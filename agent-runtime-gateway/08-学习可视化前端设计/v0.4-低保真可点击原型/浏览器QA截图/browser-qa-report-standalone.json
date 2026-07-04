@@ -1,0 +1,208 @@
+{
+  "url": "http://127.0.0.1:8765/index.html",
+  "chrome": "C:/Program Files/Google/Chrome/Application/chrome.exe",
+  "viewports": {
+    "desktop": {
+      "navResults": [
+        {
+          "pid": "home",
+          "title": "半懂起步：先知道自己在哪",
+          "active": "home",
+          "ok": true
+        },
+        {
+          "pid": "flow",
+          "title": "受控 Agent 链路：ToolCall 不是执行",
+          "active": "flow",
+          "ok": true
+        },
+        {
+          "pid": "incident",
+          "title": "重复退款事故：从失败倒推负责层",
+          "active": "incident",
+          "ok": true
+        },
+        {
+          "pid": "rag",
+          "title": "RAG 问题诊断器：搜到不等于可信",
+          "active": "rag",
+          "ok": true
+        },
+        {
+          "pid": "wiki",
+          "title": "LLM-Wiki 知识层：外部资料不能直接进课程",
+          "active": "wiki",
+          "ok": true
+        },
+        {
+          "pid": "evidence",
+          "title": "证据与门禁页：证明，而不是感觉",
+          "active": "evidence",
+          "ok": true
+        }
+      ],
+      "ragTabs": [
+        {
+          "name": "找不到",
+          "visible": true
+        },
+        {
+          "name": "找错租户",
+          "visible": true
+        },
+        {
+          "name": "引用不可信",
+          "visible": true
+        }
+      ],
+      "wikiTabs": [
+        {
+          "name": "ImportQueue",
+          "visible": true
+        },
+        {
+          "name": "SourceReview",
+          "visible": true
+        },
+        {
+          "name": "KnowledgeCard",
+          "visible": true
+        },
+        {
+          "name": "KnowledgeVersion",
+          "visible": true
+        }
+      ],
+      "badModeHasRisk": true,
+      "lowModeHasReturn": true,
+      "scoreText": "当前模拟分 1，未过关。请回看事故、负责层和证据。",
+      "layout": {
+        "scrollWidth": 1440,
+        "horizontalScroll": false,
+        "overflowingElements": [],
+        "overflowingButtons": [],
+        "imageNaturalWidths": [
+          {
+            "src": "图像素材/方向C-学习路线地图.png",
+            "naturalWidth": 1482,
+            "complete": true
+          },
+          {
+            "src": "图像素材/方向A-分层控制台.png",
+            "naturalWidth": 1487,
+            "complete": true
+          },
+          {
+            "src": "图像素材/方向B-事故推演工作台.png",
+            "naturalWidth": 1487,
+            "complete": true
+          }
+        ],
+        "boundaryText": "学习模式\nLearning mode\n模拟数据\nMock data\n不执行真实操作\nNo real execution\n来源文件\nSource files"
+      },
+      "consoleErrors": [],
+      "failedRequests": []
+    },
+    "mobile": {
+      "navResults": [
+        {
+          "pid": "home",
+          "title": "半懂起步：先知道自己在哪",
+          "active": "home",
+          "ok": true
+        },
+        {
+          "pid": "flow",
+          "title": "受控 Agent 链路：ToolCall 不是执行",
+          "active": "flow",
+          "ok": true
+        },
+        {
+          "pid": "incident",
+          "title": "重复退款事故：从失败倒推负责层",
+          "active": "incident",
+          "ok": true
+        },
+        {
+          "pid": "rag",
+          "title": "RAG 问题诊断器：搜到不等于可信",
+          "active": "rag",
+          "ok": true
+        },
+        {
+          "pid": "wiki",
+          "title": "LLM-Wiki 知识层：外部资料不能直接进课程",
+          "active": "wiki",
+          "ok": true
+        },
+        {
+          "pid": "evidence",
+          "title": "证据与门禁页：证明，而不是感觉",
+          "active": "evidence",
+          "ok": true
+        }
+      ],
+      "ragTabs": [
+        {
+          "name": "找不到",
+          "visible": true
+        },
+        {
+          "name": "找错租户",
+          "visible": true
+        },
+        {
+          "name": "引用不可信",
+          "visible": true
+        }
+      ],
+      "wikiTabs": [
+        {
+          "name": "ImportQueue",
+          "visible": true
+        },
+        {
+          "name": "SourceReview",
+          "visible": true
+        },
+        {
+          "name": "KnowledgeCard",
+          "visible": true
+        },
+        {
+          "name": "KnowledgeVersion",
+          "visible": true
+        }
+      ],
+      "badModeHasRisk": true,
+      "lowModeHasReturn": true,
+      "scoreText": "当前模拟分 1，未过关。请回看事故、负责层和证据。",
+      "layout": {
+        "scrollWidth": 390,
+        "horizontalScroll": false,
+        "overflowingElements": [],
+        "overflowingButtons": [],
+        "imageNaturalWidths": [
+          {
+            "src": "图像素材/方向C-学习路线地图.png",
+            "naturalWidth": 1482,
+            "complete": true
+          },
+          {
+            "src": "图像素材/方向A-分层控制台.png",
+            "naturalWidth": 1487,
+            "complete": true
+          },
+          {
+            "src": "图像素材/方向B-事故推演工作台.png",
+            "naturalWidth": 1487,
+            "complete": true
+          }
+        ],
+        "boundaryText": "学习模式\nLearning mode\n模拟数据\nMock data\n不执行真实操作\nNo real execution\n来源文件\nSource files"
+      },
+      "consoleErrors": [],
+      "failedRequests": []
+    }
+  }
+}

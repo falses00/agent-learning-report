@@ -1,0 +1,1005 @@
+{
+  "generatedAt": "2026-06-30T10:14:44",
+  "generatedBy": "curated gh repo view after researcher small-project list",
+  "note": "Curated small/sharp RAG optimization projects. Some may be research/demo quality; adoption requires manual review.",
+  "repositories": [
+    {
+      "nameWithOwner": "jina-ai/late-chunking",
+      "url": "https://github.com/jina-ai/late-chunking",
+      "description": "Code for explaining and evaluating late chunking (chunked pooling)",
+      "stargazerCount": 524,
+      "updatedAt": "2026-06-29T11:43:31Z",
+      "pushedAt": "2024-12-23T13:38:26Z",
+      "isArchived": false,
+      "latestRelease": null,
+      "license": {
+        "key": "apache-2.0",
+        "name": "Apache License 2.0"
+      },
+      "topics": [
+        null
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "aurelio-labs/semantic-chunkers",
+      "url": "https://github.com/aurelio-labs/semantic-chunkers",
+      "description": "",
+      "stargazerCount": 253,
+      "updatedAt": "2026-06-15T04:44:37Z",
+      "pushedAt": "2025-06-10T10:02:36Z",
+      "isArchived": false,
+      "latestRelease": {
+        "name": "v0.1.1",
+        "tagName": "v0.1.1",
+        "publishedAt": "2025-06-10T09:49:50Z",
+        "url": "https://github.com/aurelio-labs/semantic-chunkers/releases/tag/v0.1.1"
+      },
+      "license": {
+        "key": "mit",
+        "name": "MIT License"
+      },
+      "topics": [
+        null
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "disi-unibo-nlp/rag-when-how-chunk",
+      "url": "https://github.com/disi-unibo-nlp/rag-when-how-chunk",
+      "description": "[AI Project Work, KEIR] When and How Chunk in Modern RAG Applications",
+      "stargazerCount": 11,
+      "updatedAt": "2026-04-16T01:26:16Z",
+      "pushedAt": "2025-03-20T22:27:34Z",
+      "isArchived": false,
+      "latestRelease": null,
+      "license": {
+        "key": "mit",
+        "name": "MIT License"
+      },
+      "topics": [
+        null
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "curiousily/ragbase",
+      "url": "https://github.com/curiousily/ragbase",
+      "description": "Completely local RAG. Chat with your PDF documents (with open LLM) and UI to that uses LangChain, Streamlit, Ollama (Llama 3.1), Qdrant and advanced methods like reranking and semantic chunking.",
+      "stargazerCount": 128,
+      "updatedAt": "2026-06-03T06:37:47Z",
+      "pushedAt": "2024-07-26T12:01:41Z",
+      "isArchived": false,
+      "latestRelease": null,
+      "license": {
+        "key": "mit",
+        "name": "MIT License"
+      },
+      "topics": [
+        "langchain",
+        "llama3",
+        "llm",
+        "rag",
+        "streamlit",
+        "pdf",
+        "retrieval-augmented-generation"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "Neverdecel/CodeRAG",
+      "url": "https://github.com/Neverdecel/CodeRAG",
+      "description": "Local-first, zero-key semantic code search for large and custom codebases — hybrid vector + keyword retrieval with symbol-aware chunking. Usable as a CLI, Python library, REST API, or web UI.",
+      "stargazerCount": 225,
+      "updatedAt": "2026-06-28T23:10:24Z",
+      "pushedAt": "2026-06-23T11:26:03Z",
+      "isArchived": false,
+      "latestRelease": null,
+      "license": {
+        "key": "apache-2.0",
+        "name": "Apache License 2.0"
+      },
+      "topics": [
+        "ai",
+        "code-search",
+        "faiss",
+        "rag",
+        "retrieval-augmented-generation",
+        "vector-database",
+        "bm25",
+        "developer-tools",
+        "embeddings",
+        "hybrid-search",
+        "llm",
+        "local-first",
+        "python",
+        "semantic-code-search",
+        "semantic-search",
+        "tree-sitter",
+        "vector-search"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "texttron/hyde",
+      "url": "https://github.com/texttron/hyde",
+      "description": "HyDE: Precise Zero-Shot Dense Retrieval without Relevance Labels",
+      "stargazerCount": 583,
+      "updatedAt": "2026-06-28T09:04:20Z",
+      "pushedAt": "2024-12-06T15:50:57Z",
+      "isArchived": false,
+      "latestRelease": null,
+      "license": null,
+      "topics": [
+        "dense-retrieval",
+        "large-language-models",
+        "zeroshot"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "ianhohoho/auto-hyde",
+      "url": "https://github.com/ianhohoho/auto-hyde",
+      "description": "🔎 A deep-dive into HyDE for Advanced LLM RAG + 💡 Introducing AutoHyDE, a semi-supervised framework to improve the effectiveness, coverage and applicability of HyDE",
+      "stargazerCount": 37,
+      "updatedAt": "2026-05-01T09:19:13Z",
+      "pushedAt": "2024-03-26T15:33:30Z",
+      "isArchived": false,
+      "latestRelease": null,
+      "license": null,
+      "topics": [
+        "ai",
+        "hyde",
+        "langchain",
+        "llm",
+        "rag"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "BUAADreamer/EasyRAG",
+      "url": "https://github.com/BUAADreamer/EasyRAG",
+      "description": "Easy-to-Use RAG Framework; CCF AIOps International Challenge 2024 Top3 Solution; CCF AIOps 国际挑战赛 2024 季军方案",
+      "stargazerCount": 635,
+      "updatedAt": "2026-06-30T02:11:31Z",
+      "pushedAt": "2024-11-17T07:45:07Z",
+      "isArchived": false,
+      "latestRelease": null,
+      "license": {
+        "key": "mit",
+        "name": "MIT License"
+      },
+      "topics": [
+        "aiops",
+        "network-operations",
+        "rag",
+        "retrieval-augmented-generation",
+        "bge",
+        "bm25",
+        "ccf",
+        "glm4",
+        "gte",
+        "hyde",
+        "llm",
+        "minicpm",
+        "qa",
+        "retrieval",
+        "rrf"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "incidentfox/OpenRag",
+      "url": "https://github.com/incidentfox/OpenRag",
+      "description": "Multi-strategy RAG system achieving 74% Recall@10 on MultiHop-RAG. Combines RAPTOR hierarchical retrieval, knowledge graphs, HyDE, BM25, and Cohere neural reranking.",
+      "stargazerCount": 40,
+      "updatedAt": "2026-06-11T20:12:14Z",
+      "pushedAt": "2026-02-03T20:35:19Z",
+      "isArchived": false,
+      "latestRelease": null,
+      "license": {
+        "key": "mit",
+        "name": "MIT License"
+      },
+      "topics": [
+        "ai-sre",
+        "cohere",
+        "knowledge-graph",
+        "llm",
+        "rag",
+        "retrieval-augmented-generation"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "AnswerDotAI/byaldi",
+      "url": "https://github.com/AnswerDotAI/byaldi",
+      "description": "Use late-interaction multi-modal models such as ColPali in just a few lines of code.",
+      "stargazerCount": 850,
+      "updatedAt": "2026-06-08T20:04:18Z",
+      "pushedAt": "2025-01-28T20:47:40Z",
+      "isArchived": false,
+      "latestRelease": {
+        "name": "0.0.5",
+        "tagName": "v0.0.5",
+        "publishedAt": "2024-10-03T08:12:00Z",
+        "url": "https://github.com/AnswerDotAI/byaldi/releases/tag/v0.0.5"
+      },
+      "license": {
+        "key": "apache-2.0",
+        "name": "Apache License 2.0"
+      },
+      "topics": [
+        "colbert",
+        "colpali",
+        "nlp",
+        "rag",
+        "reranking",
+        "retrieval",
+        "multi-modal"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "NovaSearch-Team/RAG-Retrieval",
+      "url": "https://github.com/NovaSearch-Team/RAG-Retrieval",
+      "description": "Unify Efficient Fine-tuning of  RAG Retrieval, including Embedding, ColBERT, ReRanker.",
+      "stargazerCount": 1126,
+      "updatedAt": "2026-06-29T10:22:04Z",
+      "pushedAt": "2026-05-24T08:06:18Z",
+      "isArchived": false,
+      "latestRelease": null,
+      "license": {
+        "key": "mit",
+        "name": "MIT License"
+      },
+      "topics": [
+        "ai",
+        "llm",
+        "nlp",
+        "rag",
+        "retrieval-augmented-generation"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "FalkorDB/GraphRAG-SDK",
+      "url": "https://github.com/FalkorDB/GraphRAG-SDK",
+      "description": "Build fast and accurate GenAI apps with GraphRAG SDK at scale  🌟 ",
+      "stargazerCount": 954,
+      "updatedAt": "2026-06-29T08:42:08Z",
+      "pushedAt": "2026-06-29T12:36:24Z",
+      "isArchived": false,
+      "latestRelease": {
+        "name": "v1.3.0",
+        "tagName": "v1.3.0",
+        "publishedAt": "2026-06-04T11:18:00Z",
+        "url": "https://github.com/FalkorDB/GraphRAG-SDK/releases/tag/v1.3.0"
+      },
+      "license": {
+        "key": "apache-2.0",
+        "name": "Apache License 2.0"
+      },
+      "topics": [
+        "falkordb",
+        "graphrag",
+        "knowledge-graph",
+        "rag",
+        "graph-database",
+        "open-source",
+        "sdk",
+        "genai",
+        "llm"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "parthsarthi03/raptor",
+      "url": "https://github.com/parthsarthi03/raptor",
+      "description": "The official implementation of RAPTOR: Recursive Abstractive Processing for Tree-Organized Retrieval",
+      "stargazerCount": 1716,
+      "updatedAt": "2026-06-28T13:42:38Z",
+      "pushedAt": "2024-09-03T08:34:31Z",
+      "isArchived": false,
+      "latestRelease": null,
+      "license": {
+        "key": "mit",
+        "name": "MIT License"
+      },
+      "topics": [
+        "rag",
+        "retrieval",
+        "retrieval-augmented-generation",
+        "clustering",
+        "language-model",
+        "machine-learning",
+        "vector-database",
+        "agents",
+        "framework",
+        "llm"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "AkariAsai/self-rag",
+      "url": "https://github.com/AkariAsai/self-rag",
+      "description": "This includes the original implementation of SELF-RAG: Learning to Retrieve, Generate and Critique through self-reflection by Akari Asai, Zeqiu Wu, Yizhong Wang, Avirup Sil, and Hannaneh Hajishirzi.",
+      "stargazerCount": 2400,
+      "updatedAt": "2026-06-28T14:04:56Z",
+      "pushedAt": "2024-05-25T11:19:17Z",
+      "isArchived": false,
+      "latestRelease": null,
+      "license": {
+        "key": "mit",
+        "name": "MIT License"
+      },
+      "topics": [
+        null
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "HuskyInSalt/CRAG",
+      "url": "https://github.com/HuskyInSalt/CRAG",
+      "description": "Corrective Retrieval Augmented Generation",
+      "stargazerCount": 465,
+      "updatedAt": "2026-06-29T07:29:17Z",
+      "pushedAt": "2024-10-08T12:51:29Z",
+      "isArchived": false,
+      "latestRelease": null,
+      "license": null,
+      "topics": [
+        null
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "Nagi-ovo/CRAG-Ollama-Chat",
+      "url": "https://github.com/Nagi-ovo/CRAG-Ollama-Chat",
+      "description": "Corrective RAG demo powerd by Ollama",
+      "stargazerCount": 110,
+      "updatedAt": "2026-04-14T15:01:02Z",
+      "pushedAt": "2024-04-26T17:14:44Z",
+      "isArchived": false,
+      "latestRelease": null,
+      "license": {
+        "key": "mit",
+        "name": "MIT License"
+      },
+      "topics": [
+        null
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "Grecil/Corrective-RAG",
+      "url": "https://github.com/Grecil/Corrective-RAG",
+      "description": "Implementation of Corrective RAG using LangChain and LangGraph.",
+      "stargazerCount": 29,
+      "updatedAt": "2026-06-23T02:59:50Z",
+      "pushedAt": "2026-05-13T18:47:20Z",
+      "isArchived": false,
+      "latestRelease": null,
+      "license": null,
+      "topics": [
+        "crag",
+        "duckduckgo",
+        "faiss",
+        "langchain",
+        "langgraph",
+        "rag",
+        "streamlit",
+        "embeddings",
+        "llm",
+        "gemini-api"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "Marker-Inc-Korea/AutoRAG",
+      "url": "https://github.com/Marker-Inc-Korea/AutoRAG",
+      "description": "AutoRAG: An Open-Source Framework for Retrieval-Augmented Generation (RAG) Evaluation & Optimization with AutoML-Style Automation",
+      "stargazerCount": 4846,
+      "updatedAt": "2026-06-29T10:07:39Z",
+      "pushedAt": "2026-06-23T23:12:36Z",
+      "isArchived": false,
+      "latestRelease": {
+        "name": "v0.3.22",
+        "tagName": "v0.3.22",
+        "publishedAt": "2026-04-03T15:50:54Z",
+        "url": "https://github.com/Marker-Inc-Korea/AutoRAG/releases/tag/v0.3.22"
+      },
+      "license": {
+        "key": "apache-2.0",
+        "name": "Apache License 2.0"
+      },
+      "topics": [
+        "analysis",
+        "automl",
+        "benchmarking",
+        "document-parser",
+        "embeddings",
+        "evaluation",
+        "llm",
+        "llm-evaluation",
+        "llm-ops",
+        "open-source",
+        "ops",
+        "optimization",
+        "pipeline",
+        "python",
+        "qa",
+        "rag",
+        "rag-evaluation",
+        "retrieval-augmented-generation"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "Giskard-AI/giskard-oss",
+      "url": "https://github.com/Giskard-AI/giskard-oss",
+      "description": "🐢 Open-Source Evaluation & Testing library for LLM Agents",
+      "stargazerCount": 5478,
+      "updatedAt": "2026-06-29T20:44:44Z",
+      "pushedAt": "2026-06-30T02:11:44Z",
+      "isArchived": false,
+      "latestRelease": {
+        "name": "giskard-scan v1.0.0b2",
+        "tagName": "giskard-scan/v1.0.0b2",
+        "publishedAt": "2026-06-09T08:18:03Z",
+        "url": "https://github.com/Giskard-AI/giskard-oss/releases/tag/giskard-scan/v1.0.0b2"
+      },
+      "license": {
+        "key": "apache-2.0",
+        "name": "Apache License 2.0"
+      },
+      "topics": [
+        "mlops",
+        "ml-validation",
+        "ml-testing",
+        "ai-testing",
+        "llmops",
+        "responsible-ai",
+        "fairness-ai",
+        "trustworthy-ai",
+        "llm-eval",
+        "llm-evaluation",
+        "rag-evaluation",
+        "ai-security",
+        "llm-security",
+        "ai-red-team",
+        "red-team-tools",
+        "llm",
+        "agent-evaluation"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "onyx-dot-app/EnterpriseRAG-Bench",
+      "url": "https://github.com/onyx-dot-app/EnterpriseRAG-Bench",
+      "description": "Dataset and benchmark for RAG on company internal documents.",
+      "stargazerCount": 428,
+      "updatedAt": "2026-06-29T07:31:03Z",
+      "pushedAt": "2026-05-08T02:57:41Z",
+      "isArchived": false,
+      "latestRelease": {
+        "name": "Dataset v1.0.0",
+        "tagName": "v1.0.0",
+        "publishedAt": "2026-03-29T08:17:18Z",
+        "url": "https://github.com/onyx-dot-app/EnterpriseRAG-Bench/releases/tag/v1.0.0"
+      },
+      "license": {
+        "key": "mit",
+        "name": "MIT License"
+      },
+      "topics": [
+        "dataset",
+        "llm",
+        "rag",
+        "benchmark",
+        "enterprise",
+        "enterprise-search",
+        "evaluation",
+        "generative-ai",
+        "information-retrieval",
+        "knowledge-base",
+        "large-language-models",
+        "llm-evaluation",
+        "python",
+        "question-answering",
+        "rag-evaluation",
+        "retrieval-augmented-generation",
+        "semantic-search",
+        "synthetic-data",
+        "synthetic-data-generation"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "protectai/rebuff",
+      "url": "https://github.com/protectai/rebuff",
+      "description": "LLM Prompt Injection Detector",
+      "stargazerCount": 1508,
+      "updatedAt": "2026-06-29T15:10:21Z",
+      "pushedAt": "2024-08-07T23:35:48Z",
+      "isArchived": true,
+      "latestRelease": {
+        "name": "v0.1.1",
+        "tagName": "v0.1.1",
+        "publishedAt": "2024-01-20T01:11:48Z",
+        "url": "https://github.com/protectai/rebuff/releases/tag/v0.1.1"
+      },
+      "license": {
+        "key": "apache-2.0",
+        "name": "Apache License 2.0"
+      },
+      "topics": [
+        "llm",
+        "llmops",
+        "prompt-engineering",
+        "prompts",
+        "security",
+        "prompt-injection"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "NVIDIA/garak",
+      "url": "https://github.com/NVIDIA/garak",
+      "description": "the LLM vulnerability scanner",
+      "stargazerCount": 8269,
+      "updatedAt": "2026-06-29T20:17:40Z",
+      "pushedAt": "2026-06-29T18:23:07Z",
+      "isArchived": false,
+      "latestRelease": {
+        "name": "v0.15.1",
+        "tagName": "v0.15.1",
+        "publishedAt": "2026-06-05T17:24:50Z",
+        "url": "https://github.com/NVIDIA/garak/releases/tag/v0.15.1"
+      },
+      "license": {
+        "key": "apache-2.0",
+        "name": "Apache License 2.0"
+      },
+      "topics": [
+        "ai",
+        "llm-evaluation",
+        "llm-security",
+        "security-scanners",
+        "vulnerability-assessment"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "arsbr/Veritensor",
+      "url": "https://github.com/arsbr/Veritensor",
+      "description": "The Anti-Virus for AI Artifacts & RAG Firewall. A static analysis tool scanning Models and Notebooks for RCE, Datasets and RAG docs for Data Poisoning, PII, and Prompt Injections. Secure your AI Supply Chain.",
+      "stargazerCount": 80,
+      "updatedAt": "2026-06-04T17:58:07Z",
+      "pushedAt": "2026-06-04T17:58:42Z",
+      "isArchived": false,
+      "latestRelease": {
+        "name": "Veritensor 1.9.1",
+        "tagName": "v1.9.1",
+        "publishedAt": "2026-06-04T17:58:43Z",
+        "url": "https://github.com/arsbr/Veritensor/releases/tag/v1.9.1"
+      },
+      "license": {
+        "key": "apache-2.0",
+        "name": "Apache License 2.0"
+      },
+      "topics": [
+        "ai-security",
+        "ci-cd",
+        "cosign",
+        "devsecops",
+        "generative-ai",
+        "huggingface",
+        "llm-security",
+        "machine-learning-security",
+        "mlops",
+        "pytorch",
+        "sbom",
+        "sigstore",
+        "static-analysis",
+        "supply-chain-security",
+        "pickle-security",
+        "data-security",
+        "jupyter-notebook",
+        "pii-detection",
+        "prompt-injection",
+        "rag-security"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "codefuse-ai/ModelCache",
+      "url": "https://github.com/codefuse-ai/ModelCache",
+      "description": "A LLM semantic caching system aiming to enhance user experience by reducing response time via cached query-result pairs.",
+      "stargazerCount": 942,
+      "updatedAt": "2026-06-29T07:27:14Z",
+      "pushedAt": "2025-06-30T02:44:02Z",
+      "isArchived": false,
+      "latestRelease": {
+        "name": "ModelCache for LLMs v0.2.0",
+        "tagName": "release-v0.2.0",
+        "publishedAt": "2024-05-15T03:30:16Z",
+        "url": "https://github.com/codefuse-ai/ModelCache/releases/tag/release-v0.2.0"
+      },
+      "license": {
+        "key": "other",
+        "name": "Other"
+      },
+      "topics": [
+        "llm",
+        "semantic-cache"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "upstash/semantic-cache",
+      "url": "https://github.com/upstash/semantic-cache",
+      "description": "A fuzzy key value store based on semantic similarity rather lexical equality.",
+      "stargazerCount": 297,
+      "updatedAt": "2026-06-24T17:18:54Z",
+      "pushedAt": "2024-11-21T07:07:47Z",
+      "isArchived": false,
+      "latestRelease": {
+        "name": "v1.0.5",
+        "tagName": "v1.0.5",
+        "publishedAt": "2024-11-21T07:07:47Z",
+        "url": "https://github.com/upstash/semantic-cache/releases/tag/v1.0.5"
+      },
+      "license": {
+        "key": "mit",
+        "name": "MIT License"
+      },
+      "topics": [
+        "ai",
+        "llm",
+        "rag",
+        "search",
+        "semantic",
+        "upstash",
+        "upstash-sdk"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "aqstack/mimir",
+      "url": "https://github.com/aqstack/mimir",
+      "description": "mimir is a drop-in proxy that caches LLM API responses using semantic similarity, reducing costs and latency for repeated or similar queries.",
+      "stargazerCount": 141,
+      "updatedAt": "2026-06-08T14:23:12Z",
+      "pushedAt": "2025-12-24T09:47:25Z",
+      "isArchived": false,
+      "latestRelease": null,
+      "license": {
+        "key": "mit",
+        "name": "MIT License"
+      },
+      "topics": [
+        "caching",
+        "cost-optimization",
+        "golang",
+        "kubernetes",
+        "llm",
+        "openai",
+        "proxy",
+        "semantic-cache"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "CortexReach/memory-lancedb-pro",
+      "url": "https://github.com/CortexReach/memory-lancedb-pro",
+      "description": "Enhanced LanceDB memory plugin for OpenClaw — Hybrid Retrieval (Vector + BM25), Cross-Encoder Rerank, Multi-Scope Isolation, Management CLI",
+      "stargazerCount": 4445,
+      "updatedAt": "2026-06-29T22:07:09Z",
+      "pushedAt": "2026-06-29T10:10:02Z",
+      "isArchived": false,
+      "latestRelease": {
+        "name": "v1.1.0-beta.10: OpenClaw 2026.3+ Hook Adaptation",
+        "tagName": "v1.1.0-beta.10",
+        "publishedAt": "2026-03-23T18:53:30Z",
+        "url": "https://github.com/CortexReach/memory-lancedb-pro/releases/tag/v1.1.0-beta.10"
+      },
+      "license": null,
+      "topics": [
+        "lancedb",
+        "memory",
+        "openclaw",
+        "openclaw-agent",
+        "openclaw-plugin",
+        "rag"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "lyonzin/knowledge-rag",
+      "url": "https://github.com/lyonzin/knowledge-rag",
+      "description": "Local RAG MCP server for Claude Code — hybrid search (semantic + BM25), cross-encoder reranking, 13 MCP tools, 20 format parsers. Zero external servers, zero API keys.",
+      "stargazerCount": 130,
+      "updatedAt": "2026-06-30T00:43:19Z",
+      "pushedAt": "2026-06-24T15:38:23Z",
+      "isArchived": false,
+      "latestRelease": {
+        "name": "v4.3.1 — Hybrid Search Fixes",
+        "tagName": "v4.3.1",
+        "publishedAt": "2026-06-22T17:44:52Z",
+        "url": "https://github.com/lyonzin/knowledge-rag/releases/tag/v4.3.1"
+      },
+      "license": {
+        "key": "mit",
+        "name": "MIT License"
+      },
+      "topics": [
+        "claude",
+        "claude-code",
+        "local-ai",
+        "mcp",
+        "rag",
+        "retrieval-augmented-generation",
+        "semantic-search",
+        "vector-database",
+        "knowledge-base",
+        "reranking",
+        "document-search",
+        "hybrid-search",
+        "mcp-server",
+        "antigravity",
+        "claude-code-cli",
+        "codex",
+        "cursor-ai",
+        "inteligencia-artificial",
+        "rag-chatbot",
+        "rag-pipeline"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "LeDat98/NexusRAG",
+      "url": "https://github.com/LeDat98/NexusRAG",
+      "description": "Hybrid RAG system combining vector search, knowledge graph (LightRAG), and cross-encoder reranking — with Docling document parsing, visual intelligence (image/table captioning), agentic streaming chat, and inline citations. Powered by Gemini or local Ollama models.",
+      "stargazerCount": 322,
+      "updatedAt": "2026-06-29T10:09:28Z",
+      "pushedAt": "2026-04-20T14:20:09Z",
+      "isArchived": false,
+      "latestRelease": null,
+      "license": null,
+      "topics": [
+        "chromadb",
+        "citation",
+        "docling",
+        "document-parsing",
+        "fastapi",
+        "gemini",
+        "knowledge-base",
+        "knowledge-graph",
+        "lightrag",
+        "ollama",
+        "rag",
+        "react",
+        "reranking",
+        "retrieval-augmented-generation",
+        "streaming",
+        "vector-search"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "bhaskatripathi/pdfGPT",
+      "url": "https://github.com/bhaskatripathi/pdfGPT",
+      "description": "PDF GPT allows you to chat with the contents of your PDF file by using GPT capabilities. The most effective open source solution to turn your pdf files in a chatbot!",
+      "stargazerCount": 7166,
+      "updatedAt": "2026-06-28T06:39:18Z",
+      "pushedAt": "2026-03-06T20:50:46Z",
+      "isArchived": false,
+      "latestRelease": null,
+      "license": {
+        "key": "mit",
+        "name": "MIT License"
+      },
+      "topics": [
+        "pdfgpt",
+        "chatpdf",
+        "chatwithpdf"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "iamarunbrahma/pdf-to-markdown",
+      "url": "https://github.com/iamarunbrahma/pdf-to-markdown",
+      "description": "Conversion of PDF documents to structured Markdown, optimized for Retrieval Augmented Generation (RAG) and other NLP tasks. Extract text, tables, and images with preserved formatting for enhanced information retrieval and processing.",
+      "stargazerCount": 183,
+      "updatedAt": "2026-06-26T06:52:56Z",
+      "pushedAt": "2024-11-22T15:17:53Z",
+      "isArchived": false,
+      "latestRelease": null,
+      "license": {
+        "key": "mit",
+        "name": "MIT License"
+      },
+      "topics": [
+        "document-conversion",
+        "document-processing",
+        "information-retrieval",
+        "pdf-extraction",
+        "pdf-parsing",
+        "pdf-to-markdown",
+        "python",
+        "rag",
+        "retrieval-augmented-generation",
+        "text-extraction",
+        "pdf-converter"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "gusye1234/nano-graphrag",
+      "url": "https://github.com/gusye1234/nano-graphrag",
+      "description": "A simple, easy-to-hack GraphRAG implementation",
+      "stargazerCount": 3904,
+      "updatedAt": "2026-06-29T23:47:01Z",
+      "pushedAt": "2026-01-27T07:50:55Z",
+      "isArchived": false,
+      "latestRelease": {
+        "name": "v0.0.8",
+        "tagName": "v0.0.8",
+        "publishedAt": "2024-10-01T16:00:46Z",
+        "url": "https://github.com/gusye1234/nano-graphrag/releases/tag/v0.0.8"
+      },
+      "license": {
+        "key": "mit",
+        "name": "MIT License"
+      },
+      "topics": [
+        "gpt-4o",
+        "graphrag",
+        "learning-by-doing",
+        "gpt",
+        "llm",
+        "rag"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "Jakedismo/codegraph-rust",
+      "url": "https://github.com/Jakedismo/codegraph-rust",
+      "description": "100% Rust implementation of code graphRAG with blazing fast AST+FastML parsing, surrealDB backend and advanced agentic code analysis tools through MCP for efficient code agent context management",
+      "stargazerCount": 820,
+      "updatedAt": "2026-06-29T21:05:40Z",
+      "pushedAt": "2025-12-20T02:24:45Z",
+      "isArchived": false,
+      "latestRelease": null,
+      "license": null,
+      "topics": [
+        "graphrag",
+        "claude-code",
+        "codex",
+        "cursor",
+        "code-search",
+        "agents",
+        "ai-agents",
+        "ai-coding",
+        "coding-agent",
+        "context-engine",
+        "gemini-cli",
+        "rag",
+        "rust",
+        "search-engines",
+        "semantic-search",
+        "vibe-coding"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "aiming-lab/SimpleMem",
+      "url": "https://github.com/aiming-lab/SimpleMem",
+      "description": "SimpleMem: Efficient Lifelong Memory for LLM Agents — Text & Multimodal",
+      "stargazerCount": 3568,
+      "updatedAt": "2026-06-29T23:04:53Z",
+      "pushedAt": "2026-06-23T05:02:47Z",
+      "isArchived": false,
+      "latestRelease": {
+        "name": "v0.3.0 — Unified SimpleMem package",
+        "tagName": "v0.3.0",
+        "publishedAt": "2026-05-21T16:02:50Z",
+        "url": "https://github.com/aiming-lab/SimpleMem/releases/tag/v0.3.0"
+      },
+      "license": {
+        "key": "mit",
+        "name": "MIT License"
+      },
+      "topics": [
+        "agent",
+        "compression",
+        "llm",
+        "mcp",
+        "memory",
+        "rag",
+        "retrieval",
+        "semantic-search",
+        "simplemem",
+        "knowledge-graph",
+        "lifelong-memory",
+        "multimodal",
+        "python",
+        "audio",
+        "video",
+        "vision"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "agentscope-ai/ReMe",
+      "url": "https://github.com/agentscope-ai/ReMe",
+      "description": "ReMe: Memory Management Kit for Agents - Remember Me, Refine Me.",
+      "stargazerCount": 3128,
+      "updatedAt": "2026-06-29T14:41:38Z",
+      "pushedAt": "2026-06-29T07:58:23Z",
+      "isArchived": false,
+      "latestRelease": {
+        "name": "v0.4.0.5",
+        "tagName": "v0.4.0.5",
+        "publishedAt": "2026-06-29T06:51:18Z",
+        "url": "https://github.com/agentscope-ai/ReMe/releases/tag/v0.4.0.5"
+      },
+      "license": {
+        "key": "apache-2.0",
+        "name": "Apache License 2.0"
+      },
+      "topics": [
+        "agent",
+        "ai-agents",
+        "memory",
+        "reme",
+        "memoryscope",
+        "rag"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "zilliztech/memsearch",
+      "url": "https://github.com/zilliztech/memsearch",
+      "description": "A persistent, unified memory layer for all your AI agents (e.g. Claude Code, Codex), backed by Markdown and Milvus.",
+      "stargazerCount": 2164,
+      "updatedAt": "2026-06-29T20:43:14Z",
+      "pushedAt": "2026-06-22T09:52:51Z",
+      "isArchived": false,
+      "latestRelease": {
+        "name": "v0.4.11",
+        "tagName": "v0.4.11",
+        "publishedAt": "2026-06-22T09:53:18Z",
+        "url": "https://github.com/zilliztech/memsearch/releases/tag/v0.4.11"
+      },
+      "license": {
+        "key": "mit",
+        "name": "MIT License"
+      },
+      "topics": [
+        "agent-memory",
+        "claude-code",
+        "claude-code-plugin",
+        "memory",
+        "openclaw",
+        "progressive-disclosure",
+        "rag",
+        "agent",
+        "embeddings",
+        "milvus",
+        "semantic-search",
+        "ai-agents",
+        "harness",
+        "hybrid-search",
+        "long-term-memory",
+        "opencode",
+        "reranker",
+        "skills",
+        "codex",
+        "codex-cli"
+      ],
+      "queryStatus": "ok"
+    }
+  ]
+}

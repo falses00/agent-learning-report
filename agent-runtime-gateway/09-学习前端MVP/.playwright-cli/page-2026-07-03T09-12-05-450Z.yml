@@ -1,0 +1,266 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]: AG
+        - generic [ref=e6]:
+          - strong [ref=e7]: Agent + RAG 学习控制台
+          - generic [ref=e8]: Design-only MVP · 已过 0/13
+      - generic "学习边界" [ref=e9]:
+        - generic [ref=e10]:
+          - text: 学习模式
+          - generic [ref=e11]: Learning mode
+        - generic [ref=e12]:
+          - text: 模拟数据
+          - generic [ref=e13]: Mock data
+        - generic [ref=e14]:
+          - text: 不执行真实操作
+          - generic [ref=e15]: No real execution
+        - generic [ref=e16]:
+          - text: 来源文件
+          - generic [ref=e17]: Source files
+    - complementary [ref=e18]:
+      - generic [ref=e19]:
+        - text: 第 1 课
+        - heading "逐题学习" [level=1] [ref=e20]
+        - paragraph [ref=e21]: 每次只做一题，低于 3 分停下重讲。
+      - region "筛选学习主题" [ref=e22]:
+        - generic [ref=e23]:
+          - img [ref=e24]
+          - textbox [ref=e27]:
+            - /placeholder: 搜索主题、事故、资料
+        - generic [ref=e28]:
+          - img [ref=e29]
+          - combobox [ref=e31]:
+            - option "全部 Phase" [selected]
+            - option "Phase 0.1"
+            - option "Phase 2"
+            - option "Phase 3"
+            - option "Phase 4"
+            - option "Phase 7"
+            - option "Phase 6"
+            - option "Phase 8"
+            - option "Phase 9"
+            - option "Phase 10"
+            - option "Phase 7.5"
+      - navigation "13 个 P0 主题" [ref=e32]:
+        - button "1 建议与执行分离 Phase 0.1" [ref=e33] [cursor=pointer]:
+          - generic [ref=e34]: "1"
+          - generic [ref=e35]:
+            - strong [ref=e36]: 建议与执行分离
+            - generic [ref=e37]: Phase 0.1
+        - button "2 Runtime 状态 Phase 2" [ref=e38] [cursor=pointer]:
+          - generic [ref=e39]: "2"
+          - generic [ref=e40]:
+            - strong [ref=e41]: Runtime 状态
+            - generic [ref=e42]: Phase 2
+        - button "3 Tool Gateway Phase 3" [ref=e43] [cursor=pointer]:
+          - generic [ref=e44]: "3"
+          - generic [ref=e45]:
+            - strong [ref=e46]: Tool Gateway
+            - generic [ref=e47]: Phase 3
+        - button "4 长线任务 Phase 4" [ref=e48] [cursor=pointer]:
+          - generic [ref=e49]: "4"
+          - generic [ref=e50]:
+            - strong [ref=e51]: 长线任务
+            - generic [ref=e52]: Phase 4
+        - button "5 RAG 找不到 Phase 7" [ref=e53] [cursor=pointer]:
+          - generic [ref=e54]: "5"
+          - generic [ref=e55]:
+            - strong [ref=e56]: RAG 找不到
+            - generic [ref=e57]: Phase 7
+        - button "6 RAG 找错租户 Phase 7" [ref=e58] [cursor=pointer]:
+          - generic [ref=e59]: "6"
+          - generic [ref=e60]:
+            - strong [ref=e61]: RAG 找错租户
+            - generic [ref=e62]: Phase 7
+        - button "7 RAG 引用可信 Phase 7" [ref=e63] [cursor=pointer]:
+          - generic [ref=e64]: "7"
+          - generic [ref=e65]:
+            - strong [ref=e66]: RAG 引用可信
+            - generic [ref=e67]: Phase 7
+        - button "8 记忆污染 Phase 6" [ref=e68] [cursor=pointer]:
+          - generic [ref=e69]: "8"
+          - generic [ref=e70]:
+            - strong [ref=e71]: 记忆污染
+            - generic [ref=e72]: Phase 6
+        - button "9 Eval 门禁 Phase 7" [ref=e73] [cursor=pointer]:
+          - generic [ref=e74]: "9"
+          - generic [ref=e75]:
+            - strong [ref=e76]: Eval 门禁
+            - generic [ref=e77]: Phase 7
+        - button "10 Trace/Audit Phase 8" [ref=e78] [cursor=pointer]:
+          - generic [ref=e79]: "10"
+          - generic [ref=e80]:
+            - strong [ref=e81]: Trace/Audit
+            - generic [ref=e82]: Phase 8
+        - button "11 沙箱风险 Phase 9" [ref=e83] [cursor=pointer]:
+          - generic [ref=e84]: "11"
+          - generic [ref=e85]:
+            - strong [ref=e86]: 沙箱风险
+            - generic [ref=e87]: Phase 9
+        - button "12 多 Agent 协同 Phase 10" [ref=e88] [cursor=pointer]:
+          - generic [ref=e89]: "12"
+          - generic [ref=e90]:
+            - strong [ref=e91]: 多 Agent 协同
+            - generic [ref=e92]: Phase 10
+        - button "13 LLM-Wiki 知识层 Phase 7.5" [ref=e93] [cursor=pointer]:
+          - generic [ref=e94]: "13"
+          - generic [ref=e95]:
+            - strong [ref=e96]: LLM-Wiki 知识层
+            - generic [ref=e97]: Phase 7.5
+      - generic [ref=e98]:
+        - img [ref=e99]
+        - generic [ref=e102]: 本页没有真实退款、审批、发布或工具执行入口。
+    - generic [ref=e103]:
+      - generic [ref=e104]:
+        - generic [ref=e105]:
+          - text: Phase 0.1
+          - heading "建议与执行分离" [level=2] [ref=e106]
+          - paragraph [ref=e107]: C 首页 / A 全链路
+        - generic [ref=e108]:
+          - button "导出记录" [ref=e109] [cursor=pointer]:
+            - img [ref=e110]
+            - text: 导出记录
+          - button "重置学习" [ref=e113] [cursor=pointer]:
+            - img [ref=e114]
+            - text: 重置学习
+      - region "当前学习资料对接" [ref=e117]:
+        - figure "C 学习路线地图" [ref=e118]:
+          - img "C 学习路线地图" [ref=e119]
+          - generic [ref=e120]: C 学习路线地图
+        - generic [ref=e121]:
+          - generic [ref=e122]:
+            - img [ref=e124]
+            - generic [ref=e128]:
+              - text: 当前学习目标
+              - heading "学会用“事故 -> 负责层 -> 最小证据”解释 建议与执行分离，并能判断坏设计为什么必须停下。" [level=3] [ref=e129]
+              - paragraph [ref=e130]: 这题从学习路线图进入，重点是先建立边界意识，再进入具体链路和复述评分。
+          - list "资料到复述的桥接步骤" [ref=e131]:
+            - listitem [ref=e132]:
+              - generic [ref=e133]: "1"
+              - paragraph [ref=e134]: 先读懂资料中的主问题：为什么模型建议不能直接退款？
+            - listitem [ref=e135]:
+              - generic [ref=e136]: "2"
+              - paragraph [ref=e137]: 把页面视觉锚到事故：越权退款
+            - listitem [ref=e138]:
+              - generic [ref=e139]: "3"
+              - paragraph [ref=e140]: 用负责层定位拦截点：Request Gateway / Policy / Tool Gateway
+            - listitem [ref=e141]:
+              - generic [ref=e142]: "4"
+              - paragraph [ref=e143]: 用最小证据完成复述：学习边界、ToolCall 申请、PolicyDecision、AuditEvent
+            - listitem [ref=e144]:
+              - generic [ref=e145]: "5"
+              - paragraph [ref=e146]: 低分时回流到：Concept / FailureCase / RestatementCard
+      - generic [ref=e147]:
+        - generic [ref=e148]:
+          - img [ref=e150]
+          - generic [ref=e153]:
+            - text: 逐题主持
+            - heading "先回答，再评分，再看图复述" [level=3] [ref=e154]
+        - tablist "学习视图" [ref=e155]:
+          - button "学习任务" [ref=e156] [cursor=pointer]
+          - button "资料证据" [ref=e157] [cursor=pointer]
+          - button "低分回流" [ref=e158] [cursor=pointer]
+        - generic [ref=e159]:
+          - generic [ref=e160]:
+            - generic [ref=e161]:
+              - generic [ref=e162]:
+                - text: 看图前理解
+                - heading "为什么模型建议不能直接退款？" [level=4] [ref=e163]
+              - generic [ref=e164]: 未评
+            - textbox "用自己的话回答，不用背术语。" [ref=e165]
+            - generic [ref=e166]:
+              - generic [ref=e167]: 回答后会显示本地评分。
+              - button "请导师反馈" [ref=e168] [cursor=pointer]:
+                - img [ref=e169]
+                - text: 请导师反馈
+          - generic [ref=e171]:
+            - generic [ref=e172]:
+              - generic [ref=e173]:
+                - text: 看图提示
+                - heading "C 学习路线地图" [level=4] [ref=e174]
+              - img [ref=e175]
+            - img "C 学习路线地图" [ref=e178]
+            - list [ref=e179]:
+              - listitem [ref=e180]: 事故：越权退款
+              - listitem [ref=e181]: 负责层：Request Gateway / Policy / Tool Gateway
+              - listitem [ref=e182]: 证据：学习边界、ToolCall 申请、PolicyDecision、AuditEvent
+          - generic [ref=e183]:
+            - generic [ref=e184]:
+              - generic [ref=e185]:
+                - text: 看图后复述
+                - heading "现在请补齐事故、负责层、最小证据。" [level=4] [ref=e186]
+              - generic [ref=e187]: 未评
+            - textbox "用自己的话回答，不用背术语。" [ref=e188]
+            - generic [ref=e189]:
+              - generic [ref=e190]: 回答后会显示本地评分。
+              - button "请导师反馈" [ref=e191] [cursor=pointer]:
+                - img [ref=e192]
+                - text: 请导师反馈
+          - generic [ref=e194]:
+            - generic [ref=e195]:
+              - generic [ref=e196]:
+                - text: 坏设计判断
+                - heading "如果模型建议直接调用退款工具，会怎样？" [level=4] [ref=e197]
+              - generic [ref=e198]: 未评
+            - textbox "用自己的话回答，不用背术语。" [ref=e199]
+            - generic [ref=e200]:
+              - generic [ref=e201]: 回答后会显示本地评分。
+              - button "请导师反馈" [ref=e202] [cursor=pointer]:
+                - img [ref=e203]
+                - text: 请导师反馈
+        - generic [ref=e205]:
+          - button "记录本题评分" [ref=e206] [cursor=pointer]:
+            - img [ref=e207]
+            - text: 记录本题评分
+          - button "进入下一题" [disabled] [ref=e210]
+          - generic [ref=e211]: 低于 3 分时停下重讲
+    - complementary [ref=e212]:
+      - tablist "证据面板" [ref=e213]:
+        - button "门禁" [ref=e214] [cursor=pointer]
+        - button "来源" [ref=e215] [cursor=pointer]
+        - button "导师" [ref=e216] [cursor=pointer]
+      - generic [ref=e217]:
+        - generic [ref=e218]:
+          - img [ref=e220]
+          - generic [ref=e223]:
+            - text: Go / No-Go
+            - heading "No-Go" [level=3] [ref=e224]
+        - generic [ref=e225]:
+          - generic [ref=e226]:
+            - term [ref=e227]: 看图后通过
+            - definition [ref=e228]: 0/13
+          - generic [ref=e229]:
+            - term [ref=e230]: RAG 三类
+            - definition [ref=e231]: 未过
+          - generic [ref=e232]:
+            - term [ref=e233]: 生产误读
+            - definition [ref=e234]: 未发现
+      - generic [ref=e235]:
+        - generic [ref=e236]:
+          - img [ref=e238]
+          - generic [ref=e240]:
+            - text: 事故
+            - heading "越权退款" [level=3] [ref=e241]
+        - generic [ref=e242]:
+          - strong [ref=e243]: 负责层
+          - generic [ref=e244]:
+            - generic [ref=e245]: Request Gateway
+            - generic [ref=e246]: Policy
+            - generic [ref=e247]: Tool Gateway
+        - generic [ref=e248]:
+          - strong [ref=e249]: 最小证据
+          - generic [ref=e250]:
+            - generic [ref=e251]: 学习边界
+            - generic [ref=e252]: ToolCall 申请
+            - generic [ref=e253]: PolicyDecision
+            - generic [ref=e254]: AuditEvent
+        - generic [ref=e255]:
+          - strong [ref=e256]: 低分回流
+          - generic [ref=e257]:
+            - generic [ref=e258]: Concept
+            - generic [ref=e259]: FailureCase
+            - generic [ref=e260]: RestatementCard
+  - button "Open Next.js Dev Tools" [ref=e266] [cursor=pointer]:
+    - img [ref=e267]

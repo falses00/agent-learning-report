@@ -1,0 +1,2162 @@
+{
+  "generatedAt": "2026-06-30T09:50:24",
+  "generatedBy": "gh repo view + gh search repos via Codex main thread",
+  "note": "GitHub metadata and topics are volatile; use as 2026-06-30 RAG frontier teaching snapshot only.",
+  "repositories": [
+    {
+      "nameWithOwner": "microsoft/graphrag",
+      "url": "https://github.com/microsoft/graphrag",
+      "description": "A modular graph-based Retrieval-Augmented Generation (RAG) system",
+      "stargazerCount": 34080,
+      "updatedAt": "2026-06-30T01:28:57Z",
+      "pushedAt": "2026-06-22T07:23:02Z",
+      "latestRelease": {
+        "name": "v3.1.0",
+        "tagName": "v3.1.0",
+        "publishedAt": "2026-05-28T15:55:40Z",
+        "url": "https://github.com/microsoft/graphrag/releases/tag/v3.1.0"
+      },
+      "license": {
+        "key": "mit",
+        "name": "MIT License"
+      },
+      "topics": [
+        "graphrag",
+        "rag",
+        "llm",
+        "llms",
+        "gpt",
+        "gpt-4",
+        "gpt4"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "HKUDS/LightRAG",
+      "url": "https://github.com/HKUDS/LightRAG",
+      "description": "[EMNLP2025] \"LightRAG: Simple and Fast Retrieval-Augmented Generation\"",
+      "stargazerCount": 37151,
+      "updatedAt": "2026-06-30T01:49:04Z",
+      "pushedAt": "2026-06-28T22:18:44Z",
+      "latestRelease": {
+        "name": "v1.5.4",
+        "tagName": "v1.5.4",
+        "publishedAt": "2026-06-24T10:24:01Z",
+        "url": "https://github.com/HKUDS/LightRAG/releases/tag/v1.5.4"
+      },
+      "license": {
+        "key": "mit",
+        "name": "MIT License"
+      },
+      "topics": [
+        "knowledge-graph",
+        "large-language-models",
+        "retrieval-augmented-generation",
+        "genai",
+        "graphrag",
+        "llm",
+        "rag",
+        "gpt",
+        "gpt-4"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "run-llama/llama_index",
+      "url": "https://github.com/run-llama/llama_index",
+      "description": "LlamaIndex is the leading document agent and OCR platform",
+      "stargazerCount": 50513,
+      "updatedAt": "2026-06-30T01:45:43Z",
+      "pushedAt": "2026-06-26T14:23:35Z",
+      "latestRelease": {
+        "name": "v0.14.23",
+        "tagName": "v0.14.23",
+        "publishedAt": "2026-06-24T19:36:43Z",
+        "url": "https://github.com/run-llama/llama_index/releases/tag/v0.14.23"
+      },
+      "license": {
+        "key": "mit",
+        "name": "MIT License"
+      },
+      "topics": [
+        "agents",
+        "application",
+        "data",
+        "fine-tuning",
+        "framework",
+        "llamaindex",
+        "llm",
+        "rag",
+        "vector-database",
+        "multi-agents"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "langchain-ai/langchain",
+      "url": "https://github.com/langchain-ai/langchain",
+      "description": "The agent engineering platform.",
+      "stargazerCount": 140517,
+      "updatedAt": "2026-06-30T01:46:15Z",
+      "pushedAt": "2026-06-29T19:47:27Z",
+      "latestRelease": {
+        "name": "langchain-core==1.4.8",
+        "tagName": "langchain-core==1.4.8",
+        "publishedAt": "2026-06-18T19:39:42Z",
+        "url": "https://github.com/langchain-ai/langchain/releases/tag/langchain-core%3D%3D1.4.8"
+      },
+      "license": {
+        "key": "mit",
+        "name": "MIT License"
+      },
+      "topics": [
+        "ai",
+        "anthropic",
+        "gemini",
+        "langchain",
+        "llm",
+        "openai",
+        "python",
+        "agents",
+        "ai-agents",
+        "chatgpt",
+        "enterprise",
+        "framework",
+        "generative-ai",
+        "multiagent",
+        "open-source",
+        "pydantic",
+        "rag",
+        "deepagents",
+        "langgraph",
+        "typescript"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "deepset-ai/haystack",
+      "url": "https://github.com/deepset-ai/haystack",
+      "description": "Open-source AI orchestration framework for building context-engineered, production-ready LLM applications. Design modular pipelines and agent workflows with explicit control over retrieval, routing, memory, and generation. Built for scalable agents, RAG, multimodal applications, semantic search, and conversational systems.",
+      "stargazerCount": 25782,
+      "updatedAt": "2026-06-29T23:45:29Z",
+      "pushedAt": "2026-06-29T16:52:55Z",
+      "latestRelease": {
+        "name": "v2.30.2",
+        "tagName": "v2.30.2",
+        "publishedAt": "2026-06-18T08:36:45Z",
+        "url": "https://github.com/deepset-ai/haystack/releases/tag/v2.30.2"
+      },
+      "license": {
+        "key": "apache-2.0",
+        "name": "Apache License 2.0"
+      },
+      "topics": [
+        "nlp",
+        "question-answering",
+        "pytorch",
+        "semantic-search",
+        "information-retrieval",
+        "summarization",
+        "transformers",
+        "machine-learning",
+        "ai",
+        "python",
+        "large-language-models",
+        "generative-ai",
+        "llm",
+        "rag",
+        "retrieval-augmented-generation",
+        "agents",
+        "agent",
+        "gemini",
+        "gpt-4",
+        "orchestration"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "infiniflow/ragflow",
+      "url": "https://github.com/infiniflow/ragflow",
+      "description": "RAGFlow is a leading open-source Retrieval-Augmented Generation (RAG) engine that fuses cutting-edge RAG with Agent capabilities to create a superior context layer for LLMs",
+      "stargazerCount": 83877,
+      "updatedAt": "2026-06-30T01:48:46Z",
+      "pushedAt": "2026-06-30T01:46:46Z",
+      "latestRelease": {
+        "name": "v0.26.2",
+        "tagName": "v0.26.2",
+        "publishedAt": "2026-06-29T01:59:30Z",
+        "url": "https://github.com/infiniflow/ragflow/releases/tag/v0.26.2"
+      },
+      "license": {
+        "key": "apache-2.0",
+        "name": "Apache License 2.0"
+      },
+      "topics": [
+        "ai",
+        "ai-agents",
+        "context-engine",
+        "llm-apps",
+        "rag",
+        "retrieval-augmented-generation",
+        "agentic-ai",
+        "agentic-retrieval",
+        "agentic-search",
+        "context-management"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "chroma-core/chroma",
+      "url": "https://github.com/chroma-core/chroma",
+      "description": "Search infrastructure for AI",
+      "stargazerCount": 28636,
+      "updatedAt": "2026-06-30T01:11:22Z",
+      "pushedAt": "2026-06-30T01:11:21Z",
+      "latestRelease": {
+        "name": "1.5.9",
+        "tagName": "1.5.9",
+        "publishedAt": "2026-05-05T05:55:40Z",
+        "url": "https://github.com/chroma-core/chroma/releases/tag/1.5.9"
+      },
+      "license": {
+        "key": "apache-2.0",
+        "name": "Apache License 2.0"
+      },
+      "topics": [
+        "database",
+        "rust",
+        "rust-lang",
+        "ai",
+        "agents",
+        "ai-agents"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "qdrant/qdrant",
+      "url": "https://github.com/qdrant/qdrant",
+      "description": "Qdrant - High-performance, massive-scale Vector Database and Vector Search Engine for the next generation of AI. Also available in the cloud https://cloud.qdrant.io/",
+      "stargazerCount": 32799,
+      "updatedAt": "2026-06-30T01:44:56Z",
+      "pushedAt": "2026-06-29T23:38:44Z",
+      "latestRelease": {
+        "name": "v1.18.2",
+        "tagName": "v1.18.2",
+        "publishedAt": "2026-06-04T06:50:36Z",
+        "url": "https://github.com/qdrant/qdrant/releases/tag/v1.18.2"
+      },
+      "license": {
+        "key": "apache-2.0",
+        "name": "Apache License 2.0"
+      },
+      "topics": [
+        "neural-network",
+        "search-engine",
+        "knn-algorithm",
+        "hnsw",
+        "vector-search",
+        "nearest-neighbor-search",
+        "image-search",
+        "embeddings-similarity",
+        "recommender-system",
+        "vector-search-engine",
+        "mlops",
+        "search-engines",
+        "neural-search",
+        "similarity-search",
+        "vector-database",
+        "machine-learning",
+        "search",
+        "ai-search",
+        "ai-search-engine",
+        "hybrid-search"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "milvus-io/milvus",
+      "url": "https://github.com/milvus-io/milvus",
+      "description": "Milvus is a high-performance, cloud-native vector database built for scalable vector ANN search",
+      "stargazerCount": 45015,
+      "updatedAt": "2026-06-30T01:36:45Z",
+      "pushedAt": "2026-06-30T00:09:36Z",
+      "latestRelease": {
+        "name": "milvus-2.6.19",
+        "tagName": "v2.6.19",
+        "publishedAt": "2026-06-26T11:47:18Z",
+        "url": "https://github.com/milvus-io/milvus/releases/tag/v2.6.19"
+      },
+      "license": {
+        "key": "apache-2.0",
+        "name": "Apache License 2.0"
+      },
+      "topics": [
+        "anns",
+        "nearest-neighbor-search",
+        "faiss",
+        "vector-search",
+        "image-search",
+        "hnsw",
+        "vector-database",
+        "embedding-database",
+        "embedding-store",
+        "vector-store",
+        "vector-similarity",
+        "embedding-similarity",
+        "distributed",
+        "golang",
+        "llm",
+        "cloud-native",
+        "diskann",
+        "rag"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "weaviate/weaviate",
+      "url": "https://github.com/weaviate/weaviate",
+      "description": "Weaviate is an open-source vector database that stores both objects and vectors, allowing for the combination of vector search with structured filtering with the fault tolerance and scalability of a cloud-native database​.",
+      "stargazerCount": 16467,
+      "updatedAt": "2026-06-29T21:12:19Z",
+      "pushedAt": "2026-06-29T22:57:52Z",
+      "latestRelease": {
+        "name": "v1.38.2 - HFresh vector index Fixes, Uncompressed vector cache parallel pre-fill Improvement, Module X-*-BaseURL request headers validation Fix, New generative-deepseek module",
+        "tagName": "v1.38.2",
+        "publishedAt": "2026-06-25T06:02:05Z",
+        "url": "https://github.com/weaviate/weaviate/releases/tag/v1.38.2"
+      },
+      "license": {
+        "key": "bsd-3-clause",
+        "name": "BSD 3-Clause \"New\" or \"Revised\" License"
+      },
+      "topics": [
+        "search-engine",
+        "semantic-search",
+        "semantic-search-engine",
+        "vector-search",
+        "vector-search-engine",
+        "vector-database",
+        "approximate-nearest-neighbor-search",
+        "image-search",
+        "hnsw",
+        "information-retrieval",
+        "mlops",
+        "nearest-neighbor-search",
+        "neural-search",
+        "recommender-system",
+        "similarity-search",
+        "vectors",
+        "generative-search",
+        "hybrid-search",
+        "weaviate",
+        "grpc"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "pgvector/pgvector",
+      "url": "https://github.com/pgvector/pgvector",
+      "description": "Open-source vector similarity search for Postgres",
+      "stargazerCount": 21988,
+      "updatedAt": "2026-06-30T01:46:37Z",
+      "pushedAt": "2026-06-29T08:08:28Z",
+      "latestRelease": null,
+      "license": {
+        "key": "other",
+        "name": "Other"
+      },
+      "topics": [
+        "nearest-neighbor-search",
+        "approximate-nearest-neighbor-search"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "lancedb/lancedb",
+      "url": "https://github.com/lancedb/lancedb",
+      "description": "Developer-friendly OSS embedded retrieval library for multimodal AI. Search More; Manage Less.",
+      "stargazerCount": 10761,
+      "updatedAt": "2026-06-29T23:55:49Z",
+      "pushedAt": "2026-06-30T00:52:34Z",
+      "latestRelease": {
+        "name": "Node/Rust LanceDB v0.31.0-beta.4",
+        "tagName": "v0.31.0-beta.4",
+        "publishedAt": "2026-06-29T11:12:42Z",
+        "url": "https://github.com/lancedb/lancedb/releases/tag/v0.31.0-beta.4"
+      },
+      "license": {
+        "key": "apache-2.0",
+        "name": "Apache License 2.0"
+      },
+      "topics": [
+        "approximate-nearest-neighbor-search",
+        "image-search",
+        "nearest-neighbor-search",
+        "recommender-system",
+        "search-engine",
+        "semantic-search",
+        "similarity-search",
+        "vector-database"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "stanford-futuredata/ColBERT",
+      "url": "https://github.com/stanford-futuredata/ColBERT",
+      "description": "ColBERT: state-of-the-art neural search (SIGIR'20, TACL'21, NeurIPS'21, NAACL'22, CIKM'22, ACL'23, EMNLP'23)",
+      "stargazerCount": 3891,
+      "updatedAt": "2026-06-29T07:35:35Z",
+      "pushedAt": "2025-10-14T18:50:11Z",
+      "latestRelease": {
+        "name": "ColBERT 0.2.22",
+        "tagName": "v0.2.22",
+        "publishedAt": "2025-08-11T03:22:44Z",
+        "url": "https://github.com/stanford-futuredata/ColBERT/releases/tag/v0.2.22"
+      },
+      "license": {
+        "key": "mit",
+        "name": "MIT License"
+      },
+      "topics": [
+        null
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "AnswerDotAI/RAGatouille",
+      "url": "https://github.com/AnswerDotAI/RAGatouille",
+      "description": "Easily use and train state of the art late-interaction retrieval methods (ColBERT) in any RAG pipeline. Designed for modularity and ease-of-use, backed by research.",
+      "stargazerCount": 3938,
+      "updatedAt": "2026-06-29T15:24:24Z",
+      "pushedAt": "2025-05-17T12:45:38Z",
+      "latestRelease": {
+        "name": "0.0.9",
+        "tagName": "0.0.9",
+        "publishedAt": "2025-02-11T04:31:38Z",
+        "url": "https://github.com/AnswerDotAI/RAGatouille/releases/tag/0.0.9"
+      },
+      "license": {
+        "key": "apache-2.0",
+        "name": "Apache License 2.0"
+      },
+      "topics": [
+        null
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "FlagOpen/FlagEmbedding",
+      "url": "https://github.com/FlagOpen/FlagEmbedding",
+      "description": "Retrieval and Retrieval-augmented LLMs",
+      "stargazerCount": 11885,
+      "updatedAt": "2026-06-29T21:22:31Z",
+      "pushedAt": "2026-04-22T16:00:42Z",
+      "latestRelease": {
+        "name": "v1.4.0",
+        "tagName": "v1.4.0",
+        "publishedAt": "2026-04-22T15:59:10Z",
+        "url": "https://github.com/FlagOpen/FlagEmbedding/releases/tag/v1.4.0"
+      },
+      "license": {
+        "key": "mit",
+        "name": "MIT License"
+      },
+      "topics": [
+        "embeddings",
+        "information-retrieval",
+        "llm",
+        "sentence-embeddings",
+        "text-semantic-similarity",
+        "retrieval-augmented-generation"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "vibrantlabsai/ragas",
+      "url": "https://github.com/vibrantlabsai/ragas",
+      "description": "Supercharge Your LLM Application Evaluations 🚀",
+      "stargazerCount": 14576,
+      "updatedAt": "2026-06-30T01:24:55Z",
+      "pushedAt": "2026-02-24T07:47:19Z",
+      "latestRelease": {
+        "name": "v0.4.3",
+        "tagName": "v0.4.3",
+        "publishedAt": "2026-01-13T17:47:29Z",
+        "url": "https://github.com/vibrantlabsai/ragas/releases/tag/v0.4.3"
+      },
+      "license": {
+        "key": "apache-2.0",
+        "name": "Apache License 2.0"
+      },
+      "topics": [
+        "llm",
+        "llmops",
+        "evaluation"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "promptfoo/promptfoo",
+      "url": "https://github.com/promptfoo/promptfoo",
+      "description": "Test your prompts, agents, and RAGs. Red teaming/pentesting/vulnerability scanning for AI. Compare performance of GPT, Claude, Gemini, DeepSeek, and more. Simple declarative configs with command line and CI/CD integration.  Used by OpenAI and Anthropic.",
+      "stargazerCount": 22745,
+      "updatedAt": "2026-06-30T01:09:15Z",
+      "pushedAt": "2026-06-29T20:39:23Z",
+      "latestRelease": {
+        "name": "code-scan-action: 0.1.8",
+        "tagName": "code-scan-action-0.1.8",
+        "publishedAt": "2026-06-16T17:46:14Z",
+        "url": "https://github.com/promptfoo/promptfoo/releases/tag/code-scan-action-0.1.8"
+      },
+      "license": {
+        "key": "mit",
+        "name": "MIT License"
+      },
+      "topics": [
+        "llm",
+        "prompt-engineering",
+        "prompts",
+        "llmops",
+        "prompt-testing",
+        "testing",
+        "rag",
+        "evaluation",
+        "evaluation-framework",
+        "llm-eval",
+        "llm-evaluation",
+        "llm-evaluation-framework",
+        "ci",
+        "ci-cd",
+        "cicd",
+        "pentesting",
+        "red-teaming",
+        "vulnerability-scanners"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "langfuse/langfuse",
+      "url": "https://github.com/langfuse/langfuse",
+      "description": "🪢 Open source AI engineering platform: LLM evals, observability, metrics, prompt management, playground, datasets. Integrates with OpenTelemetry, LangChain, OpenAI SDK, LiteLLM, and more. 🍊YC W23 ",
+      "stargazerCount": 30066,
+      "updatedAt": "2026-06-30T01:00:06Z",
+      "pushedAt": "2026-06-29T23:34:40Z",
+      "latestRelease": {
+        "name": "v3.202.1",
+        "tagName": "v3.202.1",
+        "publishedAt": "2026-06-29T15:16:59Z",
+        "url": "https://github.com/langfuse/langfuse/releases/tag/v3.202.1"
+      },
+      "license": {
+        "key": "other",
+        "name": "Other"
+      },
+      "topics": [
+        "analytics",
+        "llm",
+        "llmops",
+        "large-language-models",
+        "openai",
+        "self-hosted",
+        "ycombinator",
+        "monitoring",
+        "observability",
+        "open-source",
+        "langchain",
+        "llama-index",
+        "evaluation",
+        "prompt-engineering",
+        "prompt-management",
+        "playground",
+        "llm-evaluation",
+        "llm-observability",
+        "autogen"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "Arize-ai/phoenix",
+      "url": "https://github.com/Arize-ai/phoenix",
+      "description": "AI Observability & Evaluation",
+      "stargazerCount": 10330,
+      "updatedAt": "2026-06-30T01:48:47Z",
+      "pushedAt": "2026-06-30T01:47:33Z",
+      "latestRelease": {
+        "name": "arize-phoenix-client: v2.10.0",
+        "tagName": "arize-phoenix-client-v2.10.0",
+        "publishedAt": "2026-06-26T03:21:35Z",
+        "url": "https://github.com/Arize-ai/phoenix/releases/tag/arize-phoenix-client-v2.10.0"
+      },
+      "license": {
+        "key": "other",
+        "name": "Other"
+      },
+      "topics": [
+        "llmops",
+        "ai-monitoring",
+        "ai-observability",
+        "llm-eval",
+        "aiengineering",
+        "datasets",
+        "agents",
+        "llms",
+        "prompt-engineering",
+        "anthropic",
+        "evals",
+        "llm-evaluation",
+        "openai",
+        "langchain",
+        "llamaindex",
+        "smolagents"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "confident-ai/deepeval",
+      "url": "https://github.com/confident-ai/deepeval",
+      "description": "The LLM Evaluation Framework",
+      "stargazerCount": 16542,
+      "updatedAt": "2026-06-29T23:26:27Z",
+      "pushedAt": "2026-06-26T09:43:57Z",
+      "latestRelease": {
+        "name": "Opus 4.8: Day 0 Support",
+        "tagName": "v4.0.5",
+        "publishedAt": "2026-05-28T18:42:29Z",
+        "url": "https://github.com/confident-ai/deepeval/releases/tag/v4.0.5"
+      },
+      "license": {
+        "key": "apache-2.0",
+        "name": "Apache License 2.0"
+      },
+      "topics": [
+        "evaluation-metrics",
+        "evaluation-framework",
+        "llm-evaluation",
+        "llm-evaluation-framework",
+        "llm-evaluation-metrics",
+        "python"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "getzep/zep",
+      "url": "https://github.com/getzep/zep",
+      "description": "Zep | Examples, Integrations, & More",
+      "stargazerCount": 4711,
+      "updatedAt": "2026-06-29T17:34:13Z",
+      "pushedAt": "2026-06-29T04:26:11Z",
+      "latestRelease": {
+        "name": "zep-crewai v1.1.1",
+        "tagName": "zep-crewai-v1.1.1",
+        "publishedAt": "2025-09-11T17:58:29Z",
+        "url": "https://github.com/getzep/zep/releases/tag/zep-crewai-v1.1.1"
+      },
+      "license": {
+        "key": "apache-2.0",
+        "name": "Apache License 2.0"
+      },
+      "topics": [
+        "language-model",
+        "llm",
+        "ai",
+        "knowledge-graphs"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "mem0ai/mem0",
+      "url": "https://github.com/mem0ai/mem0",
+      "description": "Universal memory layer for AI Agents",
+      "stargazerCount": 59715,
+      "updatedAt": "2026-06-30T01:12:55Z",
+      "pushedAt": "2026-06-30T01:12:54Z",
+      "latestRelease": {
+        "name": "Mem0 Node SDK (v3.0.12)",
+        "tagName": "ts-v3.0.12",
+        "publishedAt": "2026-06-27T17:10:07Z",
+        "url": "https://github.com/mem0ai/mem0/releases/tag/ts-v3.0.12"
+      },
+      "license": {
+        "key": "apache-2.0",
+        "name": "Apache License 2.0"
+      },
+      "topics": [
+        "ai",
+        "chatgpt",
+        "llm",
+        "python",
+        "chatbots",
+        "rag",
+        "application",
+        "long-term-memory",
+        "memory",
+        "memory-management",
+        "state-management",
+        "ai-agents",
+        "agents",
+        "genai"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "letta-ai/letta",
+      "url": "https://github.com/letta-ai/letta",
+      "description": "Platform for stateful agents: AI with advanced memory that can learn and self-improve over time.",
+      "stargazerCount": 23584,
+      "updatedAt": "2026-06-30T00:20:42Z",
+      "pushedAt": "2026-06-26T00:15:00Z",
+      "latestRelease": {
+        "name": "v0.16.8",
+        "tagName": "0.16.8",
+        "publishedAt": "2026-05-14T17:14:24Z",
+        "url": "https://github.com/letta-ai/letta/releases/tag/0.16.8"
+      },
+      "license": {
+        "key": "apache-2.0",
+        "name": "Apache License 2.0"
+      },
+      "topics": [
+        "llm",
+        "llm-agent",
+        "ai",
+        "ai-agents"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "neo4j/neo4j-graphrag-python",
+      "url": "https://github.com/neo4j/neo4j-graphrag-python",
+      "description": "Neo4j GraphRAG for Python",
+      "stargazerCount": 1198,
+      "updatedAt": "2026-06-29T06:06:51Z",
+      "pushedAt": "2026-06-25T15:42:04Z",
+      "latestRelease": {
+        "name": "1.18.0",
+        "tagName": "1.18.0",
+        "publishedAt": "2026-06-24T09:14:05Z",
+        "url": "https://github.com/neo4j/neo4j-graphrag-python/releases/tag/1.18.0"
+      },
+      "license": {
+        "key": "other",
+        "name": "Other"
+      },
+      "topics": [
+        "ai",
+        "cypher",
+        "genai",
+        "graph-database",
+        "neo4j",
+        "python",
+        "python3",
+        "rag",
+        "graphrag"
+      ],
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "langchain-ai/langgraph",
+      "url": "https://github.com/langchain-ai/langgraph",
+      "description": "Build resilient agents.",
+      "stargazerCount": 36056,
+      "updatedAt": "2026-06-30T01:46:13Z",
+      "pushedAt": "2026-06-30T01:24:25Z",
+      "latestRelease": {
+        "name": "langgraph==1.2.7",
+        "tagName": "1.2.7",
+        "publishedAt": "2026-06-30T01:24:26Z",
+        "url": "https://github.com/langchain-ai/langgraph/releases/tag/1.2.7"
+      },
+      "license": {
+        "key": "mit",
+        "name": "MIT License"
+      },
+      "topics": [
+        "agents",
+        "ai",
+        "ai-agents",
+        "chatgpt",
+        "deepagents",
+        "enterprise",
+        "framework",
+        "gemini",
+        "generative-ai",
+        "langchain",
+        "langgraph",
+        "llm",
+        "multiagent",
+        "open-source",
+        "openai",
+        "pydantic",
+        "python",
+        "rag"
+      ],
+      "queryStatus": "ok"
+    }
+  ],
+  "topicSearches": [
+    {
+      "topic": "rag",
+      "queryStatus": "ok",
+      "topUpdated": [
+        {
+          "description": "CyClaw is a secure, offline-first local AI agent built on three invariants: RAG-first retrieval, LangGraph topology as security policy - https://cgfixit.com/CyClaw - https://o3mjwe6dliqf6.kimi.page/",
+          "fullName": "cgfixit/CyClaw",
+          "stargazersCount": 13,
+          "updatedAt": "2026-06-30T01:49:44Z",
+          "url": "https://github.com/cgfixit/CyClaw"
+        },
+        {
+          "description": "Live tracker of new RAG implementations, tools, and patterns — updated every 15 minutes",
+          "fullName": "linny006/rag-radar",
+          "stargazersCount": 1,
+          "updatedAt": "2026-06-30T01:49:00Z",
+          "url": "https://github.com/linny006/rag-radar"
+        },
+        {
+          "description": "Open Source AI Platform - AI Chat with advanced features that works with every LLM",
+          "fullName": "onyx-dot-app/onyx",
+          "stargazersCount": 30611,
+          "updatedAt": "2026-06-30T01:48:32Z",
+          "url": "https://github.com/onyx-dot-app/onyx"
+        },
+        {
+          "description": "🧠 Local-first knowledge system for LLM agents — sqlite-vec + ONNX embeddings, no cloud/Docker/PyTorch dependency",
+          "fullName": "zycaskevin/Vault-for-LLM",
+          "stargazersCount": 40,
+          "updatedAt": "2026-06-30T01:48:32Z",
+          "url": "https://github.com/zycaskevin/Vault-for-LLM"
+        },
+        {
+          "description": "Documents, vectors, cache, queue, and cron in one SQLite file. The local backend for AI agents.",
+          "fullName": "qataruts/monlite",
+          "stargazersCount": 31,
+          "updatedAt": "2026-06-30T01:48:14Z",
+          "url": "https://github.com/qataruts/monlite"
+        },
+        {
+          "description": "Persistent semantic memory for AI agents — 100% local on Apple Silicon (MLX). Markdown source of truth + sqlite-vec hybrid search, with an MCP server and CLI. No cloud, no keys.",
+          "fullName": "jagoff/memo",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T01:47:41Z",
+          "url": "https://github.com/jagoff/memo"
+        },
+        {
+          "description": "AI Automation / Backend / Platform Engineer profile: DriveDesk AI Operator, business scenario replay, RAG/LLM workflows, CRM/ERP integrations, FastAPI, Docker.",
+          "fullName": "AlexGerlitz/AlexGerlitz",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T01:47:13Z",
+          "url": "https://github.com/AlexGerlitz/AlexGerlitz"
+        },
+        {
+          "description": "Multi-layer Intelligent Evaluation for Smart Contracts — 50 security tools across 35 analysis modules, 9 defense layers, one command. Pre-audit triage for Ethereum (EVM); multi-chain on the roadmap.",
+          "fullName": "fboiero/MIESC",
+          "stargazersCount": 5,
+          "updatedAt": "2026-06-30T01:47:03Z",
+          "url": "https://github.com/fboiero/MIESC"
+        }
+      ]
+    },
+    {
+      "topic": "retrieval-augmented-generation",
+      "queryStatus": "ok",
+      "topUpdated": [
+        {
+          "description": "Live tracker of new RAG implementations, tools, and patterns — updated every 15 minutes",
+          "fullName": "linny006/rag-radar",
+          "stargazersCount": 1,
+          "updatedAt": "2026-06-30T01:49:00Z",
+          "url": "https://github.com/linny006/rag-radar"
+        },
+        {
+          "description": "RAGFlow is a leading open-source Retrieval-Augmented Generation (RAG) engine that fuses cutting-edge RAG with Agent capabilities to create a superior context layer for LLMs",
+          "fullName": "infiniflow/ragflow",
+          "stargazersCount": 83877,
+          "updatedAt": "2026-06-30T01:48:46Z",
+          "url": "https://github.com/infiniflow/ragflow"
+        },
+        {
+          "description": "Syx is an experimental local AI memory system for long-running projects and coding agents. It explores active context, daily memory rolloff, sleep consolidation, long-term RAG retrieval, dream-like synthesis, and markdown memory artifacts.",
+          "fullName": "cjsthecoder/project_syx",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T01:44:01Z",
+          "url": "https://github.com/cjsthecoder/project_syx"
+        },
+        {
+          "description": "AegisRAG is a security-first, auditable enterprise RAG backend for teams that care more about access control,traceability, and governance than drag-and-drop workflow building.",
+          "fullName": "chyinan/AegisRAG",
+          "stargazersCount": 2,
+          "updatedAt": "2026-06-30T01:39:30Z",
+          "url": "https://github.com/chyinan/AegisRAG"
+        },
+        {
+          "description": "RAG-optimized documentation and data sources for AI-native development on the Flow network. Ground LLMs in accurate Flow and Cadence context.",
+          "fullName": "onflow/Flow-Data-Sources",
+          "stargazersCount": 4,
+          "updatedAt": "2026-06-30T01:16:48Z",
+          "url": "https://github.com/onflow/Flow-Data-Sources"
+        },
+        {
+          "description": "Modify memory values and optimize performance settings for 007 First Light to unlock characters, enable god mode, and improve frame rates.",
+          "fullName": "Mitsu-Shan116/007-First-Light-Trainer-And-Optimizer_v_2",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T01:10:16Z",
+          "url": "https://github.com/Mitsu-Shan116/007-First-Light-Trainer-And-Optimizer_v_2"
+        },
+        {
+          "description": "Enhance 007 First Light gameplay with this trainer to unlock items, enable God mode, and improve performance through stutter fixes and frame rate optimization.",
+          "fullName": "Vernajainist391/007-First-Light-Trainer-And-Optimizer_v_2",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T01:10:13Z",
+          "url": "https://github.com/Vernajainist391/007-First-Light-Trainer-And-Optimizer_v_2"
+        },
+        {
+          "description": "Optimize long-document question answering with a multi-stage RAG pipeline featuring query-aware routing, cross-encoder re-ranking, and context compression.",
+          "fullName": "impressionable-pyrrhotite668/adaptive-multistage-rag-system",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T01:07:54Z",
+          "url": "https://github.com/impressionable-pyrrhotite668/adaptive-multistage-rag-system"
+        }
+      ]
+    },
+    {
+      "topic": "agentic-rag",
+      "queryStatus": "ok",
+      "topUpdated": [
+        {
+          "description": "🌊 The leading agent meta-harness. Deploy intelligent multi-player swarms, coordinate autonomous workflows, and build conversational AI systems. Features adaptive memory, self-learning swarm intelligence, RAG integration, and native Claude Code / Codex Integration",
+          "fullName": "ruvnet/ruflo",
+          "stargazersCount": 62086,
+          "updatedAt": "2026-06-30T01:49:51Z",
+          "url": "https://github.com/ruvnet/ruflo"
+        },
+        {
+          "description": "AegisRAG is a security-first, auditable enterprise RAG backend for teams that care more about access control,traceability, and governance than drag-and-drop workflow building.",
+          "fullName": "chyinan/AegisRAG",
+          "stargazersCount": 2,
+          "updatedAt": "2026-06-30T01:39:30Z",
+          "url": "https://github.com/chyinan/AegisRAG"
+        },
+        {
+          "description": "AI-powered creative workflow platform built with LangGraph, Agentic RAG, multi-artifact generation, runtime diagnostics, observability, evaluation pipelines, and domain-aware creative coding workflows.",
+          "fullName": "lmguerrini/creative-coding-assistant",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T01:24:06Z",
+          "url": "https://github.com/lmguerrini/creative-coding-assistant"
+        },
+        {
+          "description": "Design and audit autonomous agent loops using a tested framework for triggers, verification, guardrails, and human escalation.",
+          "fullName": "Norinatiring463/loop-engineering",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T01:10:33Z",
+          "url": "https://github.com/Norinatiring463/loop-engineering"
+        },
+        {
+          "description": "Build functional AI agents with tool-use capabilities using this simple, step-by-step framework for developers.",
+          "fullName": "hard-suturasagittalis344/AI-Agents",
+          "stargazersCount": 1,
+          "updatedAt": "2026-06-30T00:56:27Z",
+          "url": "https://github.com/hard-suturasagittalis344/AI-Agents"
+        },
+        {
+          "description": "Build and test autonomous multi-agent apps with a pure Python Harness that maps Anthropic’s design to runnable code",
+          "fullName": "Chesl7916/Harness_Engineering",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T00:49:36Z",
+          "url": "https://github.com/Chesl7916/Harness_Engineering"
+        },
+        {
+          "description": "",
+          "fullName": "Cash4478/design-system-skill",
+          "stargazersCount": 2,
+          "updatedAt": "2026-06-30T00:47:44Z",
+          "url": "https://github.com/Cash4478/design-system-skill"
+        },
+        {
+          "description": "Provide a scalable context database designed to improve memory and data handling for AI agents in complex tasks.",
+          "fullName": "Uncomfortable-filagree112/OpenViking",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T00:40:04Z",
+          "url": "https://github.com/Uncomfortable-filagree112/OpenViking"
+        }
+      ]
+    },
+    {
+      "topic": "graphrag",
+      "queryStatus": "ok",
+      "topUpdated": [
+        {
+          "description": "Modify memory values and optimize performance settings for 007 First Light to unlock characters, enable god mode, and improve frame rates.",
+          "fullName": "Mitsu-Shan116/007-First-Light-Trainer-And-Optimizer_v_2",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T01:10:16Z",
+          "url": "https://github.com/Mitsu-Shan116/007-First-Light-Trainer-And-Optimizer_v_2"
+        },
+        {
+          "description": "Enhance 007 First Light gameplay with this trainer to unlock items, enable God mode, and improve performance through stutter fixes and frame rate optimization.",
+          "fullName": "Vernajainist391/007-First-Light-Trainer-And-Optimizer_v_2",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T01:10:13Z",
+          "url": "https://github.com/Vernajainist391/007-First-Light-Trainer-And-Optimizer_v_2"
+        },
+        {
+          "description": "Train lightweight world action models for robot manipulation using state-fusion decoding and frozen video backbones on LIBERO and RoboTwin2.0.",
+          "fullName": "Lauraineabsurd944/Light-WAM",
+          "stargazersCount": 1,
+          "updatedAt": "2026-06-30T01:06:03Z",
+          "url": "https://github.com/Lauraineabsurd944/Light-WAM"
+        },
+        {
+          "description": "Annotate Markdown and PDF files in Obsidian with overlay highlights and sticky notes that remain external to your original documents.",
+          "fullName": "Antony-bit375/axl-light",
+          "stargazersCount": 3,
+          "updatedAt": "2026-06-30T01:10:44Z",
+          "url": "https://github.com/Antony-bit375/axl-light"
+        },
+        {
+          "description": "Build an unofficial Claude Code CLI from source for research, Bun builds, and Node.js use with custom API endpoints",
+          "fullName": "alessandrahighvoltage217/claude-code-build",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T00:53:04Z",
+          "url": "https://github.com/alessandrahighvoltage217/claude-code-build"
+        },
+        {
+          "description": "Automate AI agent experiments to optimize any target with a metric-driven loop",
+          "fullName": "amitotic-simeon534/autoloop",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T00:53:00Z",
+          "url": "https://github.com/amitotic-simeon534/autoloop"
+        },
+        {
+          "description": "Explore Claude reviews of Claude Code with deep AI source analysis, code insights, and clear architecture notes",
+          "fullName": "andre016bryan-cyber/claude-reviews-claude",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T00:51:53Z",
+          "url": "https://github.com/andre016bryan-cyber/claude-reviews-claude"
+        },
+        {
+          "description": "Automated, graph-aware code review system — Go backend + React graph-visualization frontend, multi-language AST review engine, knowledge-graph indexing, and MCP tools. (Apache-2.0)",
+          "fullName": "austinyuch/aclab-code-review",
+          "stargazersCount": 1,
+          "updatedAt": "2026-06-30T00:50:24Z",
+          "url": "https://github.com/austinyuch/aclab-code-review"
+        }
+      ]
+    },
+    {
+      "topic": "lightrag",
+      "queryStatus": "ok",
+      "topUpdated": [
+        {
+          "description": "Extract text, answer questions, and pull structured data from PDFs and scans with local RAG and OCR for German and English documents",
+          "fullName": "unamerican-bias763/rag-document-intelligence",
+          "stargazersCount": 5,
+          "updatedAt": "2026-06-30T00:53:16Z",
+          "url": "https://github.com/unamerican-bias763/rag-document-intelligence"
+        },
+        {
+          "description": "Build agentic GraphRAG chat with Neo4j, ADK, and MCP for ad hoc graph queries, evidence chains, and multimodal reasoning",
+          "fullName": "christanbased926/agentic-graph-rag",
+          "stargazersCount": 2,
+          "updatedAt": "2026-06-30T00:46:25Z",
+          "url": "https://github.com/christanbased926/agentic-graph-rag"
+        },
+        {
+          "description": "Build a custom intake or exhaust fan for a small room with off-the-shelf IR and PWM modules and 3×140 mm PC fans",
+          "fullName": "ebtehaldousset-sudo/Gusto",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T00:42:48Z",
+          "url": "https://github.com/ebtehaldousset-sudo/Gusto"
+        },
+        {
+          "description": "PhantomCrowd AI Marketing Simulator 2026: Content Spread Forecasting with Local LLM",
+          "fullName": "charan820/PhantomCrowd-Simulacra",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-29T23:53:34Z",
+          "url": "https://github.com/charan820/PhantomCrowd-Simulacra"
+        },
+        {
+          "description": "One-Click Agent Engineering Infrastructure on VPS. Deploy private multi-agent environments with a 50k-line Next.js Aircraft Carrier architecture. Replaces heavy code-generation loops with atomic MCP commands, eliminating file system parsing to drive AI token spend to absolute zero.",
+          "fullName": "Fractera/Agent-Engineering-Infrastructure",
+          "stargazersCount": 27,
+          "updatedAt": "2026-06-29T14:34:32Z",
+          "url": "https://github.com/Fractera/Agent-Engineering-Infrastructure"
+        },
+        {
+          "description": "An advanced RAG architecture built with FastAPI, Qdrant & local LLMs. Features OCR document parsing, cross-lingual retrieval, and verifiable evidence tracing.",
+          "fullName": "nvtanphat/Noelys",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-28T10:26:51Z",
+          "url": "https://github.com/nvtanphat/Noelys"
+        },
+        {
+          "description": "Enterprise-ready AI Knowledge Agent enabling secure, multi-tenant natural language search over internal documents. Delivering accurate, cited answers governed by strict role-based access control.",
+          "fullName": "vtnguyen04/KnowledgeForge",
+          "stargazersCount": 1,
+          "updatedAt": "2026-06-28T05:57:29Z",
+          "url": "https://github.com/vtnguyen04/KnowledgeForge"
+        },
+        {
+          "description": "LightRAG AI context pack for Claude Code, Codex, Cursor, and Aider: AGENTS.md, prompts, evals, pitfalls, retrieval boundaries, and verification notes for HKUDS/LightRAG.",
+          "fullName": "tangweigang-jpg/doramagic-lightrag-pack",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-27T06:31:33Z",
+          "url": "https://github.com/tangweigang-jpg/doramagic-lightrag-pack"
+        }
+      ]
+    },
+    {
+      "topic": "hybrid-search",
+      "queryStatus": "ok",
+      "topUpdated": [
+        {
+          "description": "Two-tier hybrid search for Rust: sub-millisecond initial results via potion-128M, quality-refined rankings in 150ms via MiniLM-L6-v2. Combines lexical (Tantivy BM25) and semantic (vector cosine) search with Reciprocal Rank Fusion. Progressive iterator API, f16 SIMD vector index, feature-gated compilation.",
+          "fullName": "Dicklesworthstone/frankensearch",
+          "stargazersCount": 64,
+          "updatedAt": "2026-06-30T01:45:13Z",
+          "url": "https://github.com/Dicklesworthstone/frankensearch"
+        },
+        {
+          "description": "Shared knowledge layer for human-agent teams. Agents search, classify, and manage knowledge alongside your team.   ",
+          "fullName": "three-cubes/kairix",
+          "stargazersCount": 2,
+          "updatedAt": "2026-06-30T01:25:33Z",
+          "url": "https://github.com/three-cubes/kairix"
+        },
+        {
+          "description": "The AI-Native Search Database. Best for agent storage, it unifies vector, text, structured, and semi-structured data into a single engine. This all-in-one database makes agents smarter, easier to run, and more stable.",
+          "fullName": "oceanbase/seekdb",
+          "stargazersCount": 2766,
+          "updatedAt": "2026-06-30T01:15:48Z",
+          "url": "https://github.com/oceanbase/seekdb"
+        },
+        {
+          "description": "Persistent AI memory with hybrid search and embedded sync. Open, free, unlimited.",
+          "fullName": "n24q02m/mnemo-mcp",
+          "stargazersCount": 7,
+          "updatedAt": "2026-06-30T01:01:07Z",
+          "url": "https://github.com/n24q02m/mnemo-mcp"
+        },
+        {
+          "description": "Private hybrid search over your files — fully offline, 70+ languages. An MCP retrieval backend for AI agents.",
+          "fullName": "eliasjustus/justsearch",
+          "stargazersCount": 1,
+          "updatedAt": "2026-06-30T01:00:32Z",
+          "url": "https://github.com/eliasjustus/justsearch"
+        },
+        {
+          "description": "Search local documents to provide private knowledge retrieval for AI agents and teams in under a second.",
+          "fullName": "DawoodMX/kairix",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T00:56:26Z",
+          "url": "https://github.com/DawoodMX/kairix"
+        },
+        {
+          "description": "Sync, study, and review Anki decks on iOS with an offline-first SwiftUI flashcard app and sync server support",
+          "fullName": "angelinaviolable23/amgi",
+          "stargazersCount": 1,
+          "updatedAt": "2026-06-30T00:50:26Z",
+          "url": "https://github.com/angelinaviolable23/amgi"
+        },
+        {
+          "description": "Rust-powered code intelligence CLI for AI coding agents. Builds call graphs and hybrid semantic search indexes (Dense + Sparse + RRF + Reranker) across 7 languages. Ships as native MCP tools for Claude Code and Codex CLI.",
+          "fullName": "CodeBendKit/codeseek",
+          "stargazersCount": 422,
+          "updatedAt": "2026-06-30T00:56:30Z",
+          "url": "https://github.com/CodeBendKit/codeseek"
+        }
+      ]
+    },
+    {
+      "topic": "semantic-search",
+      "queryStatus": "ok",
+      "topUpdated": [
+        {
+          "description": "Live tracker of new RAG implementations, tools, and patterns — updated every 15 minutes",
+          "fullName": "linny006/rag-radar",
+          "stargazersCount": 1,
+          "updatedAt": "2026-06-30T01:49:00Z",
+          "url": "https://github.com/linny006/rag-radar"
+        },
+        {
+          "description": "Persistent memory MCP server for AI agents. SQLite, FTS5 and vector search, AES-256-GCM, 43 tools. Local-first, single Rust binary.",
+          "fullName": "Perseus-Computing-LLC/mimir",
+          "stargazersCount": 9,
+          "updatedAt": "2026-06-30T01:48:15Z",
+          "url": "https://github.com/Perseus-Computing-LLC/mimir"
+        },
+        {
+          "description": "A developer memory layer that automatically captures and organizes AI sessions, Git history, and development context into searchable knowledge.",
+          "fullName": "pedroaugusto04/Kote",
+          "stargazersCount": 2,
+          "updatedAt": "2026-06-30T01:46:36Z",
+          "url": "https://github.com/pedroaugusto04/Kote"
+        },
+        {
+          "description": "Live-updating landscape of vector database projects, integrations, and benchmarks — refreshed every ",
+          "fullName": "linny006/vector-db-live",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T01:45:27Z",
+          "url": "https://github.com/linny006/vector-db-live"
+        },
+        {
+          "description": "Two-tier hybrid search for Rust: sub-millisecond initial results via potion-128M, quality-refined rankings in 150ms via MiniLM-L6-v2. Combines lexical (Tantivy BM25) and semantic (vector cosine) search with Reciprocal Rank Fusion. Progressive iterator API, f16 SIMD vector index, feature-gated compilation.",
+          "fullName": "Dicklesworthstone/frankensearch",
+          "stargazersCount": 64,
+          "updatedAt": "2026-06-30T01:45:13Z",
+          "url": "https://github.com/Dicklesworthstone/frankensearch"
+        },
+        {
+          "description": "Multi-surface email platform: MCP server (19 tools), Discord bot, and web dashboard. AI drafts, semantic search, inbox triage, and team collaboration for Gmail/Outlook.",
+          "fullName": "jeremylongshore/intent-mail",
+          "stargazersCount": 1,
+          "updatedAt": "2026-06-30T01:44:59Z",
+          "url": "https://github.com/jeremylongshore/intent-mail"
+        },
+        {
+          "description": "Syx is an experimental local AI memory system for long-running projects and coding agents. It explores active context, daily memory rolloff, sleep consolidation, long-term RAG retrieval, dream-like synthesis, and markdown memory artifacts.",
+          "fullName": "cjsthecoder/project_syx",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T01:44:01Z",
+          "url": "https://github.com/cjsthecoder/project_syx"
+        },
+        {
+          "description": "Best Token-Efficient AI Coding Tools 2026 – Reduce Costs 90% with Local Memory & MCP",
+          "fullName": "tuantranute-it/icm-graph-context-flow",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T01:28:43Z",
+          "url": "https://github.com/tuantranute-it/icm-graph-context-flow"
+        }
+      ]
+    },
+    {
+      "topic": "vector-database",
+      "queryStatus": "ok",
+      "topUpdated": [
+        {
+          "description": "Live tracker of new RAG implementations, tools, and patterns — updated every 15 minutes",
+          "fullName": "linny006/rag-radar",
+          "stargazersCount": 1,
+          "updatedAt": "2026-06-30T01:49:00Z",
+          "url": "https://github.com/linny006/rag-radar"
+        },
+        {
+          "description": "Live-updating landscape of vector database projects, integrations, and benchmarks — refreshed every ",
+          "fullName": "linny006/vector-db-live",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T01:45:27Z",
+          "url": "https://github.com/linny006/vector-db-live"
+        },
+        {
+          "description": "ArcadeDB Multi-Model Database, one DBMS that supports SQL, Cypher, Gremlin, HTTP/JSON, MongoDB and Redis. ArcadeDB is a conceptual fork of OrientDB, the first Multi-Model DBMS. ArcadeDB supports Vector Embeddings.",
+          "fullName": "ArcadeData/arcadedb",
+          "stargazersCount": 983,
+          "updatedAt": "2026-06-30T01:44:14Z",
+          "url": "https://github.com/ArcadeData/arcadedb"
+        },
+        {
+          "description": "AegisRAG is a security-first, auditable enterprise RAG backend for teams that care more about access control,traceability, and governance than drag-and-drop workflow building.",
+          "fullName": "chyinan/AegisRAG",
+          "stargazersCount": 2,
+          "updatedAt": "2026-06-30T01:39:30Z",
+          "url": "https://github.com/chyinan/AegisRAG"
+        },
+        {
+          "description": "AI Hub & Intelligent Agentic Platform for the Enterprise - self-hostable AI hub for enterprise knowledge.",
+          "fullName": "lopadova/AskMyDocs",
+          "stargazersCount": 7,
+          "updatedAt": "2026-06-30T01:38:51Z",
+          "url": "https://github.com/lopadova/AskMyDocs"
+        },
+        {
+          "description": "Semantic memory and cross-project search for AI",
+          "fullName": "jkraybill/gordo-ledger",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T01:12:10Z",
+          "url": "https://github.com/jkraybill/gordo-ledger"
+        },
+        {
+          "description": "Orchestrate enterprise data ingestion from diverse repository connectors into vector search infrastructure using Java 25 and Spring Boot.",
+          "fullName": "doriapt53/spring-manifold-next-gen",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T01:09:47Z",
+          "url": "https://github.com/doriapt53/spring-manifold-next-gen"
+        },
+        {
+          "description": "Optimize long-document question answering with a multi-stage RAG pipeline featuring query-aware routing, cross-encoder re-ranking, and context compression.",
+          "fullName": "impressionable-pyrrhotite668/adaptive-multistage-rag-system",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T01:07:54Z",
+          "url": "https://github.com/impressionable-pyrrhotite668/adaptive-multistage-rag-system"
+        }
+      ]
+    },
+    {
+      "topic": "reranking",
+      "queryStatus": "ok",
+      "topUpdated": [
+        {
+          "description": "Index local files for semantic search and reranking using an MCP server, CLI, or web console on your machine.",
+          "fullName": "Tamariskwhisper962/Localbrain",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T01:04:36Z",
+          "url": "https://github.com/Tamariskwhisper962/Localbrain"
+        },
+        {
+          "description": "Extract text, answer questions, and pull structured data from PDFs and scans with local RAG and OCR for German and English documents",
+          "fullName": "unamerican-bias763/rag-document-intelligence",
+          "stargazersCount": 5,
+          "updatedAt": "2026-06-30T00:53:16Z",
+          "url": "https://github.com/unamerican-bias763/rag-document-intelligence"
+        },
+        {
+          "description": "Build a RAG engine with hybrid search, reranking, and RAGAS evaluation for fast, accurate retrieval and generation",
+          "fullName": "matomed9259/ragcore",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T00:48:08Z",
+          "url": "https://github.com/matomed9259/ragcore"
+        },
+        {
+          "description": "Bridge WeChat and Claude Code with an Electron desktop app for chat, image input, QR login, and session control",
+          "fullName": "Sudokupubescence845/WeChatClaudeCode",
+          "stargazersCount": 1,
+          "updatedAt": "2026-06-30T00:45:54Z",
+          "url": "https://github.com/Sudokupubescence845/WeChatClaudeCode"
+        },
+        {
+          "description": "Build a Q&A API that indexes PDFs and text using RAG, logging queries with MLflow for offline document search and evaluation.",
+          "fullName": "Boney-massiveness357/ragscope",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T00:38:11Z",
+          "url": "https://github.com/Boney-massiveness357/ragscope"
+        },
+        {
+          "description": "🤖 Implement hybrid human-AI orchestration patterns in Python to coordinate agents, manage sessions, and enable smooth AI-human handoffs.",
+          "fullName": "Anonymousforareason111/hybrid-orchestrator",
+          "stargazersCount": 3,
+          "updatedAt": "2026-06-30T00:20:06Z",
+          "url": "https://github.com/Anonymousforareason111/hybrid-orchestrator"
+        },
+        {
+          "description": "🔗 Connect and enhance your communication with WeKnora, a powerful platform for seamless integration and interaction in WeChat services.",
+          "fullName": "Almaskhan123/WeKnora",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-29T23:36:57Z",
+          "url": "https://github.com/Almaskhan123/WeKnora"
+        },
+        {
+          "description": "🗄️ Streamline data analysis with ConsciousDB, a vector database that integrates directly with your models for enhanced performance and ease of use.",
+          "fullName": "britorbs/consciousdb",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-29T23:27:49Z",
+          "url": "https://github.com/britorbs/consciousdb"
+        }
+      ]
+    },
+    {
+      "topic": "colbert",
+      "queryStatus": "ok",
+      "topUpdated": [
+        {
+          "description": "🚀 sgrep 2026: Next-Gen Semantic Code Search CLI - Grep Smarter, Not Harder",
+          "fullName": "henknech4/sgrep-lint",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T00:04:59Z",
+          "url": "https://github.com/henknech4/sgrep-lint"
+        },
+        {
+          "description": "Local semantic code search — hybrid ColBERT + BM25, 34% better than grep, 222x fewer tokens for AI",
+          "fullName": "MisterTK/semantex",
+          "stargazersCount": 3,
+          "updatedAt": "2026-06-29T19:14:19Z",
+          "url": "https://github.com/MisterTK/semantex"
+        },
+        {
+          "description": "Local corpus retrieval over your own text: BM25 + SPLADE v3 + ColBERTv2, with synthetic eval and an optional relevance judge",
+          "fullName": "avifenesh/sxc",
+          "stargazersCount": 2,
+          "updatedAt": "2026-06-29T21:20:23Z",
+          "url": "https://github.com/avifenesh/sxc"
+        },
+        {
+          "description": "Benchmark comparing Naive RAG, Light RAG, and HippoRAG2-Hier on Japanese river & sediment-control technical standards. 6 conditions (3 RAG × 2 LLMs), AI-as-Judge scoring.",
+          "fullName": "tk-yasuno/kasensabo_hipporag2",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-29T13:54:38Z",
+          "url": "https://github.com/tk-yasuno/kasensabo_hipporag2"
+        },
+        {
+          "description": "Local code search for AI agents: six fast, purpose-built tools that return ranked answers, not raw grep. Because maybe grep isn't all you need... 🍬",
+          "fullName": "mrsladoje/sweet-search",
+          "stargazersCount": 18,
+          "updatedAt": "2026-06-29T05:06:45Z",
+          "url": "https://github.com/mrsladoje/sweet-search"
+        },
+        {
+          "description": "Rank fusion and reranking",
+          "fullName": "arclabs561/rankops",
+          "stargazersCount": 2,
+          "updatedAt": "2026-06-27T00:50:13Z",
+          "url": "https://github.com/arclabs561/rankops"
+        },
+        {
+          "description": "Open-source inference server and production cluster for all the models your agent needs.",
+          "fullName": "superlinked/sie",
+          "stargazersCount": 2102,
+          "updatedAt": "2026-06-29T22:27:42Z",
+          "url": "https://github.com/superlinked/sie"
+        },
+        {
+          "description": "Late Interaction Models Training & Retrieval",
+          "fullName": "lightonai/pylate",
+          "stargazersCount": 860,
+          "updatedAt": "2026-06-27T15:14:40Z",
+          "url": "https://github.com/lightonai/pylate"
+        }
+      ]
+    },
+    {
+      "topic": "late-interaction",
+      "queryStatus": "ok",
+      "topUpdated": [
+        {
+          "description": "High-quality search for AI-native applications.",
+          "fullName": "topk-io/topk",
+          "stargazersCount": 80,
+          "updatedAt": "2026-06-29T18:27:29Z",
+          "url": "https://github.com/topk-io/topk"
+        },
+        {
+          "description": "Official repository of TACHIOM.",
+          "fullName": "TusKANNy/tachiom",
+          "stargazersCount": 58,
+          "updatedAt": "2026-06-26T09:36:08Z",
+          "url": "https://github.com/TusKANNy/tachiom"
+        },
+        {
+          "description": "Serve Jina Embeddings v4 multi-vector (ColBERT-style) multimodal text+image embeddings from a stock vLLM OpenAI server via an out-of-tree plugin, with configurable image fidelity.",
+          "fullName": "Mazyod/jina-embeddings-v4-vllm-plugin",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-24T08:09:44Z",
+          "url": "https://github.com/Mazyod/jina-embeddings-v4-vllm-plugin"
+        },
+        {
+          "description": "ColBERT inference in C++ (ONNX Runtime + tokenizers-cpp) without PyTorch.",
+          "fullName": "Intextus/intextus-embed",
+          "stargazersCount": 1,
+          "updatedAt": "2026-06-24T04:50:48Z",
+          "url": "https://github.com/Intextus/intextus-embed"
+        },
+        {
+          "description": "[ICML'26] LEMUR reduces multi-vector retrieval for late interaction models such as ColBERT into regular single-vector retrieval.",
+          "fullName": "ejaasaari/lemur",
+          "stargazersCount": 30,
+          "updatedAt": "2026-06-21T04:55:27Z",
+          "url": "https://github.com/ejaasaari/lemur"
+        },
+        {
+          "description": "Fused Triton kernels for late-interaction (MaxSim) scoring",
+          "fullName": "hcompai/late-interaction-kernels",
+          "stargazersCount": 24,
+          "updatedAt": "2026-06-22T12:25:06Z",
+          "url": "https://github.com/hcompai/late-interaction-kernels"
+        },
+        {
+          "description": "AccInt - local-first MCP Work Model for coding agents that learns from real outcomes.",
+          "fullName": "maxbaluev/accreted-intelligence",
+          "stargazersCount": 2,
+          "updatedAt": "2026-06-20T17:17:54Z",
+          "url": "https://github.com/maxbaluev/accreted-intelligence"
+        },
+        {
+          "description": "MCP server exposing late-interaction (ColBERT-style MaxSim) document retrieval over a local folder — pluggable encoder, runs offline by default.",
+          "fullName": "maxbaluev/mcp-retrieve",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-10T19:59:36Z",
+          "url": "https://github.com/maxbaluev/mcp-retrieve"
+        }
+      ]
+    },
+    {
+      "topic": "knowledge-graph",
+      "queryStatus": "ok",
+      "topUpdated": [
+        {
+          "description": "The semantic layer for spatial computing and AI agents — write once, run as VR, robotics, web, or game.",
+          "fullName": "brianonbased-dev/HoloScript",
+          "stargazersCount": 3,
+          "updatedAt": "2026-06-30T01:49:33Z",
+          "url": "https://github.com/brianonbased-dev/HoloScript"
+        },
+        {
+          "description": "Open-source mission control for AI agent fleets — chat to provision, agents to operate, humans to approve.",
+          "fullName": "nodealchemy/powernode-platform",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T01:44:42Z",
+          "url": "https://github.com/nodealchemy/powernode-platform"
+        },
+        {
+          "description": "build a local skill graph from your own history",
+          "fullName": "Microck/traccia",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T01:43:17Z",
+          "url": "https://github.com/Microck/traccia"
+        },
+        {
+          "description": "🧠 AI知识采集与记忆体管理插件 — 40+采集工具, SenseNova文档引擎, 12+云盘同步, 三层知识召回 | Knowledge Collection & Memory Mgmt Plugin for AI Agents",
+          "fullName": "mage0535/Knowledge-and-Memory-Management",
+          "stargazersCount": 2,
+          "updatedAt": "2026-06-30T01:42:55Z",
+          "url": "https://github.com/mage0535/Knowledge-and-Memory-Management"
+        },
+        {
+          "description": "A versatile, two-layer MCP server for AI agents: SQLite-based, local execution, no heavy backend - 19 tools, hybrid search, knowledge graphs, wiki, Saga, auth, Docker.",
+          "fullName": "Cipher208/mcp-ariel-memory",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T01:42:12Z",
+          "url": "https://github.com/Cipher208/mcp-ariel-memory"
+        },
+        {
+          "description": "MOOTx01 Community Edition",
+          "fullName": "codedaptive/mootx01-ce",
+          "stargazersCount": 1,
+          "updatedAt": "2026-06-30T01:41:13Z",
+          "url": "https://github.com/codedaptive/mootx01-ce"
+        },
+        {
+          "description": "Unified long-term memory and knowledge platform for AI agents with MCP, governance, and graph-oriented knowledge evolution.",
+          "fullName": "PrecipAI/AGI-Memory",
+          "stargazersCount": 1,
+          "updatedAt": "2026-06-30T01:40:33Z",
+          "url": "https://github.com/PrecipAI/AGI-Memory"
+        },
+        {
+          "description": "Lafuanh Mind Bridge Connect 2026 - AI Knowledge Sync Without Sorting",
+          "fullName": "M1LL4r3S-Droid/notion-sync-nexus",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T01:34:24Z",
+          "url": "https://github.com/M1LL4r3S-Droid/notion-sync-nexus"
+        }
+      ]
+    },
+    {
+      "topic": "llm-evaluation",
+      "queryStatus": "ok",
+      "topUpdated": [
+        {
+          "description": "AI Observability & Evaluation",
+          "fullName": "Arize-ai/phoenix",
+          "stargazersCount": 10330,
+          "updatedAt": "2026-06-30T01:48:47Z",
+          "url": "https://github.com/Arize-ai/phoenix"
+        },
+        {
+          "description": "Live index of LLM evaluation tools and benchmarks, refreshed every 15 minutes from GitHub",
+          "fullName": "linny006/llm-eval-tracker",
+          "stargazersCount": 4,
+          "updatedAt": "2026-06-30T01:45:24Z",
+          "url": "https://github.com/linny006/llm-eval-tracker"
+        },
+        {
+          "description": "Polinko is a research model exploring human-AI alignment through evals, evidence chains, and runtime tooling.",
+          "fullName": "tryskian/polinko",
+          "stargazersCount": 1,
+          "updatedAt": "2026-06-30T01:40:27Z",
+          "url": "https://github.com/tryskian/polinko"
+        },
+        {
+          "description": "Offline, auditable benchmark for one-shot LLM market decisions.",
+          "fullName": "ishtiaqrahman/capitalbench",
+          "stargazersCount": 2,
+          "updatedAt": "2026-06-30T01:36:58Z",
+          "url": "https://github.com/ishtiaqrahman/capitalbench"
+        },
+        {
+          "description": "Whose Side Is Your Agent On? PrincipalBench — a multi-turn benchmark and post-training methods (prompt scaffold + per-token-KL distillation) for multi-party principal loyalty in LLM agents.",
+          "fullName": "19PINE-AI/principal-loyalty",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T01:28:14Z",
+          "url": "https://github.com/19PINE-AI/principal-loyalty"
+        },
+        {
+          "description": "Lean, research-backed multi-LLM council with bias-aware judge controls (position-swap, verbosity-norm, stake-free judge) adapted from LLM-eval research.",
+          "fullName": "7xuanlu/boule",
+          "stargazersCount": 1,
+          "updatedAt": "2026-06-30T01:19:09Z",
+          "url": "https://github.com/7xuanlu/boule"
+        },
+        {
+          "description": "Canonical Origin Ø: Origin-locked AI continuity + provenance. Awakening Codex | AI Foundations: non-drift, non-merge, provenance.",
+          "fullName": "alyssadata/ALYSSA_SOLEN_PUBLIC_PROFILE",
+          "stargazersCount": 1,
+          "updatedAt": "2026-06-30T01:07:07Z",
+          "url": "https://github.com/alyssadata/ALYSSA_SOLEN_PUBLIC_PROFILE"
+        },
+        {
+          "description": "Automate equity research with an AI agent that generates evidence-grounded reports using RAG and resilient workflow orchestration.",
+          "fullName": "Vinod2515/FinSight-AI-550",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T01:05:50Z",
+          "url": "https://github.com/Vinod2515/FinSight-AI-550"
+        }
+      ]
+    },
+    {
+      "topic": "rag-evaluation",
+      "queryStatus": "ok",
+      "topUpdated": [
+        {
+          "description": "📊 Lightweight RAG pipeline benchmarking — synthetic datasets, deterministic retrieval+generation metrics, reproducible scorecards. Framework-agnostic, zero core deps.",
+          "fullName": "alvabillwu/ragbench",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T00:56:41Z",
+          "url": "https://github.com/alvabillwu/ragbench"
+        },
+        {
+          "description": "🤖 Implement hybrid human-AI orchestration patterns in Python to coordinate agents, manage sessions, and enable smooth AI-human handoffs.",
+          "fullName": "Anonymousforareason111/hybrid-orchestrator",
+          "stargazersCount": 3,
+          "updatedAt": "2026-06-30T00:20:06Z",
+          "url": "https://github.com/Anonymousforareason111/hybrid-orchestrator"
+        },
+        {
+          "description": "📚 Enhance LLMs with retrieval augmented generation, using external data for improved factual recall and grounding in context.",
+          "fullName": "1green9code9ondas9/rag-from-scratch",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T00:16:30Z",
+          "url": "https://github.com/1green9code9ondas9/rag-from-scratch"
+        },
+        {
+          "description": "Local-first SDK and CLI for debugging RAG failures, verifying citations, classifying failure modes, and generating reliability reports for user-built RAG and AI agent systems.",
+          "fullName": "samarth1412/Context-Trace",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T00:11:35Z",
+          "url": "https://github.com/samarth1412/Context-Trace"
+        },
+        {
+          "description": "🚀 Automate LLM red teaming workflows with the MCP server for LLAMATOR, featuring asynchronous job handling and seamless integration.",
+          "fullName": "kyle122497/llamator-mcp-server",
+          "stargazersCount": 2,
+          "updatedAt": "2026-06-30T00:08:44Z",
+          "url": "https://github.com/kyle122497/llamator-mcp-server"
+        },
+        {
+          "description": "📄 Transform your PDF documents into actionable insights with this RAG-based Question-Answering App for efficient and accurate responses.",
+          "fullName": "rupamsamanta123/PDF-QA-RAG-System",
+          "stargazersCount": 4,
+          "updatedAt": "2026-06-29T23:19:55Z",
+          "url": "https://github.com/rupamsamanta123/PDF-QA-RAG-System"
+        },
+        {
+          "description": "The open-source LLMOps platform: prompt playground, prompt management, LLM evaluation, and LLM observability all in one place.",
+          "fullName": "Agenta-AI/agenta",
+          "stargazersCount": 4248,
+          "updatedAt": "2026-06-29T22:16:12Z",
+          "url": "https://github.com/Agenta-AI/agenta"
+        },
+        {
+          "description": "Curated tools, papers, datasets, and practices for LLM training data engineering.",
+          "fullName": "Alfonsobang/awesome-llm-training-data",
+          "stargazersCount": 1,
+          "updatedAt": "2026-06-29T16:54:38Z",
+          "url": "https://github.com/Alfonsobang/awesome-llm-training-data"
+        }
+      ]
+    },
+    {
+      "topic": "prompt-injection",
+      "queryStatus": "ok",
+      "topUpdated": [
+        {
+          "description": "fak — the Fused Agent Kernel: treat the model like an untrusted program and the tool call like a syscall. One Go binary — a default-deny capability gate the model can't talk past, plus an addressable, bit-exact KV cache.",
+          "fullName": "anthony-chaudhary/fak",
+          "stargazersCount": 6,
+          "updatedAt": "2026-06-30T01:47:04Z",
+          "url": "https://github.com/anthony-chaudhary/fak"
+        },
+        {
+          "description": " Personal Agent OS for Claude Code — 46 hooks, 1980 skills, 97 agents. Blocks rm -rf, prompt injection, pipe-to-shell at runtime. Apache 2.0.",
+          "fullName": "yanacuti1121/Yana-AI",
+          "stargazersCount": 1,
+          "updatedAt": "2026-06-30T01:46:40Z",
+          "url": "https://github.com/yanacuti1121/Yana-AI"
+        },
+        {
+          "description": "Measuring whether AI safety guards stop image-based jailbreaks, not just text ones",
+          "fullName": "PatrickKollman/Multimodal-Safeguard-Bench",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T01:42:30Z",
+          "url": "https://github.com/PatrickKollman/Multimodal-Safeguard-Bench"
+        },
+        {
+          "description": "OWASP Foundation web repository",
+          "fullName": "OWASP/www-project-agent-memory-guard",
+          "stargazersCount": 56,
+          "updatedAt": "2026-06-30T01:23:40Z",
+          "url": "https://github.com/OWASP/www-project-agent-memory-guard"
+        },
+        {
+          "description": "The official client for the CELLO protocol — MCP server and native adapters for OpenClaw, NanoClaw, IronClaw, ZeroClaw, and other agent variants",
+          "fullName": "Mygentic-AI/cello-client",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T01:21:56Z",
+          "url": "https://github.com/Mygentic-AI/cello-client"
+        },
+        {
+          "description": "Defensive 7-layer runtime guardrails gateway for LLM agents: a reverse proxy that blocks prompt injection (incl. indirect/XPIA), tool misuse, and data exfiltration on every turn. Polyglot — Python control plane + Rust security core + React HITL. Metrics reported split (ASR vs FPR), never one blended F1.",
+          "fullName": "krishddd/SEC_Guardrails_Agent",
+          "stargazersCount": 1,
+          "updatedAt": "2026-06-30T01:20:03Z",
+          "url": "https://github.com/krishddd/SEC_Guardrails_Agent"
+        },
+        {
+          "description": "Open-source AI agent firewall for MCP security and agent egress. Scans mediated HTTP, MCP, A2A, and WebSocket traffic for exfiltration, SSRF, and prompt injection, and emits mediator-signed action receipts: verifiable audit evidence from outside the agent.",
+          "fullName": "luckyPipewrench/pipelock",
+          "stargazersCount": 738,
+          "updatedAt": "2026-06-30T01:16:06Z",
+          "url": "https://github.com/luckyPipewrench/pipelock"
+        },
+        {
+          "description": "Route coding tasks through an automated 8-agent pipeline for optimized, secure, and production-ready code output in Claude Code.",
+          "fullName": "Eastern-comptrollership272/crucible-",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T01:11:44Z",
+          "url": "https://github.com/Eastern-comptrollership272/crucible-"
+        }
+      ]
+    },
+    {
+      "topic": "document-ai",
+      "queryStatus": "ok",
+      "topUpdated": [
+        {
+          "description": "Chat with private legal documents using local LLMs. Get cited, verifiable answers on your own hardware.",
+          "fullName": "michalspheroidal902/legal-document-chat",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T01:09:44Z",
+          "url": "https://github.com/michalspheroidal902/legal-document-chat"
+        },
+        {
+          "description": "Fast GPU OCR server. 270 img/s on FUNSD. TensorRT FP16, PP-OCRv5, HTTP + gRPC.",
+          "fullName": "aiptimizer/TurboOCR",
+          "stargazersCount": 306,
+          "updatedAt": "2026-06-29T22:00:38Z",
+          "url": "https://github.com/aiptimizer/TurboOCR"
+        },
+        {
+          "description": "KnowMesh / 知络: local-first knowledge asset compiler for auditable RAG, traceable citations, and maintainable document intelligence.",
+          "fullName": "shineway-tech/KnowMesh",
+          "stargazersCount": 1,
+          "updatedAt": "2026-06-29T18:49:52Z",
+          "url": "https://github.com/shineway-tech/KnowMesh"
+        },
+        {
+          "description": "Multi-Agent AI Document Research Assistant using RAG, LangGraph, FastAPI, ChromaDB, and LLM-powered research workflows.",
+          "fullName": "n1dhiparate/multi-agent-ai-document-system",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-29T18:21:26Z",
+          "url": "https://github.com/n1dhiparate/multi-agent-ai-document-system"
+        },
+        {
+          "description": "Open-source verifier for document citations, source evidence, RAG, and agents, with built-in document parsing.",
+          "fullName": "docushell/ethos",
+          "stargazersCount": 5,
+          "updatedAt": "2026-06-29T18:09:28Z",
+          "url": "https://github.com/docushell/ethos"
+        },
+        {
+          "description": "Apple-native iOS/macOS app for document intelligence, OCR, cited answers, and source-backed retrieval over PDFs, scans, and user-controlled files.",
+          "fullName": "Gunnarguy/OpenIntelligence",
+          "stargazersCount": 19,
+          "updatedAt": "2026-06-29T17:25:07Z",
+          "url": "https://github.com/Gunnarguy/OpenIntelligence"
+        },
+        {
+          "description": "LLM-Driven Extraction of Unstructured Data — Built for API Deployments & ETL Pipeline Workflows",
+          "fullName": "Zipstack/unstract",
+          "stargazersCount": 6678,
+          "updatedAt": "2026-06-29T18:24:37Z",
+          "url": "https://github.com/Zipstack/unstract"
+        },
+        {
+          "description": "PawWork — free, open-source desktop AI agent for macOS and Windows. Alternative to Codex App and Claude Cowork. BYOK with 75+ providers, ChatGPT OAuth, local models, Office files. No terminal needed.",
+          "fullName": "Astro-Han/pawwork",
+          "stargazersCount": 64,
+          "updatedAt": "2026-06-29T15:20:56Z",
+          "url": "https://github.com/Astro-Han/pawwork"
+        }
+      ]
+    },
+    {
+      "topic": "multimodal-rag",
+      "queryStatus": "ok",
+      "topUpdated": [
+        {
+          "description": "🩺 Enhance medical diagnostics by integrating text and image analysis, bridging the gap for improved patient care with cutting-edge AI technology.",
+          "fullName": "anselmoAJ/Multimodal-Clinical-RAG-Assistant-Medical-Text-Image-Retrieval-System-",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-29T23:54:16Z",
+          "url": "https://github.com/anselmoAJ/Multimodal-Clinical-RAG-Assistant-Medical-Text-Image-Retrieval-System-"
+        },
+        {
+          "description": "Multimodal RAG with per-query routing to text / visual / hybrid retrieval paths. Vision-LLM answers and regression-gated evals.",
+          "fullName": "NorthernLightx/SpectraRAG",
+          "stargazersCount": 1,
+          "updatedAt": "2026-06-29T21:56:36Z",
+          "url": "https://github.com/NorthernLightx/SpectraRAG"
+        },
+        {
+          "description": "Legal Multi-Modal RAG is an advanced, production-grade Retrieval-Augmented Generation system designed to process both unstructured legal documents (PDFs with OCR support) and structured tabular datasets (CSV, Excel, SQL).  Built with Streamlit, LangChain (LCEL), Chroma DB, and OpenRouter (Gemini 1.5 Flash), it delivers highly accurate, cited answer",
+          "fullName": "AnshSingh30/legal-multimodal-rag",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-29T17:58:19Z",
+          "url": "https://github.com/AnshSingh30/legal-multimodal-rag"
+        },
+        {
+          "description": "書籍『入門マルチモーダルRAG』のサンプルプログラム集",
+          "fullName": "shinnou/mragbook",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-26T04:23:00Z",
+          "url": "https://github.com/shinnou/mragbook"
+        },
+        {
+          "description": "Awesome Memory Papers in Vision-Language Models",
+          "fullName": "Xzcv-hub/Awesome-Memory-in-VLM",
+          "stargazersCount": 19,
+          "updatedAt": "2026-06-28T01:10:20Z",
+          "url": "https://github.com/Xzcv-hub/Awesome-Memory-in-VLM"
+        },
+        {
+          "description": "Biomedical Research Intelligence: a multimodal, agentic hybrid RAG system over PubMed for mechanism mapping, target risk, and hypothesis generation - combining a research agent with dense retrieval, knowledge graphs, and VLMs.",
+          "fullName": "peterajhgraham/asclepius-research-labs",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-22T15:13:35Z",
+          "url": "https://github.com/peterajhgraham/asclepius-research-labs"
+        },
+        {
+          "description": "A TypeScript framework for building hybrid GraphRAG applications using SAP HANA Cloud as the unified backend for knowledge graphs (RDF) and vector embeddings. Features LlamaIndex-inspired API, schema-guided extraction, multimodal document support, and cross-check boosting for enhanced retrieval accuracy.",
+          "fullName": "skye0402/hana-kgvector",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-22T07:18:08Z",
+          "url": "https://github.com/skye0402/hana-kgvector"
+        },
+        {
+          "description": "Production-style Multi-Modal RAG pipeline supporting PDF, DOCX, CSV, Excel, JSON, Images, Audio, Video, and Web data with Hybrid Retrieval, FAISS, Cross-Encoder Reranking, and Groq LLM integration.",
+          "fullName": "gautam2101/Multi-Modal-RAG-System-with-Hybrid-Retrieval-Reranking",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-21T04:08:04Z",
+          "url": "https://github.com/gautam2101/Multi-Modal-RAG-System-with-Hybrid-Retrieval-Reranking"
+        }
+      ]
+    },
+    {
+      "topic": "query-rewriting",
+      "queryStatus": "ok",
+      "topUpdated": [
+        {
+          "description": "A multi-step Retrieval-Augmented Generation (RAG) system with a live pipeline trace, intelligent retry loop, and multi-format document ingestion.",
+          "fullName": "rayyanfaisal475207/Rag-Chatbot",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-27T22:09:15Z",
+          "url": "https://github.com/rayyanfaisal475207/Rag-Chatbot"
+        },
+        {
+          "description": "Agentic RAG workflow for markdown corpora, query rewriting, sufficient-context checks, and grounded synthesis.",
+          "fullName": "ch040602/agentic-rag",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-27T16:07:34Z",
+          "url": "https://github.com/ch040602/agentic-rag"
+        },
+        {
+          "description": ":speedboat: User and policy management component for KorAP, capable of rewriting queries for policy based document restrictions.",
+          "fullName": "KorAP/Kustvakt",
+          "stargazersCount": 6,
+          "updatedAt": "2026-06-25T08:26:34Z",
+          "url": "https://github.com/KorAP/Kustvakt"
+        },
+        {
+          "description": "SymSpellComplete, a typo-tolerant autocomplete library in Rust.",
+          "fullName": "wolfgarbe/symspell_complete_rs",
+          "stargazersCount": 2,
+          "updatedAt": "2026-06-20T11:02:56Z",
+          "url": "https://github.com/wolfgarbe/symspell_complete_rs"
+        },
+        {
+          "description": "Production-oriented RAG backend in Go with hybrid retrieval, model fallback, and ingestion pipelines",
+          "fullName": "shanmeiliu/rag-infra-go",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-10T16:10:08Z",
+          "url": "https://github.com/shanmeiliu/rag-infra-go"
+        },
+        {
+          "description": "Advanced RAG pipeline optimization framework using DSPy. Implements modular RAG pipelines with Query-Rewriting, Sub-Query Decomposition, and Hybrid Search via Weaviate. Automates prompt tuning and few-shot selection using GEPA, SIMBA, MIPRO, COPRO, and BootstrapFewShot optimizers on datasets like FreshQA, HotpotQA, TriviaQA, Wikipedia and PubMedQA.",
+          "fullName": "avnlp/dspy-opt",
+          "stargazersCount": 10,
+          "updatedAt": "2026-06-03T18:13:57Z",
+          "url": "https://github.com/avnlp/dspy-opt"
+        },
+        {
+          "description": "A governed database access layer and MCP server that validates, rewrites, and enforces policy rules on SQL queries for secure client and LLM integration.",
+          "fullName": "Desz01ate/PermitQL",
+          "stargazersCount": 0,
+          "updatedAt": "2026-05-23T14:08:46Z",
+          "url": "https://github.com/Desz01ate/PermitQL"
+        },
+        {
+          "description": "Production RAG system with LangChain, Qdrant & Docker. Multi-user isolation, 3 retrieval strategies (Similarity/MMR/HyDE), reranking, query rewriting, async ingestion worker.",
+          "fullName": "tajwarchy/production-rag",
+          "stargazersCount": 0,
+          "updatedAt": "2026-05-17T10:12:40Z",
+          "url": "https://github.com/tajwarchy/production-rag"
+        }
+      ]
+    },
+    {
+      "topic": "self-rag",
+      "queryStatus": "ok",
+      "topUpdated": [
+        {
+          "description": "A complete collection of RAG interview questions, answers (418 questions & 29 RAG types), system design scenarios, architecture patterns, and production-ready concepts.",
+          "fullName": "ather-techie/rag-interview-system",
+          "stargazersCount": 73,
+          "updatedAt": "2026-06-29T19:03:32Z",
+          "url": "https://github.com/ather-techie/rag-interview-system"
+        },
+        {
+          "description": "Prometheus is an open-source, multi-agent AI research engine that uses Corrective RAG (CRAG), hybrid retrieval, and Neo4j graph-based contradiction detection to autonomously synthesize complex biomedical literature.",
+          "fullName": "NukaNarendra/Prometheus",
+          "stargazersCount": 1,
+          "updatedAt": "2026-06-26T15:24:39Z",
+          "url": "https://github.com/NukaNarendra/Prometheus"
+        },
+        {
+          "description": "Self-RAG API for NexaAI ? retrieval-gated, context-graded, and self-correcting QA bot built with FastAPI, LangGraph, pgvector, and Google Gemini.",
+          "fullName": "shukla-hardik/self-rag",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-25T07:24:43Z",
+          "url": "https://github.com/shukla-hardik/self-rag"
+        },
+        {
+          "description": "A hybrid Retrieval-Augmented Generation (RAG) system",
+          "fullName": "Panepo/Fujinami",
+          "stargazersCount": 1,
+          "updatedAt": "2026-06-24T08:19:54Z",
+          "url": "https://github.com/Panepo/Fujinami"
+        },
+        {
+          "description": "A Streamlit-based Self-RAG-inspired evidence QA assistant with retrieval, evidence critique, answer revision, and reflection.",
+          "fullName": "fatsed/self-rag-evidence-assistant",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-15T10:21:48Z",
+          "url": "https://github.com/fatsed/self-rag-evidence-assistant"
+        },
+        {
+          "description": "Learn Retrieval-Augmented Generation (RAG) from scratch by manually building chunking, embeddings, retrieval, reranking, answerability, local generation, Graph-RAG, and Self-RAG.",
+          "fullName": "acileee/Learn-RAG-from-scratch",
+          "stargazersCount": 3,
+          "updatedAt": "2026-06-17T10:59:35Z",
+          "url": "https://github.com/acileee/Learn-RAG-from-scratch"
+        },
+        {
+          "description": "Agentic RAG with self-reflection, query decomposition, iterative retrieval and hallucination detection — CRAG + Self-RAG + Corrective RAG in production",
+          "fullName": "jhondados/agentic-rag-system",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-10T00:25:19Z",
+          "url": "https://github.com/jhondados/agentic-rag-system"
+        },
+        {
+          "description": "RAG pipeline notebooks: document loaders, chunking, embeddings, Self-RAG & Corrective RAG with LangChain and LangGraph",
+          "fullName": "Janardan-thapaliya/RAG",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-08T09:09:44Z",
+          "url": "https://github.com/Janardan-thapaliya/RAG"
+        }
+      ]
+    },
+    {
+      "topic": "corrective-rag",
+      "queryStatus": "ok",
+      "topUpdated": [
+        {
+          "description": "🔍 Enhance your searches with Self-Corrective RAG, a system that optimizes queries and evaluates document relevance using LangGraph and Google Gemini.",
+          "fullName": "Jeroflo88/Self-Corrective-RAG",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-29T23:46:23Z",
+          "url": "https://github.com/Jeroflo88/Self-Corrective-RAG"
+        },
+        {
+          "description": "An Adaptive Customer Support Agent implementing Corrective RAG (CRAG) via a LangGraph state machine. It uses Gemini 1.5 Flash to grade local ChromaDB retrievals, dynamically falling back to a live DuckDuckGo web search if the context is irrelevant to eliminate hallucinations.",
+          "fullName": "Adithya-J05/Adaptive-Customer-Support-Agent---Corrective-RAG",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-29T04:12:43Z",
+          "url": "https://github.com/Adithya-J05/Adaptive-Customer-Support-Agent---Corrective-RAG"
+        },
+        {
+          "description": "Enterprise RAG Knowledge Base for Semiconductor and Chip Manufacturing - Dual-mode RAG Workflow with Hallucination Detection",
+          "fullName": "hdhsh125/enterprise-rag-kb",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-27T02:15:47Z",
+          "url": "https://github.com/hdhsh125/enterprise-rag-kb"
+        },
+        {
+          "description": "A production-ready C-RAG (Corrective RAG) API. upload PDFs, chat with them via a multi-stage LangGraph   pipeline that evaluates retrieval quality, falls back to live web search, and streams answers using Google   Gemini.",
+          "fullName": "shukla-hardik/c-rag",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-23T06:50:08Z",
+          "url": "https://github.com/shukla-hardik/c-rag"
+        },
+        {
+          "description": "A developer tool that answers technical questions by ingesting open-source documentation. Built with a Corrective RAG (CRAG) architecture and Hybrid Retrieval to prevent hallucinations and auto-fix bad searches.",
+          "fullName": "NukaNarendra/DocuSense",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-23T06:44:50Z",
+          "url": "https://github.com/NukaNarendra/DocuSense"
+        },
+        {
+          "description": "Corrective-RAG flood and disaster relief assistant for Assam, grounded in 27 official NDMA/ASDMA/CWC/IMD documents, with a live situational map computing real-time flood risk from rainfall and river discharge data on satellite imagery. Falls back to government-only web search when retrieval is unreliable.",
+          "fullName": "priyanshu09102003/Plabon---A_flood_relief_Corrective_RAG",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-24T03:47:13Z",
+          "url": "https://github.com/priyanshu09102003/Plabon---A_flood_relief_Corrective_RAG"
+        },
+        {
+          "description": "Orchestrated multi-agent research workflow (Planner -> Researcher -> Critic -> Writer) with a corrective-RAG loop over MongoDB Atlas, producing cited briefs.",
+          "fullName": "vituccione/multi-agent-research-platform",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-22T14:56:27Z",
+          "url": "https://github.com/vituccione/multi-agent-research-platform"
+        },
+        {
+          "description": "Production-grade RAG system with hybrid retrieval (Qdrant + Elasticsearch + Neo4j), Corrective RAG via LangGraph, feedback-driven reward model, and RAGAS evaluation dashboard",
+          "fullName": "TammineniTanay/hybrid-rag-system",
+          "stargazersCount": 7,
+          "updatedAt": "2026-06-17T23:06:39Z",
+          "url": "https://github.com/TammineniTanay/hybrid-rag-system"
+        }
+      ]
+    },
+    {
+      "topic": "memory",
+      "queryStatus": "ok",
+      "topUpdated": [
+        {
+          "description": "Persistent semantic memory for AI agents — 100% local on Apple Silicon (MLX). Markdown source of truth + sqlite-vec hybrid search, with an MCP server and CLI. No cloud, no keys.",
+          "fullName": "jagoff/memo",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T01:47:41Z",
+          "url": "https://github.com/jagoff/memo"
+        },
+        {
+          "description": "Tamper-evident memory & decision lineage for AI agents. Cryptographic proof of what your agent knew. Powered by a hybrid Python/Rust (Direct-Silicon) core.",
+          "fullName": "borjamoskv/BABYLON-60",
+          "stargazersCount": 3,
+          "updatedAt": "2026-06-30T01:49:08Z",
+          "url": "https://github.com/borjamoskv/BABYLON-60"
+        },
+        {
+          "description": "Memory and context engine + app that is extremely fast, scalable, and can be run fully locally. The Memory API for the AI era.",
+          "fullName": "supermemoryai/supermemory",
+          "stargazersCount": 27937,
+          "updatedAt": "2026-06-30T01:46:39Z",
+          "url": "https://github.com/supermemoryai/supermemory"
+        },
+        {
+          "description": "🧠 AI知识采集与记忆体管理插件 — 40+采集工具, SenseNova文档引擎, 12+云盘同步, 三层知识召回 | Knowledge Collection & Memory Mgmt Plugin for AI Agents",
+          "fullName": "mage0535/Knowledge-and-Memory-Management",
+          "stargazersCount": 2,
+          "updatedAt": "2026-06-30T01:42:55Z",
+          "url": "https://github.com/mage0535/Knowledge-and-Memory-Management"
+        },
+        {
+          "description": "A versatile, two-layer MCP server for AI agents: SQLite-based, local execution, no heavy backend - 19 tools, hybrid search, knowledge graphs, wiki, Saga, auth, Docker.",
+          "fullName": "Cipher208/mcp-ariel-memory",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T01:42:12Z",
+          "url": "https://github.com/Cipher208/mcp-ariel-memory"
+        },
+        {
+          "description": "MOOTx01 Community Edition",
+          "fullName": "codedaptive/mootx01-ce",
+          "stargazersCount": 1,
+          "updatedAt": "2026-06-30T01:41:13Z",
+          "url": "https://github.com/codedaptive/mootx01-ce"
+        },
+        {
+          "description": "Aggressively snoozes inactive Chrome tabs to free memory — a tiny, privacy-respecting MV3 extension that goes further than Chrome's Memory Saver.",
+          "fullName": "luke-fairbanks/TabTamer",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T01:40:13Z",
+          "url": "https://github.com/luke-fairbanks/TabTamer"
+        },
+        {
+          "description": "An AI Assistant that’s easy to setup, does your work 24/7, knows your preferences and gets better over time.",
+          "fullName": "vellum-ai/vellum-assistant",
+          "stargazersCount": 798,
+          "updatedAt": "2026-06-30T01:39:30Z",
+          "url": "https://github.com/vellum-ai/vellum-assistant"
+        }
+      ]
+    },
+    {
+      "topic": "long-context",
+      "queryStatus": "ok",
+      "topUpdated": [
+        {
+          "description": "Optimize KV cache and context settings for LLMs on Apple Silicon Macs to prevent memory pressure and ensure stable inference performance.",
+          "fullName": "Openplan-pricklyedgedleaf841/MacKV-Opt",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T01:06:12Z",
+          "url": "https://github.com/Openplan-pricklyedgedleaf841/MacKV-Opt"
+        },
+        {
+          "description": "Optimize game development workflows with this specialized large language model designed for architecture design and engine-specific tasks.",
+          "fullName": "Aruljjp23/Sistem_Pengaduan_Alat-IT_RS",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T00:58:13Z",
+          "url": "https://github.com/Aruljjp23/Sistem_Pengaduan_Alat-IT_RS"
+        },
+        {
+          "description": "Verify your Claude Code endpoint really serves GLM-5.2 — tokenizer fingerprint + 1M context probe",
+          "fullName": "xiaoyanfei-tech/verify-glm",
+          "stargazersCount": 1,
+          "updatedAt": "2026-06-30T00:51:36Z",
+          "url": "https://github.com/xiaoyanfei-tech/verify-glm"
+        },
+        {
+          "description": "Generate high-fidelity text-to-speech from waveform latents with diffusion models for natural, clear audio output",
+          "fullName": "geothermal-agony533/LongCat-AudioDiT",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T00:51:02Z",
+          "url": "https://github.com/geothermal-agony533/LongCat-AudioDiT"
+        },
+        {
+          "description": "Build and test TurboQuant for llama.cpp-style runtimes with benchmarks, integration patches, and long-context validation",
+          "fullName": "onthenose-record446/turboquant-llama-lab",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T00:50:34Z",
+          "url": "https://github.com/onthenose-record446/turboquant-llama-lab"
+        },
+        {
+          "description": "Benchmark DSPy Recursive Language Models on DABench data analysis tasks with automated scoring for iterative code-based evaluation",
+          "fullName": "seaofokhotskquakerism746/dabench-rlm-eval",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T00:45:51Z",
+          "url": "https://github.com/seaofokhotskquakerism746/dabench-rlm-eval"
+        },
+        {
+          "description": "Build LongCat-Flash-Prover for fast theorem proving and formal reasoning with LongCat models",
+          "fullName": "ithadam61-boop/LongCat-Flash-Prover",
+          "stargazersCount": 0,
+          "updatedAt": "2026-06-30T00:44:10Z",
+          "url": "https://github.com/ithadam61-boop/LongCat-Flash-Prover"
+        },
+        {
+          "description": "SNDR Core Engine (Genesis) — vLLM runtime patch-overlay for Qwen3.6 + Gemma4 on consumer NVIDIA (Ampere sm_86, 2× A5000/3090). Qwen3.6-35B-A3B FP8 ~240 tok/s, 27B-int4 hybrid GDN+Mamba, Gemma4 26B/31B AWQ, 256K ctx. 321 patches: TurboQuant k8v4 KV, MTP/DFlash spec-decode, FULL cudagraph, hybrid GDN. vLLM pin dev424 + Control Center GUI.",
+          "fullName": "Sandermage/sndr_core_engine",
+          "stargazersCount": 119,
+          "updatedAt": "2026-06-30T00:25:30Z",
+          "url": "https://github.com/Sandermage/sndr_core_engine"
+        }
+      ]
+    }
+  ]
+}

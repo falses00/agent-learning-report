@@ -1,0 +1,273 @@
+{
+  "generatedAt": "2026-06-30T09:13:31",
+  "generatedBy": "gh repo view via Codex main thread after researcher subagent",
+  "note": "GitHub repository metadata is volatile; this snapshot is for 2026-06-30 route review only.",
+  "repositories": [
+    {
+      "nameWithOwner": "langchain-ai/langgraph",
+      "url": "https://github.com/langchain-ai/langgraph",
+      "description": "Build resilient agents.",
+      "stargazerCount": 36054,
+      "updatedAt": "2026-06-30T01:01:34Z",
+      "pushedAt": "2026-06-30T00:51:28Z",
+      "latestRelease": {
+        "name": "langgraph==1.2.6",
+        "tagName": "1.2.6",
+        "publishedAt": "2026-06-18T20:58:32Z",
+        "url": "https://github.com/langchain-ai/langgraph/releases/tag/1.2.6"
+      },
+      "license": {
+        "key": "mit",
+        "name": "MIT License"
+      },
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "microsoft/agent-framework",
+      "url": "https://github.com/microsoft/agent-framework",
+      "description": "A framework for building, orchestrating and deploying AI agents and multi-agent workflows with support for Python and .NET.",
+      "stargazerCount": 11757,
+      "updatedAt": "2026-06-29T23:40:00Z",
+      "pushedAt": "2026-06-29T23:41:24Z",
+      "latestRelease": {
+        "name": "dotnet-1.11.1",
+        "tagName": "dotnet-1.11.1",
+        "publishedAt": "2026-06-25T23:09:09Z",
+        "url": "https://github.com/microsoft/agent-framework/releases/tag/dotnet-1.11.1"
+      },
+      "license": {
+        "key": "mit",
+        "name": "MIT License"
+      },
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "openai/openai-agents-python",
+      "url": "https://github.com/openai/openai-agents-python",
+      "description": "A lightweight, powerful framework for multi-agent workflows",
+      "stargazerCount": 27514,
+      "updatedAt": "2026-06-29T22:39:02Z",
+      "pushedAt": "2026-06-29T02:33:42Z",
+      "latestRelease": {
+        "name": "v0.17.7",
+        "tagName": "v0.17.7",
+        "publishedAt": "2026-06-24T05:15:03Z",
+        "url": "https://github.com/openai/openai-agents-python/releases/tag/v0.17.7"
+      },
+      "license": {
+        "key": "mit",
+        "name": "MIT License"
+      },
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "microsoft/autogen",
+      "url": "https://github.com/microsoft/autogen",
+      "description": "A programming framework for agentic AI",
+      "stargazerCount": 59358,
+      "updatedAt": "2026-06-30T00:53:37Z",
+      "pushedAt": "2026-04-15T11:59:09Z",
+      "latestRelease": {
+        "name": "python-v0.7.5",
+        "tagName": "python-v0.7.5",
+        "publishedAt": "2025-09-30T06:18:26Z",
+        "url": "https://github.com/microsoft/autogen/releases/tag/python-v0.7.5"
+      },
+      "license": {
+        "key": "cc-by-4.0",
+        "name": "Creative Commons Attribution 4.0 International"
+      },
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "temporalio/temporal",
+      "url": "https://github.com/temporalio/temporal",
+      "description": "Temporal service",
+      "stargazerCount": 21320,
+      "updatedAt": "2026-06-29T23:24:13Z",
+      "pushedAt": "2026-06-29T23:33:13Z",
+      "latestRelease": {
+        "name": "v1.31.1",
+        "tagName": "v1.31.1",
+        "publishedAt": "2026-06-10T16:46:24Z",
+        "url": "https://github.com/temporalio/temporal/releases/tag/v1.31.1"
+      },
+      "license": {
+        "key": "mit",
+        "name": "MIT License"
+      },
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "letta-ai/letta",
+      "url": "https://github.com/letta-ai/letta",
+      "description": "Platform for stateful agents: AI with advanced memory that can learn and self-improve over time.",
+      "stargazerCount": 23584,
+      "updatedAt": "2026-06-30T00:20:42Z",
+      "pushedAt": "2026-06-26T00:15:00Z",
+      "latestRelease": {
+        "name": "v0.16.8",
+        "tagName": "0.16.8",
+        "publishedAt": "2026-05-14T17:14:24Z",
+        "url": "https://github.com/letta-ai/letta/releases/tag/0.16.8"
+      },
+      "license": {
+        "key": "apache-2.0",
+        "name": "Apache License 2.0"
+      },
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "mem0ai/mem0",
+      "url": "https://github.com/mem0ai/mem0",
+      "description": "Universal memory layer for AI Agents",
+      "stargazerCount": 59715,
+      "updatedAt": "2026-06-30T01:12:55Z",
+      "pushedAt": "2026-06-30T01:12:54Z",
+      "latestRelease": {
+        "name": "Mem0 Node SDK (v3.0.12)",
+        "tagName": "ts-v3.0.12",
+        "publishedAt": "2026-06-27T17:10:07Z",
+        "url": "https://github.com/mem0ai/mem0/releases/tag/ts-v3.0.12"
+      },
+      "license": {
+        "key": "apache-2.0",
+        "name": "Apache License 2.0"
+      },
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "langfuse/langfuse",
+      "url": "https://github.com/langfuse/langfuse",
+      "description": "🪢 Open source AI engineering platform: LLM evals, observability, metrics, prompt management, playground, datasets. Integrates with OpenTelemetry, LangChain, OpenAI SDK, LiteLLM, and more. 🍊YC W23 ",
+      "stargazerCount": 30066,
+      "updatedAt": "2026-06-30T01:00:06Z",
+      "pushedAt": "2026-06-29T23:34:40Z",
+      "latestRelease": {
+        "name": "v3.202.1",
+        "tagName": "v3.202.1",
+        "publishedAt": "2026-06-29T15:16:59Z",
+        "url": "https://github.com/langfuse/langfuse/releases/tag/v3.202.1"
+      },
+      "license": {
+        "key": "other",
+        "name": "Other"
+      },
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "promptfoo/promptfoo",
+      "url": "https://github.com/promptfoo/promptfoo",
+      "description": "Test your prompts, agents, and RAGs. Red teaming/pentesting/vulnerability scanning for AI. Compare performance of GPT, Claude, Gemini, DeepSeek, and more. Simple declarative configs with command line and CI/CD integration.  Used by OpenAI and Anthropic.",
+      "stargazerCount": 22745,
+      "updatedAt": "2026-06-30T01:09:15Z",
+      "pushedAt": "2026-06-29T20:39:23Z",
+      "latestRelease": {
+        "name": "code-scan-action: 0.1.8",
+        "tagName": "code-scan-action-0.1.8",
+        "publishedAt": "2026-06-16T17:46:14Z",
+        "url": "https://github.com/promptfoo/promptfoo/releases/tag/code-scan-action-0.1.8"
+      },
+      "license": {
+        "key": "mit",
+        "name": "MIT License"
+      },
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "e2b-dev/E2B",
+      "url": "https://github.com/e2b-dev/E2B",
+      "description": "Open-source, secure environment with real-world tools for enterprise-grade agents.",
+      "stargazerCount": 12771,
+      "updatedAt": "2026-06-29T20:46:39Z",
+      "pushedAt": "2026-06-29T20:46:34Z",
+      "latestRelease": {
+        "name": "e2b@2.31.0",
+        "tagName": "e2b@2.31.0",
+        "publishedAt": "2026-06-25T18:04:07Z",
+        "url": "https://github.com/e2b-dev/E2B/releases/tag/e2b%402.31.0"
+      },
+      "license": {
+        "key": "apache-2.0",
+        "name": "Apache License 2.0"
+      },
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "OpenHands/OpenHands",
+      "url": "https://github.com/OpenHands/OpenHands",
+      "description": "🙌 OpenHands: AI-Driven Development",
+      "stargazerCount": 78711,
+      "updatedAt": "2026-06-30T01:00:37Z",
+      "pushedAt": "2026-06-29T23:46:25Z",
+      "latestRelease": {
+        "name": "cloud: 1.40.0",
+        "tagName": "cloud-1.40.0",
+        "publishedAt": "2026-06-26T20:36:25Z",
+        "url": "https://github.com/OpenHands/OpenHands/releases/tag/cloud-1.40.0"
+      },
+      "license": {
+        "key": "other",
+        "name": "Other"
+      },
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "modelcontextprotocol/modelcontextprotocol",
+      "url": "https://github.com/modelcontextprotocol/modelcontextprotocol",
+      "description": "Specification and documentation for the Model Context Protocol",
+      "stargazerCount": 8501,
+      "updatedAt": "2026-06-30T00:54:32Z",
+      "pushedAt": "2026-06-30T01:11:22Z",
+      "latestRelease": {
+        "name": "2025-11-25",
+        "tagName": "2025-11-25",
+        "publishedAt": "2025-11-25T21:17:42Z",
+        "url": "https://github.com/modelcontextprotocol/modelcontextprotocol/releases/tag/2025-11-25"
+      },
+      "license": {
+        "key": "other",
+        "name": "Other"
+      },
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "ComposioHQ/composio",
+      "url": "https://github.com/ComposioHQ/composio",
+      "description": "Composio powers 1000+ toolkits, tool search, context management, authentication, and a sandboxed workbench to help you build AI agents that turn intent into action.",
+      "stargazerCount": 29013,
+      "updatedAt": "2026-06-30T00:16:07Z",
+      "pushedAt": "2026-06-29T17:54:08Z",
+      "latestRelease": {
+        "name": "@composio/slim@0.13.1",
+        "tagName": "@composio/slim@0.13.1",
+        "publishedAt": "2026-06-27T06:59:21Z",
+        "url": "https://github.com/ComposioHQ/composio/releases/tag/%40composio/slim%400.13.1"
+      },
+      "license": {
+        "key": "mit",
+        "name": "MIT License"
+      },
+      "queryStatus": "ok"
+    },
+    {
+      "nameWithOwner": "openai/codex",
+      "url": "https://github.com/openai/codex",
+      "description": "Lightweight coding agent that runs in your terminal",
+      "stargazerCount": 94460,
+      "updatedAt": "2026-06-30T01:11:30Z",
+      "pushedAt": "2026-06-30T01:10:17Z",
+      "latestRelease": {
+        "name": "0.142.4",
+        "tagName": "rust-v0.142.4",
+        "publishedAt": "2026-06-29T05:04:25Z",
+        "url": "https://github.com/openai/codex/releases/tag/rust-v0.142.4"
+      },
+      "license": {
+        "key": "apache-2.0",
+        "name": "Apache License 2.0"
+      },
+      "queryStatus": "ok"
+    }
+  ]
+}

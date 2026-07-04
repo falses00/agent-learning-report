@@ -1,0 +1,48 @@
+{
+  "url": "http://127.0.0.1:3000",
+  "viewports": {
+    "desktop": {
+      "topicCount": 13,
+      "gateText": "记录本题评分\n进入下一题\n本题可继续",
+      "firstScoreText": "看图前理解\n为什么模型建议不能直接退款？\n1/5\n还缺事故、负责层或最小证据。\n请导师反馈",
+      "activeTopic": "Runtime 状态",
+      "layout": {
+        "scrollWidth": 1440,
+        "innerWidth": 1440,
+        "horizontalScroll": false,
+        "overflowingElements": [],
+        "overflowingButtons": [],
+        "boundaryVisible": true,
+        "noExecutionText": true,
+        "riskyButtons": [],
+        "imageOk": true
+      },
+      "consoleErrors": [
+        "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "warning: Image with src \"/images/direction-c.png\" was detected as the Largest Contentful Paint (LCP). Please add the `loading=\"eager\"` property if this image is above the fold.\nRead more: https://nextjs.org/docs/app/api-reference/components/image#loading"
+      ],
+      "failedRequests": []
+    },
+    "mobile": {
+      "topicCount": 13,
+      "gateText": "记录本题评分\n进入下一题\n本题可继续",
+      "firstScoreText": "看图前理解\n为什么模型建议不能直接退款？\n1/5\n还缺事故、负责层或最小证据。\n请导师反馈",
+      "activeTopic": "Runtime 状态",
+      "layout": {
+        "scrollWidth": 390,
+        "innerWidth": 390,
+        "horizontalScroll": false,
+        "overflowingElements": [],
+        "overflowingButtons": [],
+        "boundaryVisible": true,
+        "noExecutionText": true,
+        "riskyButtons": [],
+        "imageOk": true
+      },
+      "consoleErrors": [
+        "warning: Image with src \"/images/direction-b.png\" was detected as the Largest Contentful Paint (LCP). Please add the `loading=\"eager\"` property if this image is above the fold.\nRead more: https://nextjs.org/docs/app/api-reference/components/image#loading"
+      ],
+      "failedRequests": []
+    }
+  }
+}

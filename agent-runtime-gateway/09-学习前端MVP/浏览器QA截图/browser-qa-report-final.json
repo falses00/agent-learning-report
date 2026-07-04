@@ -1,0 +1,56 @@
+{
+  "finalResult": "passed",
+  "url": "http://127.0.0.1:3000",
+  "generatedAt": "2026-07-03T01:17:00.150Z",
+  "checks": {
+    "desktop": {
+      "viewport": {
+        "width": 1440,
+        "height": 950
+      },
+      "topicCount": 13,
+      "boundaryVisible": true,
+      "riskyButtons": [],
+      "canContinue": true,
+      "activeAfterNext": "2\nRuntime 状态\nPhase 2",
+      "scorePassed": true,
+      "failurePathPassed": true,
+      "layout": {
+        "scrollWidth": 1440,
+        "innerWidth": 1440,
+        "horizontalScroll": false,
+        "overflowingElements": [],
+        "overflowingButtons": [],
+        "imageOk": true,
+        "imageCount": 4
+      },
+      "consoleMessages": [],
+      "failedRequests": []
+    },
+    "mobile": {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "topicCount": 13,
+      "boundaryVisible": true,
+      "riskyButtons": [],
+      "canContinue": true,
+      "activeAfterNext": "2\nRuntime 状态\nPhase 2",
+      "scorePassed": true,
+      "failurePathPassed": true,
+      "layout": {
+        "scrollWidth": 390,
+        "innerWidth": 390,
+        "horizontalScroll": false,
+        "overflowingElements": [],
+        "overflowingButtons": [],
+        "imageOk": true,
+        "imageCount": 4
+      },
+      "consoleMessages": [],
+      "failedRequests": []
+    }
+  },
+  "failures": []
+}

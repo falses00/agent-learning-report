@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>工业级 Agent 学习可视化控制台 v0.4</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳到主内容</a>
+    <div class="app-shell" data-state="default">
+      <header class="topbar" aria-label="原型边界">
+        <div class="brand-block">
+          <div class="brand-mark" aria-hidden="true">AG</div>
+          <div>
+            <p class="eyebrow">v0.4 低保真可点击原型</p>
+            <h1>Agent + RAG 学习可视化控制台</h1>
+          </div>
+        </div>
+        <div class="boundary-strip" aria-label="学习边界提示">
+          <span>学习模式 <b>Learning mode</b></span>
+          <span>模拟数据 <b>Mock data</b></span>
+          <span>不执行真实操作 <b>No real execution</b></span>
+          <span>来源文件 <b>Source files</b></span>
+        </div>
+      </header>
+
+      <aside class="phase-rail" aria-label="学习页面">
+        <div class="rail-head">
+          <p class="eyebrow">首轮 6 页</p>
+          <strong>学习路线</strong>
+        </div>
+        <nav class="page-nav" id="pageNav" aria-label="页面导航"></nav>
+        <section class="rail-note" aria-label="当前限制">
+          <strong>原型限制</strong>
+          <p>静态 HTML / CSS / JS。无登录、无后端、无真实执行。</p>
+        </section>
+      </aside>
+
+      <main id="main" class="workspace" tabindex="-1">
+        <section class="page-title-row">
+          <div>
+            <p class="eyebrow" id="phaseLabel">Phase</p>
+            <h2 id="pageTitle">页面标题</h2>
+            <p class="page-summary" id="pageSummary"></p>
+          </div>
+          <div class="state-controls" aria-label="页面状态">
+            <button class="state-button active" type="button" data-mode="default">默认</button>
+            <button class="state-button" type="button" data-mode="bad">坏设计</button>
+            <button class="state-button" type="button" data-mode="low">低分回流</button>
+          </div>
+        </section>
+
+        <section class="visual-source" aria-label="视觉来源">
+          <figure>
+            <img src="图像素材/方向C-学习路线地图.png" alt="方向 C 学习路线地图参考图" />
+            <figcaption>C 首页骨架</figcaption>
+          </figure>
+          <figure>
+            <img src="图像素材/方向A-分层控制台.png" alt="方向 A 分层控制台参考图" />
+            <figcaption>A 全链路骨架</figcaption>
+          </figure>
+          <figure>
+            <img src="图像素材/方向B-事故推演工作台.png" alt="方向 B 事故推演工作台参考图" />
+            <figcaption>B 事故骨架</figcaption>
+          </figure>
+        </section>
+
+        <section class="teaching-grid">
+          <div class="primary-panel" aria-live="polite">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">主工作区</p>
+                <h3 id="primaryTitle">核心链路</h3>
+              </div>
+              <span class="status-chip" id="gateChip">学习中</span>
+            </div>
+            <div id="primaryContent" class="primary-content"></div>
+          </div>
+
+          <aside class="evidence-panel" aria-label="证据与复述">
+            <section>
+              <p class="eyebrow">事故</p>
+              <h3 id="accidentTitle">事故名称</h3>
+              <p id="accidentText"></p>
+            </section>
+            <section>
+              <p class="eyebrow">负责层</p>
+              <div class="tag-list" id="layerTags"></div>
+            </section>
+            <section>
+              <p class="eyebrow">最小验收证据</p>
+              <ul class="evidence-list" id="evidenceList"></ul>
+            </section>
+            <section>
+              <p class="eyebrow">来源文件 source_files</p>
+              <ul class="evidence-list source-list" id="sourceFiles"></ul>
+            </section>
+            <section>
+              <p class="eyebrow">状态覆盖</p>
+              <div class="tag-list" id="stateCoverage"></div>
+            </section>
+            <section>
+              <p class="eyebrow">复述题</p>
+              <p class="question" id="restatementQuestion"></p>
+              <div class="score-row" aria-label="复述评分">
+                <button type="button" data-score="0">0</button>
+                <button type="button" data-score="1">1</button>
+                <button type="button" data-score="2" class="active">2</button>
+                <button type="button" data-score="3">3</button>
+                <button type="button" data-score="4">4</button>
+                <button type="button" data-score="5">5</button>
+              </div>
+              <p class="feedback" id="scoreFeedback">当前模拟分 2，需要回看事故和证据。</p>
+            </section>
+          </aside>
+        </section>
+
+        <section class="bottom-strip" aria-label="学习回流">
+          <div>
+            <p class="eyebrow">低分回流</p>
+            <div class="tag-list" id="feedbackTargets"></div>
+          </div>
+          <div>
+            <p class="eyebrow">13 个 P0 主题覆盖</p>
+            <div class="coverage-meter" id="coverageMeter"></div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
