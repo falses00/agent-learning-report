@@ -1,0 +1,9 @@
+[project]
+name = "agent-course-baseline"
+version = "0.1.0"
+description = "Deterministic baseline for the OpsPilot industrial agent course"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+testpaths = ["../21-测试"]

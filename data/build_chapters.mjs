@@ -1,49 +1,60 @@
-import { readFileSync, writeFileSync, existsSync } from 'fs';
-import { join } from 'path';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { dirname, relative, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const base = 'H:\\Creat A Agent';
+const dataDir = dirname(fileURLToPath(import.meta.url));
+const repoRoot = resolve(dataDir, '..');
+const checkOnly = process.argv.includes('--check');
 
 const chapters = [
-  { id: 'phase0', num: 'Phase 0', title: '课程总览与路线审核', meta: 'PRD · 调研 · 路线', src: 'agent-runtime-gateway\\00-课程总览\\课程地图.md', group: 'main' },
-  { id: 'phase0_1', num: 'Phase 0.1', title: '半懂起步', meta: '工单故事 · 建议与执行分离', src: 'agent-runtime-gateway\\02-阶段教学手册\\Phase-00.1-半懂起步教学手册.md', group: 'main' },
-  { id: 'phase1', num: 'Phase 1', title: '契约层', meta: 'AgentManifest · ToolCall', src: 'agent-runtime-gateway\\02-阶段教学手册\\第1阶段-契约层教学手册.md', group: 'main' },
-  { id: 'phase2', num: 'Phase 2', title: '最小运行时', meta: 'Run/Step · Mock Model', src: 'agent-runtime-gateway\\02-阶段教学手册\\Phase-02-最小运行时教学手册.md', group: 'main' },
-  { id: 'phase3', num: 'Phase 3', title: 'Agent 网关与工具治理', meta: 'Gateway · Policy · Audit', src: 'agent-runtime-gateway\\02-阶段教学手册\\Phase-03-Agent网关与工具治理教学手册.md', group: 'main' },
-  { id: 'phase4', num: 'Phase 4', title: '长线任务与断点恢复', meta: 'Checkpoint · Resume · HITL', src: 'agent-runtime-gateway\\02-阶段教学手册\\Phase-04-长线任务与断点恢复教学手册.md', group: 'main' },
-  { id: 'phase5', num: 'Phase 5', title: 'MCP 与工具生态', meta: 'Adapter · Registry · Credential', src: 'agent-runtime-gateway\\02-阶段教学手册\\Phase-05-MCP与工具生态教学手册.md', group: 'main' },
-  { id: 'phase6', num: 'Phase 6', title: '记忆系统', meta: 'Memory Store · Write Gate', src: 'agent-runtime-gateway\\02-阶段教学手册\\Phase-06-记忆系统教学手册.md', group: 'main' },
-  { id: 'phase7', num: 'Phase 7', title: '测评审核与红队', meta: 'Golden Set · CI Gate', src: 'agent-runtime-gateway\\02-阶段教学手册\\Phase-07-测评审核与红队教学手册.md', group: 'main' },
-  { id: 'phase8', num: 'Phase 8', title: '可观测性与审计', meta: 'Trace · Span · Replay', src: 'agent-runtime-gateway\\02-阶段教学手册\\Phase-08-可观测性与审计教学手册.md', group: 'main' },
-  { id: 'phase9', num: 'Phase 9', title: '安全隔离与沙箱', meta: 'Sandbox Profile · Isolation', src: 'agent-runtime-gateway\\02-阶段教学手册\\Phase-09-安全隔离与沙箱教学手册.md', group: 'main' },
-  { id: 'phase10', num: 'Phase 10', title: '多智能体协同', meta: 'Handoff · Shared State', src: 'agent-runtime-gateway\\02-阶段教学手册\\Phase-10-多智能体协同教学手册.md', group: 'main' },
-  { id: 'phase11', num: 'Phase 11', title: '治理控制台与发布', meta: 'Admin Console · Release Gate', src: 'agent-runtime-gateway\\02-阶段教学手册\\Phase-11-治理控制台与发布教学手册.md', group: 'main' },
-  { id: 'rag_route', num: 'RAG专项', title: 'RAG 教学路线总览', meta: 'Chunking · GraphRAG', src: 'agent-runtime-gateway\\07-RAG问题诊断与优化\\RAG教学路线总览.md', group: 'main' },
-  { id: 'appendix-c', num: '附录 C', title: '阶段验收清单', meta: '各阶段交付物与验收标准', src: 'agent-runtime-gateway\\02-阶段教学手册\\阶段验收清单.md', group: 'appendix' }
+  { id: 'start', num: '开始', title: '唯一学习入口', meta: '起点判断 · 学习循环 · 停止条件', src: 'agent-runtime-gateway/00-课程总览/00-唯一学习入口.md', group: 'start' },
+  { id: 'route', num: '路线', title: '工程实战主线 v2', meta: 'F0 · S0-S10 · 阶段门禁', src: 'agent-runtime-gateway/00-课程总览/工程实战主线-v2.md', group: 'start' },
+  { id: 'project', num: '项目', title: 'OpsPilot 贯穿项目', meta: '真实场景 · 三条演示路径', src: 'agent-runtime-gateway/11-工程实战主线/README.md', group: 'start' },
+  { id: 'standards', num: '毕业', title: '岗位能力与毕业标准', meta: '作品集 · 答辩 · 评分', src: 'agent-runtime-gateway/00-课程总览/岗位能力与毕业标准.md', group: 'start' },
+  { id: 'baseline', num: '基线', title: '可运行教学基线', meta: 'CLI · pytest · eval', src: 'agent-runtime-gateway/20-源码/README.md', group: 'start' },
+
+  { id: 's0', num: 'S0', title: '契约与确定性基线', meta: 'Schema · ErrorModel · Bad cases', src: 'agent-runtime-gateway/02-阶段教学手册/第1阶段-契约层教学手册.md', group: 'main', stageId: 's0' },
+  { id: 's1', num: 'S1', title: 'Agent Runtime', meta: 'Run · Step · State · Event', src: 'agent-runtime-gateway/02-阶段教学手册/Phase-02-最小运行时教学手册.md', group: 'main', stageId: 's1' },
+  { id: 's2', num: 'S2', title: 'Tool / Policy Gateway', meta: 'Registry · Approval · Audit', src: 'agent-runtime-gateway/02-阶段教学手册/Phase-03-Agent网关与工具治理教学手册.md', group: 'main', stageId: 's2' },
+  { id: 's3', num: 'S3', title: 'RAG 与可信引用', meta: 'ACL · Retrieval · Citation', src: 'agent-runtime-gateway/07-RAG问题诊断与优化/RAG教学路线总览.md', group: 'main', stageId: 's3' },
+  { id: 's4', num: 'S4', title: 'Durable Execution', meta: 'Checkpoint · Resume · Idempotency', src: 'agent-runtime-gateway/02-阶段教学手册/Phase-04-长线任务与断点恢复教学手册.md', group: 'main', stageId: 's4' },
+  { id: 's5', num: 'S5', title: 'Memory 与 Context', meta: 'Write Gate · TTL · Isolation', src: 'agent-runtime-gateway/02-阶段教学手册/Phase-06-记忆系统教学手册.md', group: 'main', stageId: 's5' },
+  { id: 's6', num: 'S6', title: 'Eval 与 Red Team', meta: 'Golden · Trajectory · Security', src: 'agent-runtime-gateway/02-阶段教学手册/Phase-07-测评审核与红队教学手册.md', group: 'main', stageId: 's6' },
+  { id: 's7', num: 'S7', title: 'Observability 与 SRE', meta: 'Trace · Audit · SLO', src: 'agent-runtime-gateway/02-阶段教学手册/Phase-08-可观测性与审计教学手册.md', group: 'main', stageId: 's7' },
+  { id: 's8', num: 'S8', title: 'Security 与 Sandbox', meta: 'Threat model · Isolation · MCP', src: 'agent-runtime-gateway/02-阶段教学手册/Phase-09-安全隔离与沙箱教学手册.md', group: 'main', stageId: 's8' },
+  { id: 's9', num: 'S9', title: 'Multi-agent', meta: 'Handoff · Budget · Loop guard', src: 'agent-runtime-gateway/02-阶段教学手册/Phase-10-多智能体协同教学手册.md', group: 'main', stageId: 's9' },
+  { id: 's10', num: 'S10', title: 'Release 与作品集', meta: 'Gate · Rollback · Portfolio', src: 'agent-runtime-gateway/02-阶段教学手册/Phase-11-治理控制台与发布教学手册.md', group: 'main', stageId: 's10' },
+
+  { id: 'failures', num: '手册', title: '全链路故障与修复', meta: '症状 · 根因 · 修复 · 回归', src: 'agent-runtime-gateway/11-工程实战主线/全链路故障与修复手册.md', group: 'reference' },
+  { id: 'selftest', num: '题库', title: '阶段自测与预习', meta: '每阶段 5 题 · 预习门禁', src: 'agent-runtime-gateway/11-工程实战主线/阶段自测与预习清单.md', group: 'reference' },
+  { id: 'sources', num: '资料', title: '权威资料索引', meta: '官方文档 · 标准 · 原始论文', src: 'agent-runtime-gateway/00-课程总览/权威资料索引.md', group: 'reference' },
+  { id: 'mcp', num: '专题', title: 'MCP 与工具生态', meta: '协议 · 准入 · 凭据边界', src: 'agent-runtime-gateway/02-阶段教学手册/Phase-05-MCP与工具生态教学手册.md', group: 'reference' },
+  { id: 'acceptance', num: '门禁', title: '阶段验收清单', meta: '设计理解 · 工程证据', src: 'agent-runtime-gateway/02-阶段教学手册/阶段验收清单.md', group: 'reference' },
 ];
 
-let js = `// chapters.js - 自动生成\n// 生成时间: ${new Date().toISOString()}\nconst CHAPTERS = [\n`;
-
-for (const ch of chapters) {
-  const fullPath = join(base, ch.src);
-  let content = '';
-  if (existsSync(fullPath)) {
-    content = readFileSync(fullPath, 'utf-8');
-    
-    // 剔除所有包含代码的内容，仅保留架构思维
-    // 匹配 ```(lang) ... ``` 并替换
-    content = content.replace(/```[\s\S]*?```/g, '\n> **[工程架构提示]** *此处包含的具体代码段已依最佳实践要求剥离，以突出非代码化架构契约与演练步骤设计。*\n');
-
-    console.log(`OK: ${ch.src} (${content.length} chars)`);
-  } else {
-    content = `# ${ch.title}\n\n内容文件未找到: ${ch.src}`;
-    console.log(`WARN: ${ch.src} not found`);
-  }
-  
-  js += `  { id:${JSON.stringify(ch.id)}, num:${JSON.stringify(ch.num)}, title:${JSON.stringify(ch.title)}, meta:${JSON.stringify(ch.meta)}, source:${JSON.stringify(ch.src.replace(/\\\\/g,'/'))}, group:${JSON.stringify(ch.group)}, content:${JSON.stringify(content)} },\n`;
+const missing = chapters.filter((chapter) => !existsSync(resolve(repoRoot, chapter.src)));
+if (missing.length) {
+  for (const chapter of missing) console.error(`Missing: ${chapter.src}`);
+  process.exit(1);
 }
 
-js += `];\n`;
+const payload = chapters.map((chapter) => ({
+  ...chapter,
+  source: chapter.src,
+  content: readFileSync(resolve(repoRoot, chapter.src), 'utf8'),
+}));
 
-const outPath = join(base, 'data', 'chapters.js');
-writeFileSync(outPath, js, 'utf-8');
-console.log(`\nDone! ${outPath} (${js.length} bytes, ${chapters.length} chapters)`);
+const output = `// Generated by data/build_chapters.mjs. Do not edit by hand.\nwindow.CHAPTERS = ${JSON.stringify(payload, null, 2)};\n`;
+const outputPath = resolve(dataDir, 'chapters.js');
+
+if (checkOnly) {
+  const current = existsSync(outputPath) ? readFileSync(outputPath, 'utf8') : '';
+  if (current !== output) {
+    console.error(`Out of date: ${relative(repoRoot, outputPath)}`);
+    process.exit(1);
+  }
+  console.log(`OK: ${payload.length} chapters are current.`);
+} else {
+  writeFileSync(outputPath, output, 'utf8');
+  console.log(`Generated ${relative(repoRoot, outputPath)} with ${payload.length} chapters.`);
+}
