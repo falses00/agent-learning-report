@@ -10,7 +10,8 @@
 
 - 首次学习路径与基础自检。
 - F0、S0-S10 工程路线和本地进度。
-- 每阶段目标、交付物、典型故障、修复和证据门禁。
+- 每阶段 3 项课前检查、真实事故案例、3 步动手实验和关键概念速记。
+- 每阶段 5 题自测、逐题误区反馈、首轮评分和工程证据门禁。
 - 可运行基线命令、故障演练、课程资料阅读和搜索。
 - 本地进度导出与重置，不上传学习数据。
 
@@ -27,6 +28,7 @@ python -m http.server 8000
 
 ```powershell
 node data/build_chapters.mjs --check
+node data/check_learning_content.mjs
 ```
 
 运行 Agent 教学基线：

@@ -437,16 +437,77 @@
     .stage-method li { position: relative; min-height: 52px; display: flex; align-items: center; gap: 8px; padding: 10px 14px; border-right: 1px solid var(--line); color: #4f596b; font-size: 12px; font-weight: 700; }
     .stage-method li:last-child { border-right: 0; }
     .stage-method li span { display: grid; place-items: center; width: 24px; height: 24px; flex: 0 0 auto; border-radius: 50%; background: var(--brand-soft); color: var(--accent-hover); font: 800 10px var(--mono); }
-    .stage-method li:last-child span { background: var(--brand-gradient); color: white; }
+    .stage-method li.complete { background: rgba(22, 132, 91, .06); color: #126a4a; }
+    .stage-method li.complete span { background: var(--success); color: white; }
+    .stage-method li.current { box-shadow: inset 0 -3px 0 var(--accent); color: var(--accent-hover); }
     .stage-button { min-width: 104px; min-height: 54px; border-color: rgba(0, 82, 217, .14); box-shadow: var(--shadow-card); }
     .stage-button.active { border-color: transparent; background: var(--brand-gradient); color: white; box-shadow: var(--shadow-active); }
     .stage-button.active .stage-button-state { color: rgba(255, 255, 255, .82); }
     .stage-layout { gap: 24px; }
+    .stage-layout > div { display: grid; gap: 18px; min-width: 0; }
+    .preflight-panel, .case-panel, .workshop-panel { padding: 22px 24px; border: 1px solid rgba(0, 82, 217, .14); border-radius: var(--radius); background: rgba(255, 255, 255, .92); box-shadow: var(--shadow-card); }
+    .panel-heading { display: flex; align-items: start; justify-content: space-between; gap: 16px; }
+    .panel-heading h2 { margin: 0; color: #243047; font-family: var(--display); font-size: 18px; }
+    .panel-count { flex: 0 0 auto; padding: 3px 8px; border: 1px solid rgba(0, 82, 217, .18); border-radius: 4px; background: rgba(0, 82, 217, .06); color: var(--accent-hover); font: 700 11px var(--mono); }
+    .panel-help, .quiz-rule { margin: 7px 0 14px; color: var(--ink-muted); font-size: 12px; }
+    .prerequisite-list { display: grid; gap: 0; }
+    .prerequisite-list .check-row { padding: 9px 0; }
     .stage-summary { padding: 24px; border: 1px solid rgba(0, 82, 217, .14); border-radius: var(--radius); background: rgba(255, 255, 255, .94); box-shadow: var(--shadow-card); }
     .stage-summary h2 { color: #18233a; font-family: var(--display); font-weight: 800; }
+    .concept-heading { margin-top: 15px; color: var(--ink-muted); font-size: 10px; font-weight: 800; }
+    .concept-list { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 14px; }
+    .concept-chip { padding: 4px 8px; border: 1px solid rgba(0, 82, 217, .17); border-radius: 4px; background: rgba(0, 82, 217, .055); color: var(--accent-hover); font-size: 11px; font-weight: 700; }
+    .case-panel h2 { margin: 0; color: #243047; font-family: var(--display); font-size: 20px; }
+    .case-panel > p { margin: 8px 0 16px; color: var(--ink-muted); }
+    .case-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin: 0; }
+    .case-grid > div { padding-top: 12px; border-top: 1px solid var(--line); }
+    .case-grid dt { color: var(--warning); font-size: 11px; font-weight: 800; }
+    .case-grid dd { margin: 5px 0 0; font-size: 13px; line-height: 1.65; }
+    .workshop-steps { display: grid; gap: 10px; margin: 16px 0; padding: 0; list-style: none; counter-reset: workshop; }
+    .workshop-steps li { position: relative; min-height: 34px; padding: 6px 0 6px 40px; border-bottom: 1px solid var(--line); counter-increment: workshop; }
+    .workshop-steps li::before { content: counter(workshop); position: absolute; left: 0; top: 4px; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--brand-soft); color: var(--accent-hover); font: 800 10px var(--mono); }
+    .workshop-evidence { display: grid; gap: 4px; padding: 11px 12px; border-left: 3px solid var(--accent); background: var(--brand-soft); font-size: 12px; }
+    .workshop-evidence strong { color: var(--accent-hover); }
+    .workshop-evidence span { color: var(--ink-muted); }
     .evidence-panel { position: sticky; top: calc(var(--topbar) + 18px); align-self: start; border-color: rgba(0, 82, 217, .16); box-shadow: var(--shadow-card); }
-    .quiz-section { padding: 22px 24px; border: 1px solid rgba(0, 82, 217, .12); border-radius: var(--radius); background: rgba(255, 255, 255, .88); box-shadow: var(--shadow-card); }
+    .gate-requirements { display: grid; gap: 6px; margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+    .gate-requirement { display: flex; align-items: center; justify-content: space-between; gap: 8px; color: var(--ink-muted); font-size: 11px; }
+    .gate-requirement strong { color: var(--warning); font-size: 10px; }
+    .gate-requirement.done { color: #126a4a; }
+    .gate-requirement.done strong { color: var(--success); }
+    .quiz-section { margin-top: 0; padding: 22px 24px; border: 1px solid rgba(0, 82, 217, .12); border-radius: var(--radius); background: rgba(255, 255, 255, .88); box-shadow: var(--shadow-card); }
     .quiz-section h2, .evidence-panel h2 { color: #243047; font-family: var(--display); }
+    .quiz-score { flex: 0 0 auto; min-width: 64px; padding: 5px 9px; border-radius: 4px; background: var(--brand-gradient); color: white; font: 800 12px var(--mono); text-align: center; }
+    .quiz-pagination { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; margin: 14px 0 18px; }
+    .quiz-page-button { min-height: 34px; border: 1px solid var(--line); border-radius: 5px; background: var(--surface); color: var(--ink-muted); cursor: pointer; font: 700 11px var(--mono); }
+    .quiz-page-button.active { border-color: var(--accent); background: var(--accent-soft); color: var(--accent-hover); }
+    .quiz-page-button.mastered { border-color: rgba(22, 132, 91, .3); background: var(--success-soft); color: #126a4a; }
+    .quiz-page-button.needs-review { border-color: rgba(201, 100, 66, .35); background: var(--warning-soft); color: #9b482c; }
+    .quiz-question-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+    .quiz-question-meta span { padding: 2px 7px; border-radius: 4px; background: var(--surface-muted); color: var(--ink-muted); font-size: 10px; font-weight: 700; }
+    .quiz-question-meta .critical { background: var(--danger-soft); color: var(--danger); }
+    .quiz-prompt { margin: 0 0 14px; color: #202b40; font-size: 16px; font-weight: 800; }
+    .quiz-options { display: grid; gap: 8px; }
+    .quiz-option { display: grid; grid-template-columns: 22px 28px minmax(0, 1fr); gap: 8px; align-items: start; padding: 10px 12px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--surface); cursor: pointer; }
+    .quiz-option:hover { border-color: rgba(0, 82, 217, .38); }
+    .quiz-option.selected { border-color: var(--accent); background: var(--accent-soft); }
+    .quiz-option.correct { border-color: rgba(22, 132, 91, .42); background: var(--success-soft); }
+    .quiz-option input { width: 16px; height: 16px; margin: 2px 0 0; accent-color: var(--accent); }
+    .option-key { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 4px; background: var(--surface-muted); color: var(--accent-hover); font: 800 10px var(--mono); }
+    .quiz-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .quiz-feedback { margin-top: 14px; padding: 14px; border: 1px solid var(--line); border-radius: var(--radius-sm); }
+    .quiz-feedback.correct { border-color: rgba(22, 132, 91, .35); background: var(--success-soft); }
+    .quiz-feedback.wrong { border-color: rgba(201, 100, 66, .38); background: var(--warning-soft); }
+    .quiz-feedback h4 { margin: 0 0 9px; font-size: 14px; }
+    .feedback-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 16px; }
+    .feedback-item { padding-top: 8px; border-top: 1px solid rgba(26, 29, 38, .09); }
+    .feedback-item strong { display: block; margin-bottom: 3px; color: #4f596b; font-size: 10px; }
+    .feedback-item span { font-size: 12px; line-height: 1.55; }
+    .quiz-summary { margin-top: 16px; padding: 16px; border: 1px solid rgba(0, 82, 217, .18); border-radius: var(--radius-sm); background: var(--brand-soft); }
+    .quiz-summary h3 { margin: 0 0 6px; font-size: 17px; }
+    .quiz-summary p { margin: 0 0 12px; color: var(--ink-muted); font-size: 12px; }
+    .reflection-block { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line); }
+    .reflection-block h3 { margin: 0; color: #243047; font-family: var(--display); font-size: 17px; }
 
     .mock-banner { border-color: rgba(201, 100, 66, .30); }
     .sim-controls { padding: 22px; border: 1px solid rgba(0, 82, 217, .14); border-radius: var(--radius); background: rgba(255, 255, 255, .92); box-shadow: var(--shadow-card); }
@@ -499,7 +560,9 @@
       .stage-method { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); overflow: visible; }
       .stage-method li { min-width: 0; min-height: 72px; flex-direction: column; justify-content: center; gap: 5px; padding: 7px 2px; text-align: center; font-size: 10px; line-height: 1.25; }
       .stage-summary { padding: 18px; }
-      .quiz-section { padding: 18px; }
+      .preflight-panel, .case-panel, .workshop-panel, .quiz-section { padding: 18px; }
+      .case-grid, .feedback-grid { grid-template-columns: 1fr; }
+      .quiz-option { grid-template-columns: 20px 26px minmax(0, 1fr); padding: 9px; }
       .document-reader { padding: 20px 18px; }
       .library-header { padding: 18px; }
       .sim-controls { padding: 18px; }
@@ -618,22 +681,33 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
     <section class="view" id="stageView" data-view-panel="stage">
       <div class="page-heading">
         <h1>阶段学习工作台</h1>
-        <p>每一阶段都按同一套工程闭环推进，五项证据全部完成后，才能本地标记通过。</p>
+        <p>每阶段都按“课前检查 → 案例实验 → 5 题纠错 → 工程证据”推进，三道门禁全部完成后才能通过。</p>
       </div>
       <ol class="stage-method" aria-label="阶段学习闭环">
-        <li><span>1</span>理解边界</li>
-        <li><span>2</span>完成实现</li>
-        <li><span>3</span>正常测试</li>
-        <li><span>4</span>失败测试</li>
-        <li><span>5</span>保存证据</li>
+        <li data-method-step="0"><span>1</span>理解边界</li>
+        <li data-method-step="1"><span>2</span>完成实现</li>
+        <li data-method-step="2"><span>3</span>正常测试</li>
+        <li data-method-step="3"><span>4</span>失败测试</li>
+        <li data-method-step="4"><span>5</span>保存证据</li>
       </ol>
       <div class="stage-rail" id="stageRail" aria-label="工程阶段"></div>
       <div class="stage-layout">
         <div>
+          <section class="preflight-panel" aria-labelledby="preflightTitle">
+            <div class="panel-heading">
+              <div><div class="section-label">课前门禁</div><h2 id="preflightTitle">先确认准备条件</h2></div>
+              <span class="panel-count" id="preflightCount">0 / 3</span>
+            </div>
+            <p class="panel-help">没有准备好的项目可以先看教材，但不能完成阶段验收。</p>
+            <div class="prerequisite-list" id="prerequisiteChecklist"></div>
+          </section>
+
           <section class="stage-summary" aria-labelledby="stageTitle">
             <div class="section-label" id="stageNumber">S0</div>
             <h2 id="stageTitle">契约与确定性基线</h2>
             <p class="stage-definition" id="stageDefinition"></p>
+            <div class="concept-heading">关键概念速记</div>
+            <div class="concept-list" id="stageConcepts" aria-label="关键概念"></div>
             <div class="stage-facts" id="stageFacts"></div>
             <div class="command-block">
               <div class="command-label"><span id="stageCommandLabel">本阶段命令</span><button class="copy-button" type="button" data-copy-target="stageCommand">复制命令</button></div>
@@ -642,25 +716,56 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
             <div class="button-row stage-actions">
               <button class="primary-button" id="startStageButton" type="button">开始本阶段</button>
               <button class="secondary-button" id="openStageChapter" type="button">打开阶段教材</button>
-              <button class="secondary-button" id="openSelftest" type="button">打开 5 题自测</button>
+              <button class="secondary-button" id="openSelftest" type="button">查看题库文档</button>
             </div>
           </section>
 
-          <section class="quiz-section" aria-labelledby="quizTitle">
-            <h2 id="quizTitle">解释检查</h2>
-            <p class="quiz-question" id="quizQuestion"></p>
-            <textarea class="quiz-answer" id="quizDraft" placeholder="先用自己的话回答，至少写出事故、负责层和验收证据。"></textarea>
-            <div class="button-row" style="margin-top:10px">
-              <button class="secondary-button" id="showReferenceAnswer" type="button">对照参考答案</button>
+          <section class="case-panel" aria-labelledby="caseTitle">
+            <div class="section-label">真实事故案例</div>
+            <h2 id="caseTitle"></h2>
+            <p id="caseContext"></p>
+            <dl class="case-grid">
+              <div><dt>故障表现</dt><dd id="caseSymptom"></dd></div>
+              <div><dt>工程结论</dt><dd id="caseLesson"></dd></div>
+            </dl>
+          </section>
+
+          <section class="workshop-panel" aria-labelledby="workshopTitle">
+            <div class="panel-heading">
+              <div><div class="section-label">动手实验</div><h2 id="workshopTitle"></h2></div>
+              <span class="panel-count">3 步</span>
             </div>
-            <div class="reference-answer" id="referenceAnswer" hidden></div>
-            <div class="self-rating" id="selfRating" aria-label="本地自评"></div>
+            <ol class="workshop-steps" id="workshopSteps"></ol>
+            <div class="workshop-evidence"><strong>必须留下的证据</strong><span id="workshopEvidence"></span></div>
+          </section>
+
+          <section class="quiz-section" aria-labelledby="quizTitle">
+            <div class="panel-heading">
+              <div><div class="section-label">掌握度检查</div><h2 id="quizTitle">5 题阶段自测</h2></div>
+              <span class="quiz-score" id="quizScore">0 / 10</span>
+            </div>
+            <p class="quiz-rule">首轮至少 8/10，且关键题不能首轮答错。答错后先看误区和实验，再重新作答。</p>
+            <div class="quiz-pagination" id="quizPagination" aria-label="自测题目"></div>
+            <div class="quiz-workspace" id="quizWorkspace"></div>
+            <div class="quiz-summary" id="quizSummary" hidden></div>
+
+            <div class="reflection-block">
+              <h3>阶段复述</h3>
+              <p class="quiz-question" id="quizQuestion"></p>
+              <textarea class="quiz-answer" id="quizDraft" placeholder="用自己的话写出：目标事故、负责层、关键取舍和验收证据。"></textarea>
+              <div class="button-row" style="margin-top:10px">
+                <button class="secondary-button" id="showReferenceAnswer" type="button">对照参考答案</button>
+              </div>
+              <div class="reference-answer" id="referenceAnswer" hidden></div>
+              <div class="self-rating" id="selfRating" aria-label="本地自评"></div>
+            </div>
           </section>
         </div>
 
         <aside class="evidence-panel" aria-labelledby="evidenceTitle">
           <h2 id="evidenceTitle">阶段证据门禁</h2>
-          <p>勾选表示你已经有可复现证据，不只是看过。</p>
+          <p>通过需要同时完成课前准备、自测和工程证据。</p>
+          <div class="gate-requirements" id="gateRequirements"></div>
           <div class="evidence-list" id="evidenceChecklist"></div>
           <div class="gate-message" id="gateMessage"></div>
           <button class="primary-button" id="passStageButton" type="button" style="width:100%;margin-top:12px">本地标记通过</button>
@@ -731,6 +836,7 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script src="data/chapters.js"></script>
+  <script src="data/learning_content.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked@15.0.12/marked.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js"></script>
   <script>
@@ -738,6 +844,7 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
     'use strict';
 
     const CHAPTERS = Array.isArray(window.CHAPTERS) ? window.CHAPTERS : [];
+    const LEARNING_CONTENT = window.LEARNING_CONTENT && typeof window.LEARNING_CONTENT === 'object' ? window.LEARNING_CONTENT : {};
     const STORAGE_KEY = 'ARG_ENGINEERING_COURSE_V2';
     const GITHUB_SOURCE = 'https://github.com/falses00/agent-learning-report/blob/main/';
     const evidenceLabels = [
@@ -956,6 +1063,7 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
     ];
 
     const defaultState = {
+      courseVersion: 3,
       path: 'engineering',
       currentStage: 's0',
       stages: {},
@@ -984,9 +1092,52 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
       renderProgress();
     }
 
+    function createQuizState(questionCount = 5) {
+      return {
+        current: 0,
+        results: Array.from({ length: questionCount }, () => ({ attempts: 0, firstCorrect: null, mastered: false, selected: null, lastCorrect: null })),
+      };
+    }
+
     function stageState(stageId) {
-      if (!state.stages[stageId]) state.stages[stageId] = { status: 'not-started', checks: [false, false, false, false, false], draft: '', rating: '' };
-      return state.stages[stageId];
+      if (!state.stages[stageId]) state.stages[stageId] = { status: 'not-started', checks: [false, false, false, false, false], prerequisites: [false, false, false], quiz: createQuizState(), draft: '', rating: '', referenceVisible: false, gateVersion: 0 };
+      const itemState = state.stages[stageId];
+      if (!Array.isArray(itemState.checks) || itemState.checks.length !== 5) itemState.checks = [false, false, false, false, false];
+      if (!Array.isArray(itemState.prerequisites) || itemState.prerequisites.length !== 3) itemState.prerequisites = [false, false, false];
+      const questionCount = LEARNING_CONTENT[stageId]?.quiz?.length || 5;
+      if (!itemState.quiz || !Array.isArray(itemState.quiz.results) || itemState.quiz.results.length !== questionCount) itemState.quiz = createQuizState(questionCount);
+      itemState.quiz.current = Math.max(0, Math.min(questionCount - 1, Number(itemState.quiz.current) || 0));
+      itemState.quiz.results = itemState.quiz.results.map((result) => ({
+        attempts: Number(result?.attempts) || 0,
+        firstCorrect: typeof result?.firstCorrect === 'boolean' ? result.firstCorrect : null,
+        mastered: Boolean(result?.mastered),
+        selected: Number.isInteger(result?.selected) ? result.selected : null,
+        lastCorrect: typeof result?.lastCorrect === 'boolean' ? result.lastCorrect : null,
+      }));
+      if (typeof itemState.draft !== 'string') itemState.draft = '';
+      if (typeof itemState.rating !== 'string') itemState.rating = '';
+      if (typeof itemState.referenceVisible !== 'boolean') itemState.referenceVisible = false;
+      if (itemState.status === 'passed' && itemState.gateVersion !== 3) itemState.status = 'learning';
+      return itemState;
+    }
+
+    function quizMetrics(itemState, lesson) {
+      const results = itemState.quiz.results;
+      const mastered = results.filter((result) => result.mastered).length;
+      const firstCorrect = results.filter((result) => result.firstCorrect === true).length;
+      const score = firstCorrect * 2;
+      const criticalMiss = lesson.quiz.some((question, index) => question.critical && results[index].firstCorrect === false);
+      return { mastered, score, criticalMiss, complete: mastered === lesson.quiz.length, passed: mastered === lesson.quiz.length && score >= 8 && !criticalMiss };
+    }
+
+    function gateStatus(stageId) {
+      const itemState = stageState(stageId);
+      const lesson = LEARNING_CONTENT[stageId];
+      if (!lesson) return { ready: false, preflightReady: false, evidenceReady: false, quizReady: false };
+      const preflightReady = itemState.prerequisites.every(Boolean);
+      const evidenceReady = itemState.checks.every(Boolean);
+      const quizReady = quizMetrics(itemState, lesson).passed;
+      return { ready: preflightReady && evidenceReady && quizReady, preflightReady, evidenceReady, quizReady };
     }
 
     function statusLabel(status) {
@@ -1102,10 +1253,12 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
     function renderStageView() {
       const stage = currentStage();
       const itemState = stageState(stage.id);
+      const lesson = LEARNING_CONTENT[stage.id];
       renderStageRail();
       document.getElementById('stageNumber').textContent = `${stage.num} · ${stage.implemented ? '当前可运行基线' : '后续工程实验'}`;
       document.getElementById('stageTitle').textContent = stage.title;
       document.getElementById('stageDefinition').textContent = stage.definition;
+      document.getElementById('stageConcepts').innerHTML = lesson.concepts.map((concept) => `<span class="concept-chip">${escapeHtml(concept)}</span>`).join('');
       document.getElementById('stageFacts').innerHTML = `
         <div class="fact"><div class="fact-label">工程交付</div><p>${stage.deliverable}</p></div>
         <div class="fact"><div class="fact-label failure-fact">典型事故</div><p>${stage.failure}</p></div>
@@ -1114,6 +1267,28 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
       document.getElementById('stageCommand').textContent = stage.command;
       document.getElementById('stageCommandLabel').textContent = stage.implemented ? '当前可运行' : '目标验证命令（完成实验后）';
       document.getElementById('startStageButton').textContent = itemState.status === 'not-started' ? '开始本阶段' : '继续本阶段';
+
+      document.getElementById('prerequisiteChecklist').innerHTML = lesson.prerequisites.map((text, index) => `
+        <label class="check-row">
+          <input type="checkbox" data-prerequisite="${index}" ${itemState.prerequisites[index] ? 'checked' : ''}>
+          <span><strong>准备 ${index + 1}</strong><span>${escapeHtml(text)}</span></span>
+        </label>`).join('');
+      document.getElementById('preflightCount').textContent = `${itemState.prerequisites.filter(Boolean).length} / ${lesson.prerequisites.length}`;
+      document.querySelectorAll('[data-prerequisite]').forEach((input) => input.addEventListener('change', () => {
+        itemState.prerequisites[Number(input.dataset.prerequisite)] = input.checked;
+        if (itemState.status === 'not-started') itemState.status = 'learning';
+        saveState();
+        renderStageView();
+        renderOverview();
+      }));
+
+      document.getElementById('caseTitle').textContent = lesson.caseStudy.title;
+      document.getElementById('caseContext').textContent = lesson.caseStudy.context;
+      document.getElementById('caseSymptom').textContent = lesson.caseStudy.symptom;
+      document.getElementById('caseLesson').textContent = lesson.caseStudy.lesson;
+      document.getElementById('workshopTitle').textContent = lesson.workshop.title;
+      document.getElementById('workshopSteps').innerHTML = lesson.workshop.steps.map((step) => `<li>${escapeHtml(step)}</li>`).join('');
+      document.getElementById('workshopEvidence').textContent = lesson.workshop.evidence;
 
       document.getElementById('evidenceChecklist').innerHTML = evidenceLabels.map(([title, detail], index) => `
         <label class="check-row">
@@ -1128,24 +1303,159 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
         renderOverview();
       }));
 
-      const ready = itemState.checks.every(Boolean);
+      const metrics = quizMetrics(itemState, lesson);
+      const stageGate = gateStatus(stage.id);
+      document.getElementById('gateRequirements').innerHTML = [
+        ['课前准备', stageGate.preflightReady, `${itemState.prerequisites.filter(Boolean).length}/3`],
+        ['阶段自测', stageGate.quizReady, `${metrics.score}/10`],
+        ['工程证据', stageGate.evidenceReady, `${itemState.checks.filter(Boolean).length}/5`],
+      ].map(([label, done, value]) => `<div class="gate-requirement${done ? ' done' : ''}"><span>${done ? '已完成' : '未完成'} · ${label}</span><strong>${value}</strong></div>`).join('');
+
       const gate = document.getElementById('gateMessage');
-      gate.classList.toggle('ready', ready);
-      gate.textContent = ready ? '五项证据齐全，可以本地标记通过。' : `还缺 ${itemState.checks.filter((value) => !value).length} 项证据。`;
+      gate.classList.toggle('ready', stageGate.ready);
+      const missing = [];
+      if (!stageGate.preflightReady) missing.push(`${itemState.prerequisites.filter((value) => !value).length} 项课前准备`);
+      if (!stageGate.quizReady) missing.push(metrics.complete ? '重做自测并达到 8/10，关键题首轮正确' : `${lesson.quiz.length - metrics.mastered} 道未掌握题`);
+      if (!stageGate.evidenceReady) missing.push(`${itemState.checks.filter((value) => !value).length} 项工程证据`);
+      gate.textContent = stageGate.ready ? '三道门禁全部通过，可以本地标记完成。' : `还需要：${missing.join('；')}。`;
       const passButton = document.getElementById('passStageButton');
-      passButton.disabled = !ready;
+      passButton.disabled = !stageGate.ready;
       passButton.textContent = itemState.status === 'passed' ? '已本地标记通过' : '本地标记通过';
+
+      const methodStates = [
+        stageGate.preflightReady && itemState.checks[0],
+        itemState.checks[1],
+        itemState.checks[2],
+        itemState.checks[3] && metrics.complete,
+        itemState.checks[4] && metrics.passed,
+      ];
+      const currentMethod = methodStates.findIndex((complete) => !complete);
+      document.querySelectorAll('[data-method-step]').forEach((element, index) => {
+        element.classList.toggle('complete', methodStates[index]);
+        element.classList.toggle('current', index === currentMethod);
+      });
+
+      renderInteractiveQuiz(itemState, lesson, stage.id);
 
       document.getElementById('quizQuestion').textContent = stage.question;
       const draft = document.getElementById('quizDraft');
       draft.value = itemState.draft || '';
       document.getElementById('referenceAnswer').textContent = stage.answer;
-      document.getElementById('referenceAnswer').hidden = true;
+      document.getElementById('referenceAnswer').hidden = !itemState.referenceVisible;
       renderRatings(itemState.rating);
 
       requestAnimationFrame(() => {
         const active = document.querySelector('.stage-button.active');
         if (active) active.scrollIntoView({ inline: 'center', block: 'nearest' });
+      });
+    }
+
+    function quizOptionOrder(stageId, questionIndex, answerIndex) {
+      const stageIndex = Math.max(0, STAGES.findIndex((stage) => stage.id === stageId));
+      const answerPatterns = [
+        [2, 0, 3, 1, 0], [1, 3, 2, 0, 1], [0, 2, 3, 1, 2], [3, 1, 0, 2, 3],
+        [3, 0, 1, 2, 0], [2, 3, 1, 0, 1], [1, 0, 2, 3, 2], [0, 3, 2, 1, 3],
+        [0, 1, 2, 0, 3], [3, 0, 1, 2, 1], [2, 1, 0, 3, 2], [0, 2, 3, 1, 3],
+      ];
+      const answerPosition = answerPatterns[stageIndex % answerPatterns.length][questionIndex % 5];
+      const order = [0, 1, 2, 3].filter((index) => index !== answerIndex);
+      order.splice(answerPosition, 0, answerIndex);
+      return order;
+    }
+
+    function renderInteractiveQuiz(itemState, lesson, stageId) {
+      const quizState = itemState.quiz;
+      const metrics = quizMetrics(itemState, lesson);
+      const questionIndex = quizState.current;
+      const question = lesson.quiz[questionIndex];
+      const result = quizState.results[questionIndex];
+      const letters = ['A', 'B', 'C', 'D'];
+
+      document.getElementById('quizScore').textContent = `${metrics.score} / 10`;
+      document.getElementById('quizPagination').innerHTML = lesson.quiz.map((item, index) => {
+        const itemResult = quizState.results[index];
+        const classes = [index === questionIndex ? 'active' : '', itemResult.mastered ? 'mastered' : '', itemResult.firstCorrect === false ? 'needs-review' : ''].filter(Boolean).join(' ');
+        return `<button class="quiz-page-button ${classes}" type="button" data-quiz-page="${index}" aria-label="第 ${index + 1} 题${item.critical ? '，关键题' : ''}">${index + 1}</button>`;
+      }).join('');
+
+      const options = quizOptionOrder(stageId, questionIndex, question.answer).map((optionIndex, displayIndex) => {
+        const option = question.options[optionIndex];
+        const selected = result.selected === optionIndex;
+        const correct = result.mastered && question.answer === optionIndex;
+        return `<label class="quiz-option${selected ? ' selected' : ''}${correct ? ' correct' : ''}">
+          <input type="radio" name="stageQuiz" value="${optionIndex}" ${selected ? 'checked' : ''} ${result.mastered ? 'disabled' : ''}>
+          <span class="option-key">${letters[displayIndex]}</span>
+          <span>${escapeHtml(option)}</span>
+        </label>`;
+      }).join('');
+
+      let feedback = '';
+      if (result.attempts > 0) {
+        const correct = result.lastCorrect === true;
+        feedback = `<div class="quiz-feedback ${correct ? 'correct' : 'wrong'}">
+          <h4>${correct ? '回答正确，继续用工程证据解释' : '回答不正确，先修正误区再重答'}</h4>
+          <div class="feedback-grid">
+            ${correct ? '' : `<div class="feedback-item"><strong>具体误区 · ${escapeHtml(question.category)}</strong><span>${escapeHtml(question.misconception)}</span></div>`}
+            <div class="feedback-item"><strong>正确原理</strong><span>${escapeHtml(question.explanation)}</span></div>
+            <div class="feedback-item"><strong>更简单的例子</strong><span>${escapeHtml(question.example)}</span></div>
+            <div class="feedback-item"><strong>必须重跑的实验</strong><span>${escapeHtml(question.experiment)}</span></div>
+          </div>
+        </div>`;
+      }
+
+      const nextIncomplete = quizState.results.findIndex((item, index) => index > questionIndex && !item.mastered);
+      const fallbackIncomplete = quizState.results.findIndex((item) => !item.mastered);
+      const nextIndex = nextIncomplete >= 0 ? nextIncomplete : fallbackIncomplete;
+      document.getElementById('quizWorkspace').innerHTML = `
+        <div class="quiz-question-meta"><span>第 ${questionIndex + 1} / ${lesson.quiz.length} 题</span><span>${escapeHtml(question.category)}</span>${question.critical ? '<span class="critical">关键门禁题</span>' : ''}</div>
+        <p class="quiz-prompt">${escapeHtml(question.prompt)}</p>
+        <div class="quiz-options">${options}</div>
+        <div class="quiz-actions">
+          ${result.mastered ? (nextIndex >= 0 ? `<button class="primary-button" id="nextQuizQuestion" type="button" data-next-question="${nextIndex}">下一道未掌握题</button>` : '') : `<button class="primary-button" id="submitQuizAnswer" type="button" ${result.selected === null ? 'disabled' : ''}>提交答案</button>`}
+        </div>
+        ${feedback}`;
+
+      const summary = document.getElementById('quizSummary');
+      summary.hidden = !metrics.complete;
+      if (metrics.complete) {
+        summary.innerHTML = `<h3>${metrics.passed ? '本轮自测通过' : '已经掌握答案，但本轮需要重做'}</h3>
+          <p>首轮得分 ${metrics.score}/10${metrics.criticalMiss ? '，且关键题曾首轮答错' : ''}。${metrics.passed ? '可以继续补齐工程证据。' : '按错题中的实验补强后，重做整组自测。'}</p>
+          <button class="secondary-button" id="resetStageQuiz" type="button">${metrics.passed ? '重新练习 5 题' : '重做本阶段自测'}</button>`;
+      }
+
+      document.querySelectorAll('[data-quiz-page]').forEach((button) => button.addEventListener('click', () => {
+        quizState.current = Number(button.dataset.quizPage);
+        saveState();
+        renderInteractiveQuiz(itemState, lesson, stageId);
+      }));
+      document.querySelectorAll('input[name="stageQuiz"]').forEach((input) => input.addEventListener('change', () => {
+        result.selected = Number(input.value);
+        saveState();
+        renderInteractiveQuiz(itemState, lesson, stageId);
+      }));
+      document.getElementById('submitQuizAnswer')?.addEventListener('click', () => {
+        if (result.selected === null || result.mastered) return;
+        const correct = result.selected === question.answer;
+        result.attempts += 1;
+        if (result.firstCorrect === null) result.firstCorrect = correct;
+        result.lastCorrect = correct;
+        if (correct) result.mastered = true;
+        if (itemState.status === 'not-started') itemState.status = 'learning';
+        saveState();
+        renderStageView();
+        renderOverview();
+      });
+      document.getElementById('nextQuizQuestion')?.addEventListener('click', (event) => {
+        quizState.current = Number(event.currentTarget.dataset.nextQuestion);
+        saveState();
+        renderInteractiveQuiz(itemState, lesson, stageId);
+      });
+      document.getElementById('resetStageQuiz')?.addEventListener('click', () => {
+        itemState.quiz = createQuizState(lesson.quiz.length);
+        saveState();
+        renderStageView();
+        renderOverview();
+        showToast('本阶段 5 题自测已重置');
       });
     }
 
@@ -1442,8 +1752,9 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
       });
       document.getElementById('passStageButton').addEventListener('click', () => {
         const itemState = stageState(state.currentStage);
-        if (!itemState.checks.every(Boolean)) return;
+        if (!gateStatus(state.currentStage).ready) return;
         itemState.status = 'passed';
+        itemState.gateVersion = 3;
         const currentIndex = STAGES.findIndex((stage) => stage.id === state.currentStage);
         const next = STAGES[currentIndex + 1];
         saveState(); renderStageView(); renderOverview();
@@ -1459,6 +1770,9 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
       document.getElementById('showReferenceAnswer').addEventListener('click', () => {
         const draft = document.getElementById('quizDraft').value.trim();
         if (draft.length < 12) { showToast('先写下你的判断，再看参考答案'); return; }
+        const itemState = stageState(state.currentStage);
+        itemState.referenceVisible = true;
+        saveState();
         document.getElementById('referenceAnswer').hidden = false;
       });
       document.getElementById('scenarioSelect').addEventListener('change', updateScenarioNote);
