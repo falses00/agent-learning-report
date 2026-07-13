@@ -9,12 +9,12 @@
 在线站点提供：
 
 - 首次学习路径与基础自检。
-- F0、S0-S10 工程路线和本地进度。
-- 每阶段 3 项课前检查、真实事故案例、3 步动手实验和关键概念速记。
-- 每阶段 5 题自测、逐题误区反馈、首轮评分和工程证据门禁。
+- F0、S0-S10 学习路线、本地进度，以及 3/12 工程实验覆盖率；当前可运行基线为 S0-S2。
+- 每阶段 3 项课前检查、明确标注来源的事故或合成工程故障场景、动手步骤和关键概念速记。
+- 每阶段 5 题自测、逐题误区反馈、首轮评分和结构化本地自评门禁。
 - S5 Agent Memory 实验室：14 类方法对比、工作负载选型、写入生命周期决策与专项门禁。
 - 可运行基线命令、故障演练、课程资料阅读和搜索。
-- 本地进度导出与重置，不上传学习数据。
+- 本地进度导出与重置，不上传学习数据；导出包明确标记为 `self-reported`，不能替代 CI 或独立工程复验。
 
 ## 本地运行
 
@@ -29,6 +29,7 @@ python -m http.server 8000
 
 ```powershell
 node data/build_chapters.mjs --check
+node data/check_course_gate.mjs
 node data/check_learning_content.mjs
 node data/check_memory_content.mjs
 ```
@@ -46,6 +47,8 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json
 
 - [课程唯一入口](agent-runtime-gateway/00-课程总览/00-唯一学习入口.md)
 - [工程实战主线](agent-runtime-gateway/00-课程总览/工程实战主线-v2.md)
+- [统一教学提示词 v2](agent-runtime-gateway/00-课程总览/每节课互动模板.md)
+- [真实缺口与演进台账](agent-runtime-gateway/00-课程总览/教学平台真实缺口与演进台账-2026-07-13.md)
 - [岗位能力与毕业标准](agent-runtime-gateway/00-课程总览/岗位能力与毕业标准.md)
 - [Agent Memory 方法谱系与工业选型](agent-runtime-gateway/06-工业级框架蓝图/Agent-Memory方法谱系与工业选型-2026.md)
 - [全链路故障与修复](agent-runtime-gateway/11-工程实战主线/全链路故障与修复手册.md)

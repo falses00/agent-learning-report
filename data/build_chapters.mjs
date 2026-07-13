@@ -11,6 +11,7 @@ const chapters = [
   { id: 'route', num: '路线', title: '工程实战主线 v2', meta: 'F0 · S0-S10 · 阶段门禁', src: 'agent-runtime-gateway/00-课程总览/工程实战主线-v2.md', group: 'start' },
   { id: 'project', num: '项目', title: 'OpsPilot 贯穿项目', meta: '真实场景 · 三条演示路径', src: 'agent-runtime-gateway/11-工程实战主线/README.md', group: 'start' },
   { id: 'standards', num: '毕业', title: '岗位能力与毕业标准', meta: '作品集 · 答辩 · 评分', src: 'agent-runtime-gateway/00-课程总览/岗位能力与毕业标准.md', group: 'start' },
+  { id: 'protocol', num: '协议', title: '统一教学提示词 v2', meta: '定义 · 实验 · 自测 · 证据 · 岗位映射', src: 'agent-runtime-gateway/00-课程总览/每节课互动模板.md', group: 'start' },
   { id: 'baseline', num: '基线', title: '可运行教学基线', meta: 'CLI · pytest · eval', src: 'agent-runtime-gateway/20-源码/README.md', group: 'start' },
 
   { id: 's0', num: 'S0', title: '契约与确定性基线', meta: 'Schema · ErrorModel · Bad cases', src: 'agent-runtime-gateway/02-阶段教学手册/第1阶段-契约层教学手册.md', group: 'main', stageId: 's0' },
@@ -31,6 +32,7 @@ const chapters = [
   { id: 'sources', num: '资料', title: '权威资料索引', meta: '官方文档 · 标准 · 原始论文', src: 'agent-runtime-gateway/00-课程总览/权威资料索引.md', group: 'reference' },
   { id: 'mcp', num: '专题', title: 'MCP 与工具生态', meta: '协议 · 准入 · 凭据边界', src: 'agent-runtime-gateway/02-阶段教学手册/Phase-05-MCP与工具生态教学手册.md', group: 'reference' },
   { id: 'acceptance', num: '门禁', title: '阶段验收清单', meta: '设计理解 · 工程证据', src: 'agent-runtime-gateway/02-阶段教学手册/阶段验收清单.md', group: 'reference' },
+  { id: 'audit', num: '审计', title: '真实缺口与演进台账', meta: 'P0-P2 · 证据 · 实施顺序', src: 'agent-runtime-gateway/00-课程总览/教学平台真实缺口与演进台账-2026-07-13.md', group: 'reference' },
 ];
 
 const missing = chapters.filter((chapter) => !existsSync(resolve(repoRoot, chapter.src)));

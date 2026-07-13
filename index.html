@@ -463,7 +463,7 @@
     .stage-button { min-width: 104px; min-height: 54px; border-color: rgba(0, 82, 217, .14); box-shadow: var(--shadow-card); }
     .stage-button.active { border-color: transparent; background: var(--brand-gradient); color: white; box-shadow: var(--shadow-active); }
     .stage-button.active .stage-button-state { color: rgba(255, 255, 255, .82); }
-    .stage-layout { gap: 24px; }
+    .stage-layout { grid-template-columns: minmax(0, 1.2fr) minmax(340px, .8fr); gap: 24px; }
     .stage-workflow { display: block; min-width: 0; padding: 0 24px; border: 1px solid rgba(0, 82, 217, .13); border-radius: var(--radius); background: rgba(255, 255, 255, .94); }
     .stage-workflow > section { scroll-margin-top: calc(var(--topbar) + 78px); }
     .preflight-panel, .case-panel, .workshop-panel { padding: 24px 0; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; background: transparent; box-shadow: none; }
@@ -490,12 +490,24 @@
     .workshop-evidence { display: grid; gap: 4px; padding: 11px 12px; border: 1px solid rgba(0, 82, 217, .18); border-radius: var(--radius-sm); background: var(--brand-soft); font-size: 12px; }
     .workshop-evidence strong { color: var(--accent-hover); }
     .workshop-evidence span { color: var(--ink-muted); }
-    .evidence-panel { position: sticky; top: calc(var(--topbar) + 18px); align-self: start; border-color: rgba(0, 82, 217, .16); box-shadow: 0 4px 10px rgba(0, 42, 110, .06); scroll-margin-top: calc(var(--topbar) + 18px); }
+    .evidence-panel { position: static; align-self: start; border-color: rgba(0, 82, 217, .16); box-shadow: 0 4px 10px rgba(0, 42, 110, .06); scroll-margin-top: calc(var(--topbar) + 18px); }
     .gate-requirements { display: grid; gap: 6px; margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
     .gate-requirement { display: flex; align-items: center; justify-content: space-between; gap: 8px; color: var(--ink-muted); font-size: 11px; }
     .gate-requirement strong { color: var(--warning); font-size: 10px; }
     .gate-requirement.done { color: #126a4a; }
     .gate-requirement.done strong { color: var(--success); }
+    .evidence-privacy { margin: 0 0 12px; padding: 9px 10px; border: 1px solid rgba(201, 100, 66, .22); border-radius: var(--radius-sm); background: var(--warning-soft); color: #754330; font-size: 10px; line-height: 1.55; }
+    .evidence-list { gap: 10px; }
+    .evidence-entry { display: grid; gap: 6px; padding: 10px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: #fff; }
+    .evidence-entry.complete { border-color: rgba(22, 132, 91, .30); background: var(--success-soft); }
+    .evidence-entry.invalid { border-color: rgba(201, 100, 66, .24); }
+    .evidence-entry-heading { display: flex; align-items: start; justify-content: space-between; gap: 10px; }
+    .evidence-entry-heading strong { display: block; color: #344054; font-size: 12px; }
+    .evidence-entry-heading small { display: block; margin-top: 2px; color: var(--ink-muted); font-size: 10px; line-height: 1.45; }
+    .evidence-state { flex: 0 0 auto; max-width: 104px; color: var(--warning); font: 700 9px/1.4 var(--mono); text-align: right; }
+    .evidence-entry.complete .evidence-state { color: var(--success); }
+    .evidence-input { width: 100%; min-height: 66px; resize: vertical; padding: 8px 9px; border: 1px solid var(--line); border-radius: 5px; background: var(--surface); color: var(--ink); font-size: 11px; line-height: 1.5; }
+    .evidence-input:focus { outline: 2px solid rgba(0, 82, 217, .18); border-color: var(--accent); }
     .quiz-section { margin-top: 0; padding: 24px 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
     .quiz-section h2, .evidence-panel h2 { color: #243047; font-family: var(--display); }
     .quiz-score { flex: 0 0 auto; min-width: 64px; padding: 5px 9px; border-radius: 4px; background: var(--brand-gradient); color: white; font: 800 12px var(--mono); text-align: center; }
@@ -638,6 +650,7 @@
     @media (max-width: 1040px) {
       .journey-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .route-stage-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .stage-layout { grid-template-columns: 1fr; }
       .evidence-panel { position: static; }
       .sim-controls { padding-right: 22px; border-right: 1px solid rgba(0, 82, 217, .14); border-bottom: 1px solid rgba(0, 82, 217, .14); }
       .memory-form-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -733,7 +746,7 @@
         <input id="courseSearch" type="search" placeholder="搜索课程资料" autocomplete="off">
       </label>
       <div class="progress-summary" aria-live="polite">
-        <div class="progress-row"><span>工程主线</span><strong id="sidebarProgressText">0 / 12</strong></div>
+        <div class="progress-row"><span>本地自评</span><strong id="sidebarProgressText">0 / 12</strong></div>
         <div class="progress-track"><div class="progress-fill" id="sidebarProgressFill"></div></div>
       </div>
     </div>
@@ -756,7 +769,7 @@
         <div class="overview-progress" aria-live="polite">
           <span>工程主线进度</span>
           <strong id="overviewProgressText">0 / 12</strong>
-          <small id="overviewProgressHint">当前位于 S0，S0-S2 提供可运行基线。</small>
+          <small id="overviewProgressHint">工程实验 3 / 12 可运行；推荐从 S0 开始。</small>
         </div>
       </header>
 
@@ -769,7 +782,7 @@
         </div>
         <div class="button-row">
           <button class="primary-button" id="continueButton" type="button">进入 S0 工作台</button>
-          <button class="secondary-button" id="openBaselineButton" type="button">运行教学基线</button>
+          <button class="secondary-button" id="openBaselineButton" type="button">查看基线运行说明</button>
         </div>
       </section>
 
@@ -793,7 +806,7 @@ python -m pytest ..\21-测试 -q
 python -m agent_course.cli demo
 python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
           </div>
-          <div class="expected-output">预期：11 项测试通过，5 项工程 eval 通过，退款写操作停在人工审批。</div>
+          <div class="expected-output">当前可复验基线：11 项测试、5 项工程 eval。毕业目标 60+ tests / 100+ eval 尚未达成。</div>
         </section>
 
         <section class="section-block" aria-labelledby="todayTitle">
@@ -804,7 +817,7 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
       </div>
 
       <section class="route-list" aria-labelledby="routeTitle">
-        <div class="route-header"><div><div class="section-label">完整主线</div><h2 id="routeTitle">四段式工程学习路线</h2></div><span>按证据过关，不按阅读时长过关</span></div>
+        <div class="route-header"><div><div class="section-label">完整主线</div><h2 id="routeTitle">四段式工程学习路线</h2></div><span>按证据练习，工程认证需机器或评审复验</span></div>
         <div id="routeRows"></div>
       </section>
     </section>
@@ -853,7 +866,7 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
           </section>
 
           <section class="case-panel" id="casePanel" aria-labelledby="caseTitle">
-            <div class="section-label">真实事故案例</div>
+            <div class="section-label">工程故障场景</div>
             <h2 id="caseTitle"></h2>
             <p id="caseContext"></p>
             <dl class="case-grid">
@@ -895,12 +908,13 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
         </div>
 
         <aside class="evidence-panel" id="evidencePanel" aria-labelledby="evidenceTitle">
-          <h2 id="evidenceTitle">阶段证据门禁</h2>
-          <p>通过需要同时完成课前准备、自测和工程证据。</p>
+          <h2 id="evidenceTitle">阶段自评门禁</h2>
+          <p>页面只记录本地自报证据；工程认证仍需仓库测试、CI 或评审者复验。</p>
           <div class="gate-requirements" id="gateRequirements"></div>
+          <div class="evidence-privacy">只记录脱敏摘要、仓库路径或公开 URL。不要粘贴 secret、PII 或真实客户数据。</div>
           <div class="evidence-list" id="evidenceChecklist"></div>
           <div class="gate-message" id="gateMessage"></div>
-          <button class="primary-button" id="passStageButton" type="button" style="width:100%;margin-top:12px">本地标记通过</button>
+          <button class="primary-button" id="passStageButton" type="button" style="width:100%;margin-top:12px">记录本地自评通过</button>
         </aside>
       </div>
     </section>
@@ -1034,6 +1048,7 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script src="data/chapters.js"></script>
+  <script src="data/course_gate.js"></script>
   <script src="data/learning_content.js"></script>
   <script src="data/memory_lab.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked@15.0.12/marked.min.js"></script>
@@ -1043,16 +1058,17 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
     'use strict';
 
     const CHAPTERS = Array.isArray(window.CHAPTERS) ? window.CHAPTERS : [];
+    const COURSE_GATE = window.CourseGate;
     const LEARNING_CONTENT = window.LEARNING_CONTENT && typeof window.LEARNING_CONTENT === 'object' ? window.LEARNING_CONTENT : {};
     const MEMORY_LAB = window.MEMORY_LAB && typeof window.MEMORY_LAB === 'object' ? window.MEMORY_LAB : null;
     const STORAGE_KEY = 'ARG_ENGINEERING_COURSE_V2';
     const GITHUB_SOURCE = 'https://github.com/falses00/agent-learning-report/blob/main/';
-    const evidenceLabels = [
-      ['理解边界', '能用自己的话说明本阶段负责什么、不负责什么。'],
-      ['完成实现', '已经产生可运行代码或明确的工程增量。'],
-      ['正常路径', 'happy path 测试或 eval 已通过。'],
-      ['失败路径', '至少一个失败或对抗用例已通过。'],
-      ['保存证据', '已保存 trace、eval、报告或故障复盘。'],
+    const evidenceFields = [
+      { id: 'boundary', title: '边界说明', detail: '说明负责什么、不负责什么，以及可信事实来自哪里。', placeholder: '本阶段负责……；不负责……；身份/租户/风险来自……', minLength: 30 },
+      { id: 'implementation', title: '实现与命令', detail: '登记实际修改、commit、文件路径或运行命令。', placeholder: '例如：python -m pytest ...；commit abc123；src/runtime.py', minLength: 15 },
+      { id: 'happyPath', title: '正常路径结果', detail: '记录预期、实际结果和关键输出摘要。', placeholder: '输入……；预期……；实际……；关键输出……', minLength: 20 },
+      { id: 'failurePath', title: '失败 / 对抗结果', detail: '记录坏输入、阻断位置和回归结果。', placeholder: '攻击或失败输入……；在……被阻断；回归结果……', minLength: 20 },
+      { id: 'artifact', title: '证据产物引用', detail: '填写 test、trace、audit、eval、ADR 或复盘路径。', placeholder: '例如：evidence/s0-report.json 或公开 URL', minLength: 8 },
     ];
 
     const STAGES = [
@@ -1063,7 +1079,7 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
         failure: '只会 Notebook 或复制代码，遇到异常无法定位，写操作失败后盲目重试。',
         fix: '每个问题先写最小复现，再用测试、日志和事务边界验证。',
         evidence: 'API 调用、SQL 事务测试、Git 历史、Docker 启动记录。',
-        command: 'python --version\ngit --version\ndocker --version\npython -m pytest --version', implemented: true,
+        command: '# 当前仅提供基础诊断，F0 独立实验包待接入\npython --version\ngit --version\ndocker --version\npython -m pytest --version', implemented: false,
         chapter: 'start',
         question: 'HTTP 写请求超时后，为什么不能无条件重试？',
         answer: '因为超时只表示客户端没有拿到结果，不表示服务端没有完成写操作。必须使用幂等键、查询既有结果或业务补偿，并区分可重试与不可重试错误。',
@@ -1271,7 +1287,7 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
     };
 
     const defaultState = {
-      courseVersion: 4,
+      courseVersion: 5,
       path: 'engineering',
       currentStage: 's0',
       stages: {},
@@ -1297,6 +1313,7 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
           return {
             ...defaultState,
             ...saved,
+            courseVersion: defaultState.courseVersion,
             stages: saved.stages && typeof saved.stages === 'object' ? saved.stages : {},
             today: saved.today && typeof saved.today === 'object' ? saved.today : {},
             memoryLab: {
@@ -1326,10 +1343,23 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
       };
     }
 
+    function createEvidenceState() {
+      return Object.fromEntries(evidenceFields.map((field) => [field.id, '']));
+    }
+
+    function requiredGateVersion(stageId) {
+      return stageId === 's5' ? 6 : 5;
+    }
+
     function stageState(stageId) {
-      if (!state.stages[stageId]) state.stages[stageId] = { status: 'not-started', checks: [false, false, false, false, false], prerequisites: [false, false, false], quiz: createQuizState(), draft: '', rating: '', referenceVisible: false, gateVersion: 0 };
+      if (!state.stages[stageId]) state.stages[stageId] = { status: 'not-started', checks: [false, false, false, false, false], evidence: createEvidenceState(), prerequisites: [false, false, false], quiz: createQuizState(), draft: '', rating: '', referenceVisible: false, gateVersion: 0 };
       const itemState = state.stages[stageId];
       if (!Array.isArray(itemState.checks) || itemState.checks.length !== 5) itemState.checks = [false, false, false, false, false];
+      if (!itemState.evidence || typeof itemState.evidence !== 'object') itemState.evidence = createEvidenceState();
+      for (const field of evidenceFields) {
+        if (typeof itemState.evidence[field.id] !== 'string') itemState.evidence[field.id] = '';
+        if (COURSE_GATE.detectSensitiveEvidence(itemState.evidence[field.id])) itemState.evidence[field.id] = '';
+      }
       if (!Array.isArray(itemState.prerequisites) || itemState.prerequisites.length !== 3) itemState.prerequisites = [false, false, false];
       const questionCount = LEARNING_CONTENT[stageId]?.quiz?.length || 5;
       if (!itemState.quiz || !Array.isArray(itemState.quiz.results) || itemState.quiz.results.length !== questionCount) itemState.quiz = createQuizState(questionCount);
@@ -1344,9 +1374,28 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
       if (typeof itemState.draft !== 'string') itemState.draft = '';
       if (typeof itemState.rating !== 'string') itemState.rating = '';
       if (typeof itemState.referenceVisible !== 'boolean') itemState.referenceVisible = false;
-      const requiredGateVersion = stageId === 's5' ? 4 : 3;
-      if (itemState.status === 'passed' && itemState.gateVersion !== requiredGateVersion) itemState.status = 'learning';
+      const eligibility = passEligibility(stageId, itemState);
+      if (COURSE_GATE.shouldDowngradePass({
+        ...eligibility,
+        status: itemState.status,
+        gateVersion: itemState.gateVersion,
+        requiredGateVersion: requiredGateVersion(stageId),
+      })) itemState.status = 'learning';
       return itemState;
+    }
+
+    function evidenceStatus(itemState) {
+      const items = evidenceFields.map((field) => {
+        const value = itemState.evidence[field.id].trim();
+        const validation = COURSE_GATE.validateEvidenceField(field, value);
+        return { ...field, value, complete: validation.valid, reason: validation.reason, sensitive: validation.sensitive };
+      });
+      return {
+        items,
+        byId: Object.fromEntries(items.map((item) => [item.id, item])),
+        complete: items.filter((item) => item.complete).length,
+        ready: items.every((item) => item.complete),
+      };
     }
 
     function quizMetrics(itemState, lesson) {
@@ -1380,19 +1429,24 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
       return { mastered, chooserReady, ready: mastered >= 4 && chooserReady };
     }
 
-    function gateStatus(stageId) {
-      const itemState = stageState(stageId);
+    function passEligibility(stageId, itemState) {
       const lesson = LEARNING_CONTENT[stageId];
-      if (!lesson) return { ready: false, preflightReady: false, evidenceReady: false, quizReady: false, memoryLabReady: false };
+      const stage = STAGES.find((candidate) => candidate.id === stageId);
+      if (!lesson || !stage) return { ready: false, implementationReady: false, preflightReady: false, evidenceReady: false, quizReady: false, memoryLabReady: false };
+      const implementationReady = stage.implemented === true;
       const preflightReady = itemState.prerequisites.every(Boolean);
-      const evidenceReady = itemState.checks.every(Boolean);
+      const evidenceReady = evidenceStatus(itemState).ready;
       const quizReady = quizMetrics(itemState, lesson).passed;
       const memoryLabReady = stageId !== 's5' || memoryLabStatus().ready;
-      return { ready: preflightReady && evidenceReady && quizReady && memoryLabReady, preflightReady, evidenceReady, quizReady, memoryLabReady };
+      return { ready: COURSE_GATE.canPassStage({ implementationReady, preflightReady, evidenceReady, quizReady, memoryLabReady }), implementationReady, preflightReady, evidenceReady, quizReady, memoryLabReady };
+    }
+
+    function gateStatus(stageId) {
+      return passEligibility(stageId, stageState(stageId));
     }
 
     function statusLabel(status) {
-      return status === 'passed' ? '已通过' : status === 'learning' ? '学习中' : '未开始';
+      return status === 'passed' ? '自评通过' : status === 'learning' ? '学习中' : '未开始';
     }
 
     function currentStage() {
@@ -1415,10 +1469,12 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
       const lesson = LEARNING_CONTENT[stage.id];
       const gate = gateStatus(stage.id);
       if (!lesson) return '打开阶段资料，确认本阶段交付物与验收证据。';
+      if (!stage.implemented) return `先完成 ${stage.num} 的理论、自测与设计练习；可运行工程实验尚未接入，暂不能记录阶段自评通过。`;
       if (itemState.status === 'not-started') return `开始 ${stage.num}，先完成 ${lesson.prerequisites.length} 项课前准备。`;
       if (!gate.preflightReady) return `补齐 ${itemState.prerequisites.filter((value) => !value).length} 项课前准备，再进入实验。`;
+      const evidence = evidenceStatus(itemState);
       const metrics = quizMetrics(itemState, lesson);
-      if (!itemState.checks.some(Boolean)) return '完成动手实验，并保存第一项可复现证据。';
+      if (!evidence.byId.implementation.complete) return '完成动手实验，并登记实际修改、命令或 commit。';
       if (!gate.quizReady) return metrics.complete
         ? '重做未达标或关键题，达到 8/10 且关键题首轮正确。'
         : `继续完成自测，还有 ${lesson.quiz.length - metrics.mastered} 题未掌握。`;
@@ -1427,9 +1483,9 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
         if (!lab.chooserReady) return '进入记忆实验室，先完成一次最小架构选型。';
         return `继续记忆生命周期演练，还需掌握 ${Math.max(0, 4 - lab.mastered)} 个场景。`;
       }
-      if (!gate.evidenceReady) return `补齐 ${itemState.checks.filter((value) => !value).length} 项工程证据并完成验收。`;
-      if (itemState.status !== 'passed') return '所有门禁已经满足，完成本地标记通过。';
-      return '主线已经全部完成，回到证据库整理作品集与面试材料。';
+      if (!gate.evidenceReady) return `补齐 ${evidenceFields.length - evidence.complete} 项结构化工程证据并完成验收。`;
+      if (itemState.status !== 'passed') return '本地自评条件已经满足；记录后仍需用仓库测试、CI 或评审复验。';
+      return '本地主线自评已经完成；下一步整理可机器复验的证据与作品集。';
     }
 
     function showToast(message) {
@@ -1481,6 +1537,7 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
       const stage = recommendedStage();
       const itemState = stageState(stage.id);
       const completed = completedCount();
+      const runnable = STAGES.filter((item) => item.implemented).length;
       document.getElementById('continueTitle').textContent = `${stage.num} ${stage.title}`;
       document.getElementById('continueDescription').textContent = stage.definition;
       document.getElementById('continueNextAction').textContent = nextLearningAction(stage);
@@ -1489,11 +1546,13 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
       continueStatus.className = `status-chip status-${itemState.status}`;
       const continueButton = document.getElementById('continueButton');
       continueButton.dataset.stage = stage.id;
-      continueButton.textContent = itemState.status === 'not-started' ? `进入 ${stage.num} 工作台` : `继续 ${stage.num} 工作台`;
+      continueButton.textContent = stage.implemented
+        ? (itemState.status === 'not-started' ? `进入 ${stage.num} 工作台` : `继续 ${stage.num} 工作台`)
+        : `进入 ${stage.num} 设计练习`;
       document.getElementById('overviewProgressText').textContent = `${completed} / ${STAGES.length}`;
       document.getElementById('overviewProgressHint').textContent = completed === STAGES.length
-        ? '工程主线已完成，建议整理发布证据与作品集。'
-        : `推荐下一步：${stage.num} · ${statusLabel(itemState.status)}。`;
+        ? '本地主线自评已完成；请继续整理可机器复验的证据与作品集。'
+        : `工程实验 ${runnable}/${STAGES.length} 可运行；推荐 ${stage.num} · ${statusLabel(itemState.status)}。`;
 
       document.getElementById('journeyStrip').innerHTML = ROADMAP_GROUPS.map((group) => {
         const groupStages = group.stages.map((stageId) => stageState(stageId));
@@ -1502,7 +1561,7 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
         const complete = passed === group.stages.length;
         return `<button class="journey-step${active ? ' active' : ''}${complete ? ' complete' : ''}" type="button" data-roadmap-group="${group.id}">
           <span class="journey-number">${group.number}</span>
-          <span class="journey-copy"><strong>${group.title}</strong><span>${group.range} · ${passed}/${group.stages.length} 通过</span></span>
+          <span class="journey-copy"><strong>${group.title}</strong><span>${group.range} · ${passed}/${group.stages.length} 自评</span></span>
         </button>`;
       }).join('');
       document.querySelectorAll('[data-roadmap-group]').forEach((button) => button.addEventListener('click', () => {
@@ -1539,14 +1598,14 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
             <span class="route-card-top"><span class="route-num">${item.num}</span><span class="status-text status-${itemState.status}">${statusLabel(itemState.status)}</span></span>
             <span class="route-title">${item.title}</span>
             <span class="route-objective">${item.short}</span>
-            <span class="route-boundary ${item.implemented ? 'runnable' : ''}">${item.implemented ? '可运行基线' : '后续工程实验'}</span>
+            <span class="route-boundary ${item.implemented ? 'runnable' : ''}">${item.implemented ? '可运行基线' : '工程实验待接入'}</span>
           </button>`;
         }).join('');
         return `<details class="roadmap-group" id="roadmap-${group.id}" data-roadmap-details="${group.id}"${active || openRoadmapGroups.has(group.id) ? ' open' : ''}>
           <summary><span class="roadmap-marker">${group.number}</span>
           <span class="roadmap-group-copy"><span>${group.range}</span><strong>${group.title}</strong></span>
           <span class="roadmap-summary-outcome">${group.outcome}</span>
-          <span class="roadmap-summary-meta"><span class="roadmap-group-progress">${passed} / ${group.stages.length} 通过</span><span class="roadmap-toggle" aria-hidden="true"></span></span></summary>
+          <span class="roadmap-summary-meta"><span class="roadmap-group-progress">${passed} / ${group.stages.length} 自评</span><span class="roadmap-toggle" aria-hidden="true"></span></span></summary>
           <div class="route-stage-grid">${cards}</div>
         </details>`;
       }).join('');
@@ -1571,7 +1630,7 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
       const itemState = stageState(stage.id);
       const lesson = LEARNING_CONTENT[stage.id];
       renderStageRail();
-      document.getElementById('stageNumber').textContent = `${stage.num} · ${stage.implemented ? '当前可运行基线' : '后续工程实验'}`;
+      document.getElementById('stageNumber').textContent = `${stage.num} · ${stage.implemented ? '当前可运行基线' : '理论与设计练习可用 · 工程实验待接入'}`;
       document.getElementById('stageTitle').textContent = stage.title;
       document.getElementById('stageDefinition').textContent = stage.definition;
       document.getElementById('stageConcepts').innerHTML = lesson.concepts.map((concept) => `<span class="concept-chip">${escapeHtml(concept)}</span>`).join('');
@@ -1581,7 +1640,7 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
         <div class="fact"><div class="fact-label fix-fact">解决方法</div><p>${stage.fix}</p></div>
         <div class="fact"><div class="fact-label">验收证据</div><p>${stage.evidence}</p></div>`;
       document.getElementById('stageCommand').textContent = stage.command;
-      document.getElementById('stageCommandLabel').textContent = stage.implemented ? '当前可运行' : '目标验证命令（完成实验后）';
+      document.getElementById('stageCommandLabel').textContent = stage.implemented ? '当前可运行' : '规划中的验收命令（当前不可运行）';
       document.getElementById('startStageButton').textContent = itemState.status === 'not-started' ? '开始本阶段' : '继续本阶段';
       document.getElementById('openMemoryLabButton').hidden = stage.id !== 's5';
 
@@ -1607,25 +1666,40 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
       document.getElementById('workshopSteps').innerHTML = lesson.workshop.steps.map((step) => `<li>${escapeHtml(step)}</li>`).join('');
       document.getElementById('workshopEvidence').textContent = lesson.workshop.evidence;
 
-      document.getElementById('evidenceChecklist').innerHTML = evidenceLabels.map(([title, detail], index) => `
-        <label class="check-row">
-          <input type="checkbox" data-evidence="${index}" ${itemState.checks[index] ? 'checked' : ''}>
-          <span><strong>${title}</strong><span>${detail}</span></span>
-        </label>`).join('');
-      document.querySelectorAll('[data-evidence]').forEach((input) => input.addEventListener('change', () => {
-        itemState.checks[Number(input.dataset.evidence)] = input.checked;
-        if (itemState.status === 'not-started') itemState.status = 'learning';
-        saveState();
-        renderStageView();
-        renderOverview();
-      }));
+      const evidence = evidenceStatus(itemState);
+      document.getElementById('evidenceChecklist').innerHTML = evidence.items.map((item) => `
+        <div class="evidence-entry${item.complete ? ' complete' : item.value ? ' invalid' : ''}">
+          <label class="evidence-entry-heading" for="evidence-${item.id}">
+            <span><strong>${escapeHtml(item.title)}</strong><small>${escapeHtml(item.detail)}</small></span>
+            <span class="evidence-state">${escapeHtml(item.reason)}</span>
+          </label>
+          <textarea class="evidence-input" id="evidence-${item.id}" data-evidence-field="${item.id}" placeholder="${escapeHtml(item.placeholder)}">${escapeHtml(itemState.evidence[item.id])}</textarea>
+        </div>`).join('');
+      document.querySelectorAll('[data-evidence-field]').forEach((input) => {
+        input.addEventListener('input', () => {
+          const sensitive = COURSE_GATE.detectSensitiveEvidence(input.value);
+          if (sensitive) {
+            input.value = itemState.evidence[input.dataset.evidenceField];
+            showToast(`疑似包含 ${sensitive}，未写入本地存储`);
+            return;
+          }
+          itemState.evidence[input.dataset.evidenceField] = input.value;
+          if (itemState.status === 'not-started') itemState.status = 'learning';
+          saveState();
+        });
+        input.addEventListener('change', () => {
+          renderStageView();
+          renderOverview();
+        });
+      });
 
       const metrics = quizMetrics(itemState, lesson);
       const stageGate = gateStatus(stage.id);
       const requirements = [
+        ['可运行工程实验', stageGate.implementationReady, stageGate.implementationReady ? '已接入' : '待接入'],
         ['课前准备', stageGate.preflightReady, `${itemState.prerequisites.filter(Boolean).length}/3`],
         ['阶段自测', stageGate.quizReady, `${metrics.score}/10`],
-        ['工程证据', stageGate.evidenceReady, `${itemState.checks.filter(Boolean).length}/5`],
+        ['结构化工程证据', stageGate.evidenceReady, `${evidence.complete}/${evidenceFields.length}`],
       ];
       if (stage.id === 's5') {
         const lab = memoryLabStatus();
@@ -1636,25 +1710,26 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
       const gate = document.getElementById('gateMessage');
       gate.classList.toggle('ready', stageGate.ready);
       const missing = [];
+      if (!stageGate.implementationReady) missing.push('可运行工程实验尚未接入');
       if (!stageGate.preflightReady) missing.push(`${itemState.prerequisites.filter((value) => !value).length} 项课前准备`);
       if (!stageGate.quizReady) missing.push(metrics.complete ? '重做自测并达到 8/10，关键题首轮正确' : `${lesson.quiz.length - metrics.mastered} 道未掌握题`);
-      if (!stageGate.evidenceReady) missing.push(`${itemState.checks.filter((value) => !value).length} 项工程证据`);
+      if (!stageGate.evidenceReady) missing.push(`${evidenceFields.length - evidence.complete} 项结构化工程证据`);
       if (!stageGate.memoryLabReady) {
         const lab = memoryLabStatus();
         if (!lab.chooserReady) missing.push('1 次记忆架构选型');
         if (lab.mastered < 4) missing.push(`${4 - lab.mastered} 个记忆生命周期场景`);
       }
-      gate.textContent = stageGate.ready ? `${stage.id === 's5' ? '四' : '三'}道门禁全部通过，可以本地标记完成。` : `还需要：${missing.join('；')}。`;
+      gate.textContent = stageGate.ready ? '本地自评条件已满足；这不是工程认证，仍需仓库测试、CI 或评审者复验。' : `还需要：${missing.join('；')}。`;
       const passButton = document.getElementById('passStageButton');
       passButton.disabled = !stageGate.ready;
-      passButton.textContent = itemState.status === 'passed' ? '已本地标记通过' : '本地标记通过';
+      passButton.textContent = !stageGate.implementationReady ? '工程实验待接入' : itemState.status === 'passed' ? '已记录本地自评' : '记录本地自评通过';
 
       const methodStates = [
-        stageGate.preflightReady && itemState.checks[0],
-        itemState.checks[1],
-        itemState.checks[2],
-        itemState.checks[3] && metrics.complete,
-        itemState.checks[4] && metrics.passed,
+        stageGate.preflightReady,
+        itemState.status !== 'not-started',
+        evidence.byId.implementation.complete,
+        metrics.complete,
+        stageGate.ready,
       ];
       const currentMethod = methodStates.findIndex((complete) => !complete);
       document.querySelectorAll('[data-method-step]').forEach((element, index) => {
@@ -2246,7 +2321,17 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
     }
 
     function exportProgress() {
-      const payload = { exportedAt: new Date().toISOString(), course: 'Industrial Agent Engineering Course', state };
+      reconcileStoredStageStates();
+      const payload = {
+        exportedAt: new Date().toISOString(),
+        course: 'Industrial Agent Engineering Course',
+        attestation: {
+          level: 'self-reported',
+          engineeringVerified: false,
+          note: '该文件仅记录浏览器本地自评。工程认证需由仓库测试、CI 或独立评审重新生成并核验产物。',
+        },
+        state,
+      };
       const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
       const anchor = document.createElement('a');
@@ -2298,11 +2383,11 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
         const itemState = stageState(state.currentStage);
         if (!gateStatus(state.currentStage).ready) return;
         itemState.status = 'passed';
-        itemState.gateVersion = state.currentStage === 's5' ? 4 : 3;
+        itemState.gateVersion = requiredGateVersion(state.currentStage);
         const currentIndex = STAGES.findIndex((stage) => stage.id === state.currentStage);
         const next = STAGES[currentIndex + 1];
         saveState(); renderStageView(); renderOverview();
-        showToast(next ? `已通过，下一阶段是 ${next.num}` : '工程主线已全部本地标记通过');
+        showToast(next ? `已记录本地自评，下一阶段是 ${next.num}` : '工程主线已全部记录本地自评');
       });
       document.getElementById('openStageChapter').addEventListener('click', () => openChapter(currentStage().chapter));
       document.getElementById('openSelftest').addEventListener('click', () => openChapter('selftest'));
@@ -2348,6 +2433,15 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
       renderLibrary(state.activeChapter || 'start');
     }
 
+    function reconcileStoredStageStates() {
+      for (const stage of STAGES) {
+        if (state.stages[stage.id]) stageState(stage.id);
+      }
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+      catch (error) { console.warn('Could not reconcile local progress.', error); }
+    }
+
+    reconcileStoredStageStates();
     renderAll();
     bindEvents();
     routeFromHash();
