@@ -27,6 +27,7 @@ const chapters = [
 
   { id: 'failures', num: '手册', title: '全链路故障与修复', meta: '症状 · 根因 · 修复 · 回归', src: 'agent-runtime-gateway/11-工程实战主线/全链路故障与修复手册.md', group: 'reference' },
   { id: 'selftest', num: '题库', title: '阶段自测与预习', meta: '每阶段 5 题 · 预习门禁', src: 'agent-runtime-gateway/11-工程实战主线/阶段自测与预习清单.md', group: 'reference' },
+  { id: 'memory-atlas', num: 'S5+', title: 'Agent Memory 方法谱系', meta: '14 类方法 · 工业选型 · 评测 · 趋势', src: 'agent-runtime-gateway/06-工业级框架蓝图/Agent-Memory方法谱系与工业选型-2026.md', group: 'reference' },
   { id: 'sources', num: '资料', title: '权威资料索引', meta: '官方文档 · 标准 · 原始论文', src: 'agent-runtime-gateway/00-课程总览/权威资料索引.md', group: 'reference' },
   { id: 'mcp', num: '专题', title: 'MCP 与工具生态', meta: '协议 · 准入 · 凭据边界', src: 'agent-runtime-gateway/02-阶段教学手册/Phase-05-MCP与工具生态教学手册.md', group: 'reference' },
   { id: 'acceptance', num: '门禁', title: '阶段验收清单', meta: '设计理解 · 工程证据', src: 'agent-runtime-gateway/02-阶段教学手册/阶段验收清单.md', group: 'reference' },

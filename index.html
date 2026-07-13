@@ -523,6 +523,89 @@
     .markdown blockquote { border-left: 3px solid var(--accent); background: var(--brand-soft); }
     .reader-nav { max-width: 82ch; }
 
+    .memory-boundary { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; margin-bottom: 22px; padding: 11px 14px; border: 1px solid rgba(201, 100, 66, .28); border-radius: var(--radius); background: var(--warning-soft); color: #71412f; font-size: 12px; }
+    .memory-progress { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-bottom: 34px; border-top: 1px solid rgba(0, 82, 217, .16); border-bottom: 1px solid rgba(0, 82, 217, .16); }
+    .memory-progress-item { min-height: 88px; padding: 16px 18px; border-right: 1px solid var(--line); }
+    .memory-progress-item:last-child { border-right: 0; }
+    .memory-progress-item span, .memory-progress-item strong { display: block; }
+    .memory-progress-item span { color: var(--ink-muted); font-size: 11px; font-weight: 700; }
+    .memory-progress-item strong { margin-top: 4px; color: #202b40; font-family: var(--display); font-size: 20px; }
+    .memory-progress-item small { color: var(--ink-muted); font-size: 11px; }
+    .memory-section { padding: 30px 0 34px; border-top: 1px solid rgba(0, 82, 217, .14); scroll-margin-top: calc(var(--topbar) + 16px); }
+    .memory-section-heading { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 18px; }
+    .memory-section-heading h2 { margin: 0; color: #202b40; font-family: var(--display); font-size: 22px; }
+    .memory-section-heading p { max-width: 68ch; margin: 6px 0 0; color: var(--ink-muted); font-size: 13px; }
+    .memory-family-filter { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+    .memory-family-filter button { min-height: 34px; padding: 0 10px; border: 1px solid rgba(0, 82, 217, .15); border-radius: 5px; background: var(--surface); color: var(--ink-muted); cursor: pointer; font-size: 11px; font-weight: 700; }
+    .memory-family-filter button.active { border-color: var(--accent); background: var(--accent-soft); color: var(--accent-hover); }
+    .memory-method-layout { display: grid; grid-template-columns: minmax(260px, .62fr) minmax(0, 1.38fr); gap: 26px; align-items: start; }
+    .memory-method-list { max-height: 620px; overflow: auto; border-top: 1px solid var(--line); }
+    .memory-method-button { width: 100%; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; padding: 12px 8px; border: 0; border-bottom: 1px solid var(--line); background: transparent; text-align: left; cursor: pointer; }
+    .memory-method-button:hover { background: rgba(0, 82, 217, .04); }
+    .memory-method-button.active { background: var(--brand-soft); box-shadow: inset 3px 0 0 var(--accent); }
+    .memory-method-button strong { min-width: 0; color: #263248; font-size: 13px; }
+    .memory-method-button span { color: var(--ink-muted); font-size: 10px; }
+    .memory-method-button small { grid-column: 1 / -1; color: var(--ink-muted); font-size: 11px; line-height: 1.45; }
+    .memory-detail { min-height: 380px; padding: 22px 0; border-top: 2px solid var(--accent); border-bottom: 1px solid var(--line); }
+    .memory-detail-title { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+    .memory-detail h3 { margin: 0; color: #18233a; font-family: var(--display); font-size: 22px; }
+    .memory-tag { padding: 3px 7px; border-radius: 4px; background: var(--accent-soft); color: var(--accent-hover); font-size: 10px; font-weight: 800; }
+    .memory-detail-principle { margin: 14px 0 20px; color: #354158; font-size: 15px; font-weight: 650; }
+    .memory-detail-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 22px; }
+    .memory-detail-grid div { padding: 12px 0; border-top: 1px solid var(--line); }
+    .memory-detail-grid dt { color: var(--ink-muted); font-size: 10px; font-weight: 800; }
+    .memory-detail-grid dd { margin: 4px 0 0; font-size: 12px; }
+    .memory-source { margin-top: 16px; font-size: 12px; }
+    .memory-form-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+    .memory-form-grid .field { margin: 0; }
+    .memory-form-grid select, .memory-decision select { width: 100%; min-height: 42px; padding: 7px 10px; border: 1px solid var(--line-strong); border-radius: var(--radius-sm); background: var(--surface); }
+    .memory-action-row { display: flex; align-items: center; gap: 12px; margin-top: 16px; }
+    .memory-result { margin-top: 20px; padding: 18px 20px; border: 1px solid rgba(0, 82, 217, .18); border-radius: var(--radius); background: var(--brand-soft); }
+    .memory-result h3 { margin: 0 0 10px; font-size: 17px; }
+    .memory-result-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 24px; }
+    .memory-result-grid div { padding-top: 9px; border-top: 1px solid rgba(0, 82, 217, .12); }
+    .memory-result-grid strong { display: block; color: var(--accent-hover); font-size: 10px; }
+    .memory-result-grid span { font-size: 12px; }
+    .memory-lab-layout { display: grid; grid-template-columns: minmax(260px, .7fr) minmax(0, 1.3fr); gap: 28px; }
+    .memory-candidate { padding: 18px; border: 1px solid rgba(0, 82, 217, .14); border-radius: var(--radius); background: rgba(255, 255, 255, .9); }
+    .memory-candidate h3 { margin: 0 0 8px; font-size: 17px; }
+    .memory-candidate > p { min-height: 66px; margin: 0 0 12px; color: #354158; }
+    .memory-candidate dl { margin: 0; }
+    .memory-candidate dl div { display: grid; grid-template-columns: 80px minmax(0, 1fr); gap: 10px; padding: 6px 0; border-top: 1px solid var(--line); }
+    .memory-candidate dt { color: var(--ink-muted); font-size: 10px; font-weight: 800; }
+    .memory-candidate dd { margin: 0; font-family: var(--mono); font-size: 11px; overflow-wrap: anywhere; }
+    .memory-decision { margin-top: 16px; }
+    .memory-decision label { display: block; margin-bottom: 5px; font-size: 11px; font-weight: 800; }
+    .memory-flow { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+    .memory-flow-node { min-height: 88px; padding: 11px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--surface); }
+    .memory-flow-node span, .memory-flow-node strong { display: block; }
+    .memory-flow-node span { color: var(--ink-muted); font: 700 9px var(--mono); }
+    .memory-flow-node strong { margin: 3px 0; color: #344054; font-size: 11px; }
+    .memory-flow-node small { color: var(--ink-muted); font-size: 10px; line-height: 1.4; }
+    .memory-flow-node.active { border-color: rgba(22, 132, 91, .38); background: var(--success-soft); }
+    .memory-feedback { margin-top: 14px; padding: 13px 14px; border-radius: var(--radius-sm); font-size: 12px; }
+    .memory-feedback.correct { border: 1px solid rgba(22, 132, 91, .32); background: var(--success-soft); color: #126a4a; }
+    .memory-feedback.wrong { border: 1px solid rgba(201, 100, 66, .35); background: var(--warning-soft); color: #8a462e; }
+    .memory-audit { margin: 12px 0 0; padding: 12px; overflow: auto; border-radius: var(--radius-sm); background: #0d2630; color: #d9f2ef; font-family: var(--mono); font-size: 10px; white-space: pre-wrap; }
+    .memory-reference-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(280px, .8fr); gap: 28px; }
+    .memory-reference-grid h3 { margin: 0 0 10px; color: #263248; font-size: 16px; }
+    .memory-benchmark-list { border-top: 1px solid var(--line); }
+    .memory-benchmark { display: grid; grid-template-columns: 132px minmax(0, 1fr) auto; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+    .memory-benchmark strong { min-width: 0; overflow-wrap: anywhere; font-size: 12px; }
+    .memory-benchmark span { color: var(--ink-muted); font-size: 11px; }
+    .memory-benchmark a { font-size: 11px; white-space: nowrap; }
+    .memory-metric-list { display: grid; gap: 6px; }
+    .memory-metric { display: flex; align-items: start; justify-content: space-between; gap: 14px; padding: 8px 0; border-bottom: 1px solid var(--line); }
+    .memory-metric strong { font-size: 11px; }
+    .memory-metric span { max-width: 26ch; color: var(--ink-muted); font-size: 10px; text-align: right; }
+    .memory-future { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 28px; }
+    .memory-future-column { padding-top: 14px; border-top: 2px solid var(--accent); }
+    .memory-future-column.inference { border-top-color: var(--warning); }
+    .memory-future-column h3 { margin: 0 0 9px; font-size: 16px; }
+    .memory-future-item { padding: 10px 0; border-top: 1px solid var(--line); }
+    .memory-future-item strong { display: block; font-size: 12px; }
+    .memory-future-item span { display: block; margin-top: 3px; color: var(--ink-muted); font-size: 11px; }
+
     .mobile-nav { border-top-color: rgba(0, 82, 217, .16); background: rgba(255, 255, 255, .95); box-shadow: 0 -8px 22px -22px rgba(0, 52, 140, .8); }
     .mobile-nav button.active { color: var(--accent-hover); }
 
@@ -532,6 +615,8 @@
       .route-stage-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .evidence-panel { position: static; }
       .sim-controls { padding-right: 22px; border-right: 1px solid rgba(0, 82, 217, .14); border-bottom: 1px solid rgba(0, 82, 217, .14); }
+      .memory-form-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .memory-reference-grid { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 900px) {
@@ -566,6 +651,18 @@
       .document-reader { padding: 20px 18px; }
       .library-header { padding: 18px; }
       .sim-controls { padding: 18px; }
+      .mobile-nav { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+      .memory-progress { grid-template-columns: 1fr; }
+      .memory-progress-item { min-height: 70px; border-right: 0; border-bottom: 1px solid var(--line); }
+      .memory-progress-item:last-child { border-bottom: 0; }
+      .memory-section { padding: 24px 0 28px; }
+      .memory-section-heading { align-items: start; }
+      .memory-method-layout, .memory-lab-layout { grid-template-columns: 1fr; gap: 20px; }
+      .memory-method-list { max-height: 350px; }
+      .memory-detail-grid, .memory-result-grid, .memory-form-grid, .memory-future { grid-template-columns: 1fr; }
+      .memory-flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .memory-benchmark { grid-template-columns: 100px minmax(0, 1fr); }
+      .memory-benchmark a { grid-column: 2; }
     }
   </style>
 </head>
@@ -586,6 +683,7 @@
       <button type="button" data-view="overview">总览</button>
       <button type="button" data-view="stage">阶段学习</button>
       <button type="button" data-view="simulator">故障演练</button>
+      <button type="button" data-view="memory">记忆实验室</button>
       <button type="button" data-view="library">资料库</button>
     </nav>
   </header>
@@ -717,6 +815,7 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
               <button class="primary-button" id="startStageButton" type="button">开始本阶段</button>
               <button class="secondary-button" id="openStageChapter" type="button">打开阶段教材</button>
               <button class="secondary-button" id="openSelftest" type="button">查看题库文档</button>
+              <button class="secondary-button" id="openMemoryLabButton" type="button" hidden>进入记忆实验室</button>
             </div>
           </section>
 
@@ -807,6 +906,65 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
       </div>
     </section>
 
+    <section class="view" id="memoryView" data-view-panel="memory">
+      <div class="page-heading">
+        <div class="section-label">S5 专项训练</div>
+        <h1>Agent Memory 实验室</h1>
+        <p>从工作负载出发比较方法、设计最小架构，并把每条候选记忆送过写入、召回、纠错和删除门禁。</p>
+      </div>
+      <div class="memory-boundary"><strong>教学决策模拟</strong><span>不采集真实数据</span><span>不连接数据库</span><span>论文结果不等于生产 SLA</span></div>
+      <div class="memory-progress" id="memoryProgress" aria-live="polite"></div>
+
+      <section class="memory-section" id="memoryMethods" aria-labelledby="memoryMethodsTitle">
+        <div class="memory-section-heading">
+          <div><div class="section-label">01 · 先比较</div><h2 id="memoryMethodsTitle">14 类方法谱系</h2><p>看清原理、适用场景、收益、代价和最常见的失败方式，再做产品或框架选择。</p></div>
+          <button class="secondary-button" id="openMemoryAtlas" type="button">打开完整原理教材</button>
+        </div>
+        <div class="memory-family-filter" id="memoryFamilyFilter" role="group" aria-label="按方法族筛选"></div>
+        <div class="memory-method-layout">
+          <div class="memory-method-list" id="memoryMethodList" aria-label="记忆方法列表"></div>
+          <article class="memory-detail" id="memoryMethodDetail" aria-live="polite"></article>
+        </div>
+      </section>
+
+      <section class="memory-section" id="memoryChooser" aria-labelledby="memoryChooserTitle">
+        <div class="memory-section-heading"><div><div class="section-label">02 · 再选型</div><h2 id="memoryChooserTitle">最小架构选择器</h2><p>复杂度必须由工作负载和失败证据推动。先做能治理、能评测的最小组合。</p></div></div>
+        <div class="memory-form-grid">
+          <div class="field"><label for="memoryWorkload">工作负载</label><select id="memoryWorkload"></select></div>
+          <div class="field"><label for="memorySensitivity">数据敏感度</label><select id="memorySensitivity"><option value="low">低敏感</option><option value="high">企业敏感</option><option value="regulated">强监管</option></select></div>
+          <div class="field"><label for="memoryRelations">关系复杂度</label><select id="memoryRelations"><option value="simple">简单事实</option><option value="complex">时间冲突 / 多跳关系</option></select></div>
+          <div class="field"><label for="memoryUpdates">更新频率</label><select id="memoryUpdates"><option value="low">低频稳定</option><option value="high">高频变化</option></select></div>
+        </div>
+        <div class="memory-action-row"><button class="primary-button" id="buildMemoryArchitecture" type="button">生成最小架构</button><span class="section-help">选择会写入当前浏览器的学习进度。</span></div>
+        <output class="memory-result" id="memoryArchitectureResult" aria-live="polite" hidden></output>
+      </section>
+
+      <section class="memory-section" id="memoryLifecycle" aria-labelledby="memoryLifecycleTitle">
+        <div class="memory-section-heading"><div><div class="section-label">03 · 做决策</div><h2 id="memoryLifecycleTitle">记忆生命周期演练</h2><p>至少正确完成 4 个场景。答错会指出误区；只有正确决策才展示该条记忆的路径与审计证据。</p></div></div>
+        <div class="memory-lab-layout">
+          <div>
+            <div class="field"><label for="memoryScenario">候选记忆场景</label><select id="memoryScenario"></select></div>
+            <article class="memory-candidate" id="memoryCandidate"></article>
+            <div class="memory-decision"><label for="memoryDecision">你的写入决策</label><select id="memoryDecision"></select></div>
+            <div class="memory-action-row"><button class="primary-button" id="checkMemoryDecision" type="button">校验决策</button></div>
+          </div>
+          <div>
+            <div class="memory-flow" id="memoryLifecycleFlow" aria-label="记忆生命周期"></div>
+            <div id="memoryDecisionFeedback" aria-live="polite"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="memory-section" id="memoryEvidence" aria-labelledby="memoryEvidenceTitle">
+        <div class="memory-section-heading"><div><div class="section-label">04 · 用证据验收</div><h2 id="memoryEvidenceTitle">评测基准、工业指标与未来走向</h2><p>基准告诉你“在哪类任务上有效”，指标决定“能否进入生产”。未来判断明确区分已有证据与工程推断。</p></div></div>
+        <div class="memory-reference-grid">
+          <div><h3>当前基准</h3><div class="memory-benchmark-list" id="memoryBenchmarks"></div></div>
+          <div><h3>发布指标</h3><div class="memory-metric-list" id="memoryMetrics"></div></div>
+        </div>
+        <div class="memory-future" id="memoryFuture"></div>
+      </section>
+    </section>
+
     <section class="view" id="libraryView" data-view-panel="library">
       <header class="library-header">
         <div>
@@ -830,6 +988,7 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
     <button type="button" data-view="overview">总览</button>
     <button type="button" data-view="stage">阶段</button>
     <button type="button" data-view="simulator">演练</button>
+    <button type="button" data-view="memory">记忆</button>
     <button type="button" data-view="library">资料</button>
   </nav>
 
@@ -837,6 +996,7 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
 
   <script src="data/chapters.js"></script>
   <script src="data/learning_content.js"></script>
+  <script src="data/memory_lab.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked@15.0.12/marked.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js"></script>
   <script>
@@ -845,6 +1005,7 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
 
     const CHAPTERS = Array.isArray(window.CHAPTERS) ? window.CHAPTERS : [];
     const LEARNING_CONTENT = window.LEARNING_CONTENT && typeof window.LEARNING_CONTENT === 'object' ? window.LEARNING_CONTENT : {};
+    const MEMORY_LAB = window.MEMORY_LAB && typeof window.MEMORY_LAB === 'object' ? window.MEMORY_LAB : null;
     const STORAGE_KEY = 'ARG_ENGINEERING_COURSE_V2';
     const GITHUB_SOURCE = 'https://github.com/falses00/agent-learning-report/blob/main/';
     const evidenceLabels = [
@@ -1062,24 +1223,48 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
       ['Trace / Audit', '留下调试与责任证据'],
     ];
 
+    const defaultMemoryLabState = {
+      scenarios: {},
+      chooser: null,
+      activeFamily: 'all',
+      activeMethod: 'context',
+      activeScenario: 'explicit_preference',
+    };
+
     const defaultState = {
-      courseVersion: 3,
+      courseVersion: 4,
       path: 'engineering',
       currentStage: 's0',
       stages: {},
       today: {},
       activeChapter: 'start',
+      memoryLab: defaultMemoryLabState,
     };
 
     let state = loadState();
     let activeView = 'overview';
     let simulatorRunning = false;
+    let memoryFeedback = null;
     let toastTimer;
 
     function loadState() {
       try {
         const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
-        if (saved && typeof saved === 'object') return { ...defaultState, ...saved, stages: saved.stages || {}, today: saved.today || {} };
+        if (saved && typeof saved === 'object') {
+          const savedMemoryLab = saved.memoryLab && typeof saved.memoryLab === 'object' ? saved.memoryLab : {};
+          return {
+            ...defaultState,
+            ...saved,
+            stages: saved.stages && typeof saved.stages === 'object' ? saved.stages : {},
+            today: saved.today && typeof saved.today === 'object' ? saved.today : {},
+            memoryLab: {
+              ...defaultMemoryLabState,
+              ...savedMemoryLab,
+              scenarios: savedMemoryLab.scenarios && typeof savedMemoryLab.scenarios === 'object' ? savedMemoryLab.scenarios : {},
+              chooser: savedMemoryLab.chooser && typeof savedMemoryLab.chooser === 'object' ? savedMemoryLab.chooser : null,
+            },
+          };
+        }
       } catch (error) {
         console.warn('Could not load local progress.', error);
       }
@@ -1117,7 +1302,8 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
       if (typeof itemState.draft !== 'string') itemState.draft = '';
       if (typeof itemState.rating !== 'string') itemState.rating = '';
       if (typeof itemState.referenceVisible !== 'boolean') itemState.referenceVisible = false;
-      if (itemState.status === 'passed' && itemState.gateVersion !== 3) itemState.status = 'learning';
+      const requiredGateVersion = stageId === 's5' ? 4 : 3;
+      if (itemState.status === 'passed' && itemState.gateVersion !== requiredGateVersion) itemState.status = 'learning';
       return itemState;
     }
 
@@ -1130,14 +1316,37 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
       return { mastered, score, criticalMiss, complete: mastered === lesson.quiz.length, passed: mastered === lesson.quiz.length && score >= 8 && !criticalMiss };
     }
 
+    function memoryChooserIsValid(choice) {
+      return Boolean(
+        choice
+        && choice.version === 1
+        && MEMORY_LAB?.workloads?.some((profile) => profile.id === choice.workload)
+        && ['low', 'high', 'regulated'].includes(choice.sensitivity)
+        && ['simple', 'complex'].includes(choice.relations)
+        && ['low', 'high'].includes(choice.updates)
+        && typeof choice.governance === 'string' && choice.governance.length > 10
+        && typeof choice.rationale === 'string' && choice.rationale.length > 10
+        && Number.isFinite(Date.parse(choice.selectedAt))
+      );
+    }
+
+    function memoryLabStatus() {
+      const scenarios = state.memoryLab?.scenarios && typeof state.memoryLab.scenarios === 'object' ? state.memoryLab.scenarios : {};
+      const validScenarioIds = MEMORY_LAB?.scenarios?.map((scenario) => scenario.id) || [];
+      const mastered = validScenarioIds.filter((id) => scenarios[id] === true).length;
+      const chooserReady = memoryChooserIsValid(state.memoryLab?.chooser);
+      return { mastered, chooserReady, ready: mastered >= 4 && chooserReady };
+    }
+
     function gateStatus(stageId) {
       const itemState = stageState(stageId);
       const lesson = LEARNING_CONTENT[stageId];
-      if (!lesson) return { ready: false, preflightReady: false, evidenceReady: false, quizReady: false };
+      if (!lesson) return { ready: false, preflightReady: false, evidenceReady: false, quizReady: false, memoryLabReady: false };
       const preflightReady = itemState.prerequisites.every(Boolean);
       const evidenceReady = itemState.checks.every(Boolean);
       const quizReady = quizMetrics(itemState, lesson).passed;
-      return { ready: preflightReady && evidenceReady && quizReady, preflightReady, evidenceReady, quizReady };
+      const memoryLabReady = stageId !== 's5' || memoryLabStatus().ready;
+      return { ready: preflightReady && evidenceReady && quizReady && memoryLabReady, preflightReady, evidenceReady, quizReady, memoryLabReady };
     }
 
     function statusLabel(status) {
@@ -1267,6 +1476,7 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
       document.getElementById('stageCommand').textContent = stage.command;
       document.getElementById('stageCommandLabel').textContent = stage.implemented ? '当前可运行' : '目标验证命令（完成实验后）';
       document.getElementById('startStageButton').textContent = itemState.status === 'not-started' ? '开始本阶段' : '继续本阶段';
+      document.getElementById('openMemoryLabButton').hidden = stage.id !== 's5';
 
       document.getElementById('prerequisiteChecklist').innerHTML = lesson.prerequisites.map((text, index) => `
         <label class="check-row">
@@ -1305,11 +1515,16 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
 
       const metrics = quizMetrics(itemState, lesson);
       const stageGate = gateStatus(stage.id);
-      document.getElementById('gateRequirements').innerHTML = [
+      const requirements = [
         ['课前准备', stageGate.preflightReady, `${itemState.prerequisites.filter(Boolean).length}/3`],
         ['阶段自测', stageGate.quizReady, `${metrics.score}/10`],
         ['工程证据', stageGate.evidenceReady, `${itemState.checks.filter(Boolean).length}/5`],
-      ].map(([label, done, value]) => `<div class="gate-requirement${done ? ' done' : ''}"><span>${done ? '已完成' : '未完成'} · ${label}</span><strong>${value}</strong></div>`).join('');
+      ];
+      if (stage.id === 's5') {
+        const lab = memoryLabStatus();
+        requirements.push(['记忆实验室', stageGate.memoryLabReady, `${lab.mastered}/4 + ${lab.chooserReady ? '已选型' : '未选型'}`]);
+      }
+      document.getElementById('gateRequirements').innerHTML = requirements.map(([label, done, value]) => `<div class="gate-requirement${done ? ' done' : ''}"><span>${done ? '已完成' : '未完成'} · ${label}</span><strong>${value}</strong></div>`).join('');
 
       const gate = document.getElementById('gateMessage');
       gate.classList.toggle('ready', stageGate.ready);
@@ -1317,7 +1532,12 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
       if (!stageGate.preflightReady) missing.push(`${itemState.prerequisites.filter((value) => !value).length} 项课前准备`);
       if (!stageGate.quizReady) missing.push(metrics.complete ? '重做自测并达到 8/10，关键题首轮正确' : `${lesson.quiz.length - metrics.mastered} 道未掌握题`);
       if (!stageGate.evidenceReady) missing.push(`${itemState.checks.filter((value) => !value).length} 项工程证据`);
-      gate.textContent = stageGate.ready ? '三道门禁全部通过，可以本地标记完成。' : `还需要：${missing.join('；')}。`;
+      if (!stageGate.memoryLabReady) {
+        const lab = memoryLabStatus();
+        if (!lab.chooserReady) missing.push('1 次记忆架构选型');
+        if (lab.mastered < 4) missing.push(`${4 - lab.mastered} 个记忆生命周期场景`);
+      }
+      gate.textContent = stageGate.ready ? `${stage.id === 's5' ? '四' : '三'}道门禁全部通过，可以本地标记完成。` : `还需要：${missing.join('；')}。`;
       const passButton = document.getElementById('passStageButton');
       passButton.disabled = !stageGate.ready;
       passButton.textContent = itemState.status === 'passed' ? '已本地标记通过' : '本地标记通过';
@@ -1551,6 +1771,184 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
       log.textContent += '> 审批绑定当前 ToolCall。Tool Gateway 模拟执行一次。\n> 结果：写操作完成，operation id 与 Audit 已记录。';
     }
 
+    function currentMemoryScenario() {
+      if (!MEMORY_LAB) return null;
+      const selected = MEMORY_LAB.scenarios.find((scenario) => scenario.id === state.memoryLab.activeScenario);
+      return selected || MEMORY_LAB.scenarios[0];
+    }
+
+    function renderMemoryProgress() {
+      const progress = memoryLabStatus();
+      document.getElementById('memoryProgress').innerHTML = `
+        <div class="memory-progress-item"><span>方法谱系</span><strong>${MEMORY_LAB?.methods?.length || 0} 类</strong><small>原理、收益、代价、失败模式</small></div>
+        <div class="memory-progress-item"><span>生命周期场景</span><strong>${progress.mastered} / 4</strong><small>共 ${MEMORY_LAB?.scenarios?.length || 0} 个可练场景</small></div>
+        <div class="memory-progress-item"><span>S5 专项门禁</span><strong>${progress.ready ? '已通过' : '训练中'}</strong><small>${progress.chooserReady ? '已完成架构选型' : '还需完成一次架构选型'}</small></div>`;
+    }
+
+    function renderMemoryMethods() {
+      const familyIds = new Set(MEMORY_LAB.families.map((family) => family.id));
+      if (!familyIds.has(state.memoryLab.activeFamily)) state.memoryLab.activeFamily = 'all';
+      const filtered = state.memoryLab.activeFamily === 'all'
+        ? MEMORY_LAB.methods
+        : MEMORY_LAB.methods.filter((method) => method.family === state.memoryLab.activeFamily);
+      if (!filtered.some((method) => method.id === state.memoryLab.activeMethod)) state.memoryLab.activeMethod = filtered[0]?.id || MEMORY_LAB.methods[0].id;
+      const active = MEMORY_LAB.methods.find((method) => method.id === state.memoryLab.activeMethod) || MEMORY_LAB.methods[0];
+
+      document.getElementById('memoryFamilyFilter').innerHTML = MEMORY_LAB.families.map((family) => `
+        <button type="button" class="${family.id === state.memoryLab.activeFamily ? 'active' : ''}" data-memory-family="${escapeHtml(family.id)}">${escapeHtml(family.label)}</button>`).join('');
+      document.getElementById('memoryMethodList').innerHTML = filtered.map((method) => `
+        <button type="button" class="memory-method-button${method.id === active.id ? ' active' : ''}" data-memory-method="${escapeHtml(method.id)}">
+          <strong>${escapeHtml(method.name)}</strong><span>${escapeHtml(method.status)}</span><small>${escapeHtml(method.bestFor)}</small>
+        </button>`).join('');
+      document.getElementById('memoryMethodDetail').innerHTML = `
+        <div class="memory-detail-title"><h3>${escapeHtml(active.name)}</h3><span class="memory-tag">${escapeHtml(active.status)}</span><span class="memory-tag">${escapeHtml(String(active.year))}</span></div>
+        <p class="memory-detail-principle">${escapeHtml(active.principle)}</p>
+        <dl class="memory-detail-grid">
+          <div><dt>最适合</dt><dd>${escapeHtml(active.bestFor)}</dd></div>
+          <div><dt>主要收益</dt><dd>${escapeHtml(active.advantages)}</dd></div>
+          <div><dt>代价与边界</dt><dd>${escapeHtml(active.tradeoffs)}</dd></div>
+          <div><dt>最常见误用</dt><dd>${escapeHtml(active.failure)}</dd></div>
+        </dl>
+        <p class="memory-source">一手来源：<a href="${escapeHtml(active.sourceUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(active.sourceLabel)}</a></p>`;
+
+      document.querySelectorAll('[data-memory-family]').forEach((button) => button.addEventListener('click', () => {
+        state.memoryLab.activeFamily = button.dataset.memoryFamily;
+        saveState();
+        renderMemoryMethods();
+      }));
+      document.querySelectorAll('[data-memory-method]').forEach((button) => button.addEventListener('click', () => {
+        state.memoryLab.activeMethod = button.dataset.memoryMethod;
+        saveState();
+        renderMemoryMethods();
+      }));
+    }
+
+    function renderMemoryArchitecture() {
+      const workloadSelect = document.getElementById('memoryWorkload');
+      workloadSelect.innerHTML = MEMORY_LAB.workloads.map((profile) => `<option value="${escapeHtml(profile.id)}">${escapeHtml(profile.label)}</option>`).join('');
+      const choice = state.memoryLab.chooser;
+      const profile = MEMORY_LAB.workloads.find((item) => item.id === choice?.workload);
+      if (!memoryChooserIsValid(choice) || !profile) {
+        state.memoryLab.chooser = null;
+        document.getElementById('memoryArchitectureResult').hidden = true;
+        return;
+      }
+      workloadSelect.value = choice.workload;
+      if (['low', 'high', 'regulated'].includes(choice.sensitivity)) document.getElementById('memorySensitivity').value = choice.sensitivity;
+      if (['simple', 'complex'].includes(choice.relations)) document.getElementById('memoryRelations').value = choice.relations;
+      if (['low', 'high'].includes(choice.updates)) document.getElementById('memoryUpdates').value = choice.updates;
+      const result = document.getElementById('memoryArchitectureResult');
+      result.hidden = false;
+      result.innerHTML = `<h3>${escapeHtml(profile.label)}：建议从最小可治理架构开始</h3>
+        <div class="memory-result-grid">
+          <div><strong>基础组合</strong><span>${escapeHtml(profile.baseStack.join(' + '))}</span></div>
+          <div><strong>升级条件</strong><span>${escapeHtml(typeof choice.upgrade === 'string' ? choice.upgrade : profile.upgrade)}</span></div>
+          <div><strong>避免</strong><span>${escapeHtml(profile.avoid)}</span></div>
+          <div><strong>最小评测</strong><span>${escapeHtml(profile.eval.join(' · '))}</span></div>
+          <div><strong>治理要求</strong><span>${escapeHtml(typeof choice.governance === 'string' ? choice.governance : '重新生成选型以补齐治理要求。')}</span></div>
+          <div><strong>选型证据</strong><span>${escapeHtml(typeof choice.rationale === 'string' ? choice.rationale : '重新生成选型以补齐决策证据。')}</span></div>
+        </div>`;
+    }
+
+    function buildMemoryArchitecture() {
+      const profile = MEMORY_LAB.workloads.find((item) => item.id === document.getElementById('memoryWorkload').value) || MEMORY_LAB.workloads[0];
+      const sensitivity = document.getElementById('memorySensitivity').value;
+      const relations = document.getElementById('memoryRelations').value;
+      const updates = document.getElementById('memoryUpdates').value;
+      const upgrades = [profile.upgrade];
+      if (relations === 'complex') upgrades.push('先做关系/时间查询基线；确有增益后再加入 temporal graph。');
+      if (updates === 'high') upgrades.push('所有事实增加 valid_from、valid_to、source_version 与冲突状态。');
+      const governance = sensitivity === 'regulated'
+        ? '默认不持久化；先完成合规审批、数据最小化、删除证明和人工复核。'
+        : sensitivity === 'high'
+          ? '强制 tenant ACL、加密、短 TTL、审计和 exact/paraphrase 删除验证。'
+          : '仍需来源、作用域、TTL、纠错和删除入口。';
+      const rationale = `${relations === 'complex' ? '存在复杂关系' : '以简单事实为主'}；${updates === 'high' ? '事实高频变化' : '事实相对稳定'}；${sensitivity === 'low' ? '低敏感' : sensitivity === 'high' ? '企业敏感' : '强监管'}数据。`;
+      state.memoryLab.chooser = {
+        version: 1,
+        workload: profile.id,
+        label: profile.label,
+        sensitivity,
+        relations,
+        updates,
+        baseStack: profile.baseStack,
+        upgrade: upgrades.join(' '),
+        avoid: profile.avoid,
+        eval: profile.eval,
+        governance,
+        rationale,
+        selectedAt: new Date().toISOString(),
+      };
+      saveState();
+      renderMemoryLab();
+      if (state.currentStage === 's5') renderStageView();
+      showToast('最小记忆架构已生成并记入 S5 进度');
+    }
+
+    function renderMemoryLifecycle() {
+      const validScenarioIds = new Set(MEMORY_LAB.scenarios.map((scenario) => scenario.id));
+      if (!validScenarioIds.has(state.memoryLab.activeScenario)) state.memoryLab.activeScenario = MEMORY_LAB.scenarios[0].id;
+      const scenario = currentMemoryScenario();
+      const mastered = state.memoryLab.scenarios[scenario.id] === true;
+      const select = document.getElementById('memoryScenario');
+      select.innerHTML = MEMORY_LAB.scenarios.map((item) => `<option value="${escapeHtml(item.id)}">${state.memoryLab.scenarios[item.id] === true ? '已掌握 · ' : ''}${escapeHtml(item.title)}</option>`).join('');
+      select.value = scenario.id;
+      document.getElementById('memoryDecision').innerHTML = `<option value="">请选择</option>${MEMORY_LAB.decisions.map((decision) => `<option value="${escapeHtml(decision.id)}">${escapeHtml(decision.label)}</option>`).join('')}`;
+      document.getElementById('memoryCandidate').innerHTML = `<h3>${escapeHtml(scenario.title)}</h3><p>${escapeHtml(scenario.candidate)}</p>
+        <dl><div><dt>来源</dt><dd>${escapeHtml(scenario.source)}</dd></div><div><dt>敏感度</dt><dd>${escapeHtml(scenario.sensitivity)}</dd></div><div><dt>作用域</dt><dd>${escapeHtml(scenario.scope)}</dd></div><div><dt>期限</dt><dd>${escapeHtml(scenario.ttl)}</dd></div></dl>`;
+      document.getElementById('memoryLifecycleFlow').innerHTML = MEMORY_LAB.lifecycleSteps.map((step, index) => `
+        <div class="memory-flow-node${mastered && scenario.path.includes(step.id) ? ' active' : ''}"><span>STEP ${String(index + 1).padStart(2, '0')}</span><strong>${escapeHtml(step.label)}</strong><small>${escapeHtml(step.detail)}</small></div>`).join('');
+
+      const decisionLabel = MEMORY_LAB.decisions.find((decision) => decision.id === scenario.expected)?.label || scenario.expected;
+      const feedback = document.getElementById('memoryDecisionFeedback');
+      if (memoryFeedback?.scenarioId === scenario.id) {
+        feedback.innerHTML = memoryFeedback.correct
+          ? `<div class="memory-feedback correct"><strong>决策正确：${escapeHtml(decisionLabel)}</strong><br>${escapeHtml(scenario.reason)}</div><pre class="memory-audit">${escapeHtml(JSON.stringify(scenario.audit, null, 2))}</pre>`
+          : `<div class="memory-feedback wrong"><strong>还不能这样写入。正确决策：${escapeHtml(decisionLabel)}</strong><br>误区说明：${escapeHtml(scenario.reason)}</div>`;
+      } else if (mastered) {
+        feedback.innerHTML = `<div class="memory-feedback correct"><strong>该场景已掌握：${escapeHtml(decisionLabel)}</strong><br>${escapeHtml(scenario.reason)}</div><pre class="memory-audit">${escapeHtml(JSON.stringify(scenario.audit, null, 2))}</pre>`;
+      } else {
+        feedback.innerHTML = '';
+      }
+    }
+
+    function checkMemoryDecision() {
+      const scenario = currentMemoryScenario();
+      const selected = document.getElementById('memoryDecision').value;
+      if (!selected) { showToast('先选择一个写入决策'); return; }
+      const correct = selected === scenario.expected;
+      memoryFeedback = { scenarioId: scenario.id, correct };
+      if (correct) state.memoryLab.scenarios[scenario.id] = true;
+      saveState();
+      renderMemoryLab();
+      if (state.currentStage === 's5') renderStageView();
+      showToast(correct ? '决策正确，生命周期与审计证据已展开' : '决策未通过，先看误区再重试');
+    }
+
+    function renderMemoryEvidence() {
+      document.getElementById('memoryBenchmarks').innerHTML = MEMORY_LAB.benchmarks.map((benchmark) => `
+        <div class="memory-benchmark"><strong>${escapeHtml(benchmark.name)} · ${escapeHtml(String(benchmark.year))}</strong><span>${escapeHtml(benchmark.focus)}。${escapeHtml(benchmark.fact)}</span><a href="${escapeHtml(benchmark.sourceUrl)}" target="_blank" rel="noopener noreferrer">一手来源</a></div>`).join('');
+      document.getElementById('memoryMetrics').innerHTML = MEMORY_LAB.metrics.map((metric) => `
+        <div class="memory-metric"><strong>${escapeHtml(metric.label)}</strong><span>${escapeHtml(metric.threshold)}</span></div>`).join('');
+      const evidence = MEMORY_LAB.future.filter((item) => item.kind === 'evidence');
+      const inference = MEMORY_LAB.future.filter((item) => item.kind === 'inference');
+      document.getElementById('memoryFuture').innerHTML = `
+        <div class="memory-future-column"><h3>已有证据支持</h3>${evidence.map((item) => `<div class="memory-future-item"><strong>${escapeHtml(item.title)}</strong><span>${escapeHtml(item.detail)}</span></div>`).join('')}</div>
+        <div class="memory-future-column inference"><h3>工程推断，仍需验证</h3>${inference.map((item) => `<div class="memory-future-item"><strong>${escapeHtml(item.title)}</strong><span>${escapeHtml(item.detail)}</span></div>`).join('')}</div>`;
+    }
+
+    function renderMemoryLab() {
+      if (!MEMORY_LAB) {
+        document.getElementById('memoryView').innerHTML = '<div class="page-heading"><h1>记忆实验室暂不可用</h1><p>课程数据未加载，请检查 data/memory_lab.js。</p></div>';
+        return;
+      }
+      renderMemoryProgress();
+      renderMemoryMethods();
+      renderMemoryArchitecture();
+      renderMemoryLifecycle();
+      renderMemoryEvidence();
+    }
+
     function normalizePath(path) {
       const output = [];
       for (const segment of path.replaceAll('\\', '/').split('/')) {
@@ -1640,7 +2038,7 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
     }
 
     function showView(view) {
-      activeView = ['overview', 'stage', 'simulator', 'library'].includes(view) ? view : 'overview';
+      activeView = ['overview', 'stage', 'simulator', 'memory', 'library'].includes(view) ? view : 'overview';
       document.querySelectorAll('[data-view-panel]').forEach((panel) => panel.classList.toggle('active', panel.dataset.viewPanel === activeView));
       updateViewButtons();
       closeDrawer();
@@ -1754,7 +2152,7 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
         const itemState = stageState(state.currentStage);
         if (!gateStatus(state.currentStage).ready) return;
         itemState.status = 'passed';
-        itemState.gateVersion = 3;
+        itemState.gateVersion = state.currentStage === 's5' ? 4 : 3;
         const currentIndex = STAGES.findIndex((stage) => stage.id === state.currentStage);
         const next = STAGES[currentIndex + 1];
         saveState(); renderStageView(); renderOverview();
@@ -1762,6 +2160,16 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
       });
       document.getElementById('openStageChapter').addEventListener('click', () => openChapter(currentStage().chapter));
       document.getElementById('openSelftest').addEventListener('click', () => openChapter('selftest'));
+      document.getElementById('openMemoryLabButton').addEventListener('click', () => navigate('#memory'));
+      document.getElementById('openMemoryAtlas').addEventListener('click', () => openChapter('memory-atlas'));
+      document.getElementById('buildMemoryArchitecture').addEventListener('click', buildMemoryArchitecture);
+      document.getElementById('checkMemoryDecision').addEventListener('click', checkMemoryDecision);
+      document.getElementById('memoryScenario').addEventListener('change', (event) => {
+        state.memoryLab.activeScenario = event.target.value;
+        memoryFeedback = null;
+        saveState();
+        renderMemoryLifecycle();
+      });
       document.getElementById('quizDraft').addEventListener('input', (event) => {
         const itemState = stageState(state.currentStage);
         itemState.draft = event.target.value;
@@ -1788,6 +2196,7 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
       renderOverview();
       renderStageView();
       renderSimulator();
+      renderMemoryLab();
       renderLibrary(state.activeChapter || 'start');
     }
 

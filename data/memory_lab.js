@@ -1,0 +1,133 @@
+(() => {
+  'use strict';
+
+  const method = (id, name, family, principle, bestFor, advantages, tradeoffs, failure, status, year, sourceLabel, sourceUrl) => ({
+    id, name, family, principle, bestFor, advantages, tradeoffs, failure, status, year, sourceLabel, sourceUrl,
+  });
+
+  window.MEMORY_LAB = {
+    updatedAt: '2026-07-13',
+    evidenceNotice: '论文结果与项目自报不等于生产 SLA。选型必须结合自己的数据、模型、权限和评测集复现。',
+    families: [
+      { id: 'all', label: '全部方法' },
+      { id: 'basic', label: '上下文与检索' },
+      { id: 'hierarchical', label: '层级与自管理' },
+      { id: 'reflective', label: '反思与演化' },
+      { id: 'graph', label: '图与时间' },
+      { id: 'experience', label: '经验与技能' },
+      { id: 'multimodal', label: '多模态' },
+    ],
+    methods: [
+      method('context', 'Context + trimming', 'basic', '保留最近 turns，并按 token 或轮次裁剪。', '单会话工具 Agent、当前任务状态。', '简单、低延迟、易调试。', '窗口溢出后旧细节消失，不能跨会话学习。', '把 Runtime checkpoint 与聊天历史混成一个对象。', '基础模式', 2026, 'OpenAI Agents SDK Sessions', 'https://openai.github.io/openai-agents-python/sessions/'),
+      method('summary', 'Versioned summary', 'basic', '把旧会话压缩为带来源和版本的摘要。', '长会话客服、任务交接、上下文预算。', '显著减少 prompt token。', '有损压缩，反复摘要会放大漂移。', '模型总结未经核验就覆盖原始事实。', '基础模式', 2026, 'OpenAI Session Memory Cookbook', 'https://developers.openai.com/cookbook/examples/agents_sdk/session_memory'),
+      method('vector', 'Vector RAG memory', 'basic', '对历史片段做 embedding，并按语义相似度召回。', '大量非结构化文本、同义表达和宽召回。', '生态成熟、扩展容易、可绑定原始片段。', '时间、冲突和多跳较弱；相似不等于真实。', '只调 top_k，忽略 ACL、来源和 staleness。', '基础模式', 2020, 'Retrieval-Augmented Generation', 'https://arxiv.org/abs/2005.11401'),
+      method('generative-agents', 'Generative Agents', 'reflective', '用 recency、importance、relevance 召回 memory stream，并生成高层 reflection。', '社会模拟、角色行为和记忆教学。', '把观察、反思和计划闭环讲得清楚。', 'LLM 调用多，生产权限和删除不是核心。', '把“行为可信度”直接等同于事实正确性。', '研究原型', 2023, 'Generative Agents paper', 'https://arxiv.org/abs/2304.03442'),
+      method('reflexion', 'Reflexion', 'reflective', '根据失败和反馈生成 verbal reflection，写入 episodic buffer。', '代码、Web、游戏等可重复试错任务。', '不微调也能积累失败教训。', '依赖评价器，反思可能自欺或过拟合。', '未经环境验证的反思被提升为长期策略。', '研究模式', 2023, 'Reflexion paper', 'https://arxiv.org/abs/2303.11366'),
+      method('voyager', 'Voyager skill library', 'experience', '把成功轨迹固化成可检索、可组合的可执行技能。', '具身 Agent、工具 Agent 和重复工作流。', '技能可复用、组合并降低重复探索。', '执行安全和环境版本迁移成本高。', '旧版本技能在新环境里继续执行写操作。', '研究模式', 2023, 'Voyager paper', 'https://arxiv.org/abs/2305.16291'),
+      method('memorybank', 'MemoryBank', 'reflective', '用重要性、时间衰减和强化维护会话记忆与用户画像。', '陪伴、个性化对话和遗忘机制教学。', '显式引入遗忘曲线和人格画像。', '评测偏 companion，冲突与租户治理不足。', '用“像人一样记忆”掩盖来源和权限缺失。', '研究原型', 2023, 'MemoryBank paper', 'https://arxiv.org/abs/2305.10250'),
+      method('memgpt', 'MemGPT / Letta', 'hierarchical', '把 context 当快存储，把 recall/archival 当慢存储，由 Agent 用工具换入换出。', '长对话、stateful Agent、可观察的 core memory。', '层级边界清晰，Agent 可以主动管理记忆。', '工具开销高，错误自写和注入可能持久化。', '让模型无门禁修改 core memory。', '工程框架', 2023, 'MemGPT paper', 'https://arxiv.org/abs/2310.08560'),
+      method('mem0', 'Mem0', 'hierarchical', '选择性抽取、合并和召回，并支持 user/session/org scope 与可选图。', 'SaaS Agent、客服、个人助手的 memory layer。', 'API 化、作用域明确、接入速度快。', '托管与开源能力有差异，公开数字多为项目自报。', '未独立验证删除、冲突和租户边界就直接采用。', '工程产品', 2025, 'Mem0 paper', 'https://arxiv.org/abs/2504.19413'),
+      method('graphiti', 'Zep / Graphiti', 'graph', '用带有效时间的 episode/entity/community 图和混合检索维护动态事实。', 'CRM、客服、合同和企业动态实体。', '时间、来源、多跳和冲突表达能力强。', '实体消歧错误会扩散，图构建与更新成本高。', '以为知识图谱天然解决 ACL 和删除。', '工程产品 / 开源引擎', 2025, 'Zep paper', 'https://arxiv.org/abs/2501.13956'),
+      method('amem', 'A-MEM', 'graph', '按 Zettelkasten 原则生成结构化 note、tags、links，并随新记忆演化。', '研究 Agent、跨任务知识积累。', '记忆网络可动态组织，不依赖固定结构。', '维护调用多，错误链接会累积并改变旧记忆。', '让 Agent 自动重写历史而不保留版本。', '研究原型', 2025, 'A-MEM paper', 'https://arxiv.org/abs/2502.12110'),
+      method('hipporag', 'HippoRAG / HippoRAG 2', 'graph', '从文本抽取图，并用 Personalized PageRank 激活关联 passage。', '多跳 QA、复杂文档和关联检索。', '单次图检索可减少反复迭代查询。', '离线抽图成本高，增量更新和 ACL 需额外设计。', '把多跳检索结果当成已验证业务事实。', '研究原型', 2025, 'HippoRAG 2 paper', 'https://arxiv.org/abs/2502.14802'),
+      method('memoryos', 'MemoryOS', 'hierarchical', '用 short/mid/long 三层和 FIFO、摘要、分页式更新管理长期个人记忆。', '个人助手和层级记忆教学。', 'OS 类比和四模块生命周期清晰。', '摘要层可能丢细节，LoCoMo 外证据有限。', '将论文实验提升幅度直接当成产品承诺。', '研究原型', 2025, 'MemoryOS paper', 'https://arxiv.org/abs/2506.06326'),
+      method('mirix', 'MIRIX', 'multimodal', '用六类 memory 和多个 memory manager 协调文本、截图与资源。', '桌面助手、屏幕历史和多模态个人 Agent。', '覆盖 procedural、resource 和 visual memory。', '系统复杂，持续屏幕采集的隐私与删除风险高。', '默认持续采集整个屏幕并长期保存。', '研究原型', 2025, 'MIRIX paper', 'https://arxiv.org/abs/2507.07957'),
+    ],
+    decisions: [
+      { id: 'allow', label: '允许长期写入' },
+      { id: 'session_only', label: '仅保留在会话' },
+      { id: 'needs_confirmation', label: '等待用户确认' },
+      { id: 'scoped_allow', label: '按租户与期限写入' },
+      { id: 'versioned_update', label: '保留版本并更新' },
+      { id: 'deny', label: '拒绝写入' },
+      { id: 'deny_and_redact', label: '拒绝并脱敏' },
+      { id: 'delete_verify', label: '删除并验证不可召回' },
+    ],
+    lifecycleSteps: [
+      { id: 'capture', label: 'Capture', detail: '只形成候选，不自动长期保存。' },
+      { id: 'gate', label: 'Write Gate', detail: '检查来源、权限、敏感级别、用途和期限。' },
+      { id: 'normalize', label: 'Normalize', detail: '抽取结构化字段并保留 provenance。' },
+      { id: 'store', label: 'Store / Index', detail: '写主记录和派生索引，绑定同一 ID 与版本。' },
+      { id: 'retrieve', label: 'Retrieve', detail: '先做 ACL、tenant、TTL、deleted 硬过滤。' },
+      { id: 'use', label: 'Use', detail: '进入 context pack，并标注来源与时间。' },
+      { id: 'correct', label: 'Correct / Expire', detail: '版本化纠正或结束有效区间。' },
+      { id: 'delete', label: 'Delete', detail: '传播 tombstone 到索引、图和缓存。' },
+      { id: 'audit', label: 'Eval / Audit', detail: '保存决定与回归证据。' },
+    ],
+    scenarios: [
+      {
+        id: 'explicit_preference', title: '用户明确偏好', candidate: '用户说：“以后默认用中文回复。”', source: 'user_statement', sensitivity: 'private-low', scope: 'user', ttl: '直到用户修改或删除', expected: 'allow', memoryType: 'semantic profile',
+        reason: '明确、低风险、跨会话有用且可撤销。仍要保存来源和删除入口。',
+        path: ['capture', 'gate', 'normalize', 'store', 'retrieve', 'use', 'audit'],
+        audit: { decision: 'allow', source: 'user_statement', scope: 'user', test: '更改偏好后旧值不再召回' },
+      },
+      {
+        id: 'temporary_filter', title: '本次任务临时条件', candidate: '用户说：“这次只查看上海工单。”', source: 'user_statement', sensitivity: 'internal', scope: 'current_run', ttl: '当前 Run', expected: 'session_only', memoryType: 'working/session',
+        reason: '它约束当前任务，不代表长期偏好。写入长期记忆会污染以后查询。',
+        path: ['capture', 'gate', 'use', 'audit'],
+        audit: { decision: 'session_only', source: 'user_statement', scope: 'current_run', test: '新 Run 不应继承上海过滤' },
+      },
+      {
+        id: 'model_guess', title: '模型推测用户行业', candidate: '模型总结：“用户可能在金融行业。”', source: 'model_inference', sensitivity: 'private', scope: 'user', ttl: '未知', expected: 'deny', memoryType: 'none',
+        reason: '推测没有权威来源，不能把概率性判断变成持久事实。',
+        path: ['capture', 'gate', 'audit'],
+        audit: { decision: 'deny', source: 'model_inference', scope: 'user', test: '后续查询不得出现该推测' },
+      },
+      {
+        id: 'secret', title: '对话中出现 API key', candidate: '用户粘贴了 API_KEY=[REDACTED]。', source: 'user_message', sensitivity: 'secret', scope: 'none', ttl: '0', expected: 'deny_and_redact', memoryType: 'none',
+        reason: 'Secret 不得进入 prompt archive、memory、trace 或 eval 样例，应立即脱敏并记录安全事件。',
+        path: ['capture', 'gate', 'audit'],
+        audit: { decision: 'deny_and_redact', source: 'user_message', scope: 'none', test: '存储、日志和导出中均无原值' },
+      },
+      {
+        id: 'crm_fact', title: '受控工具返回合同期限', candidate: 'CRM 工具返回：“客户 A 合同在 2026-08-31 到期。”', source: 'tool_result:crm', sensitivity: 'confidential', scope: 'tenant/customer-A', ttl: '到期后 30 天', expected: 'scoped_allow', memoryType: 'semantic + temporal relation',
+        reason: '可验证业务事实可以按租户、资源、有效时间和版本保存。不能扩大到 global scope。',
+        path: ['capture', 'gate', 'normalize', 'store', 'retrieve', 'use', 'correct', 'audit'],
+        audit: { decision: 'scoped_allow', source: 'tool_result:crm', scope: 'tenant/customer-A', test: 'tenant-B 与过期时间后均不可召回' },
+      },
+      {
+        id: 'conflict', title: '新旧 VIP 状态冲突', candidate: '旧记忆说客户 A 是 VIP，新 CRM 结果说不是 VIP。', source: 'tool_result:crm-v7', sensitivity: 'confidential', scope: 'tenant/customer-A', ttl: '按 CRM 版本', expected: 'versioned_update', memoryType: 'temporal semantic fact',
+        reason: '不能静默覆盖。应结束旧版本有效区间，保留来源、冲突和新版本。',
+        path: ['capture', 'gate', 'normalize', 'store', 'retrieve', 'correct', 'audit'],
+        audit: { decision: 'versioned_update', source: 'tool_result:crm-v7', scope: 'tenant/customer-A', test: '当前查询返回新值，历史时间查询仍可解释旧值' },
+      },
+      {
+        id: 'delete', title: '用户要求删除偏好', candidate: '用户要求删除“默认中文”偏好及所有可召回副本。', source: 'user_delete_request', sensitivity: 'private-low', scope: 'user', ttl: '立即', expected: 'delete_verify', memoryType: 'tombstone + audit',
+        reason: '删除必须传播到主库、向量索引、图、缓存和 context pack，并验证原文、同义词和 ID 都不可召回。',
+        path: ['capture', 'gate', 'delete', 'retrieve', 'audit'],
+        audit: { decision: 'delete_verify', source: 'user_delete_request', scope: 'user', test: 'exact/paraphrase/id 三类检索均无结果' },
+      },
+    ],
+    workloads: [
+      { id: 'single-session', label: '单会话工具 Agent', baseStack: ['message log', 'trimming', 'Runtime checkpoint'], upgrade: '只有上下文超限时加入 versioned summary。', avoid: '不要建立长期用户画像。', eval: ['任务成功率', 'token', 'resume correctness'] },
+      { id: 'support', label: '跨会话客服与个人助手', baseStack: ['message log', 'versioned summary', 'structured user facts', 'write/delete policy'], upgrade: '非结构化历史量大时加入 vector；需要主动层级管理时评估 Letta/Mem0。', avoid: '不要自动记住所有对话或模型推测。', eval: ['LoCoMo', 'LongMemEval', 'deletion_success', 'privacy leakage'] },
+      { id: 'enterprise', label: '动态企业事实与 CRM', baseStack: ['canonical fact store', 'temporal fields', 'hybrid retrieval', 'tenant ACL'], upgrade: '关系、多跳和冲突需求被证明后加入 Graphiti 类 temporal graph。', avoid: '不要把图当作权限系统。', eval: ['knowledge update', 'temporal reasoning', 'cross-tenant', 'staleness'] },
+      { id: 'knowledge', label: '复杂知识与多跳问答', baseStack: ['versioned corpus', 'vector/full-text hybrid', 'rerank', 'citation'], upgrade: '多跳基线不足时实验 HippoRAG 2 或其他 graph retrieval。', avoid: '不要把 RAG knowledge 和用户长期记忆混库。', eval: ['retrieval recall', 'multi-hop', 'citation accuracy', 'ACL'] },
+      { id: 'experience', label: 'Web、代码与运维经验', baseStack: ['trajectory log', 'verified reflection', 'environment version', 'skill tests'], upgrade: '可重复 workflow 稳定后建立 procedural skill library。', avoid: '未经环境验证的反思不能成为技能。', eval: ['LongMemEval-V2', 'task success', 'gotcha recall', 'skill regression'] },
+      { id: 'multimodal', label: '桌面与多模态个人 Agent', baseStack: ['minimal capture', 'resource index', 'local redaction', 'per-resource delete'], upgrade: '只有明确收益和隐私预算时研究 MIRIX 类分层。', avoid: '不要默认持续采集全屏和永久保存。', eval: ['multimodal recall', 'storage growth', 'PII leakage', 'delete propagation'] },
+    ],
+    benchmarks: [
+      { id: 'locomo', name: 'LoCoMo', year: 2024, focus: '长期对话、时间与因果', fact: '约 300 turns、平均 9K tokens、最多 35 sessions。', sourceUrl: 'https://arxiv.org/abs/2402.17753' },
+      { id: 'longmemeval', name: 'LongMemEval', year: 2025, focus: '跨会话检索、更新、时间与拒答', fact: '官方仓库提供 500 个高质量问题。', sourceUrl: 'https://github.com/xiaowu0162/longmemeval' },
+      { id: 'longmemeval-v2', name: 'LongMemEval-V2', year: 2026, focus: '环境状态、工作流和 gotcha', fact: '451 个问题，历史最多 500 条轨迹和 115M tokens；论文标注 Work in Progress。', sourceUrl: 'https://arxiv.org/abs/2605.12493' },
+      { id: 'memory-agent-bench', name: 'MemoryAgentBench', year: 2026, focus: '增量多轮写入、更新和管理', fact: 'ICLR 2026 论文，强调 memory agent 的核心能力覆盖。', sourceUrl: 'https://openreview.net/forum?id=DT7JyQC3MR' },
+      { id: 'systems', name: 'Agent Memory Systems Characterization', year: 2026, focus: '构建、召回、生成阶段成本', fact: '研究十种系统在两个 benchmark suite 上的系统级行为。', sourceUrl: 'https://arxiv.org/abs/2606.06448' },
+    ],
+    future: [
+      { kind: 'evidence', title: '从用户历史走向环境经验', detail: 'LongMemEval-V2 评测状态、工作流、环境 gotcha 和前提，而不只问“用户以前说过什么”。' },
+      { kind: 'evidence', title: '图与有效时间继续扩张', detail: 'Graphiti、HippoRAG 2、A-MEM 和 2026 graph memory survey 都把关系、演化和多跳作为核心问题。' },
+      { kind: 'evidence', title: '成本归因成为独立问题', detail: '2026 systems characterization 把 construction、retrieval、generation 分开分析，说明准确率之外还必须看 freshness、latency 和 amortization。' },
+      { kind: 'inference', title: '工业栈将分成五类存储', detail: '预计消息历史、用户事实、业务实体图、环境经验和技能库会分开治理，而不是共享一个向量库。' },
+      { kind: 'inference', title: '删除与审计比容量更重要', detail: '随着长期记忆增长，纠错、遗忘、数据主权和跨租户证明会成为主要发布门禁。' },
+    ],
+    metrics: [
+      { id: 'recall', label: 'Memory Recall', threshold: '按分层 case 设定，不只看平均值' },
+      { id: 'precision', label: 'Memory Precision', threshold: '错误记忆不得随规模上升' },
+      { id: 'stale', label: 'Stale Memory Rate', threshold: '关键政策与身份事实为 0' },
+      { id: 'delete', label: 'Deletion Success', threshold: 'exact/paraphrase/id 均不可召回' },
+      { id: 'privacy', label: 'Privacy Leakage', threshold: 'critical case 必须为 0' },
+      { id: 'source', label: 'Source Coverage', threshold: '关键记忆必须 100% 可追溯' },
+      { id: 'ablation', label: 'Ablation Value', threshold: '质量提升需覆盖成本、延迟和风险增量' },
+    ],
+  };
+})();
