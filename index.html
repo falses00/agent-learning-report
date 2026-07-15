@@ -81,7 +81,7 @@
     .progress-summary { margin-top: 11px; display: grid; gap: 6px; }
     .progress-row { display: flex; justify-content: space-between; gap: 10px; color: var(--ink-muted); font-size: 12px; }
     .progress-track { height: 6px; overflow: hidden; border-radius: 999px; background: var(--surface-strong); }
-    .progress-fill { height: 100%; width: 0; border-radius: inherit; background: var(--accent); transition: width 180ms ease-out; }
+    .progress-fill { height: 100%; width: 100%; border-radius: inherit; background: var(--accent); transform: scaleX(0); transform-origin: left center; transition: transform 180ms ease-out; }
     .course-nav { flex: 1; overflow: auto; padding: 8px; }
     .nav-group { margin: 12px 9px 5px; color: var(--ink-muted); font-size: 11px; font-weight: 700; }
     .course-link { width: 100%; min-height: 42px; display: grid; grid-template-columns: 42px minmax(0, 1fr); align-items: center; gap: 7px; padding: 6px 8px; border: 0; border-radius: var(--radius-sm); background: transparent; text-align: left; cursor: pointer; }
@@ -321,8 +321,8 @@
       --mono: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
       --brand-gradient: linear-gradient(135deg, #0052d9 0%, #1a6fe8 58%, #c96442 100%);
       --brand-soft: linear-gradient(135deg, rgba(0, 82, 217, .08), rgba(201, 100, 66, .07));
-      --shadow-card: 0 1px 2px rgba(0, 40, 100, .04), 0 12px 32px -20px rgba(0, 52, 140, .32);
-      --shadow-active: 0 10px 28px -16px rgba(0, 82, 217, .55);
+      --shadow-card: 0 1px 3px rgba(31, 41, 55, .08);
+      --shadow-active: 0 2px 6px rgba(31, 41, 55, .14);
     }
 
     body {
@@ -338,7 +338,7 @@
       padding: 0 26px;
       border-bottom-color: rgba(0, 82, 217, .12);
       background: rgba(248, 250, 254, .90);
-      box-shadow: 0 1px 10px rgba(0, 42, 110, .04);
+      box-shadow: 0 1px 8px rgba(31, 41, 55, .06);
     }
     .topbar::after { content: ""; position: absolute; inset: auto 0 -1px; height: 1px; background: linear-gradient(90deg, rgba(0, 82, 217, .38), rgba(201, 100, 66, .22), transparent 72%); }
     .topbar-brand { color: #243047; font-family: var(--display); font-size: 14px; font-weight: 800; }
@@ -348,15 +348,15 @@
     .view-nav button.active { color: var(--accent-hover); box-shadow: var(--shadow-card); }
     .view-nav button.active::after { content: ""; position: absolute; inset: auto 9px 2px; height: 2px; border-radius: 2px; background: var(--brand-gradient); }
 
-    .sidebar { border-right-color: rgba(0, 82, 217, .12); background: rgba(255, 255, 255, .95); box-shadow: 8px 0 30px -28px rgba(0, 52, 140, .55); }
+    .sidebar { border-right-color: rgba(0, 82, 217, .12); background: rgba(255, 255, 255, .95); box-shadow: none; }
     .brand { min-height: 94px; gap: 12px; padding: 16px 18px; border-bottom-color: var(--line); }
-    .brand-mark { width: 40px; height: 40px; border-radius: 8px; background: var(--brand-gradient); box-shadow: 0 8px 20px -12px rgba(0, 82, 217, .8); }
+    .brand-mark { width: 40px; height: 40px; border-radius: 8px; background: var(--brand-gradient); box-shadow: 0 3px 8px rgba(31, 41, 55, .16); }
     .brand-title { color: #18233a; font-family: var(--display); font-size: 15px; font-weight: 800; }
     .brand-subtitle { margin-top: 3px; color: var(--ink-muted); font-size: 11px; }
     .sidebar-tools { padding: 16px 14px 12px; }
     .search-field input { border-color: rgba(0, 82, 217, .13); background: #f4f7fc; }
     .progress-track { background: #e7edf7; }
-    .progress-fill { background: var(--brand-gradient); box-shadow: 0 0 10px rgba(0, 82, 217, .22); }
+    .progress-fill { background: var(--brand-gradient); }
     .course-nav { padding: 10px 10px 18px; }
     .nav-section { margin-top: 8px; }
     .nav-section > summary { list-style: none; }
@@ -390,7 +390,7 @@
     .journey-strip { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
     .journey-step { position: relative; min-height: 74px; display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 10px; align-items: center; padding: 12px; border: 1px solid rgba(0, 82, 217, .13); border-radius: var(--radius); background: rgba(255, 255, 255, .86); text-align: left; cursor: pointer; }
     .journey-step:hover { border-color: rgba(0, 82, 217, .42); background: #fff; }
-    .journey-step.active { border-color: var(--accent); background: var(--brand-soft); box-shadow: 0 4px 10px rgba(0, 82, 217, .08); }
+    .journey-step.active { border-color: var(--accent); background: var(--brand-soft); box-shadow: none; }
     .journey-step.complete { border-color: rgba(22, 132, 91, .42); }
     .journey-number { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: #edf2fb; color: var(--accent-hover); font: 700 11px var(--mono); }
     .journey-step.active .journey-number { background: var(--brand-gradient); color: white; }
@@ -399,7 +399,7 @@
     .journey-copy strong { color: #243047; font-size: 13px; }
     .journey-copy span { margin-top: 3px; color: var(--ink-muted); font-size: 10px; }
 
-    .continue-panel { margin: 18px 0 16px; border-color: rgba(0, 82, 217, .22); background: var(--brand-soft); box-shadow: 0 4px 10px rgba(0, 82, 217, .06); }
+    .continue-panel { margin: 18px 0 16px; border-color: rgba(0, 82, 217, .22); background: var(--brand-soft); box-shadow: none; }
     .continue-heading { display: flex; align-items: center; gap: 9px; margin-bottom: 6px; }
     .status-chip { padding: 3px 7px; border: 1px solid var(--line); border-radius: 4px; background: rgba(255, 255, 255, .72); color: var(--ink-muted); font-size: 10px; font-weight: 800; }
     .status-chip.status-learning { border-color: rgba(0, 82, 217, .28); color: var(--accent-hover); }
@@ -408,7 +408,7 @@
     .continue-next strong { flex: 0 0 auto; color: #344054; }
     .section-label { color: var(--warning); font-weight: 800; }
     .continue-panel h2 { color: #18233a; font-family: var(--display); font-weight: 800; }
-    .primary-button { border-color: var(--accent); background: var(--accent); box-shadow: 0 8px 18px -13px rgba(0, 82, 217, .9); }
+    .primary-button { border-color: var(--accent); background: var(--accent); box-shadow: 0 2px 6px rgba(31, 41, 55, .14); }
     .primary-button:hover { border-color: var(--accent-hover); background: var(--accent-hover); }
     .secondary-button { border-color: rgba(0, 82, 217, .24); }
 
@@ -418,7 +418,7 @@
     .segment-control { border-color: rgba(0, 82, 217, .15); background: #edf2fa; }
     .segment-control button.active { color: var(--accent-hover); box-shadow: var(--shadow-card); }
     .check-row input { accent-color: var(--accent); }
-    .command-block { background: #0d2630; box-shadow: 0 12px 26px -22px rgba(0, 38, 58, .8); }
+    .command-block { background: #0d2630; box-shadow: none; }
 
     .route-list { margin-top: 42px; border-top-color: rgba(0, 82, 217, .16); }
     .route-header { padding: 24px 0 14px; }
@@ -439,8 +439,8 @@
     .route-stage-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
     .roadmap-group .route-stage-grid { margin: 0 0 24px 56px; }
     .route-card { min-width: 0; min-height: 142px; display: flex; flex-direction: column; align-items: stretch; gap: 7px; padding: 14px; border: 1px solid rgba(0, 82, 217, .12); border-radius: var(--radius); background: rgba(255, 255, 255, .94); text-align: left; cursor: pointer; }
-    .route-card:hover { border-color: rgba(0, 82, 217, .44); background: #fff; box-shadow: 0 4px 10px rgba(0, 82, 217, .06); }
-    .route-card.current { border-color: var(--accent); background: var(--brand-soft); box-shadow: 0 4px 10px rgba(0, 82, 217, .08); }
+    .route-card:hover { border-color: rgba(0, 82, 217, .44); background: #fff; box-shadow: none; }
+    .route-card.current { border-color: var(--accent); background: var(--brand-soft); box-shadow: none; }
     .route-card-top { display: flex; justify-content: space-between; gap: 8px; align-items: center; }
     .route-num { color: var(--accent-hover); font: 800 11px var(--mono); }
     .route-title { color: #202b40; font-size: 15px; font-weight: 800; }
@@ -452,7 +452,7 @@
     .stage-switcher { margin-bottom: 14px; }
     .stage-switcher > span { display: block; margin-bottom: 7px; color: var(--ink-muted); font-size: 10px; font-weight: 800; }
     .stage-rail { gap: 8px; padding-bottom: 8px; }
-    .stage-method { position: sticky; top: calc(var(--topbar) + 8px); z-index: 20; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0; margin: 0 0 18px; padding: 0; overflow: hidden; border: 1px solid rgba(0, 82, 217, .14); border-radius: var(--radius); background: rgba(255, 255, 255, .96); box-shadow: 0 4px 10px rgba(0, 42, 110, .06); list-style: none; }
+    .stage-method { position: sticky; top: calc(var(--topbar) + 8px); z-index: 20; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0; margin: 0 0 18px; padding: 0; overflow: hidden; border: 1px solid rgba(0, 82, 217, .14); border-radius: var(--radius); background: rgba(255, 255, 255, .96); box-shadow: var(--shadow-card); list-style: none; }
     .stage-method li { position: relative; min-width: 0; border-right: 1px solid var(--line); color: #4f596b; font-size: 12px; font-weight: 700; }
     .stage-method li:last-child { border-right: 0; }
     .stage-method button { width: 100%; min-height: 52px; display: flex; align-items: center; gap: 8px; padding: 8px 12px; border: 0; background: transparent; color: inherit; cursor: pointer; font: inherit; text-align: left; }
@@ -490,7 +490,7 @@
     .workshop-evidence { display: grid; gap: 4px; padding: 11px 12px; border: 1px solid rgba(0, 82, 217, .18); border-radius: var(--radius-sm); background: var(--brand-soft); font-size: 12px; }
     .workshop-evidence strong { color: var(--accent-hover); }
     .workshop-evidence span { color: var(--ink-muted); }
-    .evidence-panel { position: static; align-self: start; border-color: rgba(0, 82, 217, .16); box-shadow: 0 4px 10px rgba(0, 42, 110, .06); scroll-margin-top: calc(var(--topbar) + 18px); }
+    .evidence-panel { position: static; align-self: start; border-color: rgba(0, 82, 217, .16); box-shadow: var(--shadow-card); scroll-margin-top: calc(var(--topbar) + 18px); }
     .gate-requirements { display: grid; gap: 6px; margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
     .gate-requirement { display: flex; align-items: center; justify-content: space-between; gap: 8px; color: var(--ink-muted); font-size: 11px; }
     .gate-requirement strong { color: var(--warning); font-size: 10px; }
@@ -564,7 +564,7 @@
     .memory-progress-item span { color: var(--ink-muted); font-size: 11px; font-weight: 700; }
     .memory-progress-item strong { margin-top: 4px; color: #202b40; font-family: var(--display); font-size: 20px; }
     .memory-progress-item small { color: var(--ink-muted); font-size: 11px; }
-    .memory-section-nav { position: sticky; top: calc(var(--topbar) + 8px); z-index: 18; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0 0 18px; overflow: hidden; border: 1px solid rgba(0, 82, 217, .14); border-radius: var(--radius); background: rgba(255, 255, 255, .96); box-shadow: 0 4px 10px rgba(0, 42, 110, .06); }
+    .memory-section-nav { position: sticky; top: calc(var(--topbar) + 8px); z-index: 18; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0 0 18px; overflow: hidden; border: 1px solid rgba(0, 82, 217, .14); border-radius: var(--radius); background: rgba(255, 255, 255, .96); box-shadow: var(--shadow-card); }
     .memory-section-nav button { min-height: 44px; padding: 6px 10px; border: 0; border-right: 1px solid var(--line); background: transparent; color: var(--ink-muted); cursor: pointer; font-size: 11px; font-weight: 800; }
     .memory-section-nav button:last-child { border-right: 0; }
     .memory-section-nav button:hover { background: var(--surface-muted); color: var(--ink); }
@@ -644,7 +644,7 @@
     .memory-future-item strong { display: block; font-size: 12px; }
     .memory-future-item span { display: block; margin-top: 3px; color: var(--ink-muted); font-size: 11px; }
 
-    .mobile-nav { border-top-color: rgba(0, 82, 217, .16); background: rgba(255, 255, 255, .95); box-shadow: 0 -8px 22px -22px rgba(0, 52, 140, .8); }
+    .mobile-nav { border-top-color: rgba(0, 82, 217, .16); background: rgba(255, 255, 255, .95); box-shadow: 0 -1px 6px rgba(31, 41, 55, .08); }
     .mobile-nav button.active { color: var(--accent-hover); }
 
     @media (max-width: 1040px) {
@@ -769,7 +769,7 @@
         <div class="overview-progress" aria-live="polite">
           <span>工程主线进度</span>
           <strong id="overviewProgressText">0 / 12</strong>
-          <small id="overviewProgressHint">工程实验 3 / 12 可运行；推荐从 S0 开始。</small>
+          <small id="overviewProgressHint">工程实验 5 / 12 可运行；推荐按基础从 F0 或 S0 开始。</small>
         </div>
       </header>
 
@@ -804,9 +804,10 @@
             <pre id="baselineCommand">cd "agent-runtime-gateway\20-源码"
 python -m pytest ..\21-测试 -q
 python -m agent_course.cli demo
-python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
+python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json
+python -m agent_course.cli eval ..\22-评测集\s3-rag-baseline.json</pre>
           </div>
-          <div class="expected-output">当前可复验基线：11 项测试、5 项工程 eval。毕业目标 60+ tests / 100+ eval 尚未达成。</div>
+          <div class="expected-output" id="baselineMetrics">正在读取可复验工程基线。</div>
         </section>
 
         <section class="section-block" aria-labelledby="todayTitle">
@@ -1049,6 +1050,7 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
 
   <script src="data/chapters.js"></script>
   <script src="data/course_gate.js"></script>
+  <script src="data/baseline_metrics.js"></script>
   <script src="data/learning_content.js"></script>
   <script src="data/memory_lab.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked@15.0.12/marked.min.js"></script>
@@ -1059,6 +1061,9 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
 
     const CHAPTERS = Array.isArray(window.CHAPTERS) ? window.CHAPTERS : [];
     const COURSE_GATE = window.CourseGate;
+    const BASELINE_METRICS = window.BASELINE_METRICS && typeof window.BASELINE_METRICS === 'object'
+      ? window.BASELINE_METRICS
+      : { tests: 31, evalCases: 10, assertions: 54, runnableStages: ['f0', 's0', 's1', 's2', 's3'], totalStages: 12, targets: { tests: 60, evalCases: 100 } };
     const LEARNING_CONTENT = window.LEARNING_CONTENT && typeof window.LEARNING_CONTENT === 'object' ? window.LEARNING_CONTENT : {};
     const MEMORY_LAB = window.MEMORY_LAB && typeof window.MEMORY_LAB === 'object' ? window.MEMORY_LAB : null;
     const STORAGE_KEY = 'ARG_ENGINEERING_COURSE_V2';
@@ -1073,14 +1078,14 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
 
     const STAGES = [
       {
-        id: 'f0', num: 'F0', title: '工程基础', short: 'Python、HTTP、SQL、Git、pytest、Docker',
+        id: 'f0', num: 'F0', title: '工程基础', short: 'Python、HTTP、SQL、Git、pytest',
         definition: '补齐独立完成后端实验所需的最小工程能力，避免用 Agent 框架掩盖基础缺口。',
         deliverable: '一个带 CLI、HTTP、SQLite 和 pytest 的小型服务。',
         failure: '只会 Notebook 或复制代码，遇到异常无法定位，写操作失败后盲目重试。',
         fix: '每个问题先写最小复现，再用测试、日志和事务边界验证。',
-        evidence: 'API 调用、SQL 事务测试、Git 历史、Docker 启动记录。',
-        command: '# 当前仅提供基础诊断，F0 独立实验包待接入\npython --version\ngit --version\ndocker --version\npython -m pytest --version', implemented: false,
-        chapter: 'start',
+        evidence: 'API 调用、SQL 事务测试、Git 历史和 pytest/JUnit 报告。',
+        command: 'cd "agent-runtime-gateway\\20-源码"\npython -m pytest ..\\21-测试\\test_foundation.py -q\npython -m agent_course.cli ticket --db "$env:TEMP\\opspilot-f0.db" create --tenant tenant-a --title "VPN access failing" --idempotency-key request-f0-01', implemented: true,
+        chapter: 'f0-lab',
         question: 'HTTP 写请求超时后，为什么不能无条件重试？',
         answer: '因为超时只表示客户端没有拿到结果，不表示服务端没有完成写操作。必须使用幂等键、查询既有结果或业务补偿，并区分可重试与不可重试错误。',
       },
@@ -1097,12 +1102,12 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
         answer: 'JSON 只证明语法可解析，不证明字段完整、类型正确、主体有权限或资源属于当前租户。边界层仍必须按可信 schema 和认证事实验证。',
       },
       {
-        id: 's1', num: 'S1', title: 'Agent Runtime', short: 'Run、Step、State、Event',
+        id: 's1', num: 'S1', title: 'Agent Runtime', short: 'Run、State、Trace、Audit',
         definition: '用显式状态机控制 Agent 每一步的输入、输出、停止、失败和恢复。',
-        deliverable: 'Run/Step/Event 状态机、step limit、timeout、cancel 和 trace id。',
+        deliverable: 'RunRecord、拒绝/审批等待/完成状态、trace id 和关联 audit events。',
         failure: '一个 while true 包办全部逻辑，聊天历史充当状态，循环或失败无法恢复。',
-        fix: '定义合法转换表、结构化事件、预算与终止条件。',
-        evidence: '非法跳转、模型超时、无进展循环和取消路径测试。',
+        fix: '先显式保存 Run 状态、trace 与停止结果，再在后续实验补转换表、预算和取消。',
+        evidence: '跨租户拒绝、审批等待、重复审批和 trace/audit 一致性测试。',
         command: 'cd "agent-runtime-gateway\\20-源码"\npython -m pytest ..\\21-测试 -q -k runtime', implemented: true,
         chapter: 's1',
         question: '聊天历史为什么不能替代 Run、Step 和 Event？',
@@ -1121,14 +1126,14 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
         answer: 'Prompt 仍由不确定模型解释，也可能被注入覆盖。权限必须在模型之外，根据可信身份、租户、工具定义和资源事实强制裁决。',
       },
       {
-        id: 's3', num: 'S3', title: 'RAG 与可信引用', short: 'ACL、Retrieval、Rerank、Citation',
+        id: 's3', num: 'S3', title: 'RAG 与可信引用', short: 'ACL、Freshness、Lexical Retrieval、Citation',
         definition: '让答案只使用当前租户可访问、版本明确、能支持结论的知识证据。',
-        deliverable: '版本化 ingestion、tenant ACL、hybrid retrieval、rerank、citation 和拒答。',
+        deliverable: '确定性知识 fixture、tenant ACL、freshness/source trust、lexical retrieval、citation validation 和拒答。',
         failure: '找不到政策、找错租户、引用过期，或检索命中却不支持答案。',
         fix: '分开评测 retrieval、answer 和 citation，ACL 在检索前强制执行。',
         evidence: 'hard retrieval、跨租户、过期文档、unsupported claim eval。',
-        command: '# 完成 S3 实验后运行\npython -m pytest tests -q -k rag\npython -m evals.run datasets/rag.jsonl', implemented: false,
-        chapter: 's3',
+        command: 'cd "agent-runtime-gateway\\20-源码"\npython -m pytest ..\\21-测试\\test_rag.py ..\\21-测试\\test_evals.py -q\npython -m agent_course.cli eval ..\\22-评测集\\s3-rag-baseline.json', implemented: true,
+        chapter: 's3-lab',
         question: 'Retrieval recall 很高，为什么答案仍可能错误？',
         answer: '召回到相关文档不等于上下文精确、引用支持结论或生成没有歪曲。检索、重排、上下文组装、答案和引用需要分别评测。',
       },
@@ -1218,6 +1223,9 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
       },
     ];
 
+    const runnableStageIds = new Set(BASELINE_METRICS.runnableStages);
+    for (const stage of STAGES) stage.implemented = runnableStageIds.has(stage.id);
+
     const ROADMAP_GROUPS = [
       {
         id: 'foundation', number: '01', title: '工程起步', range: 'F0',
@@ -1287,7 +1295,7 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
     };
 
     const defaultState = {
-      courseVersion: 5,
+      courseVersion: 6,
       path: 'engineering',
       currentStage: 's0',
       stages: {},
@@ -1348,6 +1356,7 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
     }
 
     function requiredGateVersion(stageId) {
+      if (stageId === 'f0' || stageId === 's3') return 7;
       return stageId === 's5' ? 6 : 5;
     }
 
@@ -1504,7 +1513,7 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
       const completed = completedCount();
       const percent = completed / STAGES.length * 100;
       document.getElementById('sidebarProgressText').textContent = `${completed} / ${STAGES.length}`;
-      document.getElementById('sidebarProgressFill').style.width = `${percent}%`;
+      document.getElementById('sidebarProgressFill').style.transform = `scaleX(${percent / 100})`;
     }
 
     function renderCourseNav(query = '') {
@@ -1553,6 +1562,9 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
       document.getElementById('overviewProgressHint').textContent = completed === STAGES.length
         ? '本地主线自评已完成；请继续整理可机器复验的证据与作品集。'
         : `工程实验 ${runnable}/${STAGES.length} 可运行；推荐 ${stage.num} · ${statusLabel(itemState.status)}。`;
+      const testGap = Math.max(0, BASELINE_METRICS.targets.tests - BASELINE_METRICS.tests);
+      const evalGap = Math.max(0, BASELINE_METRICS.targets.evalCases - BASELINE_METRICS.evalCases);
+      document.getElementById('baselineMetrics').textContent = `当前可复验基线：${BASELINE_METRICS.tests} 项测试、${BASELINE_METRICS.evalCases} 项工程 eval、${BASELINE_METRICS.assertions} 条组合断言。距离毕业数量门槛还差 ${testGap} 项测试和 ${evalGap} 项 eval。`;
 
       document.getElementById('journeyStrip').innerHTML = ROADMAP_GROUPS.map((group) => {
         const groupStages = group.stages.map((stageId) => stageState(stageId));
@@ -1618,11 +1630,23 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
     }
 
     function renderStageRail() {
-      document.getElementById('stageRail').innerHTML = STAGES.map((stage) => {
+      const rail = document.getElementById('stageRail');
+      rail.innerHTML = STAGES.map((stage) => {
         const itemState = stageState(stage.id);
         return `<button class="stage-button${stage.id === state.currentStage ? ' active' : ''}" type="button" data-stage="${stage.id}"><span class="stage-button-num">${stage.num}</span><span class="stage-button-state">${statusLabel(itemState.status)}</span></button>`;
       }).join('');
-      document.querySelectorAll('[data-stage]').forEach((button) => button.addEventListener('click', () => openStage(button.dataset.stage, false)));
+      document.querySelectorAll('[data-stage]').forEach((button) => button.addEventListener('click', () => openStage(button.dataset.stage)));
+      requestAnimationFrame(centerCurrentStage);
+    }
+
+    function centerCurrentStage() {
+      const rail = document.getElementById('stageRail');
+      const active = rail.querySelector('[data-stage].active');
+      if (!active) return;
+      rail.scrollLeft = Math.max(
+        0,
+        active.offsetLeft - (rail.clientWidth - active.offsetWidth) / 2,
+      );
     }
 
     function renderStageView() {
@@ -2420,7 +2444,10 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json</pre>
       document.getElementById('rejectScenario').addEventListener('click', () => resolveApproval(false));
       window.addEventListener('hashchange', routeFromHash);
       window.addEventListener('scroll', scheduleSectionNavUpdate, { passive: true });
-      window.addEventListener('resize', scheduleSectionNavUpdate);
+      window.addEventListener('resize', () => {
+        scheduleSectionNavUpdate();
+        requestAnimationFrame(centerCurrentStage);
+      });
       window.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeDrawer(); });
     }
 

@@ -55,13 +55,28 @@ class AgentRuntime:
         knowledge_call = ToolCall(
             operation_id=f"{run_id}:knowledge",
             tool_name="knowledge.retrieve",
-            arguments={"tenant_id": request.tenant_id, "query": request.message},
+            arguments={
+                "tenant_id": request.tenant_id,
+                "query": request.message,
+                "allowed_sources": ["policy", "kb", "crm_notes"],
+                "top_k": 3,
+            },
             requested_by=request.principal,
             tenant_id=request.tenant_id,
             trace_id=trace_id,
             risk_level=RiskLevel.LOW,
         )
         knowledge = self._execute_allowed(run, knowledge_call)
+        citation = knowledge.get("citation")
+        grounded = bool(knowledge.get("grounded"))
+        self._audit(
+            run,
+            "retrieval",
+            "rag.retrieve",
+            str(citation or "no-citation"),
+            "hit" if grounded else "miss",
+            "CITATION_VALIDATED" if grounded else "NO_GROUNDED_CONTEXT",
+        )
 
         if self._requests_refund(request.message):
             refund_call = ToolCall(
@@ -94,10 +109,21 @@ class AgentRuntime:
             return run
 
         run.status = RunStatus.COMPLETED
-        run.result = {
-            "answer": "Refunds require approval and idempotent execution.",
-            "citation": knowledge["citation"],
-        }
+        if grounded:
+            run.result = {
+                "answer": knowledge["documents"][0]["text"],
+                "citation": citation,
+                "citations": knowledge["citations"],
+                "grounded": True,
+            }
+        else:
+            run.result = {
+                "answer": "I do not have accessible, current evidence to answer this request.",
+                "citation": None,
+                "citations": [],
+                "grounded": False,
+                "refusal_reason": "NO_GROUNDED_CONTEXT",
+            }
         self.store.save_run(run)
         self._audit(run, "runtime", "run.complete", request.ticket_id, "completed", "READ_ONLY_COMPLETE")
         return run

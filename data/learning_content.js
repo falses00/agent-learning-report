@@ -9,7 +9,7 @@
       prerequisites: [
         "能在终端运行 Python、Git 和 pytest，并看懂失败堆栈。",
         "能解释 HTTP 状态码、JSON 请求和 SQL 事务的基本边界。",
-        "准备一个最小后端练习目录，所有实验都能从干净环境重跑。",
+        "已经运行 F0 FastAPI/SQLite 实验，并能从干净环境重跑测试。",
       ],
       concepts: ["幂等键", "事务边界", "测试分层", "凭据卫生"],
       caseStudy: {
@@ -34,7 +34,7 @@
     s0: {
       prerequisites: [
         "能写 dataclass 或 Pydantic schema，并开启严格字段校验。",
-        "已经运行 S0-S2 教学基线，知道正常和坏输入的结果。",
+        "已经运行 F0 与 S0-S3 教学基线，知道正常、失败和对抗输入的结果。",
         "准备至少三个坏输入：缺字段、额外字段、跨租户字段。",
       ],
       concepts: ["严格 Schema", "ToolCall 申请", "可信身份事实", "Typed Error"],
@@ -111,11 +111,11 @@
     },
     s3: {
       prerequisites: [
-        "准备 20-30 份带 tenant、版本和生效日期的政策文档。",
-        "定义 retrieval、answer、citation 三类独立评测标准。",
-        "准备跨租户、过期文档和无答案问题。",
+        "已经运行确定性 S3 fixture，能解释 ACL、freshness、source trust 和 relevance 四道前置门禁。",
+        "定义 retrieval、answer、citation 与 audit 四类独立评测标准。",
+        "准备跨租户、过期文档、间接注入和无答案问题。",
       ],
-      concepts: ["检索前 ACL", "Hybrid Retrieval", "Claim Citation", "拒答门禁"],
+      concepts: ["检索前 ACL", "有效期与来源门禁", "可验证 Citation", "拒答与分层 Eval"],
       caseStudy: {
         title: "召回了错误租户的退款政策",
         context: "向量相似度很高，但缓存键没有 tenant，tenant-a 命中了 tenant-b 的新政策。",
@@ -124,8 +124,8 @@
       },
       workshop: {
         title: "构建可拒答的多租户 RAG",
-        steps: ["为文档、chunk、索引记录 tenant 和版本 lineage。", "在检索前执行 ACL，再做 hybrid retrieval 与 rerank。", "分别评测召回、答案支持度和引用版本。"],
-        evidence: "保存 hard query、tenant mismatch、stale citation 和拒答 eval 报告。",
+        steps: ["为文档和引用记录 tenant、版本、生效期与来源信任。", "在 lexical baseline 评分前执行 ACL、freshness 和 source trust。", "验证 citation quote，并用组合断言评测命中、拒答、audit 与 trace。"],
+        evidence: "保存 current citation、tenant mismatch、stale policy、indirect injection 和拒答 eval 报告。",
       },
       quiz: [
         q("retrieval recall 很高，答案为什么仍可能错误？", ["模型温度太低", "召回相关不等于上下文精确、引用支持或生成忠实", "top_k 太小必然错误", "向量库不能做问答"], 1, "评测", "用单一召回指标代替端到端事实支持。", "检索、重排、上下文、答案和引用需要分别评测。", "找到相关法规不代表引用条款真的支持结论。", "构造命中相关文档但引用不支持结论的 case。"),

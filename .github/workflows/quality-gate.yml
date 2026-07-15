@@ -1,0 +1,72 @@
+name: Engineering quality gate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: quality-gate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          package-manager-cache: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: agent-runtime-gateway/20-源码/pyproject.toml
+
+      - name: Install teaching baseline
+        working-directory: agent-runtime-gateway/20-源码
+        run: python -m pip install -e ".[test]"
+
+      - name: Run content, test, and eval gates
+        run: python scripts/run_quality_gate.py
+
+      - name: Upload quality evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: quality-evidence-${{ github.sha }}
+          path: quality-reports/
+          if-no-files-found: warn
+          retention-days: 14
+
+  attest:
+    if: github.event_name == 'push'
+    needs: quality-gate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+      attestations: write
+      artifact-metadata: write
+    steps:
+      - name: Download quality evidence
+        uses: actions/download-artifact@v8
+        with:
+          name: quality-evidence-${{ github.sha }}
+          path: quality-reports/
+
+      - name: Attest quality manifest
+        uses: actions/attest@v4
+        with:
+          subject-path: quality-reports/manifest.json

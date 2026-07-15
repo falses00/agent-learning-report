@@ -5,6 +5,7 @@ from typing import Any, Callable
 
 from .contracts import ContractError, Decision, PolicyDecision, RiskLevel, ToolCall
 from .policy import PolicyEngine
+from .rag import KnowledgeBase
 
 
 @dataclass(frozen=True)
@@ -15,8 +16,9 @@ class ToolDefinition:
 
 
 class ToolRegistry:
-    def __init__(self) -> None:
-        self.refund_execution_count = 0
+    def __init__(self, knowledge_base: KnowledgeBase | None = None) -> None:
+        self._knowledge_base = knowledge_base or KnowledgeBase()
+        self._execution_counts: dict[str, int] = {}
         self._tools = {
             "knowledge.retrieve": ToolDefinition(
                 "knowledge.retrieve", RiskLevel.LOW, self._retrieve_knowledge
@@ -38,7 +40,9 @@ class ToolRegistry:
         definition = self.definition(call.tool_name)
         if call.risk_level is not definition.risk_level:
             raise ContractError("tool risk level does not match registry")
-        return definition.executor(call.arguments)
+        result = definition.executor(call.arguments)
+        self._execution_counts[call.tool_name] = self._execution_counts.get(call.tool_name, 0) + 1
+        return result
 
     @property
     def __execution_permit(self) -> object:
@@ -49,21 +53,24 @@ class ToolRegistry:
     def _gateway_permit(self) -> object:
         return self.__execution_permit
 
-    @staticmethod
-    def _retrieve_knowledge(arguments: dict[str, Any]) -> dict[str, Any]:
+    def _retrieve_knowledge(self, arguments: dict[str, Any]) -> dict[str, Any]:
         tenant_id = arguments.get("tenant_id")
         query = arguments.get("query")
         if not tenant_id or not query:
             raise ContractError("knowledge.retrieve requires tenant_id and query")
+        result = self._knowledge_base.retrieve(
+            tenant_id=tenant_id,
+            query=query,
+            allowed_sources=arguments.get("allowed_sources"),
+            top_k=arguments.get("top_k", 3),
+        )
         return {
-            "documents": [
-                {
-                    "document_id": "refund-policy-v1",
-                    "tenant_id": tenant_id,
-                    "text": "Refunds require approval and must be idempotent.",
-                }
-            ],
-            "citation": "refund-policy-v1",
+            "documents": [document.to_context_dict() for document in result.documents],
+            "citations": [citation.to_dict() for citation in result.citations],
+            "citation": result.citations[0].document_id if result.citations else None,
+            "grounded": result.grounded and self._knowledge_base.validate_citations(
+                result.citations, tenant_id=tenant_id
+            ),
         }
 
     def _refund(self, arguments: dict[str, Any]) -> dict[str, Any]:
@@ -71,13 +78,16 @@ class ToolRegistry:
         amount = arguments.get("amount")
         if not ticket_id or not isinstance(amount, (int, float)) or amount <= 0:
             raise ContractError("billing.refund requires ticket_id and a positive amount")
-        self.refund_execution_count += 1
         return {
             "status": "refunded",
             "ticket_id": ticket_id,
             "amount": amount,
             "provider_reference": f"mock-refund-{ticket_id}",
         }
+
+    def execution_count(self, tool_name: str) -> int:
+        self.definition(tool_name)
+        return self._execution_counts.get(tool_name, 0)
 
 
 class ToolGateway:
@@ -130,6 +140,4 @@ class ToolGateway:
         return decision, result
 
     def execution_count(self, tool_name: str) -> int:
-        if tool_name == "billing.refund":
-            return self.__registry.refund_execution_count
-        raise ContractError(f"execution counter is unavailable for tool: {tool_name}")
+        return self.__registry.execution_count(tool_name)

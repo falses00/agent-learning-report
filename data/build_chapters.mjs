@@ -14,10 +14,12 @@ const chapters = [
   { id: 'protocol', num: '协议', title: '统一教学提示词 v2', meta: '定义 · 实验 · 自测 · 证据 · 岗位映射', src: 'agent-runtime-gateway/00-课程总览/每节课互动模板.md', group: 'start' },
   { id: 'baseline', num: '基线', title: '可运行教学基线', meta: 'CLI · pytest · eval', src: 'agent-runtime-gateway/20-源码/README.md', group: 'start' },
 
+  { id: 'f0-lab', num: 'F0', title: '工程基础可运行实验', meta: 'FastAPI · SQLite · Idempotency · pytest', src: 'agent-runtime-gateway/labs/F0-foundation/README.md', group: 'main', stageId: 'f0' },
   { id: 's0', num: 'S0', title: '契约与确定性基线', meta: 'Schema · ErrorModel · Bad cases', src: 'agent-runtime-gateway/02-阶段教学手册/第1阶段-契约层教学手册.md', group: 'main', stageId: 's0' },
   { id: 's1', num: 'S1', title: 'Agent Runtime', meta: 'Run · Step · State · Event', src: 'agent-runtime-gateway/02-阶段教学手册/Phase-02-最小运行时教学手册.md', group: 'main', stageId: 's1' },
   { id: 's2', num: 'S2', title: 'Tool / Policy Gateway', meta: 'Registry · Approval · Audit', src: 'agent-runtime-gateway/02-阶段教学手册/Phase-03-Agent网关与工具治理教学手册.md', group: 'main', stageId: 's2' },
   { id: 's3', num: 'S3', title: 'RAG 与可信引用', meta: 'ACL · Retrieval · Citation', src: 'agent-runtime-gateway/07-RAG问题诊断与优化/RAG教学路线总览.md', group: 'main', stageId: 's3' },
+  { id: 's3-lab', num: 'S3 实验', title: '多租户 RAG 与可信引用实验', meta: 'ACL first · Freshness · Refusal · Eval', src: 'agent-runtime-gateway/labs/S03-rag-citations/README.md', group: 'main' },
   { id: 's4', num: 'S4', title: 'Durable Execution', meta: 'Checkpoint · Resume · Idempotency', src: 'agent-runtime-gateway/02-阶段教学手册/Phase-04-长线任务与断点恢复教学手册.md', group: 'main', stageId: 's4' },
   { id: 's5', num: 'S5', title: 'Memory 与 Context', meta: 'Write Gate · TTL · Isolation', src: 'agent-runtime-gateway/02-阶段教学手册/Phase-06-记忆系统教学手册.md', group: 'main', stageId: 's5' },
   { id: 's6', num: 'S6', title: 'Eval 与 Red Team', meta: 'Golden · Trajectory · Security', src: 'agent-runtime-gateway/02-阶段教学手册/Phase-07-测评审核与红队教学手册.md', group: 'main', stageId: 's6' },

@@ -1,6 +1,7 @@
 tmp/
 .playwright-cli/
 output/playwright/
+quality-reports/
 __pycache__/
 .pytest_cache/
 *.py[cod]

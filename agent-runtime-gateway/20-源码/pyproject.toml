@@ -3,7 +3,14 @@ name = "agent-course-baseline"
 version = "0.1.0"
 description = "Deterministic baseline for the OpsPilot industrial agent course"
 requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115,<1",
+    "pydantic>=2.10,<3",
+    "uvicorn>=0.34,<1",
+]
 
-[tool.pytest.ini_options]
-addopts = "-ra"
-testpaths = ["../21-测试"]
+[project.optional-dependencies]
+test = [
+    "httpx>=0.28,<1",
+    "pytest>=8,<10",
+]
