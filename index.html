@@ -709,6 +709,235 @@
       .memory-benchmark a { grid-column: 2; }
     }
   </style>
+  <style>
+    /* Layout distillation: fewer containers, one continuous learning workflow. */
+    :root {
+      --space-xs: 4px;
+      --space-sm: 8px;
+      --space-md: 12px;
+      --space-lg: 16px;
+      --space-xl: 24px;
+      --space-2xl: 32px;
+      --space-3xl: 48px;
+      --content-width: 1160px;
+      --shadow-card: none;
+      --shadow-active: none;
+    }
+
+    body { background: #f7f9fc; background-image: none; }
+    .app-main { background: #fff; }
+    .view { width: min(var(--content-width), calc(100% - 64px)); padding: 40px 0 88px; }
+    .page-heading { margin-bottom: var(--space-2xl); }
+    .page-heading h1 { font-size: 30px; }
+
+    .topbar { background: rgba(255, 255, 255, .96); box-shadow: none; }
+    .topbar::after { display: none; }
+    .topbar-boundary { align-items: center; gap: 0; }
+    .boundary-badge { min-height: 28px; padding: 0 8px; border: 0; background: transparent; }
+    .boundary-badge + .boundary-badge::before { content: "·"; margin-right: 8px; color: #a8b0bf; }
+    .view-nav { gap: 4px; padding: 0; border: 0; background: transparent; }
+    .view-nav button { min-height: 38px; padding: 0 12px; }
+    .view-nav button.active { background: var(--accent-soft); box-shadow: none; }
+    .view-nav button.active::after { inset: auto 12px 0; background: var(--accent); }
+
+    .sidebar { background: #f9fafc; }
+    .brand { min-height: var(--topbar); padding: 0 18px; }
+    .brand-mark { width: 34px; height: 34px; box-shadow: none; }
+    .sidebar-tools { padding-top: 14px; }
+    .nav-group-meta { background: transparent; }
+    .course-link.active { background: var(--accent-soft); }
+
+    .overview-hero { padding: 8px 0 30px; }
+    .hero-kicker { display: none; }
+    .overview-hero h1 { font-size: 32px; }
+    .overview-progress { min-height: 64px; }
+
+    .continue-panel {
+      margin: 0;
+      padding: 28px 0;
+      border: 0;
+      border-bottom: 1px solid var(--line);
+      border-radius: 0;
+      background: transparent;
+    }
+    .continue-panel .continue-next { margin-top: 10px; }
+    .status-chip { background: var(--surface-muted); }
+
+    .journey-overview { margin: 0; padding: 22px 0; }
+    .journey-strip { display: flex; gap: 0; }
+    .journey-step {
+      min-width: 0;
+      min-height: 58px;
+      flex: 1;
+      grid-template-columns: 28px minmax(0, 1fr);
+      gap: 10px;
+      padding: 6px 20px;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+    }
+    .journey-step:first-child { padding-left: 0; }
+    .journey-step + .journey-step { border-left: 1px solid var(--line); }
+    .journey-step:hover { border-color: var(--line); background: var(--surface-muted); }
+    .journey-step.active { border-color: var(--line); background: transparent; }
+    .journey-step.active .journey-copy strong { color: var(--accent-hover); }
+    .journey-number { width: 26px; height: 26px; border-radius: 50%; }
+    .journey-copy strong { font-size: 13px; }
+    .journey-copy span { font-size: 11px; }
+
+    .overview-grid {
+      grid-template-columns: minmax(0, 1.35fr) minmax(280px, .65fr);
+      gap: 40px;
+      margin-top: 0;
+      padding: 34px 0 40px;
+      border-bottom: 1px solid var(--line);
+    }
+    .section-block { padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
+    .section-block:last-child { padding-left: 40px; border-left: 1px solid var(--line); }
+    .segment-control button.active { box-shadow: none; }
+
+    .route-list { margin-top: 48px; border-top: 0; }
+    .route-header { padding: 0 0 18px; }
+    .roadmap-group > summary {
+      grid-template-columns: 64px 176px minmax(0, 1fr) auto;
+      min-height: 72px;
+      padding: 14px 0;
+    }
+    .roadmap-marker {
+      display: block;
+      width: auto;
+      height: auto;
+      border-radius: 0;
+      background: transparent;
+      color: var(--accent);
+      font: 800 12px var(--mono);
+    }
+    .route-stage-grid { display: block; border-top: 1px solid var(--line); }
+    .roadmap-group:not([open]) > .route-stage-grid { display: none; }
+    .roadmap-group .route-stage-grid { margin: 0 0 24px 64px; }
+    .route-card {
+      width: 100%;
+      min-height: 68px;
+      display: grid;
+      grid-template-columns: 64px minmax(0, 1fr) auto 72px;
+      gap: 16px;
+      align-items: center;
+      padding: 13px 12px;
+      border: 0;
+      border-bottom: 1px solid var(--line);
+      border-radius: 0;
+      background: transparent;
+    }
+    .route-card:hover { border-color: var(--line); background: var(--surface-muted); }
+    .route-card.current { border-color: var(--line); background: rgba(0, 82, 217, .055); }
+    .route-main { min-width: 0; }
+    .route-title, .route-objective { display: block; }
+    .route-title { font-size: 14px; }
+    .route-objective { margin-top: 2px; font-size: 11px; }
+    .route-boundary { justify-self: start; white-space: nowrap; }
+    .route-card .status-text { justify-self: end; white-space: nowrap; }
+
+    .stage-switcher { margin-bottom: 18px; }
+    .stage-switcher > span { margin-bottom: 0; }
+    .stage-rail { gap: 0; padding: 0; border-bottom: 1px solid var(--line); }
+    .stage-button {
+      min-width: 84px;
+      min-height: 52px;
+      padding: 8px 14px 9px;
+      border: 0;
+      border-bottom: 2px solid transparent;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+      text-align: center;
+    }
+    .stage-button:hover { border-color: var(--line-strong); background: var(--surface-muted); }
+    .stage-button.active { border-color: var(--accent); background: var(--accent-soft); color: var(--accent-hover); box-shadow: none; }
+    .stage-button.active .stage-button-state { color: var(--ink-muted); }
+
+    .stage-method {
+      border: 0;
+      border-bottom: 1px solid var(--line);
+      border-radius: 0;
+      background: rgba(255, 255, 255, .98);
+      box-shadow: none;
+    }
+    .stage-method li { border-right: 0; }
+    .stage-method li.current { background: var(--accent-soft); }
+    .stage-layout { grid-template-columns: minmax(0, 1.35fr) minmax(320px, .65fr); gap: 40px; }
+    .stage-workflow { padding: 0; border: 0; border-radius: 0; background: transparent; }
+    .stage-workflow > section { scroll-margin-top: calc(var(--topbar) + 72px); }
+    .preflight-panel, .case-panel, .workshop-panel, .stage-summary, .quiz-section { padding: 28px 0; }
+    .evidence-panel {
+      position: static;
+      scroll-margin-top: calc(var(--topbar) + 72px);
+      padding: 4px 0 0 32px;
+      border: 0;
+      border-left: 1px solid var(--line);
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+    .evidence-entry { gap: 7px; padding: 12px 0; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; background: transparent; }
+    .evidence-entry.complete { border-color: var(--line); background: transparent; }
+    .evidence-privacy { border: 0; }
+    .workshop-evidence { border: 0; }
+
+    .sim-controls { padding: 0 28px 0 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
+    .sim-flow { gap: 0; border-top: 1px solid var(--line); }
+    .sim-node { min-height: 62px; padding: 10px 8px; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; background: transparent; box-shadow: none; }
+    .sim-node.running, .sim-node.passed, .sim-node.blocked, .sim-node.review { border-color: var(--line); }
+
+    .library-header { padding: 0 0 24px; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; background: transparent; box-shadow: none; }
+    .document-reader { padding: 30px 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
+    .document-reader.markdown, .fallback-content, .reader-nav { max-width: 76ch; }
+
+    .memory-boundary { border: 0; }
+    .memory-section-nav { border: 0; border-bottom: 1px solid var(--line); border-radius: 0; box-shadow: none; }
+    .memory-section-nav button { border-right: 0; }
+    .memory-method-button.active { background: var(--accent-soft); box-shadow: none; }
+    .memory-result { border: 0; }
+    .memory-flow { gap: 0 18px; }
+    .memory-flow-node { min-height: 94px; padding: 12px 0; border: 0; border-top: 1px solid var(--line); border-radius: 0; background: transparent; }
+    .memory-flow-node.active { border-color: var(--success); background: transparent; }
+
+    @media (max-width: 1040px) {
+      .stage-layout { grid-template-columns: 1fr; }
+      .evidence-panel { padding: 28px 0 0; border-left: 0; border-top: 1px solid var(--line); }
+      .sim-controls { padding: 0 0 24px; border-right: 0; border-bottom: 1px solid var(--line); }
+    }
+
+    @media (max-width: 1199px) {
+      .topbar { gap: 10px; padding-inline: 16px; }
+      .topbar-boundary { display: none; }
+      .view-nav button { padding-inline: 9px; white-space: nowrap; }
+    }
+
+    @media (max-width: 720px) {
+      .view { width: min(100% - 32px, var(--content-width)); padding-top: 26px; }
+      .page-heading h1, .overview-hero h1 { font-size: 27px; }
+      .continue-panel { padding: 24px 0; }
+      .journey-overview { overflow: hidden; }
+      .journey-strip { gap: 0; padding: 0 0 6px; }
+      .journey-step { flex: 0 0 190px; padding: 7px 16px; }
+      .journey-step:first-child { padding-left: 0; }
+      .overview-grid { grid-template-columns: 1fr; gap: 28px; padding: 30px 0 34px; }
+      .section-block:last-child { padding: 28px 0 0; border-top: 1px solid var(--line); border-left: 0; }
+      .roadmap-group > summary { grid-template-columns: 44px minmax(0, 1fr) auto; }
+      .roadmap-group .route-stage-grid { margin-left: 0; }
+      .route-card { grid-template-columns: 44px minmax(0, 1fr) auto; gap: 10px; padding: 13px 4px; }
+      .route-card .route-num { grid-row: 1 / span 2; align-self: start; padding-top: 2px; }
+      .route-main { grid-column: 2; }
+      .route-boundary { grid-column: 2; grid-row: 2; }
+      .route-card .status-text { grid-column: 3; grid-row: 1; }
+      .stage-workflow { padding: 0; }
+      .stage-method { top: 62px; }
+      .evidence-panel { padding-top: 24px; }
+      .library-header { padding: 0 0 20px; }
+      .document-reader { padding: 24px 0; }
+      .memory-flow { grid-template-columns: 1fr; gap: 0; }
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#workspace">跳到学习内容</a>
@@ -1606,11 +1835,11 @@ python -m agent_course.cli eval ..\22-评测集\s3-rag-baseline.json</pre>
           const item = STAGES.find((candidate) => candidate.id === stageId);
           const itemState = stageState(stageId);
           const current = item.id === stage.id;
-          return `<button class="route-card${current ? ' current' : ''}" type="button" data-stage-route="${item.id}">
-            <span class="route-card-top"><span class="route-num">${item.num}</span><span class="status-text status-${itemState.status}">${statusLabel(itemState.status)}</span></span>
-            <span class="route-title">${item.title}</span>
-            <span class="route-objective">${item.short}</span>
+          return `<button class="route-card${current ? ' current' : ''}" type="button" data-stage-route="${item.id}"${current ? ' aria-current="step"' : ''}>
+            <span class="route-num">${item.num}</span>
+            <span class="route-main"><span class="route-title">${item.title}</span><span class="route-objective">${item.short}</span></span>
             <span class="route-boundary ${item.implemented ? 'runnable' : ''}">${item.implemented ? '可运行基线' : '工程实验待接入'}</span>
+            <span class="status-text status-${itemState.status}">${statusLabel(itemState.status)}</span>
           </button>`;
         }).join('');
         return `<details class="roadmap-group" id="roadmap-${group.id}" data-roadmap-details="${group.id}"${active || openRoadmapGroups.has(group.id) ? ' open' : ''}>
