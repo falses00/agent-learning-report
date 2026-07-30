@@ -229,6 +229,18 @@ def main() -> int:
             SOURCE_DIR,
             "s3-rag-eval.json",
         ),
+        Check(
+            "s4-durable-eval",
+            (
+                sys.executable,
+                "-m",
+                "agent_course.cli",
+                "eval",
+                "../22-评测集/s4-durable-baseline.json",
+            ),
+            SOURCE_DIR,
+            "s4-durable-eval.json",
+        ),
     )
 
     results = [_run(check, output_dir) for check in checks]

@@ -11,7 +11,7 @@
 在线站点提供：
 
 - 首次学习路径与基础自检。
-- F0、S0-S10 学习路线、本地进度，以及 5/12 工程实验覆盖率；当前可运行基线为 F0、S0-S3。
+- F0、S0-S10 学习路线、本地进度，以及 6/12 工程实验覆盖率；当前可运行基线为 F0、S0-S4。
 - 每阶段 3 项课前检查、明确标注来源的事故或合成工程故障场景、动手步骤和关键概念速记。
 - 每阶段 5 题自测、逐题误区反馈、首轮评分和结构化本地自评门禁。
 - S5 Agent Memory 实验室：14 类方法对比、工作负载选型、写入生命周期决策与专项门禁。
@@ -47,6 +47,8 @@ python -m pytest ..\21-测试 -q
 python -m agent_course.cli demo
 python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json
 python -m agent_course.cli eval ..\22-评测集\s3-rag-baseline.json
+python -m agent_course.cli eval ..\22-评测集\s4-durable-baseline.json
+python -m agent_course.cli durable-demo --work-dir "$env:TEMP\opspilot-s4" --reset
 ```
 
 ## 可复验质量证据
@@ -73,6 +75,7 @@ manifest 中保存各报告的 SHA-256，因此签名来源、提交版本与报
 - [真实缺口与演进台账](agent-runtime-gateway/00-课程总览/教学平台真实缺口与演进台账-2026-07-13.md)
 - [岗位能力与毕业标准](agent-runtime-gateway/00-课程总览/岗位能力与毕业标准.md)
 - [Agent Memory 方法谱系与工业选型](agent-runtime-gateway/06-工业级框架蓝图/Agent-Memory方法谱系与工业选型-2026.md)
+- [S4 崩溃恢复与副作用对账实验](agent-runtime-gateway/labs/S04-durable-execution/README.md)
 - [全链路故障与修复](agent-runtime-gateway/11-工程实战主线/全链路故障与修复手册.md)
 
-当前源码是 F0、S0-S3 教学基线，不是生产系统，不能接入真实资金、客户数据或生产凭据。
+当前源码是 F0、S0-S4 教学基线，不是生产系统，不能接入真实资金、客户数据或生产凭据。

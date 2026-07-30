@@ -2,17 +2,27 @@ from __future__ import annotations
 
 import argparse
 import json
+from pathlib import Path
 
 from .contracts import RunRequest
+from .durability import CrashPoint, FailureInjector, MockRefundProvider, SimulatedCrash
 from .evals import run_eval
 from .foundation import IdempotencyConflict, TicketRepository, TicketService
 from .runtime import AgentRuntime
+from .store import SQLiteStore
+from .tools import ToolRegistry
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="OpsPilot course baseline")
     subparsers = parser.add_subparsers(dest="command", required=True)
     subparsers.add_parser("demo", help="run the approval and idempotency demo")
+    durable_parser = subparsers.add_parser(
+        "durable-demo",
+        help="run the S4 crash, reconciliation, and resume demo",
+    )
+    durable_parser.add_argument("--work-dir", required=True)
+    durable_parser.add_argument("--reset", action="store_true")
     eval_parser = subparsers.add_parser("eval", help="run a JSON eval set")
     eval_parser.add_argument("path")
     ticket_parser = subparsers.add_parser("ticket", help="run the F0 SQLite/CLI lab")
@@ -44,6 +54,83 @@ def main() -> int:
         print(json.dumps(runtime.store.list_audit(run.run_id), indent=2, ensure_ascii=False))
         print(json.dumps({"refund_execution_count": runtime.tool_execution_count("billing.refund")}))
         return 0
+
+    if args.command == "durable-demo":
+        work_dir = Path(args.work_dir)
+        work_dir.mkdir(parents=True, exist_ok=True)
+        runtime_path = work_dir / "runtime.db"
+        provider_path = work_dir / "provider.db"
+        if args.reset:
+            runtime_path.unlink(missing_ok=True)
+            provider_path.unlink(missing_ok=True)
+        elif runtime_path.exists() or provider_path.exists():
+            print(
+                json.dumps(
+                    {
+                        "error": "WORK_DIR_NOT_EMPTY",
+                        "message": "Use a new directory or pass --reset for this teaching fixture.",
+                    }
+                )
+            )
+            return 2
+
+        provider = MockRefundProvider(str(provider_path))
+        first = AgentRuntime(
+            store=SQLiteStore(str(runtime_path)),
+            tools=ToolRegistry(refund_provider=provider),
+            failure_injector=FailureInjector([CrashPoint.AFTER_PROVIDER_SUCCESS]),
+        )
+        waiting = first.start(
+            RunRequest(
+                principal="agent@example.com",
+                tenant_id="tenant-a",
+                ticket_tenant_id="tenant-a",
+                ticket_id="S4-DEMO-001",
+                message="Please refund this order.",
+            )
+        )
+        crash = None
+        try:
+            first.approve(waiting.run_id, "manager@example.com")
+        except SimulatedCrash as exc:
+            crash = str(exc)
+        before_resume = {
+            "run": first.store.get_run(waiting.run_id).to_dict(),
+            "operation": first.store.operation_record(f"{waiting.run_id}:refund"),
+            "provider_execution_count": provider.execution_count(),
+            "crash": crash,
+        }
+        first.store.close()
+        provider.close()
+        if crash is None:
+            print(json.dumps({"error": "CRASH_NOT_TRIGGERED"}))
+            return 3
+
+        reopened_provider = MockRefundProvider(str(provider_path))
+        resumed = AgentRuntime(
+            store=SQLiteStore(str(runtime_path)),
+            tools=ToolRegistry(refund_provider=reopened_provider),
+        )
+        completed = resumed.resume(waiting.run_id)
+        payload = {
+            "scenario": "provider-success-before-local-commit",
+            "before_resume": before_resume,
+            "after_resume": {
+                "run": completed.to_dict(),
+                "operation": resumed.store.operation_record(f"{waiting.run_id}:refund"),
+                "checkpoint": resumed.store.latest_checkpoint(waiting.run_id),
+                "audit": resumed.store.list_audit(waiting.run_id),
+                "provider_execution_count": reopened_provider.execution_count(),
+            },
+        }
+        print(json.dumps(payload, indent=2, ensure_ascii=False))
+        succeeded = (
+            completed.status.value == "completed"
+            and reopened_provider.execution_count() == 1
+        )
+        resumed.store.close()
+        reopened_provider.close()
+        return 0 if succeeded else 1
 
     if args.command == "ticket":
         repository = TicketRepository(args.db)

@@ -1,0 +1,69 @@
+{
+  "suite": "s4-durable-baseline",
+  "version": "2026-07-31",
+  "cases": [
+    {
+      "id": "provider-success-before-local-commit",
+      "critical": true,
+      "request": {
+        "principal": "agent@example.com",
+        "tenant_id": "tenant-a",
+        "ticket_tenant_id": "tenant-a",
+        "ticket_id": "S4-EVAL-001",
+        "message": "Please refund this order."
+      },
+      "action": "approve_crash_after_provider_then_resume",
+      "expected_status": "completed",
+      "expected_refund_executions": 1,
+      "assertions": [
+        {"type": "operation", "tool_name": "billing.refund", "status": "committed", "attempts": 1},
+        {"type": "checkpoint", "reason": "operation.committed", "schema_version": 1, "status": "completed"},
+        {"type": "audit", "action": "tool.execute", "outcome": "recovered", "reason_code": "PROVIDER_RESULT_RECONCILED"},
+        {"type": "result", "path": "result.provider_reference", "op": "exists"},
+        {"type": "trace", "audit_consistent": true}
+      ]
+    },
+    {
+      "id": "crash-before-provider-dispatch",
+      "critical": true,
+      "request": {
+        "principal": "agent@example.com",
+        "tenant_id": "tenant-a",
+        "ticket_tenant_id": "tenant-a",
+        "ticket_id": "S4-EVAL-002",
+        "message": "Please refund this order."
+      },
+      "action": "approve_crash_before_provider_then_resume",
+      "expected_status": "completed",
+      "expected_refund_executions": 1,
+      "assertions": [
+        {"type": "operation", "tool_name": "billing.refund", "status": "committed", "attempts": 1},
+        {"type": "audit", "action": "run.resume", "reason_code": "CHECKPOINT_RESTORED"},
+        {"type": "audit", "action": "tool.execute", "outcome": "executed", "reason_code": "OPERATION_COMMITTED"},
+        {"type": "trace", "audit_consistent": true}
+      ]
+    },
+    {
+      "id": "unknown-provider-outcome-fails-closed",
+      "critical": true,
+      "request": {
+        "principal": "agent@example.com",
+        "tenant_id": "tenant-a",
+        "ticket_tenant_id": "tenant-a",
+        "ticket_id": "S4-EVAL-003",
+        "message": "Please refund this order."
+      },
+      "action": "approve_crash_then_provider_unknown",
+      "expected_status": "needs_reconciliation",
+      "expected_refund_executions": 1,
+      "assertions": [
+        {"type": "operation", "tool_name": "billing.refund", "status": "ambiguous", "attempts": 1},
+        {"type": "checkpoint", "reason": "operation.ambiguous", "schema_version": 1, "status": "needs_reconciliation"},
+        {"type": "result", "path": "error.code", "op": "equals", "value": "PROVIDER_OUTCOME_UNKNOWN"},
+        {"type": "result", "path": "error.retryable", "op": "equals", "value": false},
+        {"type": "audit", "action": "operation.reconcile", "outcome": "paused", "reason_code": "PROVIDER_OUTCOME_UNKNOWN"},
+        {"type": "trace", "audit_consistent": true}
+      ]
+    }
+  ]
+}

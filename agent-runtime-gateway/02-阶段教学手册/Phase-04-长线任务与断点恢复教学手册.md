@@ -1,8 +1,11 @@
 # Phase 04 - 长线任务与断点恢复教学手册
 
 生成日期：2026-06-30  
-学习模式：Design-only  
+最近更新：2026-07-31
+学习模式：可运行教学基线 + 扩展设计
 目标：让你理解长线 Agent 为什么必须支持 checkpoint、resume、retry、cancel、fork、human-in-the-loop 和幂等。
+
+可运行入口：[S4 崩溃恢复与副作用对账实验](../labs/S04-durable-execution/README.md)。先完成 provider 前/后 crash、query-before-retry、ambiguous fail-closed 和 checkpoint 版本测试，再使用本手册扩展 fork、quarantine、审批 TTL 与生产 workflow engine 选型。
 
 ## 1. 本阶段解决的失控风险
 
@@ -40,7 +43,7 @@ Quarantine
 
 ## 3. 课时拆分
 
-| 课时 | 主题 | 你要理解 | Design-only 产物 |
+| 课时 | 主题 | 你要理解 | 必须产物 |
 |---|---|---|---|
 | 4.1 | Checkpoint | 保存的是可恢复状态，不是聊天摘要 | checkpoint 内容表 |
 | 4.2 | Resume | 从最近安全点继续，不重做副作用 | resume 时间线 |
@@ -114,7 +117,7 @@ Step 4 等待人工审批
 - fork 与 retry 有什么区别？
 - 什么失败应该 quarantine 而不是继续 retry？
 
-## 7. Design-only 过关标准
+## 7. 原理过关标准
 
 你应该能复述：
 
@@ -124,16 +127,18 @@ Checkpoint 保存可恢复状态，resume 从安全点继续，retry 必须受�
 保存聊天记录不等于 durable execution。
 ```
 
-## 8. 后续 Implementation-later 门禁
+## 8. 可运行实验门禁
 
-后续工程阶段才需要：
+当前工程实验必须证明：
 
 - checkpoint 能保存并恢复。
 - 重复 operation_id 不产生重复副作用。
 - approval resume 能从暂停点继续。
 - cancel 后不再调用工具。
-- max step guard 生效。
-- 失败任务能进入 quarantined 状态。
+- provider 结果未知时进入 `needs_reconciliation`，不能盲目 retry。
+- checkpoint schema 不兼容时拒绝恢复。
+
+扩展设计仍需完成：max step guard、fork、审批 TTL、worker lease 和 quarantined 运维流程。
 
 ## 9. 进入 Phase 5 条件
 

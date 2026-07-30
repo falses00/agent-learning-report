@@ -4,6 +4,13 @@ from dataclasses import dataclass
 from typing import Any, Callable
 
 from .contracts import ContractError, Decision, PolicyDecision, RiskLevel, ToolCall
+from .durability import (
+    MockRefundProvider,
+    ProviderIdempotencyConflict,
+    ProviderLookup,
+    ProviderLookupStatus,
+    request_fingerprint,
+)
 from .policy import PolicyEngine
 from .rag import KnowledgeBase
 
@@ -12,19 +19,25 @@ from .rag import KnowledgeBase
 class ToolDefinition:
     name: str
     risk_level: RiskLevel
-    executor: Callable[[dict[str, Any]], dict[str, Any]]
+    executor: Callable[[ToolCall], dict[str, Any]]
+    lookup: Callable[[ToolCall], ProviderLookup] | None = None
 
 
 class ToolRegistry:
-    def __init__(self, knowledge_base: KnowledgeBase | None = None) -> None:
+    def __init__(
+        self,
+        knowledge_base: KnowledgeBase | None = None,
+        refund_provider: MockRefundProvider | None = None,
+    ) -> None:
         self._knowledge_base = knowledge_base or KnowledgeBase()
+        self._refund_provider = refund_provider or MockRefundProvider()
         self._execution_counts: dict[str, int] = {}
         self._tools = {
             "knowledge.retrieve": ToolDefinition(
                 "knowledge.retrieve", RiskLevel.LOW, self._retrieve_knowledge
             ),
             "billing.refund": ToolDefinition(
-                "billing.refund", RiskLevel.HIGH, self._refund
+                "billing.refund", RiskLevel.HIGH, self._refund, self._lookup_refund
             ),
         }
 
@@ -40,7 +53,7 @@ class ToolRegistry:
         definition = self.definition(call.tool_name)
         if call.risk_level is not definition.risk_level:
             raise ContractError("tool risk level does not match registry")
-        result = definition.executor(call.arguments)
+        result = definition.executor(call)
         self._execution_counts[call.tool_name] = self._execution_counts.get(call.tool_name, 0) + 1
         return result
 
@@ -53,7 +66,8 @@ class ToolRegistry:
     def _gateway_permit(self) -> object:
         return self.__execution_permit
 
-    def _retrieve_knowledge(self, arguments: dict[str, Any]) -> dict[str, Any]:
+    def _retrieve_knowledge(self, call: ToolCall) -> dict[str, Any]:
+        arguments = call.arguments
         tenant_id = arguments.get("tenant_id")
         query = arguments.get("query")
         if not tenant_id or not query:
@@ -73,20 +87,35 @@ class ToolRegistry:
             ),
         }
 
-    def _refund(self, arguments: dict[str, Any]) -> dict[str, Any]:
+    def _refund(self, call: ToolCall) -> dict[str, Any]:
+        arguments = call.arguments
         ticket_id = arguments.get("ticket_id")
         amount = arguments.get("amount")
         if not ticket_id or not isinstance(amount, (int, float)) or amount <= 0:
             raise ContractError("billing.refund requires ticket_id and a positive amount")
-        return {
-            "status": "refunded",
-            "ticket_id": ticket_id,
-            "amount": amount,
-            "provider_reference": f"mock-refund-{ticket_id}",
-        }
+        return self._refund_provider.execute(call.operation_id, arguments)
+
+    def _lookup_refund(self, call: ToolCall) -> ProviderLookup:
+        lookup = self._refund_provider.lookup(call.operation_id)
+        if (
+            lookup.status is ProviderLookupStatus.SUCCEEDED
+            and lookup.request_hash != request_fingerprint(call.arguments)
+        ):
+            raise ProviderIdempotencyConflict(
+                "provider operation_id maps to different refund arguments"
+            )
+        return lookup
+
+    def lookup(self, call: ToolCall) -> ProviderLookup:
+        definition = self.definition(call.tool_name)
+        if definition.lookup is None:
+            raise ContractError(f"tool does not support reconciliation: {call.tool_name}")
+        return definition.lookup(call)
 
     def execution_count(self, tool_name: str) -> int:
         self.definition(tool_name)
+        if tool_name == "billing.refund":
+            return self._refund_provider.execution_count()
         return self._execution_counts.get(tool_name, 0)
 
 
@@ -138,6 +167,9 @@ class ToolGateway:
             return decision, None
         result = self.__registry._execute_authorized(call, self.__permit)
         return decision, result
+
+    def lookup(self, call: ToolCall) -> ProviderLookup:
+        return self.__registry.lookup(call)
 
     def execution_count(self, tool_name: str) -> int:
         return self.__registry.execution_count(tool_name)

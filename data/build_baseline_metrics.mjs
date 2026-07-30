@@ -9,8 +9,9 @@ const testDir = resolve(repoRoot, 'agent-runtime-gateway/21-测试');
 const evalFiles = [
   'agent-runtime-gateway/22-评测集/engineering-baseline.json',
   'agent-runtime-gateway/22-评测集/s3-rag-baseline.json',
+  'agent-runtime-gateway/22-评测集/s4-durable-baseline.json',
 ];
-const runnableStages = ['f0', 's0', 's1', 's2', 's3'];
+const runnableStages = ['f0', 's0', 's1', 's2', 's3', 's4'];
 const targets = { tests: 60, evalCases: 100, runnableStages: 12 };
 
 const testFiles = readdirSync(testDir).filter((name) => /^test_.*\.py$/.test(name));
@@ -40,7 +41,7 @@ for (const path of evalFiles) {
 }
 
 const metrics = {
-  version: '2026-07-15',
+  version: '2026-07-31',
   tests,
   evalCases,
   assertions,

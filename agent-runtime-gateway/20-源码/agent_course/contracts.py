@@ -12,9 +12,19 @@ class ContractError(ValueError):
 class RunStatus(StrEnum):
     CREATED = "created"
     WAITING_APPROVAL = "waiting_approval"
+    EXECUTING = "executing"
+    NEEDS_RECONCILIATION = "needs_reconciliation"
     COMPLETED = "completed"
     DENIED = "denied"
     FAILED = "failed"
+    CANCELLED = "cancelled"
+
+
+class OperationStatus(StrEnum):
+    APPROVED = "approved"
+    DISPATCHING = "dispatching"
+    AMBIGUOUS = "ambiguous"
+    COMMITTED = "committed"
 
 
 class Decision(StrEnum):
@@ -128,6 +138,7 @@ class RunRecord:
     request: RunRequest
     status: RunStatus = RunStatus.CREATED
     pending_call: ToolCall | None = None
+    approved_by: str | None = None
     result: dict[str, Any] | None = None
     error: ErrorModel | None = None
 

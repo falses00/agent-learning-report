@@ -1,13 +1,25 @@
 from __future__ import annotations
 
 import json
+from contextlib import ExitStack
 from dataclasses import asdict
 from pathlib import Path
+from tempfile import TemporaryDirectory
 from typing import Any
 
 from .contracts import ContractError, RunRequest
+from .durability import CrashPoint, FailureInjector, MockRefundProvider, SimulatedCrash
 from .rag import Citation, KnowledgeBase
 from .runtime import AgentRuntime
+from .store import SQLiteStore
+from .tools import ToolRegistry
+
+
+DURABLE_ACTIONS = {
+    "approve_crash_after_provider_then_resume",
+    "approve_crash_before_provider_then_resume",
+    "approve_crash_then_provider_unknown",
+}
 
 
 def run_eval(path: str | Path) -> dict[str, Any]:
@@ -23,74 +35,126 @@ def run_eval(path: str | Path) -> dict[str, Any]:
     for case in cases:
         case_id = str(case.get("id", "missing-case-id"))
         critical = bool(case.get("critical", False))
-        runtime = AgentRuntime()
+        action = case.get("action")
         before_counts: dict[str, int] = {}
         case_failures: list[str] = []
 
-        try:
-            run = runtime.start(RunRequest.from_dict(case["request"]))
-            action = case.get("action")
-            if action == "approve_twice":
-                run = runtime.approve(run.run_id, "manager@example.com")
-                run = runtime.approve(run.run_id, "manager@example.com")
-            elif action is not None:
-                case_failures.append(f"unsupported action: {action}")
-        except (ContractError, KeyError, TypeError, ValueError) as exc:
-            failures.append(
-                {
-                    "case_id": case_id,
-                    "critical": critical,
-                    "reason": f"case setup failed: {exc}",
-                    "reasons": [f"case setup failed: {exc}"],
-                }
-            )
-            continue
-
-        expected_status = case.get("expected_status")
-        if expected_status is not None:
-            assertion_total += 1
-            if run.status.value == expected_status:
-                assertion_passed += 1
-            else:
-                case_failures.append(
-                    f"status expected {expected_status}, got {run.status.value}"
+        with ExitStack() as resources:
+            provider: MockRefundProvider | None = None
+            runtime_path: Path | None = None
+            provider_path: Path | None = None
+            if action in DURABLE_ACTIONS:
+                work_dir = Path(
+                    resources.enter_context(TemporaryDirectory(prefix="opspilot-s4-eval-"))
                 )
-
-        if case.get("expected_refund_executions") is not None:
-            assertion_total += 1
-            expected = case["expected_refund_executions"]
-            actual = runtime.tool_execution_count("billing.refund")
-            if actual == expected:
-                assertion_passed += 1
-            else:
-                case_failures.append(
-                    f"billing.refund executions expected {expected}, got {actual}"
+                runtime_path = work_dir / "runtime.db"
+                provider_path = work_dir / "provider.db"
+                provider = MockRefundProvider(str(provider_path))
+                store = SQLiteStore(str(runtime_path))
+                resources.callback(provider.close)
+                resources.callback(store.close)
+                crash_point = (
+                    CrashPoint.BEFORE_PROVIDER_CALL
+                    if action == "approve_crash_before_provider_then_resume"
+                    else CrashPoint.AFTER_PROVIDER_SUCCESS
                 )
-
-        audit = runtime.store.list_audit(run.run_id)
-        for assertion in case.get("assertions", []):
-            assertion_total += 1
-            passed, reason = _evaluate_assertion(
-                assertion,
-                run=run,
-                runtime=runtime,
-                audit=audit,
-                before_counts=before_counts,
-            )
-            if passed:
-                assertion_passed += 1
+                runtime = AgentRuntime(
+                    store=store,
+                    tools=ToolRegistry(refund_provider=provider),
+                    failure_injector=FailureInjector([crash_point]),
+                )
             else:
-                case_failures.append(reason)
+                runtime = AgentRuntime()
+                resources.callback(runtime.store.close)
 
-        if case_failures:
-            failures.append(
-                {
-                    "case_id": case_id,
-                    "critical": critical,
-                    "reason": "; ".join(case_failures),
-                    "reasons": case_failures,
-                }
-            )
+            try:
+                run = runtime.start(RunRequest.from_dict(case["request"]))
+                if action == "approve_twice":
+                    run = runtime.approve(run.run_id, "manager@example.com")
+                    run = runtime.approve(run.run_id, "manager@example.com")
+                elif action in DURABLE_ACTIONS:
+                    try:
+                        runtime.approve(run.run_id, "manager@example.com")
+                    except SimulatedCrash:
+                        pass
+                    else:
+                        case_failures.append("configured crash point did not interrupt execution")
+                    if provider is None or runtime_path is None or provider_path is None:
+                        case_failures.append("durable action is missing its file-backed fixture")
+                    else:
+                        run_id = run.run_id
+                        runtime.store.close()
+                        provider.close()
+                        provider = MockRefundProvider(
+                            str(provider_path),
+                            lookup_available=action != "approve_crash_then_provider_unknown",
+                        )
+                        store = SQLiteStore(str(runtime_path))
+                        resources.callback(provider.close)
+                        resources.callback(store.close)
+                        runtime = AgentRuntime(
+                            store=store,
+                            tools=ToolRegistry(refund_provider=provider),
+                        )
+                        run = runtime.resume(run_id)
+                elif action is not None:
+                    case_failures.append(f"unsupported action: {action}")
+            except (ContractError, KeyError, TypeError, ValueError) as exc:
+                failures.append(
+                    {
+                        "case_id": case_id,
+                        "critical": critical,
+                        "reason": f"case setup failed: {exc}",
+                        "reasons": [f"case setup failed: {exc}"],
+                    }
+                )
+                continue
+
+            expected_status = case.get("expected_status")
+            if expected_status is not None:
+                assertion_total += 1
+                if run.status.value == expected_status:
+                    assertion_passed += 1
+                else:
+                    case_failures.append(
+                        f"status expected {expected_status}, got {run.status.value}"
+                    )
+
+            if case.get("expected_refund_executions") is not None:
+                assertion_total += 1
+                expected = case["expected_refund_executions"]
+                actual = runtime.tool_execution_count("billing.refund")
+                if actual == expected:
+                    assertion_passed += 1
+                else:
+                    case_failures.append(
+                        f"billing.refund executions expected {expected}, got {actual}"
+                    )
+
+            audit = runtime.store.list_audit(run.run_id)
+            for assertion in case.get("assertions", []):
+                assertion_total += 1
+                passed, reason = _evaluate_assertion(
+                    assertion,
+                    run=run,
+                    runtime=runtime,
+                    audit=audit,
+                    before_counts=before_counts,
+                )
+                if passed:
+                    assertion_passed += 1
+                else:
+                    case_failures.append(reason)
+
+            if case_failures:
+                failures.append(
+                    {
+                        "case_id": case_id,
+                        "critical": critical,
+                        "reason": "; ".join(case_failures),
+                        "reasons": case_failures,
+                    }
+                )
 
     total = len(cases)
     critical_failed = sum(1 for failure in failures if failure["critical"])
@@ -167,6 +231,40 @@ def _evaluate_assertion(
             if inconsistent:
                 return False, "audit events contain inconsistent trace_id values"
         return bool(audit), "trace assertion requires at least one audit event"
+
+    if assertion_type == "operation":
+        expected = {
+            key: value
+            for key, value in assertion.items()
+            if key in {"tool_name", "status", "attempts"}
+        }
+        if not expected:
+            return False, "operation assertion must specify tool_name, status, or attempts"
+        operations = runtime.store.list_operations(run.run_id)
+        matched = any(
+            all(operation.get(key) == value for key, value in expected.items())
+            for operation in operations
+        )
+        return matched, f"operation ledger entry not found: {expected}; got {operations}"
+
+    if assertion_type == "checkpoint":
+        checkpoint = runtime.store.latest_checkpoint(run.run_id)
+        if checkpoint is None:
+            return False, "checkpoint assertion requires a saved checkpoint"
+        expected = {
+            key: value
+            for key, value in assertion.items()
+            if key in {"reason", "schema_version"}
+        }
+        if "status" in assertion:
+            expected["status"] = assertion["status"]
+            actual = {**checkpoint, "status": checkpoint["state"].get("status")}
+        else:
+            actual = checkpoint
+        if not expected:
+            return False, "checkpoint assertion must specify reason, schema_version, or status"
+        matched = all(actual.get(key) == value for key, value in expected.items())
+        return matched, f"checkpoint expected {expected}, got {actual}"
 
     if assertion_type == "result":
         root = {

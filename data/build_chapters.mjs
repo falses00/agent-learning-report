@@ -21,6 +21,7 @@ const chapters = [
   { id: 's3', num: 'S3', title: 'RAG 与可信引用', meta: 'ACL · Retrieval · Citation', src: 'agent-runtime-gateway/07-RAG问题诊断与优化/RAG教学路线总览.md', group: 'main', stageId: 's3' },
   { id: 's3-lab', num: 'S3 实验', title: '多租户 RAG 与可信引用实验', meta: 'ACL first · Freshness · Refusal · Eval', src: 'agent-runtime-gateway/labs/S03-rag-citations/README.md', group: 'main' },
   { id: 's4', num: 'S4', title: 'Durable Execution', meta: 'Checkpoint · Resume · Idempotency', src: 'agent-runtime-gateway/02-阶段教学手册/Phase-04-长线任务与断点恢复教学手册.md', group: 'main', stageId: 's4' },
+  { id: 's4-lab', num: 'S4 实验', title: '崩溃恢复与副作用对账实验', meta: 'Crash · Ledger · Reconcile · Fail closed', src: 'agent-runtime-gateway/labs/S04-durable-execution/README.md', group: 'main' },
   { id: 's5', num: 'S5', title: 'Memory 与 Context', meta: 'Write Gate · TTL · Isolation', src: 'agent-runtime-gateway/02-阶段教学手册/Phase-06-记忆系统教学手册.md', group: 'main', stageId: 's5' },
   { id: 's6', num: 'S6', title: 'Eval 与 Red Team', meta: 'Golden · Trajectory · Security', src: 'agent-runtime-gateway/02-阶段教学手册/Phase-07-测评审核与红队教学手册.md', group: 'main', stageId: 's6' },
   { id: 's7', num: 'S7', title: 'Observability 与 SRE', meta: 'Trace · Audit · SLO', src: 'agent-runtime-gateway/02-阶段教学手册/Phase-08-可观测性与审计教学手册.md', group: 'main', stageId: 's7' },

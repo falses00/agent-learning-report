@@ -16,6 +16,7 @@ EVAL_DIR = Path(__file__).resolve().parents[1] / "22-评测集"
 def test_composable_assertions_pass_engineering_and_rag_baselines() -> None:
     engineering = run_eval(EVAL_DIR / "engineering-baseline.json")
     rag = run_eval(EVAL_DIR / "s3-rag-baseline.json")
+    durable = run_eval(EVAL_DIR / "s4-durable-baseline.json")
 
     assert engineering["failed"] == 0
     assert engineering["suite"] == "engineering-baseline"
@@ -26,6 +27,10 @@ def test_composable_assertions_pass_engineering_and_rag_baselines() -> None:
     assert rag["suite"] == "s3-rag-baseline"
     assert rag["assertions"] >= 20
     assert rag["assertions_passed"] == rag["assertions"]
+    assert durable["failed"] == 0
+    assert durable["suite"] == "s4-durable-baseline"
+    assert durable["assertions"] >= 20
+    assert durable["assertions_passed"] == durable["assertions"]
 
 
 def test_eval_reports_critical_citation_failure(tmp_path) -> None:

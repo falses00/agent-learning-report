@@ -1034,7 +1034,8 @@
 python -m pytest ..\21-测试 -q
 python -m agent_course.cli demo
 python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json
-python -m agent_course.cli eval ..\22-评测集\s3-rag-baseline.json</pre>
+python -m agent_course.cli eval ..\22-评测集\s3-rag-baseline.json
+python -m agent_course.cli eval ..\22-评测集\s4-durable-baseline.json</pre>
           </div>
           <div class="expected-output" id="baselineMetrics">正在读取可复验工程基线。</div>
         </section>
@@ -1373,8 +1374,8 @@ python -m agent_course.cli eval ..\22-评测集\s3-rag-baseline.json</pre>
         failure: '工具已经成功但本地未记录，恢复后再次退款或重复写库。',
         fix: '保存业务状态与副作用引用，使用幂等键、查询既有结果和补偿策略。',
         evidence: '审批前重启、工具前后 crash、重复 operation id 和恢复测试。',
-        command: '# 完成 S4 实验后运行\npython -m pytest tests -q -k "resume or idempotent or crash"', implemented: false,
-        chapter: 's4',
+        command: 'cd "agent-runtime-gateway\\20-源码"\npython -m pytest ..\\21-测试\\test_runtime.py ..\\21-测试\\test_durable.py -q\npython -m agent_course.cli eval ..\\22-评测集\\s4-durable-baseline.json\npython -m agent_course.cli durable-demo --work-dir "$env:TEMP\\opspilot-s4" --reset', implemented: true,
+        chapter: 's4-lab',
         question: '外部工具成功、本地 operation ledger 提交前崩溃，如何恢复？',
         answer: '不能直接重试。应使用 provider 幂等键或查询接口确认既有结果，再提交本地状态；无法确认时进入人工处理或补偿流程。',
       },
