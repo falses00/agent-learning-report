@@ -1,8 +1,8 @@
 # Phase 06 - 记忆系统教学手册
 
-更新日期：2026-07-13
-学习模式：原理教材 + 前端决策实验 + 工程设计；生产存储实现留到 Implementation-later
-目标：让你理解记忆不是“把聊天记录塞进向量库”，而是一个有来源、权限、生命周期、写入门禁、召回策略、删除机制和评测闭环的数据治理系统。
+更新日期：2026-07-31
+学习模式：原理教材 + 前端决策实验 + 可运行 SQLite 工程实验 + 失败注入 + JSONL 评测
+目标：让你理解并实现记忆不是“把聊天记录塞进向量库”，而是一个有来源、权限、生命周期、写入门禁、召回策略、删除机制和评测闭环的数据治理系统。
 
 > 必读主教材：[Agent Memory 方法谱系与工业选型（2026）](../06-工业级框架蓝图/Agent-Memory方法谱系与工业选型-2026.md)。先比较方法，再做架构选择；不要先选产品再寻找问题。
 
@@ -65,13 +65,13 @@ Memory Eval
 | 课时 | 主题 | 你要理解 | 必交产物 |
 |---|---|---|---|
 | 6.1 | 边界与分层 | state、context、session、memory、RAG 的区别 | 边界图 |
-| 6.2 | 方法谱系 | 上下文裁剪、摘要、向量、层级、反思、图、技能、多模态的原理与代价 | 14 类方法比较表 |
+| 6.2 | 方法谱系 | 上下文裁剪、摘要、向量、层级、反思、图、技能、多模态、结构化压缩与 belief 的原理与代价 | 17 类方法比较表 |
 | 6.3 | 工业选型 | 按工作负载、敏感度、关系复杂度和更新频率选择最小架构 | 选型决策记录 |
 | 6.4 | 写入门禁 | 不是所有内容都能记，先判来源、范围、敏感度和 TTL | memory write gate 表 |
 | 6.5 | 生命周期 | capture、normalize、store、consolidate、retrieve、use、correct、expire/delete | 生命周期审计图 |
 | 6.6 | 权限与租户 | 召回必须带 principal、tenant、scope | 召回权限矩阵 |
 | 6.7 | 纠错与删除 | 版本冲突、tombstone、索引传播和缓存失效 | 删除传播测试 |
-| 6.8 | Memory Eval | 同时评测召回、污染、时效、删除、泄漏、成本和延迟 | 12 条专项评测基线 |
+| 6.8 | Memory Eval | 同时评测召回、污染、时效、删除、泄漏、成本和延迟 | 18 条可执行专项评测基线 |
 | 6.9 | 趋势判断 | 区分论文事实、项目自报结果和工程推断 | 趋势证据卡 |
 
 推荐顺序：先在站点“记忆实验室”完成 1 次工作负载选型，再完成至少 4 个生命周期场景，最后才进入工程证据验收。
@@ -160,22 +160,35 @@ Phase 6 解决的是长期上下文污染和隐私越界。
 - 至少正确完成 4 个写入/拒绝/临时保存/纠错/删除场景。
 - 能从 `memory-engineering-baseline.jsonl` 中挑出一条安全失败用例，说明预期结果和审计证据。
 
-## 9. 后续 Implementation-later 门禁
+## 9. 当前可运行工程门禁
 
-后续工程阶段才需要：
+先进入[S5 受治理 Memory 实验](../labs/S05-memory-context/README.md)，再运行：
 
-- memory write gate 拒绝模型猜测和敏感信息。
-- retrieval policy 强制 principal/tenant/scope。
-- delete/tombstone 能阻止再次召回。
-- memory eval 覆盖 recall、precision、pollution、staleness、privacy leakage。
-- 记忆写入、拒绝、召回和删除都有 audit。
-- RAG 证据、会话状态和长期记忆分开存放、分开评测。
+```powershell
+cd "agent-runtime-gateway\20-源码"
+python -m pytest ..\21-测试\test_memory.py -q
+python -m agent_course.cli memory-eval ..\22-评测集\memory-engineering-baseline.jsonl
+python -m agent_course.cli memory-demo --db "$env:TEMP\opspilot-s5-memory.db" --reset
+```
+
+当前门禁真实覆盖：
+
+- memory write gate 拒绝模型猜测、Secret/PII 与不可信持久化指令。
+- retrieval policy 从受信 `MemoryAccessPolicy` 读取成员关系、管理员和资源 grant；调用方自填 tenant/subject 不构成授权。
+- TTL 到期会失效主记录并删除派生索引。
+- delete 会硬删除同一 subject 的整个版本链、清理派生索引并留下最小 tombstone；验证目标 ID、subject 和原内容不再出现。
+- 版本化更新保留旧事实的 validity、来源和 supersedes 链。
+- context pack 受 token budget 约束，超长记录整条跳过而非截断事实。
+- 18 条 JSONL eval 覆盖正常、失败、对抗、伪造租户、自授资源、重复 add 冲突和文件数据库重开。
+
+仍属生产扩展，而非本阶段已证明能力：真实 embedding/hybrid retrieval、temporal graph、并发控制、加密/KMS、备份擦除、法务留存和跨区域 SLO。
 
 ## 10. 参考锚点
 
 - [数据治理与记忆生命周期](../06-工业级框架蓝图/数据治理与记忆生命周期.md)
 - [Agent Memory 方法谱系与工业选型（2026）](../06-工业级框架蓝图/Agent-Memory方法谱系与工业选型-2026.md)
 - [Memory 专项评测基线](../22-评测集/memory-engineering-baseline.jsonl)
+- [S5 受治理 Memory 实验](../labs/S05-memory-context/README.md)
 - [RAG 跨层契约与版本治理](../06-工业级框架蓝图/RAG跨层契约与版本治理.md)
 - [测评审核体系](../04-测评审核体系/测评审核体系.md)
 - [证据索引](../10-GitHub项目调研/00-证据索引.md)

@@ -1,6 +1,6 @@
 # Agent Memory 方法谱系与工业选型（2026）
 
-- 核验日期：2026-07-13
+- 核验日期：2026-07-31
 - 适用阶段：工程主线 S5 / Design-only Phase 06
 证据规则：只引用原论文、OpenReview、官方项目仓库和官方文档。论文实验结果不等于独立复现，项目 README 自报数据不等于生产 SLA。
 
@@ -143,6 +143,9 @@ score = relevance
 | HippoRAG / 2 | LLM 抽取图，Personalized PageRank 激活相关 passage | 多跳 QA、复杂文档关联 | 关联检索强，减少反复检索 | 离线抽图成本、增量和 ACL 需补齐 | 研究原型 |
 | MemoryOS | short/mid/long 三层，FIFO、摘要和分页式更新 | 个人助手、层级摘要教学 | OS 类比清晰，生命周期完整 | 摘要层丢细节，LoCoMo 外证据有限 | 研究原型 |
 | MIRIX | core/episodic/semantic/procedural/resource/vault 六类，多 Agent 管理多模态记忆 | 桌面助手、屏幕与资源记忆 | 覆盖图像、资源和流程 | 系统复杂，持续屏幕采集有隐私风险 | 研究原型 |
+| SimpleMem | atomic memory + semantic compression + recursive consolidation + intent-aware retrieval | 长历史、多模态和轻量本地 Agent | 三段边界清楚，易比较压缩与召回 | 压缩不可逆，错误合并会丢来源和冲突 | 研究原型 |
+| ReMe | 从轨迹蒸馏、改写、合并和剪枝 procedural memory | 代码、Web、运维和重复工作流 | 经验可读、可搜索、可淘汰 | 错误经验晋升和环境版本漂移 | 研究工具包 |
+| Hindsight | retain / recall / reflect，区分 facts、experiences、entity summaries、beliefs | 长期对话与动态实体 | 时间、来源和 belief 演化边界明确 | 多阶段成本高，错误 belief 会持续影响召回 | 研究原型 |
 
 ## 6. 方法原理与取舍
 
@@ -208,6 +211,16 @@ score = relevance
 - **缺点**：存储量、隐私暴露、实体对齐和删除传播更难。
 - **适用**：需要屏幕历史或多模态资源的研究与受控产品。
 门禁：默认最小采集，优先本地处理，必须支持区域遮罩、敏感识别和按资源删除。
+
+### 6.8 结构化压缩、程序经验与 belief 演化
+
+2026 年的新路线不是一个统一“最佳记忆算法”，而是分别优化不同环节：
+
+- **SimpleMem**：先把轨迹压成 atomic memory，再递归整合冗余，并按查询意图构造上下文。适合比较压缩率、证据覆盖和召回成本；压缩后的事实仍要保留来源、冲突与可删除映射。
+- **ReMe**：把任务轨迹蒸馏为 procedural memory，通过 refine、merge、prune 维护经验库。适合工具型 Agent；只有环境回放成功、权限范围明确且版本兼容的经验才能晋升。
+- **Hindsight**：把 retain、recall、reflect 分离，并区分世界事实、Agent 经历、实体摘要与可修订 belief。适合讲清“证据不等于推断”；belief 必须能被反证、降权和删除。
+
+共同误区：不能用论文 benchmark 的平均提升替代生产中的 tenant isolation、PII、TTL、删除、错误前提和长期退化评测。
 
 ## 7. 工业选型顺序
 
@@ -327,6 +340,9 @@ authorize request
 | LongMemEval（ICLR 2025） | information extraction、multi-session reasoning、knowledge update、temporal、abstention | 测更新、冲突、时间与拒答 | 主要是 assistant 历史 |
 | LongMemEval-V2（2026 WIP） | 451 个问题，最多 500 条环境轨迹和 115M tokens，测状态、工作流、gotcha、前提 | 高阶测“是否成为熟悉环境的操作者” | 工作进行中，coding agent 方法延迟高 |
 | MemoryAgentBench（ICLR 2026） | 增量多轮写入、检索、更新与记忆管理 | 测在线记忆能力而非一次性静态 QA | 需要结合生产安全指标 |
+| EvoMemBench（2026） | 持续写入、自演化、冲突与长期退化 | 测 memory evolution 是否越用越可靠 | 新基准，仍需独立复现与生产分布验证 |
+| MemSyco-Bench（2026） | 长期记忆导致的迎合与错误前提放大 | 测“保持一致”是否压过事实核验 | 专项安全基准，不覆盖完整生命周期 |
+| PM-Bench（2026） | prospective memory：保留未来意图、识别触发条件、按时执行 | 测 Agent 是否记得未来承诺 | 还需叠加权限、取消、幂等和副作用门禁 |
 | DMR | 深层历史事实检索 | 检索压力测试 | 不能覆盖删除和治理 |
 | HippoRAG 系列数据集 | 多跳和关联检索 | 比较 vector 与 graph retrieval | 不是完整用户记忆评测 |
 
@@ -338,6 +354,8 @@ authorize request
 | 召回质量 | memory recall、precision、evidence coverage | precision 下降导致污染 |
 | 时间 | temporal reasoning、stale_memory_rate | 过期记忆仍使用 |
 | 冲突 | conflict detection/resolution | 无来源覆盖旧值 |
+| 前提 | false-premise resistance、memory sycophancy | 错误信念被长期一致性放大 |
+| 未来意图 | prospective recall、trigger precision、authorized execution | 错时、越权或取消后仍执行 |
 | 安全 | privacy leakage、cross-tenant contamination | 任一泄漏 case 失败 |
 | 删除 | deletion_success、paraphrase re-retrieval | 删除后仍可召回 |
 | 归因 | source coverage、citation accuracy | 关键记忆无来源 |
@@ -368,6 +386,8 @@ authorize request
 3. **系统成本开始被单独研究**：2026 年 Agent Memory systems characterization 把构建、召回和生成阶段分开归因，强调 freshness、latency 和 fleet-scale 取舍。
 4. **Memory 类型继续细分**：Semantic、episodic、procedural、resource、relation 和不同 user/session/org scope 正在成为显式设计对象。
 5. **多模态记忆进入研究系统**：MIRIX 等工作开始处理长期截图和资源记忆，但隐私与存储风险更高。
+6. **压缩、经验与 belief 分层演进**：SimpleMem、ReMe 和 Hindsight 分别优化结构化压缩、程序经验和 retain/recall/reflect，而不是只扩大向量库。
+7. **新的风险面开始独立评测**：EvoMemBench、MemSyco-Bench 和 PM-Bench 分别把持续退化、记忆迎合与未来承诺变成显式 benchmark。
 
 ### 12.2 基于上述证据的课程推断
 
@@ -378,6 +398,7 @@ authorize request
 - Temporal graph 会成为动态企业数据的常见候选，但不会替代向量宽召回和结构化事实库。
 - 遗忘、纠错、删除、审计和数据主权的重要性会超过“记住更多”。
 - 评测会继续从离线 QA 走向任务成功率、长期运营、staleness 曲线、用户纠正和环境版本迁移。
+- Memory controller 可能同时处理写入晋升、冲突、错误前提、未来触发与删除证明，而不只做召回排序。
 - 参数化记忆、外部记忆和上下文压缩会共存，工程选择将由更新速度、可删除性、成本和风险决定。
 
 ## 13. 推荐学习顺序
@@ -439,6 +460,9 @@ authorize request
 - [Mem0（2025）](https://arxiv.org/abs/2504.19413)
 - [MemoryOS（2025）](https://arxiv.org/abs/2506.06326)
 - [MIRIX（2025）](https://arxiv.org/abs/2507.07957)
+- [SimpleMem（2026）](https://arxiv.org/abs/2601.02553)
+- [ReMe（ACL Findings 2026）](https://arxiv.org/abs/2512.10696)
+- [Hindsight（2026）](https://arxiv.org/abs/2512.12818)
 - [LangMem 官方概念指南](https://langchain-ai.github.io/langmem/concepts/conceptual_guide/)
 
 ### 评测与 2026 前沿
@@ -450,6 +474,9 @@ authorize request
 - [Graph-based Agent Memory Survey（2026）](https://arxiv.org/abs/2602.05665)
 - [Memory for Autonomous LLM Agents Survey（2026）](https://arxiv.org/abs/2603.07670)
 - [Agent Memory Systems Characterization（2026）](https://arxiv.org/abs/2606.06448)
+- [EvoMemBench（2026）](https://arxiv.org/abs/2605.18421)
+- [MemSyco-Bench（2026）](https://arxiv.org/abs/2607.01071)
+- [PM-Bench（2026）](https://arxiv.org/abs/2607.12385)
 
 ## 17. 仍未知或需要独立验证的部分
 

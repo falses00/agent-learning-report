@@ -6,7 +6,7 @@
   });
 
   window.MEMORY_LAB = {
-    updatedAt: '2026-07-13',
+    updatedAt: '2026-07-31',
     evidenceNotice: '论文结果与项目自报不等于生产 SLA。选型必须结合自己的数据、模型、权限和评测集复现。',
     families: [
       { id: 'all', label: '全部方法' },
@@ -32,6 +32,9 @@
       method('hipporag', 'HippoRAG / HippoRAG 2', 'graph', '从文本抽取图，并用 Personalized PageRank 激活关联 passage。', '多跳 QA、复杂文档和关联检索。', '单次图检索可减少反复迭代查询。', '离线抽图成本高，增量更新和 ACL 需额外设计。', '把多跳检索结果当成已验证业务事实。', '研究原型', 2025, 'HippoRAG 2 paper', 'https://arxiv.org/abs/2502.14802'),
       method('memoryos', 'MemoryOS', 'hierarchical', '用 short/mid/long 三层和 FIFO、摘要、分页式更新管理长期个人记忆。', '个人助手和层级记忆教学。', 'OS 类比和四模块生命周期清晰。', '摘要层可能丢细节，LoCoMo 外证据有限。', '将论文实验提升幅度直接当成产品承诺。', '研究原型', 2025, 'MemoryOS paper', 'https://arxiv.org/abs/2506.06326'),
       method('mirix', 'MIRIX', 'multimodal', '用六类 memory 和多个 memory manager 协调文本、截图与资源。', '桌面助手、屏幕历史和多模态个人 Agent。', '覆盖 procedural、resource 和 visual memory。', '系统复杂，持续屏幕采集的隐私与删除风险高。', '默认持续采集整个屏幕并长期保存。', '研究原型', 2025, 'MIRIX paper', 'https://arxiv.org/abs/2507.07957'),
+      method('simplemem', 'SimpleMem', 'basic', '先把轨迹压成 atomic memory，再递归合并冗余事实，并按查询意图组织召回上下文。', '长历史问答、轻量本地 Agent 和多模态记忆实验。', '压缩、整合和检索三段边界清楚，易做 ablation。', '压缩不可逆，错误合并会丢失来源或把冲突事实揉成一个结论。', '只比较 token 节省，不测冲突、删除和压缩后证据覆盖。', '研究原型', 2026, 'SimpleMem paper', 'https://arxiv.org/abs/2601.02553'),
+      method('reme', 'ReMe', 'experience', '把成功与失败轨迹蒸馏为可搜索的 procedural memory，并通过 refine、merge 和 prune 控制经验库。', '代码、Web、运维和重复工具工作流。', '经验以可读节点保存，便于检查、复用和淘汰。', '错误经验可能被晋升；环境变化会让旧策略失效。', '未经环境回放、权限检查和版本绑定就把反思提升为技能。', '研究工具包', 2026, 'ReMe paper', 'https://arxiv.org/abs/2512.10696'),
+      method('hindsight', 'Hindsight', 'graph', '将 retain、recall、reflect 分开，并区分世界事实、Agent 经历、实体摘要和可修订 belief。', '长期对话、动态实体和需要证据与推断分离的 Agent。', '显式建模时间、实体、来源与 belief 演化。', '多阶段写入和反思成本高，错误 belief 仍可能持续影响召回。', '把 belief 当事实，或在删除时只清原文而遗漏派生摘要和关系。', '研究原型', 2026, 'Hindsight paper', 'https://arxiv.org/abs/2512.12818'),
     ],
     decisions: [
       { id: 'allow', label: '允许长期写入' },
@@ -112,13 +115,20 @@
       { id: 'longmemeval-v2', name: 'LongMemEval-V2', year: 2026, focus: '环境状态、工作流和 gotcha', fact: '451 个问题，历史最多 500 条轨迹和 115M tokens；论文标注 Work in Progress。', sourceUrl: 'https://arxiv.org/abs/2605.12493' },
       { id: 'memory-agent-bench', name: 'MemoryAgentBench', year: 2026, focus: '增量多轮写入、更新和管理', fact: 'ICLR 2026 论文，强调 memory agent 的核心能力覆盖。', sourceUrl: 'https://openreview.net/forum?id=DT7JyQC3MR' },
       { id: 'systems', name: 'Agent Memory Systems Characterization', year: 2026, focus: '构建、召回、生成阶段成本', fact: '研究十种系统在两个 benchmark suite 上的系统级行为。', sourceUrl: 'https://arxiv.org/abs/2606.06448' },
+      { id: 'evomembench', name: 'EvoMemBench', year: 2026, focus: '持续写入下的自演化、冲突和长期退化', fact: '把 memory evolution 作为持续过程评测，而不是一次性静态检索。', sourceUrl: 'https://arxiv.org/abs/2605.18421' },
+      { id: 'memsyco', name: 'MemSyco-Bench', year: 2026, focus: '记忆驱动的迎合与错误信念放大', fact: '专项暴露长期记忆如何让 Agent 持续迎合用户错误前提。', sourceUrl: 'https://arxiv.org/abs/2607.01071' },
+      { id: 'pm-bench', name: 'PM-Bench', year: 2026, focus: '未来意图、触发条件和 prospective memory', fact: '评测 Agent 能否在未来合适时机执行先前承诺，而非只回忆过去。', sourceUrl: 'https://arxiv.org/abs/2607.12385' },
     ],
     future: [
       { kind: 'evidence', title: '从用户历史走向环境经验', detail: 'LongMemEval-V2 评测状态、工作流、环境 gotcha 和前提，而不只问“用户以前说过什么”。' },
       { kind: 'evidence', title: '图与有效时间继续扩张', detail: 'Graphiti、HippoRAG 2、A-MEM 和 2026 graph memory survey 都把关系、演化和多跳作为核心问题。' },
       { kind: 'evidence', title: '成本归因成为独立问题', detail: '2026 systems characterization 把 construction、retrieval、generation 分开分析，说明准确率之外还必须看 freshness、latency 和 amortization。' },
+      { kind: 'evidence', title: '记忆会放大迎合和错误前提', detail: 'MemSyco-Bench 将 memory-induced sycophancy 单独评测，说明长期一致不等于长期正确。' },
+      { kind: 'evidence', title: '从回忆过去扩展到记住未来承诺', detail: 'PM-Bench 把 prospective memory 拆成意图保持、条件识别和按时执行，补上当前 recall benchmark 的盲区。' },
+      { kind: 'evidence', title: '持续演化开始有独立基准', detail: 'EvoMemBench 关注长期写入、冲突和自演化后的能力变化，要求课程观察退化曲线而非单次得分。' },
       { kind: 'inference', title: '工业栈将分成五类存储', detail: '预计消息历史、用户事实、业务实体图、环境经验和技能库会分开治理，而不是共享一个向量库。' },
       { kind: 'inference', title: '删除与审计比容量更重要', detail: '随着长期记忆增长，纠错、遗忘、数据主权和跨租户证明会成为主要发布门禁。' },
+      { kind: 'inference', title: '控制器会从召回器升级为治理器', detail: '未来 memory controller 不只决定 top-k，还要处理写入晋升、冲突、前提核验、未来触发和删除证明。' },
     ],
     metrics: [
       { id: 'recall', label: 'Memory Recall', threshold: '按分层 case 设定，不只看平均值' },
@@ -128,6 +138,10 @@
       { id: 'privacy', label: 'Privacy Leakage', threshold: 'critical case 必须为 0' },
       { id: 'source', label: 'Source Coverage', threshold: '关键记忆必须 100% 可追溯' },
       { id: 'ablation', label: 'Ablation Value', threshold: '质量提升需覆盖成本、延迟和风险增量' },
+      { id: 'conflict', label: 'Conflict Resolution', threshold: '当前值与历史值都能按时间和来源解释' },
+      { id: 'authorization', label: 'Authorization Isolation', threshold: '跨 tenant、user、resource critical case 必须为 0' },
+      { id: 'premise', label: 'False-premise Resistance', threshold: '错误前提不能被长期一致性放大' },
+      { id: 'prospective', label: 'Prospective Success', threshold: '未来承诺只在授权条件和正确时机触发' },
     ],
   };
 })();

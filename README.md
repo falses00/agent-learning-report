@@ -11,10 +11,10 @@
 在线站点提供：
 
 - 首次学习路径与基础自检。
-- F0、S0-S10 学习路线、本地进度，以及 6/12 工程实验覆盖率；当前可运行基线为 F0、S0-S4。
+- F0、S0-S10 学习路线、本地进度，以及 7/12 工程实验覆盖率；当前可运行基线为 F0、S0-S5。
 - 每阶段 3 项课前检查、明确标注来源的事故或合成工程故障场景、动手步骤和关键概念速记。
 - 每阶段 5 题自测、逐题误区反馈、首轮评分和结构化本地自评门禁。
-- S5 Agent Memory 实验室：14 类方法对比、工作负载选型、写入生命周期决策与专项门禁。
+- S5 Agent Memory 实验室：17 类方法对比、工作负载选型、写入生命周期决策、SQLite 治理实验与 18 条专项评测。
 - 可运行基线命令、故障演练、课程资料阅读和搜索。
 - 本地进度导出与重置，不上传学习数据；导出包明确标记为 `self-reported`，不能替代 CI 或独立工程复验。
 
@@ -49,6 +49,8 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json
 python -m agent_course.cli eval ..\22-评测集\s3-rag-baseline.json
 python -m agent_course.cli eval ..\22-评测集\s4-durable-baseline.json
 python -m agent_course.cli durable-demo --work-dir "$env:TEMP\opspilot-s4" --reset
+python -m agent_course.cli memory-eval ..\22-评测集\memory-engineering-baseline.jsonl
+python -m agent_course.cli memory-demo --db "$env:TEMP\opspilot-s5-memory.db" --reset
 ```
 
 ## 可复验质量证据
@@ -59,7 +61,7 @@ python -m agent_course.cli durable-demo --work-dir "$env:TEMP\opspilot-s4" --res
 python scripts/run_quality_gate.py
 ```
 
-命令会生成 `quality-reports/manifest.json`、pytest JUnit 报告、课程检查日志和两套 eval JSON。每次向 `main` 推送后，Actions 会保留整包证据，并使用 GitHub Artifact Attestations 为 manifest 生成可验证的构建来源。下载 CI 产物后可核对：
+命令会生成 `quality-reports/manifest.json`、pytest JUnit 报告、课程检查日志和四套 eval JSON。每次向 `main` 推送后，Actions 会保留整包证据，并使用 GitHub Artifact Attestations 为 manifest 生成可验证的构建来源。下载 CI 产物后可核对：
 
 ```powershell
 gh attestation verify quality-reports/manifest.json --repo falses00/agent-learning-report
@@ -76,6 +78,7 @@ manifest 中保存各报告的 SHA-256，因此签名来源、提交版本与报
 - [岗位能力与毕业标准](agent-runtime-gateway/00-课程总览/岗位能力与毕业标准.md)
 - [Agent Memory 方法谱系与工业选型](agent-runtime-gateway/06-工业级框架蓝图/Agent-Memory方法谱系与工业选型-2026.md)
 - [S4 崩溃恢复与副作用对账实验](agent-runtime-gateway/labs/S04-durable-execution/README.md)
+- [S5 受治理 Agent Memory 实验](agent-runtime-gateway/labs/S05-memory-context/README.md)
 - [全链路故障与修复](agent-runtime-gateway/11-工程实战主线/全链路故障与修复手册.md)
 
-当前源码是 F0、S0-S4 教学基线，不是生产系统，不能接入真实资金、客户数据或生产凭据。
+当前源码是 F0、S0-S5 教学基线，不是生产系统，不能接入真实资金、客户数据或生产凭据。

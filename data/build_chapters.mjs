@@ -23,6 +23,7 @@ const chapters = [
   { id: 's4', num: 'S4', title: 'Durable Execution', meta: 'Checkpoint · Resume · Idempotency', src: 'agent-runtime-gateway/02-阶段教学手册/Phase-04-长线任务与断点恢复教学手册.md', group: 'main', stageId: 's4' },
   { id: 's4-lab', num: 'S4 实验', title: '崩溃恢复与副作用对账实验', meta: 'Crash · Ledger · Reconcile · Fail closed', src: 'agent-runtime-gateway/labs/S04-durable-execution/README.md', group: 'main' },
   { id: 's5', num: 'S5', title: 'Memory 与 Context', meta: 'Write Gate · TTL · Isolation', src: 'agent-runtime-gateway/02-阶段教学手册/Phase-06-记忆系统教学手册.md', group: 'main', stageId: 's5' },
+  { id: 's5-lab', num: 'S5 实验', title: '受治理的 Agent Memory 实验', meta: 'Write Gate · ACL · TTL · Delete · Eval', src: 'agent-runtime-gateway/labs/S05-memory-context/README.md', group: 'main' },
   { id: 's6', num: 'S6', title: 'Eval 与 Red Team', meta: 'Golden · Trajectory · Security', src: 'agent-runtime-gateway/02-阶段教学手册/Phase-07-测评审核与红队教学手册.md', group: 'main', stageId: 's6' },
   { id: 's7', num: 'S7', title: 'Observability 与 SRE', meta: 'Trace · Audit · SLO', src: 'agent-runtime-gateway/02-阶段教学手册/Phase-08-可观测性与审计教学手册.md', group: 'main', stageId: 's7' },
   { id: 's8', num: 'S8', title: 'Security 与 Sandbox', meta: 'Threat model · Isolation · MCP', src: 'agent-runtime-gateway/02-阶段教学手册/Phase-09-安全隔离与沙箱教学手册.md', group: 'main', stageId: 's8' },
@@ -31,7 +32,7 @@ const chapters = [
 
   { id: 'failures', num: '手册', title: '全链路故障与修复', meta: '症状 · 根因 · 修复 · 回归', src: 'agent-runtime-gateway/11-工程实战主线/全链路故障与修复手册.md', group: 'reference' },
   { id: 'selftest', num: '题库', title: '阶段自测与预习', meta: '每阶段 5 题 · 预习门禁', src: 'agent-runtime-gateway/11-工程实战主线/阶段自测与预习清单.md', group: 'reference' },
-  { id: 'memory-atlas', num: 'S5+', title: 'Agent Memory 方法谱系', meta: '14 类方法 · 工业选型 · 评测 · 趋势', src: 'agent-runtime-gateway/06-工业级框架蓝图/Agent-Memory方法谱系与工业选型-2026.md', group: 'reference' },
+  { id: 'memory-atlas', num: 'S5+', title: 'Agent Memory 方法谱系', meta: '17 类方法 · 工业选型 · 评测 · 趋势', src: 'agent-runtime-gateway/06-工业级框架蓝图/Agent-Memory方法谱系与工业选型-2026.md', group: 'reference' },
   { id: 'sources', num: '资料', title: '权威资料索引', meta: '官方文档 · 标准 · 原始论文', src: 'agent-runtime-gateway/00-课程总览/权威资料索引.md', group: 'reference' },
   { id: 'mcp', num: '专题', title: 'MCP 与工具生态', meta: '协议 · 准入 · 凭据边界', src: 'agent-runtime-gateway/02-阶段教学手册/Phase-05-MCP与工具生态教学手册.md', group: 'reference' },
   { id: 'acceptance', num: '门禁', title: '阶段验收清单', meta: '设计理解 · 工程证据', src: 'agent-runtime-gateway/02-阶段教学手册/阶段验收清单.md', group: 'reference' },

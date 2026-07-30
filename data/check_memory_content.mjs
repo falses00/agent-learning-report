@@ -21,7 +21,7 @@ const requireUniqueIds = (items, path) => {
 if (!lab || typeof lab !== 'object') {
   errors.push('window.MEMORY_LAB is missing');
 } else {
-  if (!Array.isArray(lab.methods) || lab.methods.length !== 14) errors.push('methods must contain exactly 14 entries');
+  if (!Array.isArray(lab.methods) || lab.methods.length < 17) errors.push('methods must contain at least 17 entries');
   else {
     requireUniqueIds(lab.methods, 'methods');
     lab.methods.forEach((item, index) => {
@@ -69,12 +69,17 @@ for (const [index, line] of evalLines.entries()) {
   try { evalCases.push(JSON.parse(line)); }
   catch (error) { errors.push(`eval line ${index + 1} is invalid JSON: ${error.message}`); }
 }
-if (evalCases.length < 12) errors.push('memory eval set must contain at least 12 cases');
+if (evalCases.length < 18) errors.push('memory eval set must contain at least 18 cases');
 else {
   requireUniqueIds(evalCases, 'evalCases');
   evalCases.forEach((item, index) => {
-    for (const field of ['id', 'category', 'operation', 'input', 'expected_decision']) requireText(item[field], `evalCases[${index}].${field}`);
+    for (const field of ['id', 'version', 'category', 'operation', 'input', 'expected_decision']) requireText(item[field], `evalCases[${index}].${field}`);
+    if (!item.request || typeof item.request !== 'object' || Array.isArray(item.request)) errors.push(`evalCases[${index}].request must be an object`);
     if (!Array.isArray(item.assertions) || !item.assertions.length) errors.push(`evalCases[${index}].assertions must be non-empty`);
+    else item.assertions.forEach((assertion, assertionIndex) => {
+      if (!assertion || typeof assertion !== 'object' || Array.isArray(assertion)) errors.push(`evalCases[${index}].assertions[${assertionIndex}] must be an object`);
+      else requireText(assertion.type, `evalCases[${index}].assertions[${assertionIndex}].type`);
+    });
     if (typeof item.critical !== 'boolean') errors.push(`evalCases[${index}].critical must be boolean`);
   });
 }

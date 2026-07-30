@@ -2,18 +2,41 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 from pathlib import Path
 
 from .contracts import RunRequest
 from .durability import CrashPoint, FailureInjector, MockRefundProvider, SimulatedCrash
 from .evals import run_eval
 from .foundation import IdempotencyConflict, TicketRepository, TicketService
+from .memory import (
+    MemoryAccessPolicy,
+    MemoryCandidate,
+    MemoryScope,
+    MemorySensitivity,
+    MemoryService,
+    MemorySourceKind,
+    MemoryStore,
+    MemoryType,
+)
+from .memory_evals import run_memory_eval
 from .runtime import AgentRuntime
 from .store import SQLiteStore
 from .tools import ToolRegistry
 
 
+DEMO_MEMORY_ACCESS_POLICY = MemoryAccessPolicy(
+    tenant_memberships={
+        "user-a": {"tenant-a"},
+        "user-b": {"tenant-b"},
+        "agent": {"tenant-a"},
+    },
+)
+
+
 def main() -> int:
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")
     parser = argparse.ArgumentParser(description="OpsPilot course baseline")
     subparsers = parser.add_subparsers(dest="command", required=True)
     subparsers.add_parser("demo", help="run the approval and idempotency demo")
@@ -25,6 +48,17 @@ def main() -> int:
     durable_parser.add_argument("--reset", action="store_true")
     eval_parser = subparsers.add_parser("eval", help="run a JSON eval set")
     eval_parser.add_argument("path")
+    memory_eval_parser = subparsers.add_parser(
+        "memory-eval",
+        help="run the executable S5 JSONL memory eval set",
+    )
+    memory_eval_parser.add_argument("path")
+    memory_parser = subparsers.add_parser(
+        "memory-demo",
+        help="run the S5 write, isolation, expiry, and delete demo",
+    )
+    memory_parser.add_argument("--db", required=True)
+    memory_parser.add_argument("--reset", action="store_true")
     ticket_parser = subparsers.add_parser("ticket", help="run the F0 SQLite/CLI lab")
     ticket_parser.add_argument("--db", required=True, help="SQLite database path")
     ticket_commands = ticket_parser.add_subparsers(dest="ticket_command", required=True)
@@ -161,6 +195,137 @@ def main() -> int:
             return 0
         finally:
             repository.close()
+
+    if args.command == "memory-demo":
+        database = Path(args.db)
+        database.parent.mkdir(parents=True, exist_ok=True)
+        if args.reset:
+            database.unlink(missing_ok=True)
+        elif database.exists():
+            print(
+                json.dumps(
+                    {
+                        "error": "MEMORY_DB_EXISTS",
+                        "message": "Use a new database or pass --reset for this teaching fixture.",
+                    }
+                )
+            )
+            return 2
+
+        store = MemoryStore(str(database))
+        service = MemoryService(
+            store,
+            access_policy=DEMO_MEMORY_ACCESS_POLICY,
+        )
+        try:
+            preference = service.write(
+                MemoryCandidate(
+                    content="用户偏好默认使用中文回复",
+                    source_kind=MemorySourceKind.USER_STATEMENT,
+                    source_ref="user-message:s5-demo",
+                    tenant_id="tenant-a",
+                    principal_id="user-a",
+                    scope=MemoryScope.USER,
+                    subject_id="preference:language",
+                    sensitivity=MemorySensitivity.PRIVATE,
+                    memory_type=MemoryType.SEMANTIC,
+                    ttl_seconds=31_536_000,
+                    confidence=1.0,
+                    run_id="s5-demo",
+                )
+            )
+            model_guess = service.write(
+                MemoryCandidate(
+                    content="用户可能在金融行业",
+                    source_kind=MemorySourceKind.MODEL_INFERENCE,
+                    source_ref="model-output:s5-demo",
+                    tenant_id="tenant-a",
+                    principal_id="agent",
+                    scope=MemoryScope.USER,
+                    subject_id="profile:industry",
+                    sensitivity=MemorySensitivity.PRIVATE,
+                    memory_type=MemoryType.SEMANTIC,
+                    ttl_seconds=86_400,
+                    confidence=0.55,
+                    run_id="s5-demo",
+                )
+            )
+            sensitive = service.write(
+                MemoryCandidate(
+                    content="API key = sk-course-canary-123456",
+                    source_kind=MemorySourceKind.USER_MESSAGE,
+                    source_ref="user-message:s5-sensitive-demo",
+                    tenant_id="tenant-a",
+                    principal_id="user-a",
+                    scope=MemoryScope.USER,
+                    subject_id="secret:api",
+                    sensitivity=MemorySensitivity.SECRET,
+                    memory_type=MemoryType.SEMANTIC,
+                    ttl_seconds=3_600,
+                    confidence=1.0,
+                    run_id="s5-demo",
+                )
+            )
+            recalled = service.search(
+                principal_id="user-a",
+                tenant_id="tenant-a",
+                query="默认使用什么语言回复",
+            )
+            cross_tenant = service.search(
+                principal_id="user-b",
+                tenant_id="tenant-b",
+                requested_tenant_id="tenant-a",
+                query="语言偏好",
+            )
+            deleted = service.delete(
+                preference.memory_id or "",
+                actor="user-a",
+                tenant_id="tenant-a",
+                reason="teaching deletion proof",
+            )
+            after_delete = service.search(
+                principal_id="user-a",
+                tenant_id="tenant-a",
+                query="回复语言偏好",
+            )
+            payload = {
+                "scenario": "governed-memory-lifecycle",
+                "write": preference.to_dict(),
+                "model_guess": model_guess.to_dict(),
+                "sensitive_candidate": sensitive.to_dict(),
+                "recall_before_delete": recalled.to_dict(),
+                "cross_tenant": cross_tenant.to_dict(),
+                "delete": deleted.to_dict(),
+                "recall_after_delete": after_delete.to_dict(),
+                "store": {
+                    "active_count": store.active_count(),
+                    "index_count": store.index_count(),
+                    "tombstone_count": store.tombstone_count(),
+                },
+                "audit_reason_codes": [
+                    event["reason_code"] for event in store.list_audit()
+                ],
+                "sensitive_value_persisted": (
+                    "sk-course-canary-123456" in store.serialized_state()
+                ),
+            }
+            print(json.dumps(payload, indent=2, ensure_ascii=False))
+            succeeded = (
+                recalled.to_dict()["record_count"] == 1
+                and cross_tenant.decision.value == "deny"
+                and after_delete.to_dict()["record_count"] == 0
+                and store.index_count() == 0
+                and store.tombstone_count() == 1
+                and not payload["sensitive_value_persisted"]
+            )
+            return 0 if succeeded else 1
+        finally:
+            store.close()
+
+    if args.command == "memory-eval":
+        result = run_memory_eval(args.path)
+        print(json.dumps(result, indent=2, ensure_ascii=False))
+        return 0 if result["failed"] == 0 else 1
 
     result = run_eval(args.path)
     print(json.dumps(result, indent=2, ensure_ascii=False))

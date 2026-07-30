@@ -7,11 +7,12 @@ const repoRoot = resolve(dataDir, '..');
 const checkOnly = process.argv.includes('--check');
 const testDir = resolve(repoRoot, 'agent-runtime-gateway/21-测试');
 const evalFiles = [
-  'agent-runtime-gateway/22-评测集/engineering-baseline.json',
-  'agent-runtime-gateway/22-评测集/s3-rag-baseline.json',
-  'agent-runtime-gateway/22-评测集/s4-durable-baseline.json',
+  { path: 'agent-runtime-gateway/22-评测集/engineering-baseline.json', format: 'json' },
+  { path: 'agent-runtime-gateway/22-评测集/s3-rag-baseline.json', format: 'json' },
+  { path: 'agent-runtime-gateway/22-评测集/s4-durable-baseline.json', format: 'json' },
+  { path: 'agent-runtime-gateway/22-评测集/memory-engineering-baseline.jsonl', format: 'jsonl' },
 ];
-const runnableStages = ['f0', 's0', 's1', 's2', 's3', 's4'];
+const runnableStages = ['f0', 's0', 's1', 's2', 's3', 's4', 's5'];
 const targets = { tests: 60, evalCases: 100, runnableStages: 12 };
 
 const testFiles = readdirSync(testDir).filter((name) => /^test_.*\.py$/.test(name));
@@ -23,19 +24,23 @@ const tests = testFiles.reduce((total, name) => {
 let evalCases = 0;
 let assertions = 0;
 let explicitAssertions = 0;
-for (const path of evalFiles) {
-  const payload = JSON.parse(readFileSync(resolve(repoRoot, path), 'utf8'));
-  if (!Array.isArray(payload.cases)) throw new Error(`${path} must contain cases[]`);
-  evalCases += payload.cases.length;
-  explicitAssertions += payload.cases.reduce(
+for (const entry of evalFiles) {
+  const source = readFileSync(resolve(repoRoot, entry.path), 'utf8');
+  const cases = entry.format === 'jsonl'
+    ? source.split(/\r?\n/).filter(Boolean).map((line) => JSON.parse(line))
+    : JSON.parse(source).cases;
+  if (!Array.isArray(cases)) throw new Error(`${entry.path} must contain cases[] or JSONL cases`);
+  evalCases += cases.length;
+  explicitAssertions += cases.reduce(
     (total, item) => total + (Array.isArray(item.assertions) ? item.assertions.length : 0),
     0,
   );
-  assertions += payload.cases.reduce(
+  assertions += cases.reduce(
     (total, item) => total
       + (Array.isArray(item.assertions) ? item.assertions.length : 0)
       + (item.expected_status !== undefined ? 1 : 0)
-      + (item.expected_refund_executions !== undefined ? 1 : 0),
+      + (item.expected_refund_executions !== undefined ? 1 : 0)
+      + (item.expected_decision !== undefined ? 1 : 0),
     0,
   );
 }

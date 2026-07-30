@@ -241,6 +241,18 @@ def main() -> int:
             SOURCE_DIR,
             "s4-durable-eval.json",
         ),
+        Check(
+            "s5-memory-eval",
+            (
+                sys.executable,
+                "-m",
+                "agent_course.cli",
+                "memory-eval",
+                "../22-评测集/memory-engineering-baseline.jsonl",
+            ),
+            SOURCE_DIR,
+            "s5-memory-eval.json",
+        ),
     )
 
     results = [_run(check, output_dir) for check in checks]

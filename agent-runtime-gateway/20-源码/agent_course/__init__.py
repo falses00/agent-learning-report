@@ -9,6 +9,20 @@ from .durability import (
     SimulatedCrash,
 )
 from .foundation import TicketRepository, TicketService
+from .memory import (
+    MemoryAccessPolicy,
+    MemoryCandidate,
+    MemoryDecision,
+    MemoryRecord,
+    MemoryScope,
+    MemorySearchResult,
+    MemorySensitivity,
+    MemoryService,
+    MemorySourceKind,
+    MemoryStore,
+    MemoryType,
+    MemoryWriteResult,
+)
 from .rag import Citation, KnowledgeBase, KnowledgeDocument
 from .runtime import AgentRuntime
 
@@ -20,6 +34,18 @@ __all__ = [
     "KnowledgeBase",
     "KnowledgeDocument",
     "MockRefundProvider",
+    "MemoryCandidate",
+    "MemoryAccessPolicy",
+    "MemoryDecision",
+    "MemoryRecord",
+    "MemoryScope",
+    "MemorySearchResult",
+    "MemorySensitivity",
+    "MemoryService",
+    "MemorySourceKind",
+    "MemoryStore",
+    "MemoryType",
+    "MemoryWriteResult",
     "ProviderLookupStatus",
     "RunRequest",
     "RunStatus",

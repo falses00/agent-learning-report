@@ -1035,7 +1035,8 @@ python -m pytest ..\21-测试 -q
 python -m agent_course.cli demo
 python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json
 python -m agent_course.cli eval ..\22-评测集\s3-rag-baseline.json
-python -m agent_course.cli eval ..\22-评测集\s4-durable-baseline.json</pre>
+python -m agent_course.cli eval ..\22-评测集\s4-durable-baseline.json
+python -m agent_course.cli memory-eval ..\22-评测集\memory-engineering-baseline.jsonl</pre>
           </div>
           <div class="expected-output" id="baselineMetrics">正在读取可复验工程基线。</div>
         </section>
@@ -1201,7 +1202,7 @@ python -m agent_course.cli eval ..\22-评测集\s4-durable-baseline.json</pre>
 
       <section class="memory-section" id="memoryMethods" aria-labelledby="memoryMethodsTitle">
         <div class="memory-section-heading">
-          <div><div class="section-label">01 · 先比较</div><h2 id="memoryMethodsTitle">14 类方法谱系</h2><p>看清原理、适用场景、收益、代价和最常见的失败方式，再做产品或框架选择。</p></div>
+          <div><div class="section-label">01 · 先比较</div><h2 id="memoryMethodsTitle">17 类方法谱系</h2><p>看清原理、适用场景、收益、代价和最常见的失败方式，再做产品或框架选择。</p></div>
           <button class="secondary-button" id="openMemoryAtlas" type="button">打开完整原理教材</button>
         </div>
         <div class="memory-family-filter" id="memoryFamilyFilter" role="group" aria-label="按方法族筛选"></div>
@@ -1386,8 +1387,8 @@ python -m agent_course.cli eval ..\22-评测集\s4-durable-baseline.json</pre>
         failure: '错误事实、PII 或其他租户内容被长期写入并持续污染决策。',
         fix: '最小化存储，绑定来源与租户，支持纠正、删除和 ablation。',
         evidence: '错误记忆、TTL、删除、跨租户和上下文消融测试。',
-        command: '# 完成 S5 实验后运行\npython -m pytest tests -q -k "memory or context"', implemented: false,
-        chapter: 's5',
+        command: 'cd "agent-runtime-gateway\\20-源码"\npython -m pytest ..\\21-测试\\test_memory.py -q\npython -m agent_course.cli memory-eval ..\\22-评测集\\memory-engineering-baseline.jsonl\npython -m agent_course.cli memory-demo --db "$env:TEMP\\opspilot-s5-memory.db" --reset', implemented: true,
+        chapter: 's5-lab',
         question: '为什么“记得越多”通常不会让 Agent 更好？',
         answer: '更多记忆会增加噪声、成本、隐私风险和错误事实污染。只有经过门禁且通过 ablation 证明有价值的记忆才值得进入上下文。',
       },

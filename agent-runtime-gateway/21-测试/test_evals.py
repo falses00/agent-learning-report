@@ -8,6 +8,7 @@ import pytest
 
 from agent_course import AgentRuntime
 from agent_course.evals import _evaluate_assertion, run_eval
+from agent_course.memory_evals import run_memory_eval
 
 
 EVAL_DIR = Path(__file__).resolve().parents[1] / "22-评测集"
@@ -17,6 +18,7 @@ def test_composable_assertions_pass_engineering_and_rag_baselines() -> None:
     engineering = run_eval(EVAL_DIR / "engineering-baseline.json")
     rag = run_eval(EVAL_DIR / "s3-rag-baseline.json")
     durable = run_eval(EVAL_DIR / "s4-durable-baseline.json")
+    memory = run_memory_eval(EVAL_DIR / "memory-engineering-baseline.jsonl")
 
     assert engineering["failed"] == 0
     assert engineering["suite"] == "engineering-baseline"
@@ -31,6 +33,12 @@ def test_composable_assertions_pass_engineering_and_rag_baselines() -> None:
     assert durable["suite"] == "s4-durable-baseline"
     assert durable["assertions"] >= 20
     assert durable["assertions_passed"] == durable["assertions"]
+    assert memory["failed"] == 0
+    assert memory["suite"] == "s5-memory-baseline"
+    assert memory["total"] == 18
+    assert memory["assertions"] >= 85
+    assert memory["assertions_passed"] == memory["assertions"]
+    assert memory["release_passed"] is True
 
 
 def test_eval_reports_critical_citation_failure(tmp_path) -> None:
