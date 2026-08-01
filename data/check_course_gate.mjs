@@ -18,9 +18,10 @@ for (const field of fields) assert(gate.validateEvidenceField(field, field.value
 assert(!gate.validateEvidenceField(fields[0], 'x'.repeat(80)).valid, 'meaningless long evidence accepted');
 assert(gate.validateEvidenceField(fields[1], 'token=super-secret-value-123456').sensitive, 'credential was not detected');
 
-const completeGate = { implementationReady: true, preflightReady: true, quizReady: true, evidenceReady: true, memoryLabReady: true };
+const completeGate = { implementationReady: true, preflightReady: true, quizReady: true, evidenceReady: true, memoryLabReady: true, evalLabReady: true };
 assert(gate.canPassStage(completeGate), 'complete gate should pass');
 assert(!gate.canPassStage({ ...completeGate, implementationReady: false }), 'missing lab should block');
+assert(!gate.canPassStage({ ...completeGate, evalLabReady: false }), 'missing S6 eval lab should block');
 assert(gate.shouldDowngradePass({ ...completeGate, status: 'passed', gateVersion: 5, requiredGateVersion: 5, quizReady: false }), 'forged pass was trusted');
 assert(gate.shouldDowngradePass({ ...completeGate, status: 'passed', gateVersion: 5, requiredGateVersion: 5, implementationReady: false }), 'unimplemented lab pass was trusted');
 assert(!gate.shouldDowngradePass({ ...completeGate, status: 'passed', gateVersion: 5, requiredGateVersion: 5 }), 'valid pass was downgraded');

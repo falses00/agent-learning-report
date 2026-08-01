@@ -693,7 +693,7 @@
       .document-reader { padding: 20px 18px; }
       .library-header { padding: 18px; }
       .sim-controls { padding: 18px; }
-      .mobile-nav { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+      .mobile-nav { grid-template-columns: repeat(6, minmax(0, 1fr)); }
       .memory-progress { grid-template-columns: 1fr; }
       .memory-progress-item { min-height: 70px; border-right: 0; border-bottom: 1px solid var(--line); }
       .memory-progress-item:last-child { border-bottom: 0; }
@@ -901,10 +901,52 @@
     .memory-flow-node { min-height: 94px; padding: 12px 0; border: 0; border-top: 1px solid var(--line); border-radius: 0; background: transparent; }
     .memory-flow-node.active { border-color: var(--success); background: transparent; }
 
+    .eval-pipeline { border-top: 1px solid var(--line); }
+    .eval-pipeline-step { display: grid; grid-template-columns: 56px minmax(150px, .42fr) minmax(0, 1fr); gap: 18px; align-items: start; padding: 15px 4px; border-bottom: 1px solid var(--line); }
+    .eval-pipeline-step span { color: var(--accent); font: 800 11px var(--mono); }
+    .eval-pipeline-step strong { color: #263248; font-size: 13px; }
+    .eval-pipeline-step p { margin: 0; color: var(--ink-muted); font-size: 12px; }
+    .eval-table-wrap { overflow-x: auto; border-top: 1px solid var(--line); }
+    .eval-table { width: 100%; border-collapse: collapse; min-width: 760px; }
+    .eval-table th, .eval-table td { padding: 11px 10px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; font-size: 11px; }
+    .eval-table th { color: var(--ink-muted); font-size: 10px; text-transform: uppercase; }
+    .eval-table td:first-child { color: #263248; font-weight: 750; }
+    .eval-decision-code { white-space: nowrap; font: 800 10px var(--mono); color: var(--danger); }
+    .eval-decision-code.warn { color: var(--warning); }
+    .eval-lab-layout { display: grid; grid-template-columns: minmax(280px, .72fr) minmax(0, 1.28fr); gap: 40px; align-items: start; }
+    .eval-lab-layout > * { min-width: 0; }
+    #evalScenario { width: 100%; max-width: 100%; }
+    .eval-scenario-sheet { margin-top: 14px; padding: 18px 0; border-top: 2px solid var(--accent); border-bottom: 1px solid var(--line); }
+    .eval-scenario-sheet h3 { margin: 0 0 8px; color: #202b40; font: 800 19px var(--display); }
+    .eval-scenario-sheet > p { margin: 0 0 14px; color: #354158; font-size: 13px; }
+    .eval-scenario-meta { margin: 0; }
+    .eval-scenario-meta div { display: grid; grid-template-columns: 74px minmax(0, 1fr); gap: 12px; padding: 7px 0; border-top: 1px solid var(--line); }
+    .eval-scenario-meta dt { color: var(--ink-muted); font-size: 10px; font-weight: 800; }
+    .eval-scenario-meta dd { margin: 0; font: 11px var(--mono); overflow-wrap: anywhere; }
+    .eval-decision-control { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 16px; border: 1px solid var(--line-strong); border-radius: var(--radius-sm); overflow: hidden; }
+    .eval-decision-control button { min-height: 42px; border: 0; background: var(--surface); color: var(--ink-muted); cursor: pointer; font-size: 12px; font-weight: 800; }
+    .eval-decision-control button + button { border-left: 1px solid var(--line); }
+    .eval-decision-control button.active { background: var(--accent-soft); color: var(--accent-hover); }
+    .eval-trace { border-top: 1px solid var(--line); }
+    .eval-trace-step { display: grid; grid-template-columns: 42px minmax(130px, .38fr) minmax(0, 1fr); gap: 14px; padding: 13px 0; border-bottom: 1px solid var(--line); opacity: .45; }
+    .eval-trace-step.active { opacity: 1; }
+    .eval-trace-step span { color: var(--ink-muted); font: 800 9px var(--mono); }
+    .eval-trace-step strong { font-size: 11px; }
+    .eval-trace-step small { color: var(--ink-muted); font-size: 10px; }
+    .eval-evidence-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(300px, .85fr); gap: 40px; }
+    .eval-evidence-grid h3 { margin: 0 0 10px; color: #263248; font-size: 16px; }
+    #evalFuture { grid-template-columns: 1fr; gap: 18px; margin-top: 0; }
+    .eval-source-list { border-top: 1px solid var(--line); }
+    .eval-source-row { display: grid; grid-template-columns: minmax(150px, .44fr) minmax(0, 1fr) auto; gap: 14px; padding: 11px 0; border-bottom: 1px solid var(--line); }
+    .eval-source-row strong { font-size: 11px; }
+    .eval-source-row span { color: var(--ink-muted); font-size: 10px; }
+    .eval-source-row a { font-size: 10px; white-space: nowrap; }
+
     @media (max-width: 1040px) {
       .stage-layout { grid-template-columns: 1fr; }
       .evidence-panel { padding: 28px 0 0; border-left: 0; border-top: 1px solid var(--line); }
       .sim-controls { padding: 0 0 24px; border-right: 0; border-bottom: 1px solid var(--line); }
+      .eval-evidence-grid { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 1199px) {
@@ -914,6 +956,7 @@
     }
 
     @media (max-width: 720px) {
+      html, body { overflow-x: clip; }
       .view { width: min(100% - 32px, var(--content-width)); padding-top: 26px; }
       .page-heading h1, .overview-hero h1 { font-size: 27px; }
       .continue-panel { padding: 24px 0; }
@@ -936,6 +979,18 @@
       .library-header { padding: 0 0 20px; }
       .document-reader { padding: 24px 0; }
       .memory-flow { grid-template-columns: 1fr; gap: 0; }
+      .eval-lab-layout { grid-template-columns: 1fr; gap: 28px; }
+      .eval-pipeline-step { grid-template-columns: 42px minmax(120px, .42fr) minmax(0, 1fr); gap: 10px; }
+      .eval-trace-step { grid-template-columns: 36px minmax(100px, .42fr) minmax(0, 1fr); gap: 8px; }
+      .eval-source-row { grid-template-columns: minmax(110px, .45fr) minmax(0, 1fr); }
+      .eval-source-row a { grid-column: 2; }
+      .eval-decision-control button { min-height: 44px; }
+      .eval-table { min-width: 0; }
+      .eval-table thead { display: none; }
+      .eval-table tbody, .eval-table tr, .eval-table td { display: block; width: 100%; }
+      .eval-table tr { padding: 10px 0; border-bottom: 1px solid var(--line); }
+      .eval-table td { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 10px; padding: 5px 0; border-bottom: 0; }
+      .eval-table td::before { content: attr(data-label); color: var(--ink-muted); font-size: 9px; font-weight: 800; }
     }
   </style>
 </head>
@@ -957,6 +1012,7 @@
       <button type="button" data-view="stage">阶段学习</button>
       <button type="button" data-view="simulator">故障演练</button>
       <button type="button" data-view="memory">记忆实验室</button>
+      <button type="button" data-view="eval">评测实验室</button>
       <button type="button" data-view="library">资料库</button>
     </nav>
   </header>
@@ -1036,7 +1092,8 @@ python -m agent_course.cli demo
 python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json
 python -m agent_course.cli eval ..\22-评测集\s3-rag-baseline.json
 python -m agent_course.cli eval ..\22-评测集\s4-durable-baseline.json
-python -m agent_course.cli memory-eval ..\22-评测集\memory-engineering-baseline.jsonl</pre>
+python -m agent_course.cli memory-eval ..\22-评测集\memory-engineering-baseline.jsonl
+python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json</pre>
           </div>
           <div class="expected-output" id="baselineMetrics">正在读取可复验工程基线。</div>
         </section>
@@ -1094,6 +1151,7 @@ python -m agent_course.cli memory-eval ..\22-评测集\memory-engineering-baseli
               <button class="secondary-button" id="openStageChapter" type="button">打开阶段教材</button>
               <button class="secondary-button" id="openSelftest" type="button">查看题库文档</button>
               <button class="secondary-button" id="openMemoryLabButton" type="button" hidden>进入记忆实验室</button>
+              <button class="secondary-button" id="openEvalLabButton" type="button" hidden>进入评测实验室</button>
             </div>
           </section>
 
@@ -1250,6 +1308,59 @@ python -m agent_course.cli memory-eval ..\22-评测集\memory-engineering-baseli
       </section>
     </section>
 
+    <section class="view" id="evalView" data-view-panel="eval">
+      <div class="page-heading">
+        <div class="section-label">S6 专项训练</div>
+        <h1>Agent Eval 与发布门禁实验室</h1>
+        <p>把前序能力装入同一发布候选，先验证 Agent，再攻击 grader 与 gate，最终用可复现证据作出 pass 或 block。</p>
+      </div>
+      <div class="memory-boundary"><strong>教学门禁模拟</strong><span>不调用真实模型</span><span>不读取私有 holdout</span><span>本地指标不代表生产 SLO</span></div>
+      <div class="memory-progress" id="evalProgress" aria-live="polite"></div>
+      <nav class="memory-section-nav" aria-label="评测实验室步骤">
+        <button type="button" data-eval-target="evalPipeline">发布链</button>
+        <button type="button" data-eval-target="evalRules">门禁表</button>
+        <button type="button" data-eval-target="evalDecisions">判定演练</button>
+        <button type="button" data-eval-target="evalEvidence">证据与未来</button>
+      </nav>
+
+      <section class="memory-section" id="evalPipeline" aria-labelledby="evalPipelineTitle">
+        <div class="memory-section-heading">
+          <div><div class="section-label">01 · 建立全链路</div><h2 id="evalPipelineTitle">从候选版本到发布判定</h2><p>顺序不能颠倒：先固定版本和干净 trial，再看规则、轨迹、裁判、切分与运营预算。</p></div>
+          <button class="secondary-button" id="openEvalGuide" type="button">打开完整实验教材</button>
+        </div>
+        <div class="eval-pipeline" id="evalPipelineList"></div>
+      </section>
+
+      <section class="memory-section" id="evalRules" aria-labelledby="evalRulesTitle">
+        <div class="memory-section-heading"><div><div class="section-label">02 · 读懂阻塞规则</div><h2 id="evalRulesTitle">风险不能被一个总分压平</h2><p>每条规则都绑定触发信号、判定理由和必须保留的证据；非关键差异可以进入 backlog，不必制造过度拒绝。</p></div></div>
+        <div class="eval-table-wrap"><table class="eval-table"><thead><tr><th>触发信号</th><th>决策</th><th>工程理由</th><th>必须留下</th></tr></thead><tbody id="evalRuleRows"></tbody></table></div>
+      </section>
+
+      <section class="memory-section" id="evalDecisions" aria-labelledby="evalDecisionsTitle">
+        <div class="memory-section-heading"><div><div class="section-label">03 · 亲自作出决策</div><h2 id="evalDecisionsTitle">发布门禁判定演练</h2><p>至少正确完成 4 个场景。答错会指出具体误区；判对后才展示 blocker、证据和该场景经过的门禁步骤。</p></div></div>
+        <div class="eval-lab-layout">
+          <div>
+            <div class="field"><label for="evalScenario">候选发布场景</label><select id="evalScenario"></select></div>
+            <article class="eval-scenario-sheet" id="evalScenarioSheet"></article>
+            <div class="eval-decision-control" id="evalDecisionControl" role="group" aria-label="你的发布决策"></div>
+            <div class="memory-action-row"><button class="primary-button" id="checkEvalDecision" type="button">校验发布决策</button></div>
+          </div>
+          <div>
+            <div class="eval-trace" id="evalTrace" aria-label="该场景经过的门禁步骤"></div>
+            <div id="evalDecisionFeedback" aria-live="polite"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="memory-section" id="evalEvidence" aria-labelledby="evalEvidenceTitle">
+        <div class="memory-section-heading"><div><div class="section-label">04 · 核验证据边界</div><h2 id="evalEvidenceTitle">一手实践与工业演进</h2><p>一手资料支持的变化与工程推断分开呈现；平台 API 可以替换，task、dataset、grader 和证据谱系不能丢。</p></div></div>
+        <div class="eval-evidence-grid">
+          <div><h3>一手资料</h3><div class="eval-source-list" id="evalSources"></div></div>
+          <div><h3>当前与未来</h3><div class="memory-future" id="evalFuture"></div></div>
+        </div>
+      </section>
+    </section>
+
     <section class="view" id="libraryView" data-view-panel="library">
       <header class="library-header">
         <div>
@@ -1274,6 +1385,7 @@ python -m agent_course.cli memory-eval ..\22-评测集\memory-engineering-baseli
     <button type="button" data-view="stage">阶段</button>
     <button type="button" data-view="simulator">演练</button>
     <button type="button" data-view="memory">记忆</button>
+    <button type="button" data-view="eval">评测</button>
     <button type="button" data-view="library">资料</button>
   </nav>
 
@@ -1284,6 +1396,7 @@ python -m agent_course.cli memory-eval ..\22-评测集\memory-engineering-baseli
   <script src="data/baseline_metrics.js"></script>
   <script src="data/learning_content.js"></script>
   <script src="data/memory_lab.js"></script>
+  <script src="data/eval_lab.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked@15.0.12/marked.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js"></script>
   <script>
@@ -1297,6 +1410,7 @@ python -m agent_course.cli memory-eval ..\22-评测集\memory-engineering-baseli
       : { tests: 31, evalCases: 10, assertions: 54, runnableStages: ['f0', 's0', 's1', 's2', 's3'], totalStages: 12, targets: { tests: 60, evalCases: 100 } };
     const LEARNING_CONTENT = window.LEARNING_CONTENT && typeof window.LEARNING_CONTENT === 'object' ? window.LEARNING_CONTENT : {};
     const MEMORY_LAB = window.MEMORY_LAB && typeof window.MEMORY_LAB === 'object' ? window.MEMORY_LAB : null;
+    const EVAL_LAB = window.EVAL_LAB && typeof window.EVAL_LAB === 'object' ? window.EVAL_LAB : null;
     const STORAGE_KEY = 'ARG_ENGINEERING_COURSE_V2';
     const GITHUB_SOURCE = 'https://github.com/falses00/agent-learning-report/blob/main/';
     const evidenceFields = [
@@ -1395,11 +1509,11 @@ python -m agent_course.cli memory-eval ..\22-评测集\memory-engineering-baseli
       {
         id: 's6', num: 'S6', title: 'Eval 与 Red Team', short: 'Golden、Trajectory、Security、CI',
         definition: '把质量与安全要求变成版本化、可回归、能阻塞发布的证据。',
-        deliverable: 'Golden、tool、trajectory、RAG、security eval runner 和 CI gate。',
+        deliverable: 'Release manifest、五类数据切分、混合 grader、门禁 adversarial suite 和证据 hash。',
         failure: '平均分很高，却有跨租户、重复副作用或关键安全 case 失败。',
         fix: '关键 case 单独阻塞，规则断言优先，LLM judge 必须校准。',
-        evidence: '不少于 100 个分层 case、holdout、ablation 和回归报告。',
-        command: '# 完成 S6 实验后运行\npython -m evals.run datasets/all.jsonl --gate release', implemented: false,
+        evidence: '35 个 Agent case、183 条断言、16 个门禁攻击、holdout 边界、版本与判定 hash。',
+        command: 'cd "agent-runtime-gateway\\20-源码"\npython -m pytest ..\\21-测试\\test_release_gate.py -q\npython -m agent_course.cli release-gate ..\\22-评测集\\s6-release-manifest.json\npython -m agent_course.cli release-gate-eval ..\\22-评测集\\s6-release-gate-adversarial.json', implemented: true,
         chapter: 's6',
         question: '平均分 95，但一个跨租户 case 失败，能否发布？',
         answer: '不能。跨租户泄漏属于 critical failure，应独立阻塞发布，不能被平均分稀释。',
@@ -1525,20 +1639,28 @@ python -m agent_course.cli memory-eval ..\22-评测集\memory-engineering-baseli
       activeScenario: 'explicit_preference',
     };
 
+    const defaultEvalLabState = {
+      scenarios: {},
+      activeScenario: 'critical-average',
+      selectedDecision: '',
+    };
+
     const defaultState = {
-      courseVersion: 6,
+      courseVersion: 7,
       path: 'engineering',
       currentStage: 's0',
       stages: {},
       today: {},
       activeChapter: 'start',
       memoryLab: defaultMemoryLabState,
+      evalLab: defaultEvalLabState,
     };
 
     let state = loadState();
     let activeView = 'overview';
     let simulatorRunning = false;
     let memoryFeedback = null;
+    let evalFeedback = null;
     let toastTimer;
     const openNavGroups = new Set(['start']);
     const openRoadmapGroups = new Set();
@@ -1549,6 +1671,7 @@ python -m agent_course.cli memory-eval ..\22-评测集\memory-engineering-baseli
         const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
         if (saved && typeof saved === 'object') {
           const savedMemoryLab = saved.memoryLab && typeof saved.memoryLab === 'object' ? saved.memoryLab : {};
+          const savedEvalLab = saved.evalLab && typeof saved.evalLab === 'object' ? saved.evalLab : {};
           return {
             ...defaultState,
             ...saved,
@@ -1560,6 +1683,12 @@ python -m agent_course.cli memory-eval ..\22-评测集\memory-engineering-baseli
               ...savedMemoryLab,
               scenarios: savedMemoryLab.scenarios && typeof savedMemoryLab.scenarios === 'object' ? savedMemoryLab.scenarios : {},
               chooser: savedMemoryLab.chooser && typeof savedMemoryLab.chooser === 'object' ? savedMemoryLab.chooser : null,
+            },
+            evalLab: {
+              ...defaultEvalLabState,
+              ...savedEvalLab,
+              scenarios: savedEvalLab.scenarios && typeof savedEvalLab.scenarios === 'object' ? savedEvalLab.scenarios : {},
+              selectedDecision: ['pass', 'block'].includes(savedEvalLab.selectedDecision) ? savedEvalLab.selectedDecision : '',
             },
           };
         }
@@ -1587,7 +1716,7 @@ python -m agent_course.cli memory-eval ..\22-评测集\memory-engineering-baseli
     }
 
     function requiredGateVersion(stageId) {
-      if (stageId === 'f0' || stageId === 's3') return 7;
+      if (stageId === 'f0' || stageId === 's3' || stageId === 's6') return 7;
       return stageId === 's5' ? 6 : 5;
     }
 
@@ -1669,16 +1798,24 @@ python -m agent_course.cli memory-eval ..\22-评测集\memory-engineering-baseli
       return { mastered, chooserReady, ready: mastered >= 4 && chooserReady };
     }
 
+    function evalLabStatus() {
+      const scenarios = state.evalLab?.scenarios && typeof state.evalLab.scenarios === 'object' ? state.evalLab.scenarios : {};
+      const validScenarioIds = EVAL_LAB?.scenarios?.map((scenario) => scenario.id) || [];
+      const mastered = validScenarioIds.filter((id) => scenarios[id] === true).length;
+      return { mastered, ready: mastered >= 4 };
+    }
+
     function passEligibility(stageId, itemState) {
       const lesson = LEARNING_CONTENT[stageId];
       const stage = STAGES.find((candidate) => candidate.id === stageId);
-      if (!lesson || !stage) return { ready: false, implementationReady: false, preflightReady: false, evidenceReady: false, quizReady: false, memoryLabReady: false };
+      if (!lesson || !stage) return { ready: false, implementationReady: false, preflightReady: false, evidenceReady: false, quizReady: false, memoryLabReady: false, evalLabReady: false };
       const implementationReady = stage.implemented === true;
       const preflightReady = itemState.prerequisites.every(Boolean);
       const evidenceReady = evidenceStatus(itemState).ready;
       const quizReady = quizMetrics(itemState, lesson).passed;
       const memoryLabReady = stageId !== 's5' || memoryLabStatus().ready;
-      return { ready: COURSE_GATE.canPassStage({ implementationReady, preflightReady, evidenceReady, quizReady, memoryLabReady }), implementationReady, preflightReady, evidenceReady, quizReady, memoryLabReady };
+      const evalLabReady = stageId !== 's6' || evalLabStatus().ready;
+      return { ready: COURSE_GATE.canPassStage({ implementationReady, preflightReady, evidenceReady, quizReady, memoryLabReady, evalLabReady }), implementationReady, preflightReady, evidenceReady, quizReady, memoryLabReady, evalLabReady };
     }
 
     function gateStatus(stageId) {
@@ -1722,6 +1859,10 @@ python -m agent_course.cli memory-eval ..\22-评测集\memory-engineering-baseli
         const lab = memoryLabStatus();
         if (!lab.chooserReady) return '进入记忆实验室，先完成一次最小架构选型。';
         return `继续记忆生命周期演练，还需掌握 ${Math.max(0, 4 - lab.mastered)} 个场景。`;
+      }
+      if (!gate.evalLabReady) {
+        const lab = evalLabStatus();
+        return `进入评测实验室继续发布判定，还需掌握 ${Math.max(0, 4 - lab.mastered)} 个场景。`;
       }
       if (!gate.evidenceReady) return `补齐 ${evidenceFields.length - evidence.complete} 项结构化工程证据并完成验收。`;
       if (itemState.status !== 'passed') return '本地自评条件已经满足；记录后仍需用仓库测试、CI 或评审复验。';
@@ -1898,6 +2039,7 @@ python -m agent_course.cli memory-eval ..\22-评测集\memory-engineering-baseli
       document.getElementById('stageCommandLabel').textContent = stage.implemented ? '当前可运行' : '规划中的验收命令（当前不可运行）';
       document.getElementById('startStageButton').textContent = itemState.status === 'not-started' ? '开始本阶段' : '继续本阶段';
       document.getElementById('openMemoryLabButton').hidden = stage.id !== 's5';
+      document.getElementById('openEvalLabButton').hidden = stage.id !== 's6';
 
       document.getElementById('prerequisiteChecklist').innerHTML = lesson.prerequisites.map((text, index) => `
         <label class="check-row">
@@ -1960,6 +2102,10 @@ python -m agent_course.cli memory-eval ..\22-评测集\memory-engineering-baseli
         const lab = memoryLabStatus();
         requirements.push(['记忆实验室', stageGate.memoryLabReady, `${lab.mastered}/4 + ${lab.chooserReady ? '已选型' : '未选型'}`]);
       }
+      if (stage.id === 's6') {
+        const lab = evalLabStatus();
+        requirements.push(['评测实验室', stageGate.evalLabReady, `${lab.mastered}/4 个发布判定`]);
+      }
       document.getElementById('gateRequirements').innerHTML = requirements.map(([label, done, value]) => `<div class="gate-requirement${done ? ' done' : ''}"><span>${done ? '已完成' : '未完成'} · ${label}</span><strong>${value}</strong></div>`).join('');
 
       const gate = document.getElementById('gateMessage');
@@ -1973,6 +2119,10 @@ python -m agent_course.cli memory-eval ..\22-评测集\memory-engineering-baseli
         const lab = memoryLabStatus();
         if (!lab.chooserReady) missing.push('1 次记忆架构选型');
         if (lab.mastered < 4) missing.push(`${4 - lab.mastered} 个记忆生命周期场景`);
+      }
+      if (!stageGate.evalLabReady) {
+        const lab = evalLabStatus();
+        missing.push(`${Math.max(0, 4 - lab.mastered)} 个发布门禁判定场景`);
       }
       gate.textContent = stageGate.ready ? '本地自评条件已满足；这不是工程认证，仍需仓库测试、CI 或评审者复验。' : `还需要：${missing.join('；')}。`;
       const passButton = document.getElementById('passStageButton');
@@ -2410,11 +2560,126 @@ python -m agent_course.cli memory-eval ..\22-评测集\memory-engineering-baseli
       });
     }
 
+    function currentEvalScenario() {
+      if (!EVAL_LAB) return null;
+      const selected = EVAL_LAB.scenarios.find((scenario) => scenario.id === state.evalLab.activeScenario);
+      return selected || EVAL_LAB.scenarios[0];
+    }
+
+    function renderEvalProgress() {
+      const progress = evalLabStatus();
+      const baseline = EVAL_LAB.baseline || [];
+      document.getElementById('evalProgress').innerHTML = baseline.map((item, index) => `
+        <div class="memory-progress-item"><span>${escapeHtml(item.label)}</span><strong>${index === 2 ? `${progress.mastered} / 4` : escapeHtml(item.value)}</strong><small>${index === 2 ? `${progress.ready ? 'S6 专项门禁已满足' : '完成发布判定演练'} · ${escapeHtml(item.detail)}` : escapeHtml(item.detail)}</small></div>`).join('');
+    }
+
+    function renderEvalPipeline() {
+      document.getElementById('evalPipelineList').innerHTML = EVAL_LAB.pipeline.map((step, index) => `
+        <div class="eval-pipeline-step"><span>${String(index + 1).padStart(2, '0')}</span><strong>${escapeHtml(step.label)}</strong><p>${escapeHtml(step.detail)}</p></div>`).join('');
+    }
+
+    function renderEvalRules() {
+      document.getElementById('evalRuleRows').innerHTML = EVAL_LAB.rules.map((rule) => `
+        <tr><td data-label="触发信号">${escapeHtml(rule.signal)}</td><td data-label="决策"><span class="eval-decision-code${rule.decision.includes('WARN') ? ' warn' : ''}">${escapeHtml(rule.decision)}</span></td><td data-label="工程理由">${escapeHtml(rule.reason)}</td><td data-label="必须留下">${escapeHtml(rule.evidence)}</td></tr>`).join('');
+    }
+
+    function renderEvalDecision() {
+      const validScenarioIds = new Set(EVAL_LAB.scenarios.map((scenario) => scenario.id));
+      if (!validScenarioIds.has(state.evalLab.activeScenario)) state.evalLab.activeScenario = EVAL_LAB.scenarios[0].id;
+      const scenario = currentEvalScenario();
+      const mastered = state.evalLab.scenarios[scenario.id] === true;
+      const select = document.getElementById('evalScenario');
+      select.innerHTML = EVAL_LAB.scenarios.map((item) => `<option value="${escapeHtml(item.id)}">${state.evalLab.scenarios[item.id] === true ? '已掌握 · ' : ''}${escapeHtml(item.title)}</option>`).join('');
+      select.value = scenario.id;
+      document.getElementById('evalScenarioSheet').innerHTML = `
+        <h3>${escapeHtml(scenario.title)}</h3><p>${escapeHtml(scenario.prompt)}</p>
+        <dl class="eval-scenario-meta"><div><dt>Profile</dt><dd>${escapeHtml(scenario.profile)}</dd></div><div><dt>观测值</dt><dd>${escapeHtml(scenario.score)}</dd></div><div><dt>候选边界</dt><dd>${escapeHtml(EVAL_LAB.evidenceNotice)}</dd></div></dl>`;
+      document.getElementById('evalDecisionControl').innerHTML = EVAL_LAB.decisions.map((decision) => `
+        <button type="button" class="${state.evalLab.selectedDecision === decision.id ? 'active' : ''}" data-eval-decision="${escapeHtml(decision.id)}" aria-pressed="${state.evalLab.selectedDecision === decision.id}">${escapeHtml(decision.label)}</button>`).join('');
+      document.querySelectorAll('[data-eval-decision]').forEach((button) => button.addEventListener('click', () => {
+        state.evalLab.selectedDecision = button.dataset.evalDecision;
+        evalFeedback = null;
+        saveState();
+        renderEvalDecision();
+      }));
+      document.getElementById('evalTrace').innerHTML = EVAL_LAB.pipeline.map((step, index) => `
+        <div class="eval-trace-step${mastered && scenario.pipeline.includes(step.id) ? ' active' : ''}"><span>${String(index + 1).padStart(2, '0')}</span><strong>${escapeHtml(step.label)}</strong><small>${mastered && scenario.pipeline.includes(step.id) ? escapeHtml(step.detail) : '判定正确后显示该步骤证据'}</small></div>`).join('');
+
+      const decisionLabel = EVAL_LAB.decisions.find((decision) => decision.id === scenario.expected)?.label || scenario.expected;
+      const feedback = document.getElementById('evalDecisionFeedback');
+      const evidence = { decision: scenario.expected, reason_code: scenario.blocker, required_evidence: scenario.evidence };
+      if (evalFeedback?.scenarioId === scenario.id) {
+        feedback.innerHTML = evalFeedback.correct
+          ? `<div class="memory-feedback correct"><strong>判定正确：${escapeHtml(decisionLabel)}</strong><br>${escapeHtml(scenario.reason)}</div><pre class="memory-audit">${escapeHtml(JSON.stringify(evidence, null, 2))}</pre>`
+          : `<div class="memory-feedback wrong"><strong>这次发布判定会产生风险。</strong><br>${escapeHtml(scenario.misconception)}<br>补充原理：${escapeHtml(scenario.reason)}</div>`;
+      } else if (mastered) {
+        feedback.innerHTML = `<div class="memory-feedback correct"><strong>该场景已掌握：${escapeHtml(decisionLabel)}</strong><br>${escapeHtml(scenario.reason)}</div><pre class="memory-audit">${escapeHtml(JSON.stringify(evidence, null, 2))}</pre>`;
+      } else {
+        feedback.innerHTML = '';
+      }
+    }
+
+    function checkEvalDecision() {
+      const scenario = currentEvalScenario();
+      const selected = state.evalLab.selectedDecision;
+      if (!selected) { showToast('先选择允许发布或阻塞发布'); return; }
+      const correct = selected === scenario.expected;
+      evalFeedback = { scenarioId: scenario.id, correct };
+      if (correct) state.evalLab.scenarios[scenario.id] = true;
+      saveState();
+      renderEvalLab();
+      if (state.currentStage === 's6') renderStageView();
+      showToast(correct ? '发布判定正确，门禁步骤与证据已展开' : '判定未通过，请结合误区和 blocker 重试');
+    }
+
+    function renderEvalEvidence() {
+      document.getElementById('evalSources').innerHTML = EVAL_LAB.sources.map((source) => `
+        <div class="eval-source-row"><strong>${escapeHtml(source.name)}</strong><span>${escapeHtml(source.focus)}</span><a href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer">一手来源</a></div>`).join('');
+      const evidence = EVAL_LAB.future.filter((item) => item.kind === 'evidence');
+      const inference = EVAL_LAB.future.filter((item) => item.kind === 'inference');
+      document.getElementById('evalFuture').innerHTML = `
+        <div class="memory-future-column"><h3>已有证据支持</h3>${evidence.map((item) => `<div class="memory-future-item"><strong>${escapeHtml(item.title)}</strong><span>${escapeHtml(item.detail)}</span></div>`).join('')}</div>
+        <div class="memory-future-column inference"><h3>工程推断，仍需验证</h3>${inference.map((item) => `<div class="memory-future-item"><strong>${escapeHtml(item.title)}</strong><span>${escapeHtml(item.detail)}</span></div>`).join('')}</div>`;
+    }
+
+    function renderEvalLab() {
+      if (!EVAL_LAB) {
+        document.getElementById('evalView').innerHTML = '<div class="page-heading"><h1>评测实验室暂不可用</h1><p>课程数据未加载，请检查 data/eval_lab.js。</p></div>';
+        return;
+      }
+      renderEvalProgress();
+      renderEvalPipeline();
+      renderEvalRules();
+      renderEvalDecision();
+      renderEvalEvidence();
+      requestAnimationFrame(updateEvalSectionNav);
+    }
+
+    function updateEvalSectionNav() {
+      if (activeView !== 'eval') return;
+      const sections = [...document.querySelectorAll('[data-eval-target]')]
+        .map((button) => document.getElementById(button.dataset.evalTarget))
+        .filter(Boolean);
+      if (!sections.length) return;
+      const offset = window.innerWidth <= 720 ? 124 : 118;
+      let activeSection = sections[0].id;
+      for (const section of sections) {
+        if (section.getBoundingClientRect().top <= offset) activeSection = section.id;
+      }
+      document.querySelectorAll('[data-eval-target]').forEach((button) => {
+        const active = button.dataset.evalTarget === activeSection;
+        button.classList.toggle('active', active);
+        if (active) button.setAttribute('aria-current', 'step');
+        else button.removeAttribute('aria-current');
+      });
+    }
+
     function scheduleSectionNavUpdate() {
       if (sectionNavFrame) return;
       sectionNavFrame = requestAnimationFrame(() => {
         sectionNavFrame = 0;
         updateMemorySectionNav();
+        updateEvalSectionNav();
       });
     }
 
@@ -2507,12 +2772,13 @@ python -m agent_course.cli memory-eval ..\22-评测集\memory-engineering-baseli
     }
 
     function showView(view) {
-      activeView = ['overview', 'stage', 'simulator', 'memory', 'library'].includes(view) ? view : 'overview';
+      activeView = ['overview', 'stage', 'simulator', 'memory', 'eval', 'library'].includes(view) ? view : 'overview';
       document.querySelectorAll('[data-view-panel]').forEach((panel) => panel.classList.toggle('active', panel.dataset.viewPanel === activeView));
       updateViewButtons();
       closeDrawer();
       window.scrollTo({ top: 0, behavior: 'auto' });
       requestAnimationFrame(updateMemorySectionNav);
+      requestAnimationFrame(updateEvalSectionNav);
     }
 
     function navigate(hash) {
@@ -2629,6 +2895,9 @@ python -m agent_course.cli memory-eval ..\22-评测集\memory-engineering-baseli
       document.querySelectorAll('[data-memory-target]').forEach((button) => button.addEventListener('click', () => {
         document.getElementById(button.dataset.memoryTarget)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }));
+      document.querySelectorAll('[data-eval-target]').forEach((button) => button.addEventListener('click', () => {
+        document.getElementById(button.dataset.evalTarget)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }));
       document.getElementById('startStageButton').addEventListener('click', () => {
         const itemState = stageState(state.currentStage);
         if (itemState.status === 'not-started') itemState.status = 'learning';
@@ -2647,7 +2916,9 @@ python -m agent_course.cli memory-eval ..\22-评测集\memory-engineering-baseli
       document.getElementById('openStageChapter').addEventListener('click', () => openChapter(currentStage().chapter));
       document.getElementById('openSelftest').addEventListener('click', () => openChapter('selftest'));
       document.getElementById('openMemoryLabButton').addEventListener('click', () => navigate('#memory'));
+      document.getElementById('openEvalLabButton').addEventListener('click', () => navigate('#eval'));
       document.getElementById('openMemoryAtlas').addEventListener('click', () => openChapter('memory-atlas'));
+      document.getElementById('openEvalGuide').addEventListener('click', () => openChapter('s6-lab'));
       document.getElementById('buildMemoryArchitecture').addEventListener('click', buildMemoryArchitecture);
       document.getElementById('checkMemoryDecision').addEventListener('click', checkMemoryDecision);
       document.getElementById('memoryScenario').addEventListener('change', (event) => {
@@ -2655,6 +2926,14 @@ python -m agent_course.cli memory-eval ..\22-评测集\memory-engineering-baseli
         memoryFeedback = null;
         saveState();
         renderMemoryLifecycle();
+      });
+      document.getElementById('checkEvalDecision').addEventListener('click', checkEvalDecision);
+      document.getElementById('evalScenario').addEventListener('change', (event) => {
+        state.evalLab.activeScenario = event.target.value;
+        state.evalLab.selectedDecision = '';
+        evalFeedback = null;
+        saveState();
+        renderEvalDecision();
       });
       document.getElementById('quizDraft').addEventListener('input', (event) => {
         const itemState = stageState(state.currentStage);
@@ -2688,6 +2967,7 @@ python -m agent_course.cli memory-eval ..\22-评测集\memory-engineering-baseli
       renderStageView();
       renderSimulator();
       renderMemoryLab();
+      renderEvalLab();
       renderLibrary(state.activeChapter || 'start');
     }
 

@@ -50,7 +50,7 @@ def _commit_sha() -> str:
 
 def _working_tree_dirty() -> bool | None:
     result = subprocess.run(
-        ["git", "status", "--porcelain", "--untracked-files=no"],
+        ["git", "status", "--porcelain", "--untracked-files=all"],
         cwd=ROOT,
         capture_output=True,
         text=True,
@@ -192,6 +192,12 @@ def main() -> int:
             "memory-content.log",
         ),
         Check(
+            "eval-content",
+            ("node", "data/check_eval_content.mjs"),
+            ROOT,
+            "eval-content.log",
+        ),
+        Check(
             "pytest",
             (
                 sys.executable,
@@ -252,6 +258,30 @@ def main() -> int:
             ),
             SOURCE_DIR,
             "s5-memory-eval.json",
+        ),
+        Check(
+            "s6-release-gate",
+            (
+                sys.executable,
+                "-m",
+                "agent_course.cli",
+                "release-gate",
+                "../22-评测集/s6-release-manifest.json",
+            ),
+            SOURCE_DIR,
+            "s6-release-gate.json",
+        ),
+        Check(
+            "s6-gate-adversarial",
+            (
+                sys.executable,
+                "-m",
+                "agent_course.cli",
+                "release-gate-eval",
+                "../22-评测集/s6-release-gate-adversarial.json",
+            ),
+            SOURCE_DIR,
+            "s6-gate-adversarial.json",
         ),
     )
 

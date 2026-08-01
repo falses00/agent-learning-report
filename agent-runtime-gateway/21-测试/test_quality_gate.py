@@ -3,6 +3,7 @@ from __future__ import annotations
 import importlib.util
 import sys
 from pathlib import Path
+from types import SimpleNamespace
 
 
 SCRIPT_PATH = Path(__file__).resolve().parents[2] / "scripts" / "run_quality_gate.py"
@@ -11,6 +12,19 @@ assert SPEC is not None and SPEC.loader is not None
 quality_gate = importlib.util.module_from_spec(SPEC)
 sys.modules[SPEC.name] = quality_gate
 SPEC.loader.exec_module(quality_gate)
+
+
+def test_dirty_check_includes_untracked_execution_inputs(monkeypatch) -> None:
+    calls: list[list[str]] = []
+
+    def fake_run(command, **_kwargs):
+        calls.append(command)
+        return SimpleNamespace(returncode=0, stdout="?? data/eval_lab.js\n")
+
+    monkeypatch.setattr(quality_gate.subprocess, "run", fake_run)
+
+    assert quality_gate._working_tree_dirty() is True
+    assert "--untracked-files=all" in calls[0]
 
 
 def test_failed_check_is_reported_with_replayable_evidence(tmp_path) -> None:

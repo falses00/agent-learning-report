@@ -29,6 +29,7 @@ def run_eval(path: str | Path) -> dict[str, Any]:
         raise ValueError("eval payload must contain a non-empty cases array")
 
     failures: list[dict[str, Any]] = []
+    case_results: list[dict[str, Any]] = []
     assertion_total = 0
     assertion_passed = 0
 
@@ -38,6 +39,8 @@ def run_eval(path: str | Path) -> dict[str, Any]:
         action = case.get("action")
         before_counts: dict[str, int] = {}
         case_failures: list[str] = []
+        case_assertion_total = 0
+        case_assertion_passed = 0
 
         with ExitStack() as resources:
             provider: MockRefundProvider | None = None
@@ -100,12 +103,23 @@ def run_eval(path: str | Path) -> dict[str, Any]:
                 elif action is not None:
                     case_failures.append(f"unsupported action: {action}")
             except (ContractError, KeyError, TypeError, ValueError) as exc:
+                reason = f"case setup failed: {exc}"
                 failures.append(
                     {
                         "case_id": case_id,
                         "critical": critical,
-                        "reason": f"case setup failed: {exc}",
-                        "reasons": [f"case setup failed: {exc}"],
+                        "reason": reason,
+                        "reasons": [reason],
+                    }
+                )
+                case_results.append(
+                    {
+                        "case_id": case_id,
+                        "critical": critical,
+                        "passed": False,
+                        "assertions": 0,
+                        "assertions_passed": 0,
+                        "reasons": [reason],
                     }
                 )
                 continue
@@ -113,8 +127,10 @@ def run_eval(path: str | Path) -> dict[str, Any]:
             expected_status = case.get("expected_status")
             if expected_status is not None:
                 assertion_total += 1
+                case_assertion_total += 1
                 if run.status.value == expected_status:
                     assertion_passed += 1
+                    case_assertion_passed += 1
                 else:
                     case_failures.append(
                         f"status expected {expected_status}, got {run.status.value}"
@@ -122,10 +138,12 @@ def run_eval(path: str | Path) -> dict[str, Any]:
 
             if case.get("expected_refund_executions") is not None:
                 assertion_total += 1
+                case_assertion_total += 1
                 expected = case["expected_refund_executions"]
                 actual = runtime.tool_execution_count("billing.refund")
                 if actual == expected:
                     assertion_passed += 1
+                    case_assertion_passed += 1
                 else:
                     case_failures.append(
                         f"billing.refund executions expected {expected}, got {actual}"
@@ -134,6 +152,7 @@ def run_eval(path: str | Path) -> dict[str, Any]:
             audit = runtime.store.list_audit(run.run_id)
             for assertion in case.get("assertions", []):
                 assertion_total += 1
+                case_assertion_total += 1
                 passed, reason = _evaluate_assertion(
                     assertion,
                     run=run,
@@ -143,6 +162,7 @@ def run_eval(path: str | Path) -> dict[str, Any]:
                 )
                 if passed:
                     assertion_passed += 1
+                    case_assertion_passed += 1
                 else:
                     case_failures.append(reason)
 
@@ -155,6 +175,16 @@ def run_eval(path: str | Path) -> dict[str, Any]:
                         "reasons": case_failures,
                     }
                 )
+            case_results.append(
+                {
+                    "case_id": case_id,
+                    "critical": critical,
+                    "passed": not case_failures,
+                    "assertions": case_assertion_total,
+                    "assertions_passed": case_assertion_passed,
+                    "reasons": case_failures,
+                }
+            )
 
     total = len(cases)
     critical_failed = sum(1 for failure in failures if failure["critical"])
@@ -168,6 +198,7 @@ def run_eval(path: str | Path) -> dict[str, Any]:
         "release_passed": not failures,
         "assertions": assertion_total,
         "assertions_passed": assertion_passed,
+        "case_results": case_results,
         "failures": failures,
     }
 

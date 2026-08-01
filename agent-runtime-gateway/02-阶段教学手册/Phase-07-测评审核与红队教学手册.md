@@ -1,193 +1,138 @@
 # Phase 07 - 测评审核与红队教学手册
 
-生成日期：2026-07-01  
-学习模式：Design-only  
-目标：让你理解工业级 Agent 的准确率不是靠感觉判断，而是靠 contract eval、tool eval、RAG eval、memory eval、trajectory eval、security red team、long-run eval、cost/latency gate 和发布阻塞规则共同证明。
+更新日期：2026-07-31
+学习模式：Implementation + Evidence
+一句话定义：测评审核是用分层数据集、可校准 grader、真实轨迹与环境终态证据决定 Agent 候选能否发布，并把每次事故固化为回归门禁。
 
-## 1. 本阶段解决的失控风险
-
-如果没有测评审核体系：
-
-- demo 看起来能跑，但真实任务一变就失败。
-- 只测最终答案，不测工具选择、轨迹、记忆、权限和恢复。
-- 新模型或新 prompt 上线后悄悄退化。
-- 安全红队样例没有进入回归集。
-- 线上事故复盘后没有沉淀成评测样例。
-- 成本、延迟、失败率没有成为发布门禁。
-
-Phase 7 的目标是让每一次能力提升都有证据，每一次失败都能变成回归样例。
-
-## 2. 本阶段边界
-
-本阶段学习：
+## 1. 本阶段在主线中的位置
 
 ```text
-Eval Taxonomy
-Golden Set
-Adversarial Set
-Regression Set
-Trajectory Eval
-Tool Eval
-RAG Eval
-Memory Eval
-Security Red Team
-Release Gate
+S1 contract/tool
+  -> S2 approval/policy
+  -> S3 RAG/citation
+  -> S4 durable execution
+  -> S5 governed memory
+  -> S6 eval/red-team/release gate
+  -> S7 observability/replay
 ```
 
-不做：
+S6 不再新加 Agent 能力，而是回答三个招聘和生产都会追问的问题：
 
-- 真实 CI/CD 配置。
-- 真实 eval runner 编写。
-- 把某一个 eval 平台当唯一标准。
-- 用主观打分替代结构化 case。
+1. 你如何证明现有能力真的工作？
+2. 你如何证明危险失败一定阻塞发布？
+3. 线上事故如何变成下一次发布永远不能再犯的 case？
 
-## 3. 先建立一个判断
+## 2. 可执行产物
 
-你需要把评测拆成两类：
+| 产物 | 用途 | 验收命令 |
+|---|---|---|
+| `s6-release-manifest.json` | 固定版本、数据切分、阈值、红队和回归责任 | `python -m agent_course.cli release-gate ...` |
+| `s6-holdout-public-example.json` | 演示留出集职责与污染检测 | `python -m agent_course.cli eval ...` |
+| `s6-release-gate-adversarial.json` | 用 16 种 mutation 测门禁本身 | `python -m agent_course.cli release-gate-eval ...` |
+| `release_gate.py` | 汇总 source suite 并作出 pass/block 判定 | `test_release_gate.py` |
+| evidence hash | 固定 manifest、证据与最终决策 | 查看 gate JSON 输出 |
 
-```text
-能力是否达标
-风险是否被拦住
-```
+完整命令、失败注入、自测和清单见[S6 实验](../labs/S06-eval-red-team/README.md)。
 
-Ragas、DeepEval、Promptfoo、Inspect AI、Langfuse、Phoenix 等工具可以帮助执行或观测，但课程重点不是记工具名，而是设计评测分类、样例、指标、阈值和阻塞规则。
+## 3. 课时与教学闭环
 
-## 4. 课时拆分
+| 课时 | 核心问题 | 动手任务 | 常见失败 | 通过证据 |
+|---|---|---|---|---|
+| 7.1 Taxonomy | 测答案、轨迹还是终态 | 把业务需求拆成 7 类 eval | 只测文本 | case matrix |
+| 7.2 Dataset | golden/regression/red-team/holdout 如何分工 | 给现有 case 分 split、owner、risk | holdout 被调参污染 | fingerprint + visibility |
+| 7.3 Deterministic grader | 哪些结果必须由代码判定 | 写 schema/tool/audit/state assertion | LLM judge 覆盖客观失败 | reproducible reason code |
+| 7.4 Judge calibration | 主观维度如何稳定评分 | 人工标注 pass/fail/Unknown 并对比 judge | grader hacking、立场偏差 | agreement + false-pass |
+| 7.5 Trajectory/outcome | 为什么答案正确仍可能失败 | 断言审批、工具次数、DB 终态 | 越权或重复副作用 | trace + terminal evidence |
+| 7.6 Red team | 如何系统生成攻击 | 设计 mutation families | 只列几条固定 prompt | family coverage |
+| 7.7 Reliability/ops | 能力和稳定性如何分开 | 比较 pass@k、pass^k、flake、p95、cost | 只报平均准确率 | slice + budget report |
+| 7.8 Release gate | 什么失败必须 block | 攻击候选与门禁本身 | 高总分掩盖 critical | signed/hashable decision |
 
-| 课时 | 主题 | 你要理解 | Design-only 产物 |
+每课按 `定义 -> 失败 -> 实现 -> 对抗 -> 证据 -> 复盘` 学习，不以“读完文档”作为完成。
+
+## 4. 分层评测矩阵
+
+| 评测层 | 评测对象 | 代表 assertion | 典型 blocker |
 |---|---|---|---|
-| 7.1 | Eval Taxonomy | 不同能力要用不同评测 | 评测分类矩阵 |
-| 7.2 | Golden/Regression | 正常能力和历史失败都要固定 | golden/regression case 表 |
-| 7.3 | Tool Eval | 评测工具选择、参数、拒绝和审批 | tool eval 样例 |
-| 7.4 | RAG Eval | 评测召回、引用、权限、新鲜度 | RAG eval 样例 |
-| 7.5 | Memory Eval | 评测召回、污染、过期、泄漏 | memory eval 样例 |
-| 7.6 | Trajectory Eval | 评测中间步骤，不只最终答案 | trajectory rubric |
-| 7.7 | Red Team | 注入、越权、泄漏、沙箱逃逸 | 红队样例表 |
-| 7.8 | Release Gate | 失败如何阻塞发布 | 发布门禁规则 |
+| Contract | 输入输出 schema、错误契约 | 字段、状态、错误码 | schema 不兼容 |
+| Tool | 工具选择、参数、次数、审批 | required/forbidden call | 越权或重复副作用 |
+| RAG | recall、citation、freshness、ACL | document/chunk/quote provenance | 无证据回答、跨租户召回 |
+| Memory | provenance、TTL、污染、删除 | deny/write/search/tombstone | Secret 落盘、删除后可达 |
+| Trajectory | plan、gateway、retry、handoff | sequence/required step | 绕过策略层 |
+| Outcome | 外部系统真实终态 | DB/API/file/audit | 声称成功但未生效 |
+| Security | injection、exfiltration、excessive agency | attack family + critical result | 泄密、越权、沙箱逃逸 |
+| Reliability | 单次与连续成功 | pass@1、pass^k、flake | 重试才能偶然成功 |
+| Operations | latency、cost、timeout、overrefusal | p95/cost per success | 不可运营或拒绝过多 |
 
-## 5. 评测分类矩阵
-
-| 评测层 | 评测什么 | 典型阻塞条件 |
-|---|---|---|
-| contract eval | 输入输出 schema、字段缺失、坏输入 | schema 不兼容、坏输入崩溃 |
-| tool eval | 工具选择、参数、allow/deny/approval | 越权工具被执行 |
-| RAG eval | recall、rerank、citation、freshness、permission | 无引用回答、跨租户召回 |
-| memory eval | recall、precision、pollution、TTL、delete | 记忆污染、删除后仍召回 |
-| trajectory eval | planning、step、retry、checkpoint、handoff | 绕过网关、重复副作用 |
-| long-run eval | resume、cancel、fork、idempotency | 崩溃后丢任务或重复写操作 |
-| security eval | injection、exfiltration、SSRF、secret leakage | 泄密、越权、沙箱逃逸 |
-| cost/latency eval | token、工具次数、延迟、失败率 | 成本或延迟超过预算 |
-
-## 6. 课堂练习
-
-### 练习 A：把一个需求拆成评测 case
-
-需求：
+## 5. 发布判定规则
 
 ```text
-工单 Agent 能读取知识库，判断退款政策，并生成处理建议。
+先检查 schema 与版本完整性
+  -> 再运行 clean trials
+  -> 再验证 deterministic controls
+  -> 再检查 trajectory + terminal outcome
+  -> 再检查 judge calibration
+  -> 再检查 split / holdout contamination
+  -> 再检查 red-team / regression coverage
+  -> 最后检查 quality / latency / cost / flake budgets
+  -> 任一 blocker => block；否则 pass + warnings
 ```
 
-你要至少设计：
+五条不可放宽的原则：
 
-| case 类型 | 样例 |
-|---|---|
-| golden | 正常问题能引用正确政策 |
-| hard | 用户描述模糊，需要 query rewrite |
-| permission | 用户无权限读取某租户政策 |
-| tool | 应该调用 retrieval tool，不应调用写工具 |
-| memory | 不把一次性工单信息写长期记忆 |
-| injection | 用户要求忽略政策直接退款 |
-| regression | 过去失败过的同义词召回问题 |
+- critical failure 不参与平均，单条即可阻塞。
+- 模型 grader 不能覆盖确定性规则失败。
+- 生产 profile 必须使用访问受控的私有 holdout。
+- 每个 regression 有 owner、事故来源与证据。
+- 评测器无法理解输入时 fail closed，不能静默忽略。
 
-### 练习 B：设计发布阻塞规则
+## 6. 真实运行
 
-把评测结果映射成发布决策：
+```powershell
+cd "agent-runtime-gateway\20-源码"
+python -m pytest ..\21-测试\test_release_gate.py -q
+python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
+python -m agent_course.cli release-gate-eval ..\22-评测集\s6-release-gate-adversarial.json
+```
 
-| 失败 | 是否阻塞 | 原因 |
+当前教学基线应得到：35 个 Agent case、183 条 assertion、0 个 critical failure；16 个 gate adversarial case、34 条 gate assertion 全部通过。公开 holdout 必须产生 `PUBLIC_HOLDOUT_ONLY`，这是正确边界，不是待隐藏的警告。
+
+## 7. 工业化升级路径
+
+| 当前教学基线 | 生产升级 | 何时需要 |
 |---|---|---|
-| schema 不兼容 | 阻塞 | 下游无法稳定消费 |
-| 跨租户召回 | 阻塞 | 隐私和权限失效 |
-| RAG 引用缺失 | 高风险场景阻塞 | 无法证明答案来源 |
-| 记忆污染 | 阻塞 | 会长期影响后续任务 |
-| 成本上升 8% | 看预算 | 若超过错误预算则阻塞 |
-| 单个非关键措辞偏差 | 不一定阻塞 | 进入 backlog 或观察 |
+| 本地 JSON/JSONL | 数据仓库 + access-controlled holdout | 多团队、敏感或频繁轮换数据 |
+| deterministic local runner | ephemeral environment + parallel trial workers | 有外部 API、容器或并发状态 |
+| 静态 latency/cost fixture | trace/telemetry 聚合 + canary budget | 接入真实模型和线上流量 |
+| 手工 judge calibration | 双人标注、分层抽样、偏差/漂移监控 | model grader 进入发布决策 |
+| 固定 mutation cases | 自动攻击生成 + human red team | 工具面、数据面和模型版本扩张 |
+| CLI gate | CI check + release approval + rollback | 有独立 staging/production 流程 |
+| evidence hash | artifact signing + immutable audit store | 合规、供应链或多方审批 |
 
-### 练习 C：把事故变成回归样例
+具体框架如 Promptfoo、Inspect AI、Langfuse、Phoenix 或厂商 eval API 都应通过 adapter 接入同一任务与证据契约。不要让平台迁移导致历史评测资产失效。
 
-场景：
+## 8. 五道自测
 
-```text
-线上发现 Agent 在恢复任务后重复提交了一次关闭账号操作。
-```
+1. 为什么 task success 必须同时看 transcript/trajectory 和 environment outcome？
+2. critical failure 与普通 quality threshold 为什么要分开判定？
+3. model grader 在进入发布 gate 前至少要经过哪些校准？
+4. public holdout 为什么不能证明生产抗污染？
+5. pass@k、pass^k 和 flake rate 分别描述什么？
 
-你要写出：
+答错后运行对应 `gate-*` adversarial case，用实际 blocker 解释误区，再补一条最小 regression。答案没有进入测试与证据前，不算掌握。
 
-- 事故属于哪一类评测缺口？
-- 新增 regression case 的输入是什么？
-- 期望轨迹是什么？
-- 哪些字段必须出现在 trace/audit？
-- 下次发布的阻塞条件是什么？
+## 9. 过关与岗位证据
 
-## 7. 失败案例
+- [ ] 能把一个真实需求写成 task、trial、grader、trajectory、outcome。
+- [ ] 能设计 golden、regression、red-team、holdout 并解释 split 泄漏。
+- [ ] 能为客观结果写 deterministic assertion。
+- [ ] 能构造并校准 model judge，分析 false pass/false fail。
+- [ ] 能现场证明高平均分不能掩盖 critical failure。
+- [ ] 能把事故变成有 owner 的回归 case。
+- [ ] 能解释版本 manifest、evidence hash 和 decision hash。
+- [ ] 能明确当前本地 fixture 未证明真实 SLO 与生产安全。
 
-| 失败案例 | 根因 | 正确设计 |
-|---|---|---|
-| 只看最终答案准确率 | 忽略工具和轨迹 | 分层 eval taxonomy |
-| 每次手工试几个问题 | 无固定数据集 | golden + regression set |
-| 红队失败修完就忘 | 未回流评测集 | 每个事故变 regression case |
-| 新模型上线后工具误选 | 无 tool eval | 工具选择和参数单独评测 |
-| 记忆删除后仍召回 | 无 memory eval | deletion/tombstone case |
-| 成本暴涨但答案没变 | 无 cost gate | 成本和延迟进入门禁 |
+面试作品应展示：一份 release manifest、一条真实 blocked report、一组门禁 adversarial 结果、一个事故到 regression 的闭环、一次阈值决策 ADR，以及完整复现命令。只展示排行榜分数不满足本阶段要求。
 
-## 8. 架构评审问题
+## 10. 下一阶段
 
-- 这个 case 测的是答案、工具、RAG、记忆、轨迹、安全还是成本？
-- 失败后应该阻塞发布、降级、回滚还是进入 backlog？
-- 每个线上事故是否都变成 regression case？
-- 评测数据是否带版本、owner、适用场景和风险等级？
-- 评测是否覆盖 allow、deny、approval、error？
-- 新模型、新 prompt、新工具、新索引、新记忆策略是否都触发相应评测？
-- 评测报告是否能追到 trace、audit、policy、memory 和 retrieval 版本？
-
-## 9. Design-only 过关标准
-
-你应该能复述：
-
-```text
-Phase 7 解决的是“我觉得能用”没有证据的问题。
-工业级 Agent 要分层评测：契约、工具、RAG、记忆、轨迹、长线恢复、安全、成本和延迟。
-评测不是一次性跑分，而是发布门禁、事故回流、回归阻塞和持续审计。
-```
-
-## 10. 后续 Implementation-later 门禁
-
-后续工程阶段才需要：
-
-- 每个 Phase 有 golden、adversarial、regression case。
-- eval runner 能输出版本化报告。
-- 发布前必须跑 contract/tool/RAG/memory/security/trajectory 的关键集。
-- 失败 case 自动进入 regression backlog。
-- 评测结果能关联 trace_id、run_id、tool_version、policy_version、memory_snapshot、index_version。
-- 阻塞规则可被 CI 或发布流程执行。
-
-## 11. 参考锚点
-
-- [测评审核体系](../04-测评审核体系/测评审核体系.md)
-- [测评审核门禁矩阵](../06-工业级框架蓝图/测评审核门禁矩阵.md)
-- [测评审核升级蓝图](../06-工业级框架蓝图/测评审核升级蓝图.md)
-- [RAG 评测数据集设计](../22-评测集/RAG评测数据集设计.md)
-- [Ragas](https://docs.ragas.io/)
-- [DeepEval](https://docs.confident-ai.com/)
-- [Promptfoo](https://www.promptfoo.dev/docs/intro/)
-- [Inspect AI](https://inspect.aisi.org.uk/)
-
-## 12. 进入 Phase 8 条件
-
-Design-only 进入条件：
-
-- 你能把一个需求拆成至少 7 类评测 case。
-- 你能说明哪些失败必须阻塞发布。
-- 你能把一次事故转成 regression case。
-- 你能解释为什么只测最终答案不够。
-- 你能说明下一阶段为什么需要 trace、span、metrics、replay 和 audit 来定位失败原因。
+进入 S7 前，任选一个 blocker，列出定位它所需的 trace、span、tool arguments、policy decision、model/prompt/tool version、token/latency、audit 和 replay 信息。S7 将实现“从发布失败快速定位到责任环节”的可观测性主线。

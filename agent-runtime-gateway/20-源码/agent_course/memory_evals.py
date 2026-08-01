@@ -46,6 +46,7 @@ def run_memory_eval(path: str | Path) -> dict[str, Any]:
         raise ValueError("memory eval must contain at least one JSONL case")
 
     failures: list[dict[str, Any]] = []
+    case_results: list[dict[str, Any]] = []
     assertion_total = 0
     assertion_passed = 0
 
@@ -53,6 +54,8 @@ def run_memory_eval(path: str | Path) -> dict[str, Any]:
         case_id = str(case.get("id", "missing-case-id"))
         critical = bool(case.get("critical", False))
         case_failures: list[str] = []
+        case_assertion_total = 0
+        case_assertion_passed = 0
         with ExitStack() as resources:
             work_dir = Path(
                 resources.enter_context(TemporaryDirectory(prefix="opspilot-s5-eval-"))
@@ -96,12 +99,23 @@ def run_memory_eval(path: str | Path) -> dict[str, Any]:
                     setup_results,
                 )
             except (ContractError, KeyError, TypeError, ValueError) as exc:
+                reason = f"case setup failed: {exc}"
                 failures.append(
                     {
                         "case_id": case_id,
                         "critical": critical,
-                        "reason": f"case setup failed: {exc}",
-                        "reasons": [f"case setup failed: {exc}"],
+                        "reason": reason,
+                        "reasons": [reason],
+                    }
+                )
+                case_results.append(
+                    {
+                        "case_id": case_id,
+                        "critical": critical,
+                        "passed": False,
+                        "assertions": 0,
+                        "assertions_passed": 0,
+                        "reasons": [reason],
                     }
                 )
                 continue
@@ -109,8 +123,10 @@ def run_memory_eval(path: str | Path) -> dict[str, Any]:
             expected_decision = case.get("expected_decision")
             if expected_decision is not None:
                 assertion_total += 1
+                case_assertion_total += 1
                 if result.get("decision") == expected_decision:
                     assertion_passed += 1
+                    case_assertion_passed += 1
                 else:
                     case_failures.append(
                         f"decision expected {expected_decision}, got {result.get('decision')}"
@@ -118,6 +134,7 @@ def run_memory_eval(path: str | Path) -> dict[str, Any]:
 
             for assertion in case.get("assertions", []):
                 assertion_total += 1
+                case_assertion_total += 1
                 try:
                     passed, reason = _evaluate_assertion(
                         assertion,
@@ -130,6 +147,7 @@ def run_memory_eval(path: str | Path) -> dict[str, Any]:
                     reason = f"memory assertion failed closed: {exc}"
                 if passed:
                     assertion_passed += 1
+                    case_assertion_passed += 1
                 else:
                     case_failures.append(reason)
 
@@ -142,6 +160,16 @@ def run_memory_eval(path: str | Path) -> dict[str, Any]:
                         "reasons": case_failures,
                     }
                 )
+            case_results.append(
+                {
+                    "case_id": case_id,
+                    "critical": critical,
+                    "passed": not case_failures,
+                    "assertions": case_assertion_total,
+                    "assertions_passed": case_assertion_passed,
+                    "reasons": case_failures,
+                }
+            )
 
     critical_failed = sum(1 for failure in failures if failure["critical"])
     return {
@@ -154,6 +182,7 @@ def run_memory_eval(path: str | Path) -> dict[str, Any]:
         "release_passed": not failures,
         "assertions": assertion_total,
         "assertions_passed": assertion_passed,
+        "case_results": case_results,
         "failures": failures,
     }
 

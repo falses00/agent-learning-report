@@ -30,8 +30,11 @@ if (!content || typeof content !== 'object') {
     if (!Array.isArray(stage.prerequisites) || stage.prerequisites.length !== 3) errors.push(`${stageId}.prerequisites must contain 3 items`);
     else stage.prerequisites.forEach((item, index) => requireText(item, `${stageId}.prerequisites[${index}]`));
 
-    if (!Array.isArray(stage.concepts) || stage.concepts.length !== 4) errors.push(`${stageId}.concepts must contain 4 items`);
-    else stage.concepts.forEach((item, index) => requireText(item, `${stageId}.concepts[${index}]`));
+    if (!Array.isArray(stage.concepts) || stage.concepts.length < 4 || stage.concepts.length > 8) errors.push(`${stageId}.concepts must contain 4 to 8 items`);
+    else {
+      stage.concepts.forEach((item, index) => requireText(item, `${stageId}.concepts[${index}]`));
+      if (new Set(stage.concepts).size !== stage.concepts.length) errors.push(`${stageId}.concepts must be unique`);
+    }
 
     for (const field of ['title', 'context', 'symptom', 'lesson']) requireText(stage.caseStudy?.[field], `${stageId}.caseStudy.${field}`);
     requireText(stage.workshop?.title, `${stageId}.workshop.title`);

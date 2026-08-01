@@ -1,6 +1,6 @@
 # 可运行基线
 
-这不是完整生产 Agent，而是课程 F0、S0-S5 的可运行起点。它用确定性组件稳定证明：HTTP/CLI/SQLite 基础、严格契约、租户隔离、ToolCall 只是申请、高风险工具审批、operation ledger 幂等、多租户 RAG、可信引用、拒答、崩溃恢复、provider reconciliation、受治理的长期 Memory 和组合式 eval assertions。
+这不是完整生产 Agent，而是课程 F0、S0-S6 的可运行起点。它用确定性组件稳定证明：HTTP/CLI/SQLite 基础、严格契约、租户隔离、ToolCall 只是申请、高风险工具审批、operation ledger 幂等、多租户 RAG、可信引用、拒答、崩溃恢复、provider reconciliation、受治理的长期 Memory，以及可阻塞发布并能被反向红队的 eval gate。
 
 ## 运行
 
@@ -15,6 +15,8 @@ python -m agent_course.cli eval ..\22-评测集\s4-durable-baseline.json
 python -m agent_course.cli durable-demo --work-dir "$env:TEMP\opspilot-s4" --reset
 python -m agent_course.cli memory-eval ..\22-评测集\memory-engineering-baseline.jsonl
 python -m agent_course.cli memory-demo --db "$env:TEMP\opspilot-s5-memory.db" --reset
+python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
+python -m agent_course.cli release-gate-eval ..\22-评测集\s6-release-gate-adversarial.json
 ```
 
 无需 API key。F0 HTTP 实验使用 FastAPI/Pydantic，测试使用 pytest/httpx；版本范围固定在 `pyproject.toml`。
@@ -36,6 +38,8 @@ python -m agent_course.cli memory-demo --db "$env:TEMP\opspilot-s5-memory.db" --
 - S5 只允许有来源、有限作用域和有限 TTL 的候选写入；模型猜测、Secret/PII 与不可信持久化指令被拒绝。
 - tenant、principal 和 resource ACL 在 Memory 相关性计算前硬过滤；TTL 到期同步删除派生索引。
 - 版本化纠错保留历史，删除传播到独立索引并用 exact/paraphrase/ID 验证不可召回。
+- S6 汇总 35 个前序 Agent case 与 183 条 assertion；critical failure、缺失轨迹/终态、未校准 judge、holdout 污染和预算超限独立阻塞。
+- 16 个 adversarial case 专门测试门禁本身，未知输入 fail closed；公开 holdout 会保留生产证据不足警告。
 
 ## 代码边界
 
@@ -52,11 +56,13 @@ python -m agent_course.cli memory-demo --db "$env:TEMP\opspilot-s5-memory.db" --
 | `durability.py` | 可持久化 mock provider、稳定 operation ID、crash point 与 provider lookup |
 | `memory.py` | S5 write gate、SQLite record/index/tombstone/audit、ACL、TTL、版本和删除 |
 | `memory_evals.py` | 独立 SQLite JSONL case、确定性时钟和 fail-closed Memory assertions |
-| `cli.py` | ticket、demo 和 eval 入口 |
+| `release_gate.py` | S6 manifest/schema、source suite 汇总、grader/holdout/风险/预算判定与证据 hash |
+| `release_gate_evals.py` | 对门禁规则执行 adversarial mutation，防止 false pass |
+| `cli.py` | ticket、demo、eval 和 release gate 入口 |
 
 ## 为什么先不用真实模型
 
-真实模型会引入随机性、网络、限流、费用和 provider 差异。F0、S0-S5 先固定 planner、lexical retrieval、mock refund provider 和 deterministic Memory service，可以稳定复现权限、状态、副作用、引用、拒答、恢复与记忆治理故障。后续添加 `ModelGateway`、embedding、reranker、temporal graph 或 workflow adapter 时，仍保留 deterministic baseline 作为回归 fixture。
+真实模型会引入随机性、网络、限流、费用和 provider 差异。F0、S0-S6 先固定 planner、lexical retrieval、mock refund provider、deterministic Memory service 与 release gate，可以稳定复现权限、状态、副作用、引用、拒答、恢复、记忆治理和门禁绕过故障。后续添加 `ModelGateway`、embedding、reranker、temporal graph 或 workflow adapter 时，仍保留 deterministic baseline 作为回归 fixture。
 
 ## 已知生产缺口
 
@@ -65,10 +71,11 @@ python -m agent_course.cli memory-demo --db "$env:TEMP\opspilot-s5-memory.db" --
 - 审批目前只有姓名字符串，没有真实身份认证、审批范围绑定、TTL 和一次性 token。
 - S3 已有 ACL/freshness/source trust、deterministic ranking、citation validation 和检索评测；仍没有生产 ingestion、embedding/hybrid search、reranker、index migration、在线质量监控和真实模型生成。
 - S5 已有受信成员/资源策略、write gate、tenant/user/resource 隔离、TTL、版本链硬删除、context budget 和 18-case eval；仍没有真实身份认证 adapter、embedding/graph、并发写控制、KMS/加密、备份擦除、法务留存、跨区域复制和生产 SLO。
+- S6 已有严格 manifest、五类 split、版本谱系、deterministic/model-judge 边界、holdout 污染检测、critical gate、预算 gate 和 gate adversarial；仍没有真实模型 trial、人工双标平台、私有 holdout 仓库、线上 telemetry、canary、签名制品和发布审批 adapter。
 - audit 表不是 append-only/WORM 存储，未实现访问控制、签名、保留和导出策略。
 - 没有真实 model gateway、队列、OpenTelemetry、sandbox、secret broker 和应用部署；仓库已接入基础 CI 质量门禁与签名 manifest，但不等于生产发布系统。
 
-因此该代码只能作为 F0、S0-S5 教学证据，不能接入真实资金、客户数据或生产凭据。
+因此该代码只能作为 F0、S0-S6 教学证据，不能接入真实资金、客户数据或生产凭据。
 
 ## 下一步实验
 
@@ -76,7 +83,7 @@ python -m agent_course.cli memory-demo --db "$env:TEMP\opspilot-s5-memory.db" --
 2. 为 S4 增加多 worker lease/fencing、审批 TTL、outbox relay 和补偿演练。
 3. 为 RAG 增加版本化 ingestion、embedding/hybrid adapter 和 reranker 对照实验。
 4. 为 Memory 增加可替换 vector/graph adapter，并用同一治理基线验证 ACL、TTL 和删除传播。
-5. 接入真实模型 adapter，并用同一 eval set 比较质量、延迟、成本与安全退化。
-6. 将现有 CI attestation 继续接入课程 graduation gate，并补性能、安全与线上 SLO 证据。
+5. 接入真实模型 adapter，并用同一 eval contract 比较 pass@1、pass^k、延迟、成本与安全退化。
+6. 建立访问受控的 private holdout 与人工 grader 校准流程，再把 CI attestation 接入 canary、回滚和生产审批。
 
 每次改动都要保留正常、失败和对抗测试。完整路线见[工程实战主线 v2](../00-课程总览/工程实战主线-v2.md)。

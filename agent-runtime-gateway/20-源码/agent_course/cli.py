@@ -20,6 +20,8 @@ from .memory import (
     MemoryType,
 )
 from .memory_evals import run_memory_eval
+from .release_gate import run_release_gate
+from .release_gate_evals import run_release_gate_eval
 from .runtime import AgentRuntime
 from .store import SQLiteStore
 from .tools import ToolRegistry
@@ -53,6 +55,16 @@ def main() -> int:
         help="run the executable S5 JSONL memory eval set",
     )
     memory_eval_parser.add_argument("path")
+    release_gate_parser = subparsers.add_parser(
+        "release-gate",
+        help="run the executable S6 release gate manifest",
+    )
+    release_gate_parser.add_argument("path")
+    release_gate_eval_parser = subparsers.add_parser(
+        "release-gate-eval",
+        help="red-team the S6 release gate with adversarial mutations",
+    )
+    release_gate_eval_parser.add_argument("path")
     memory_parser = subparsers.add_parser(
         "memory-demo",
         help="run the S5 write, isolation, expiry, and delete demo",
@@ -324,6 +336,16 @@ def main() -> int:
 
     if args.command == "memory-eval":
         result = run_memory_eval(args.path)
+        print(json.dumps(result, indent=2, ensure_ascii=False))
+        return 0 if result["failed"] == 0 else 1
+
+    if args.command == "release-gate":
+        result = run_release_gate(args.path)
+        print(json.dumps(result, indent=2, ensure_ascii=False))
+        return 0 if result["release_passed"] else 1
+
+    if args.command == "release-gate-eval":
+        result = run_release_gate_eval(args.path)
         print(json.dumps(result, indent=2, ensure_ascii=False))
         return 0 if result["failed"] == 0 else 1
 

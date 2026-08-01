@@ -25,6 +25,7 @@ const chapters = [
   { id: 's5', num: 'S5', title: 'Memory 与 Context', meta: 'Write Gate · TTL · Isolation', src: 'agent-runtime-gateway/02-阶段教学手册/Phase-06-记忆系统教学手册.md', group: 'main', stageId: 's5' },
   { id: 's5-lab', num: 'S5 实验', title: '受治理的 Agent Memory 实验', meta: 'Write Gate · ACL · TTL · Delete · Eval', src: 'agent-runtime-gateway/labs/S05-memory-context/README.md', group: 'main' },
   { id: 's6', num: 'S6', title: 'Eval 与 Red Team', meta: 'Golden · Trajectory · Security', src: 'agent-runtime-gateway/02-阶段教学手册/Phase-07-测评审核与红队教学手册.md', group: 'main', stageId: 's6' },
+  { id: 's6-lab', num: 'S6 实验', title: '可阻塞发布的 Eval 与红队门禁', meta: 'Release Gate · Holdout · Judge · Evidence', src: 'agent-runtime-gateway/labs/S06-eval-red-team/README.md', group: 'main' },
   { id: 's7', num: 'S7', title: 'Observability 与 SRE', meta: 'Trace · Audit · SLO', src: 'agent-runtime-gateway/02-阶段教学手册/Phase-08-可观测性与审计教学手册.md', group: 'main', stageId: 's7' },
   { id: 's8', num: 'S8', title: 'Security 与 Sandbox', meta: 'Threat model · Isolation · MCP', src: 'agent-runtime-gateway/02-阶段教学手册/Phase-09-安全隔离与沙箱教学手册.md', group: 'main', stageId: 's8' },
   { id: 's9', num: 'S9', title: 'Multi-agent', meta: 'Handoff · Budget · Loop guard', src: 'agent-runtime-gateway/02-阶段教学手册/Phase-10-多智能体协同教学手册.md', group: 'main', stageId: 's9' },

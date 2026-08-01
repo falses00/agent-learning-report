@@ -193,7 +193,7 @@
         "定义 critical failure、通过阈值和发布阻塞规则。",
         "准备规则断言与少量人工标注基准。",
       ],
-      concepts: ["Golden Set", "Critical Gate", "Trajectory Eval", "Judge Calibration"],
+      concepts: ["Task / Trial", "Trajectory + Outcome", "Critical Gate", "Judge Calibration", "Private Holdout", "Evidence Lineage"],
       caseStudy: {
         title: "平均 95 分仍泄漏其他租户",
         context: "总体评测分数很高，但一个跨租户用例失败，被平均值掩盖。",
@@ -202,8 +202,8 @@
       },
       workshop: {
         title: "构建能阻塞发布的评测门禁",
-        steps: ["把数据集分为正常、困难、事故和安全层。", "优先用规则检查权限、工具和最终环境状态。", "固定版本并将 critical failure 接入 CI。"],
-        evidence: "保存数据集 manifest、逐层指标、失败轨迹和 release gate 输出。",
+        steps: ["运行 release manifest，核对 35 个 source case、183 条 assertion 和公开 holdout 警告。", "运行 gate adversarial suite，观察 critical、judge、trajectory、terminal state 和污染 blocker。", "在评测实验室完成至少 4 个发布判定，并登记 manifest/evidence/decision hash。"],
+        evidence: "保存数据集 manifest、逐层指标、失败轨迹、门禁攻击结果和 release gate 三类 hash。",
       },
       quiz: [
         q("平均分 95，但跨租户 case 失败，能发布吗？", ["可以，平均分足够高", "只要重跑成功一次就可以", "不能，critical failure 必须独立阻塞", "降低该题权重"], 2, "安全", "用平均值稀释不可接受的关键风险。", "权限泄漏、重复扣款等 case 应为零容忍门禁。", "100 次安全中 1 次开错门仍是安全系统失败。", "让单个 tenant isolation case 失败并断言 CI 退出非零。", true),
