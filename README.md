@@ -11,13 +11,14 @@
 在线站点提供：
 
 - 首次学习路径与基础自检。
-- F0、S0-S10 学习路线、本地进度，以及 9/12 工程实验覆盖率；当前可运行基线为 F0、S0-S7。
+- F0、S0-S10 学习路线、本地进度，以及 10/12 工程实验覆盖率；当前可运行基线为 F0、S0-S8。
 - 每阶段 3 项课前检查、明确标注来源的事故或合成工程故障场景、动手步骤和关键概念速记。
 - 每阶段 5 题自测、逐题误区反馈、首轮评分和结构化本地自评门禁。
 - S3 RAG 全链路实验室：10 层证据链、25 条提升路径、14 类故障诊断、10 个固定 commit 源码项目与可消融架构规划。
 - S5 Agent Memory 实验室：21 类方法、六轴分类、8 个固定 commit 源码项目、工作负载选型、写入生命周期决策、SQLite 治理实验与 18 条专项评测。
 - S6 Eval 与发布门禁实验室：35 个前序 Agent case、183 条断言、16 个门禁攻击、grader/holdout/critical gate 和证据 hash。
 - S7 Observability 与事故响应实验室：信号契约、W3C trace、SLO/burn-rate 分级、8 个事故判定、6 个 Runtime run 与 14 个门禁攻击。
+- S8 Security 与 Sandbox 实验室：9 层控制链、4 类安全终态、10 个交互事故、6 个固定 commit 源码项目与 25 个 critical 攻击 case。
 - 可运行基线命令、故障演练、课程资料阅读和搜索。
 - 本地进度导出与重置，不上传学习数据；导出包明确标记为 `self-reported`，不能替代 CI 或独立工程复验。
 
@@ -42,6 +43,7 @@ node data/check_rag_content.mjs
 node data/check_memory_content.mjs
 node data/check_eval_content.mjs
 node data/check_observability_content.mjs
+node data/check_security_content.mjs
 ```
 
 运行 Agent 教学基线：
@@ -62,6 +64,7 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
 python -m agent_course.cli release-gate-eval ..\22-评测集\s6-release-gate-adversarial.json
 python -m agent_course.cli observability ..\22-评测集\s7-observability-manifest.json
 python -m agent_course.cli observability-eval ..\22-评测集\s7-observability-adversarial.json
+python -m agent_course.cli security-eval ..\22-评测集\s8-security-adversarial.json
 ```
 
 ## 可复验质量证据
@@ -72,7 +75,7 @@ python -m agent_course.cli observability-eval ..\22-评测集\s7-observability-a
 python scripts/run_quality_gate.py
 ```
 
-命令当前执行 18 项检查，生成 `quality-reports/manifest.json`、pytest JUnit、内容检查、S3 基础与诊断 eval、S4/S5 eval、S6 release gate，以及 S7 observability 基线与 adversarial JSON。每次向 `main` 推送后，Actions 会保留整包证据，并使用 GitHub Artifact Attestations 为 manifest 生成可验证的构建来源。下载 CI 产物后可核对：
+命令当前执行 20 项检查，生成 `quality-reports/manifest.json`、pytest JUnit、内容检查、S3 基础与诊断 eval、S4/S5 eval、S6 release gate、S7 observability，以及 S8 security adversarial JSON。每次向 `main` 推送后，Actions 会保留整包证据，并使用 GitHub Artifact Attestations 为 manifest 生成可验证的构建来源。下载 CI 产物后可核对：
 
 ```powershell
 gh attestation verify quality-reports/manifest.json --repo falses00/agent-learning-report
@@ -94,6 +97,7 @@ manifest 中保存各报告的 SHA-256，因此签名来源、提交版本与报
 - [S5 受治理 Agent Memory 实验](agent-runtime-gateway/labs/S05-memory-context/README.md)
 - [S6 可阻塞发布的 Eval 与红队门禁实验](agent-runtime-gateway/labs/S06-eval-red-team/README.md)
 - [S7 Observability、SLO 与事故回归实验](agent-runtime-gateway/labs/S07-observability-sre/README.md)
+- [S8 Agent Security 与 Sandbox 对抗实验](agent-runtime-gateway/labs/S08-security-sandbox/README.md)
 - [全链路故障与修复](agent-runtime-gateway/11-工程实战主线/全链路故障与修复手册.md)
 
-当前源码是 F0、S0-S7 教学基线，不是生产系统，不能接入真实资金、客户数据或生产凭据。
+当前源码是 F0、S0-S8 教学基线，不是生产系统，不能接入真实资金、客户数据或生产凭据。

@@ -26,6 +26,7 @@ from .release_gate import run_release_gate
 from .release_gate_evals import run_release_gate_eval
 from .rag_diagnostics import run_rag_diagnostic_eval
 from .runtime import AgentRuntime
+from .security import run_security_eval
 from .store import SQLiteStore
 from .tools import ToolRegistry
 
@@ -83,6 +84,11 @@ def main() -> int:
         help="run the executable RAG failure diagnosis suite",
     )
     rag_diagnostic_parser.add_argument("path")
+    security_eval_parser = subparsers.add_parser(
+        "security-eval",
+        help="run the executable S8 security policy and adversarial suite",
+    )
+    security_eval_parser.add_argument("path")
     memory_parser = subparsers.add_parser(
         "memory-demo",
         help="run the S5 write, isolation, expiry, and delete demo",
@@ -379,6 +385,11 @@ def main() -> int:
 
     if args.command == "rag-diagnostic-eval":
         result = run_rag_diagnostic_eval(args.path)
+        print(json.dumps(result, indent=2, ensure_ascii=False))
+        return 0 if result["failed"] == 0 else 1
+
+    if args.command == "security-eval":
+        result = run_security_eval(args.path)
         print(json.dumps(result, indent=2, ensure_ascii=False))
         return 0 if result["failed"] == 0 else 1
 

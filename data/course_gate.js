@@ -51,7 +51,7 @@
   }
 
   function canPassStage(input) {
-    return Boolean(input.implementationReady && input.preflightReady && input.quizReady && input.evidenceReady && input.ragLabReady && input.memoryLabReady && input.evalLabReady && input.observabilityLabReady);
+    return Boolean(input.implementationReady && input.preflightReady && input.quizReady && input.evidenceReady && input.ragLabReady && input.memoryLabReady && input.evalLabReady && input.observabilityLabReady && input.securityLabReady);
   }
 
   function shouldDowngradePass(input) {

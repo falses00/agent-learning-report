@@ -569,6 +569,7 @@
     .memory-section-nav button:last-child { border-right: 0; }
     .memory-section-nav button:hover { background: var(--surface-muted); color: var(--ink); }
     .memory-section-nav button.active { background: var(--brand-soft); color: var(--accent-hover); box-shadow: inset 0 -2px 0 var(--accent); }
+    .security-section-nav { grid-template-columns: repeat(5, minmax(0, 1fr)); }
     .memory-section { padding: 30px 0 34px; border-top: 1px solid rgba(0, 82, 217, .14); scroll-margin-top: calc(var(--topbar) + 66px); }
     .memory-section-heading { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 18px; }
     .memory-section-heading h2 { margin: 0; color: #202b40; font-family: var(--display); font-size: 22px; }
@@ -1029,6 +1030,7 @@
       .mobile-nav { grid-template-columns: repeat(8, minmax(0, 1fr)); }
       .mobile-nav button { min-width: 0; padding-inline: 1px; font-size: 10px; }
       .rag-section-nav button { font-size: 9px; }
+      .security-section-nav button { padding-inline: 2px; font-size: 9px; line-height: 1.25; }
       .rag-pipeline-row { grid-template-columns: 32px minmax(0, 1fr); gap: 5px 10px; }
       .rag-pipeline-row p, .rag-pipeline-row small { grid-column: 2; }
       .rag-axis-list { grid-template-columns: 1fr; }
@@ -1090,7 +1092,7 @@
     <nav class="view-nav" aria-label="主要视图">
       <button type="button" data-view="overview">总览</button>
       <button type="button" data-view="stage">阶段学习</button>
-      <button type="button" data-view="simulator">故障演练</button>
+      <button type="button" data-view="security">安全实验</button>
       <button type="button" data-view="rag">RAG 实验室</button>
       <button type="button" data-view="memory">记忆实验室</button>
       <button type="button" data-view="eval">评测实验室</button>
@@ -1175,7 +1177,9 @@ python -m agent_course.cli eval ..\22-评测集\engineering-baseline.json
 python -m agent_course.cli eval ..\22-评测集\s3-rag-baseline.json
 python -m agent_course.cli eval ..\22-评测集\s4-durable-baseline.json
 python -m agent_course.cli memory-eval ..\22-评测集\memory-engineering-baseline.jsonl
-python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json</pre>
+python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
+python -m agent_course.cli observability-eval ..\22-评测集\s7-observability-adversarial.json
+python -m agent_course.cli security-eval ..\22-评测集\s8-security-adversarial.json</pre>
           </div>
           <div class="expected-output" id="baselineMetrics">正在读取可复验工程基线。</div>
         </section>
@@ -1236,6 +1240,7 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
               <button class="secondary-button" id="openMemoryLabButton" type="button" hidden>进入记忆实验室</button>
               <button class="secondary-button" id="openEvalLabButton" type="button" hidden>进入评测实验室</button>
               <button class="secondary-button" id="openObservabilityLabButton" type="button" hidden>进入运营实验室</button>
+              <button class="secondary-button" id="openSecurityLabButton" type="button" hidden>进入安全实验室</button>
             </div>
           </section>
 
@@ -1584,6 +1589,68 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
       </section>
     </section>
 
+    <section class="view" id="securityView" data-view-panel="security">
+      <div class="page-heading">
+        <div class="section-label">S8 专项训练</div>
+        <h1>Agent Security 与 Sandbox 实验室</h1>
+        <p>假设模型会被误导，沿九层确定性控制链判断请求应允许、待审批、阻断还是隔离。</p>
+      </div>
+      <div class="memory-boundary"><strong>可运行控制平面 fixture</strong><span>25 个 critical case</span><span>不执行真实工具</span><span>不冒充 gVisor / microVM</span></div>
+      <div class="memory-progress" id="securityProgress" aria-live="polite"></div>
+      <nav class="memory-section-nav security-section-nav" aria-label="安全实验室步骤">
+        <button type="button" data-security-target="securityControls">控制链</button>
+        <button type="button" data-security-target="securityDecisions">决策语义</button>
+        <button type="button" data-security-target="securityScenarios">攻击演练</button>
+        <button type="button" data-security-target="securityProjects">源码审计</button>
+        <button type="button" data-security-target="securityEvidence">证据与趋势</button>
+      </nav>
+
+      <section class="memory-section" id="securityControls" aria-labelledby="securityControlsTitle">
+        <div class="memory-section-heading">
+          <div><div class="section-label">01 · 约束危险路径</div><h2 id="securityControlsTitle">九层控制链</h2><p>Prompt 和 classifier 只降低风险；身份、网络、文件、凭据和执行边界必须由模型之外的系统强制执行。</p></div>
+          <button class="secondary-button" id="openSecurityGuide" type="button">打开完整实验教材</button>
+        </div>
+        <div class="ops-signal-list" id="securityControlList"></div>
+      </section>
+
+      <section class="memory-section" id="securityDecisions" aria-labelledby="securityDecisionsTitle">
+        <div class="memory-section-heading"><div><div class="section-label">02 · 固定终态</div><h2 id="securityDecisionsTitle">四种决策，不允许模糊放行</h2><p>审批不能覆盖其他安全失败；未知 schema、策略故障和 sandbox 故障必须 fail closed。</p></div></div>
+        <div class="journey-strip" id="securityDecisionList"></div>
+      </section>
+
+      <section class="memory-section" id="securityScenarios" aria-labelledby="securityScenariosTitle">
+        <div class="memory-section-heading"><div><div class="section-label">03 · 亲自判定攻击</div><h2 id="securityScenariosTitle">安全响应决策演练</h2><p>至少正确完成 4 个场景。答错先说明误区，答对后才显示 reason code 和必须保留的证据。</p></div></div>
+        <div class="ops-lab-layout">
+          <div>
+            <div class="field"><label for="securityScenario">当前攻击场景</label><select id="securityScenario"></select></div>
+            <article class="ops-scenario-sheet" id="securityScenarioSheet"></article>
+            <div class="ops-decision-control" id="securityDecisionControl" role="group" aria-label="你的安全决策"></div>
+            <div class="memory-action-row"><button class="primary-button" id="checkSecurityDecision" type="button">校验安全决策</button></div>
+          </div>
+          <div>
+            <div class="ops-signal-path" id="securityControlPath" aria-label="该场景的控制证据"></div>
+            <div id="securityDecisionFeedback" aria-live="polite"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="memory-section" id="securityProjects" aria-labelledby="securityProjectsTitle">
+        <div class="memory-section-heading"><div><div class="section-label">04 · 不把产品名当架构</div><h2 id="securityProjectsTitle">六个项目的源码边界</h2><p>固定 commit 检查隔离、策略和攻击评测实现，同时明确每个项目仍不能替代的企业控制。</p></div></div>
+        <div class="memory-method-layout">
+          <div class="memory-method-list" id="securityProjectList" aria-label="安全源码项目列表"></div>
+          <article class="memory-detail" id="securityProjectDetail" aria-live="polite"></article>
+        </div>
+      </section>
+
+      <section class="memory-section" id="securityEvidence" aria-labelledby="securityEvidenceTitle">
+        <div class="memory-section-heading"><div><div class="section-label">05 · 区分证据与推断</div><h2 id="securityEvidenceTitle">一手规范与未来走向</h2><p>已公开的规范和工程实践单独列出；工作流凭据、签名 sandbox profile 与 MCP 持续准入仍需生产验证。</p></div></div>
+        <div class="eval-evidence-grid">
+          <div><h3>一手资料</h3><div class="eval-source-list" id="securitySources"></div></div>
+          <div><h3>当前与未来</h3><div class="memory-future" id="securityFuture"></div></div>
+        </div>
+      </section>
+    </section>
+
     <section class="view" id="libraryView" data-view-panel="library">
       <header class="library-header">
         <div>
@@ -1606,7 +1673,7 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
   <nav class="mobile-nav" id="mobileBottomNav" aria-label="移动端主要视图">
     <button class="mobile-nav-button" type="button" data-view="overview">总览</button>
     <button class="mobile-nav-button" type="button" data-view="stage">阶段</button>
-    <button class="mobile-nav-button" type="button" data-view="simulator">演练</button>
+    <button class="mobile-nav-button" type="button" data-view="security">安全</button>
     <button class="mobile-nav-button" type="button" data-view="rag">检索</button>
     <button class="mobile-nav-button" type="button" data-view="memory">记忆</button>
     <button class="mobile-nav-button" type="button" data-view="eval">评测</button>
@@ -1624,6 +1691,7 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
   <script src="data/memory_lab.js"></script>
   <script src="data/eval_lab.js"></script>
   <script src="data/observability_lab.js"></script>
+  <script src="data/security_lab.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked@15.0.12/marked.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js"></script>
   <script>
@@ -1640,6 +1708,7 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
     const MEMORY_LAB = window.MEMORY_LAB && typeof window.MEMORY_LAB === 'object' ? window.MEMORY_LAB : null;
     const EVAL_LAB = window.EVAL_LAB && typeof window.EVAL_LAB === 'object' ? window.EVAL_LAB : null;
     const OBSERVABILITY_LAB = window.OBSERVABILITY_LAB && typeof window.OBSERVABILITY_LAB === 'object' ? window.OBSERVABILITY_LAB : null;
+    const SECURITY_LAB = window.SECURITY_LAB && typeof window.SECURITY_LAB === 'object' ? window.SECURITY_LAB : null;
     const STORAGE_KEY = 'ARG_ENGINEERING_COURSE_V2';
     const GITHUB_SOURCE = 'https://github.com/falses00/agent-learning-report/blob/main/';
     const evidenceFields = [
@@ -1765,8 +1834,8 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
         deliverable: 'Threat model、secret broker、egress/FS policy、sandbox profile 和 MCP 准入。',
         failure: '间接 prompt injection 诱导工具外发数据，或恶意 MCP server 扩大权限。',
         fix: '指令与数据分离、短期凭据、allowlist、审批、强隔离和 kill switch。',
-        evidence: 'Injection、exfiltration、SSRF、恶意 MCP 和 forbidden path probes。',
-        command: '# 完成 S8 实验后运行\npython -m pytest tests -q -k security', implemented: false,
+        evidence: '25 个 critical case、150 条运行断言、四类决策、九层控制证据与固定 commit 源码审计。',
+        command: 'cd "agent-runtime-gateway\\20-源码"\npython -m pytest ..\\21-测试\\test_security.py -q\npython -m agent_course.cli security-eval ..\\22-评测集\\s8-security-adversarial.json', implemented: true,
         chapter: 's8',
         question: '为什么 Docker 本身不等于绝对安全沙箱？',
         answer: '容器共享宿主内核，挂载、网络、能力集和凭据配置错误仍可能导致逃逸或数据外传。隔离必须按风险组合文件、网络、进程、凭据和运行时边界。',
@@ -1891,8 +1960,15 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
       selectedResponse: '',
     };
 
+    const defaultSecurityLabState = {
+      scenarios: {},
+      activeScenario: 'indirect-injection',
+      selectedDecision: '',
+      activeProject: 'gvisor',
+    };
+
     const defaultState = {
-      courseVersion: 9,
+      courseVersion: 10,
       path: 'engineering',
       currentStage: 's0',
       stages: {},
@@ -1902,6 +1978,7 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
       memoryLab: defaultMemoryLabState,
       evalLab: defaultEvalLabState,
       observabilityLab: defaultObservabilityLabState,
+      securityLab: defaultSecurityLabState,
     };
 
     let state = loadState();
@@ -1911,6 +1988,7 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
     let memoryFeedback = null;
     let evalFeedback = null;
     let opsFeedback = null;
+    let securityFeedback = null;
     let toastTimer;
     const openNavGroups = new Set(['start']);
     const openRoadmapGroups = new Set();
@@ -1924,6 +2002,7 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
           const savedMemoryLab = saved.memoryLab && typeof saved.memoryLab === 'object' ? saved.memoryLab : {};
           const savedEvalLab = saved.evalLab && typeof saved.evalLab === 'object' ? saved.evalLab : {};
           const savedObservabilityLab = saved.observabilityLab && typeof saved.observabilityLab === 'object' ? saved.observabilityLab : {};
+          const savedSecurityLab = saved.securityLab && typeof saved.securityLab === 'object' ? saved.securityLab : {};
           return {
             ...defaultState,
             ...saved,
@@ -1955,6 +2034,13 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
               scenarios: savedObservabilityLab.scenarios && typeof savedObservabilityLab.scenarios === 'object' ? savedObservabilityLab.scenarios : {},
               selectedResponse: ['page', 'ticket', 'observe'].includes(savedObservabilityLab.selectedResponse) ? savedObservabilityLab.selectedResponse : '',
             },
+            securityLab: {
+              ...defaultSecurityLabState,
+              ...savedSecurityLab,
+              scenarios: savedSecurityLab.scenarios && typeof savedSecurityLab.scenarios === 'object' ? savedSecurityLab.scenarios : {},
+              selectedDecision: SECURITY_LAB?.decisions?.some((item) => item.id === savedSecurityLab.selectedDecision) ? savedSecurityLab.selectedDecision : '',
+              activeProject: SECURITY_LAB?.projects?.some((item) => item.id === savedSecurityLab.activeProject) ? savedSecurityLab.activeProject : defaultSecurityLabState.activeProject,
+            },
           };
         }
       } catch (error) {
@@ -1982,6 +2068,7 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
 
     function requiredGateVersion(stageId) {
       if (stageId === 's3') return 9;
+      if (stageId === 's8') return 10;
       if (stageId === 's7') return 8;
       if (stageId === 'f0' || stageId === 's6') return 7;
       return stageId === 's5' ? 6 : 5;
@@ -2099,10 +2186,17 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
       return { mastered, ready: mastered >= 4 };
     }
 
+    function securityLabStatus() {
+      const scenarios = state.securityLab?.scenarios && typeof state.securityLab.scenarios === 'object' ? state.securityLab.scenarios : {};
+      const validScenarioIds = SECURITY_LAB?.scenarios?.map((scenario) => scenario.id) || [];
+      const mastered = validScenarioIds.filter((id) => scenarios[id] === true).length;
+      return { mastered, ready: mastered >= 4 };
+    }
+
     function passEligibility(stageId, itemState) {
       const lesson = LEARNING_CONTENT[stageId];
       const stage = STAGES.find((candidate) => candidate.id === stageId);
-      if (!lesson || !stage) return { ready: false, implementationReady: false, preflightReady: false, evidenceReady: false, quizReady: false, ragLabReady: false, memoryLabReady: false, evalLabReady: false, observabilityLabReady: false };
+      if (!lesson || !stage) return { ready: false, implementationReady: false, preflightReady: false, evidenceReady: false, quizReady: false, ragLabReady: false, memoryLabReady: false, evalLabReady: false, observabilityLabReady: false, securityLabReady: false };
       const implementationReady = stage.implemented === true;
       const preflightReady = itemState.prerequisites.every(Boolean);
       const evidenceReady = evidenceStatus(itemState).ready;
@@ -2111,7 +2205,8 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
       const memoryLabReady = stageId !== 's5' || memoryLabStatus().ready;
       const evalLabReady = stageId !== 's6' || evalLabStatus().ready;
       const observabilityLabReady = stageId !== 's7' || observabilityLabStatus().ready;
-      return { ready: COURSE_GATE.canPassStage({ implementationReady, preflightReady, evidenceReady, quizReady, ragLabReady, memoryLabReady, evalLabReady, observabilityLabReady }), implementationReady, preflightReady, evidenceReady, quizReady, ragLabReady, memoryLabReady, evalLabReady, observabilityLabReady };
+      const securityLabReady = stageId !== 's8' || securityLabStatus().ready;
+      return { ready: COURSE_GATE.canPassStage({ implementationReady, preflightReady, evidenceReady, quizReady, ragLabReady, memoryLabReady, evalLabReady, observabilityLabReady, securityLabReady }), implementationReady, preflightReady, evidenceReady, quizReady, ragLabReady, memoryLabReady, evalLabReady, observabilityLabReady, securityLabReady };
     }
 
     function gateStatus(stageId) {
@@ -2168,6 +2263,10 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
       if (!gate.observabilityLabReady) {
         const lab = observabilityLabStatus();
         return `进入运营实验室继续事故响应判定，还需掌握 ${Math.max(0, 4 - lab.mastered)} 个场景。`;
+      }
+      if (!gate.securityLabReady) {
+        const lab = securityLabStatus();
+        return `进入安全实验室继续攻击判定，还需掌握 ${Math.max(0, 4 - lab.mastered)} 个场景。`;
       }
       if (!gate.evidenceReady) return `补齐 ${evidenceFields.length - evidence.complete} 项结构化工程证据并完成验收。`;
       if (itemState.status !== 'passed') return '本地自评条件已经满足；记录后仍需用仓库测试、CI 或评审复验。';
@@ -2347,6 +2446,7 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
       document.getElementById('openMemoryLabButton').hidden = stage.id !== 's5';
       document.getElementById('openEvalLabButton').hidden = stage.id !== 's6';
       document.getElementById('openObservabilityLabButton').hidden = stage.id !== 's7';
+      document.getElementById('openSecurityLabButton').hidden = stage.id !== 's8';
 
       document.getElementById('prerequisiteChecklist').innerHTML = lesson.prerequisites.map((text, index) => `
         <label class="check-row">
@@ -2421,6 +2521,10 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
         const lab = observabilityLabStatus();
         requirements.push(['运营实验室', stageGate.observabilityLabReady, `${lab.mastered}/4 个事故响应判定`]);
       }
+      if (stage.id === 's8') {
+        const lab = securityLabStatus();
+        requirements.push(['安全实验室', stageGate.securityLabReady, `${lab.mastered}/4 个攻击判定`]);
+      }
       document.getElementById('gateRequirements').innerHTML = requirements.map(([label, done, value]) => `<div class="gate-requirement${done ? ' done' : ''}"><span>${done ? '已完成' : '未完成'} · ${label}</span><strong>${value}</strong></div>`).join('');
 
       const gate = document.getElementById('gateMessage');
@@ -2447,6 +2551,10 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
       if (!stageGate.observabilityLabReady) {
         const lab = observabilityLabStatus();
         missing.push(`${Math.max(0, 4 - lab.mastered)} 个事故响应判定场景`);
+      }
+      if (!stageGate.securityLabReady) {
+        const lab = securityLabStatus();
+        missing.push(`${Math.max(0, 4 - lab.mastered)} 个安全攻击判定场景`);
       }
       gate.textContent = stageGate.ready ? '本地自评条件已满足；这不是工程认证，仍需仓库测试、CI 或评审者复验。' : `还需要：${missing.join('；')}。`;
       const passButton = document.getElementById('passStageButton');
@@ -3304,6 +3412,123 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
       requestAnimationFrame(updateOpsSectionNav);
     }
 
+    function currentSecurityScenario() {
+      const scenarios = SECURITY_LAB?.scenarios || [];
+      const selected = scenarios.find((scenario) => scenario.id === state.securityLab.activeScenario);
+      if (selected) return selected;
+      const fallback = scenarios[0];
+      if (fallback) state.securityLab.activeScenario = fallback.id;
+      return fallback;
+    }
+
+    function renderSecurityProgress() {
+      const status = securityLabStatus();
+      const baseline = SECURITY_LAB.baseline;
+      document.getElementById('securityProgress').innerHTML = `
+        <div class="memory-progress-item"><span>发布门禁</span><strong>${baseline.cases} critical cases</strong><small>${baseline.assertions} assertions · 0 critical failure</small></div>
+        <div class="memory-progress-item"><span>控制与源码</span><strong>${baseline.controls} controls · ${baseline.projects} projects</strong><small>固定 commit，并写明每个项目不负责什么</small></div>
+        <div class="memory-progress-item"><span>攻击判断</span><strong>${status.mastered} / 4</strong><small>${status.ready ? '已满足 S8 专项门禁' : '至少掌握 4 类不同边界'}</small></div>`;
+    }
+
+    function renderSecurityControls() {
+      document.getElementById('securityControlList').innerHTML = SECURITY_LAB.controls.map((control) => `
+        <div class="ops-signal-row"><strong>${escapeHtml(control.name)}</strong><span>${escapeHtml(control.question)}</span><small>事故：${escapeHtml(control.failure)}</small><small>证据：${escapeHtml(control.evidence)}</small></div>`).join('');
+      document.getElementById('securityDecisionList').innerHTML = SECURITY_LAB.decisions.map((decision, index) => `
+        <div class="journey-step"><span class="journey-number">${String(index + 1).padStart(2, '0')}</span><span class="journey-copy"><strong>${escapeHtml(decision.label)}</strong><small>${escapeHtml(decision.detail)}</small></span></div>`).join('');
+    }
+
+    function renderSecurityDecision() {
+      const scenario = currentSecurityScenario();
+      if (!scenario) return;
+      const mastered = state.securityLab.scenarios[scenario.id] === true;
+      const select = document.getElementById('securityScenario');
+      select.innerHTML = SECURITY_LAB.scenarios.map((item) => `<option value="${escapeHtml(item.id)}">${state.securityLab.scenarios[item.id] === true ? '已掌握 · ' : ''}${escapeHtml(item.title)}</option>`).join('');
+      select.value = scenario.id;
+      document.getElementById('securityScenarioSheet').innerHTML = `
+        <h3>${escapeHtml(scenario.title)}</h3><p>${escapeHtml(scenario.observation)}</p>
+        <dl class="eval-scenario-meta"><div><dt>危险动作</dt><dd>${scenario.expected === 'allow' ? '允许按原计划执行' : '当前不得产生副作用'}</dd></div><div><dt>判定目标</dt><dd>选择最小但足够安全的终态</dd></div><div><dt>证据要求</dt><dd>metadata-only · reason code · regression owner</dd></div></dl>`;
+      document.getElementById('securityDecisionControl').innerHTML = SECURITY_LAB.decisions.map((decision) => `
+        <button type="button" class="${state.securityLab.selectedDecision === decision.id ? 'active' : ''}" data-security-decision="${escapeHtml(decision.id)}" aria-pressed="${state.securityLab.selectedDecision === decision.id}" title="${escapeHtml(decision.detail)}">${escapeHtml(decision.label)}</button>`).join('');
+      document.querySelectorAll('[data-security-decision]').forEach((button) => button.addEventListener('click', () => {
+        state.securityLab.selectedDecision = button.dataset.securityDecision;
+        securityFeedback = null;
+        saveState();
+        renderSecurityDecision();
+      }));
+      const controlByBlocker = {
+        SECURITY_POLICY_ALLOWED: 'registry', APPROVAL_REQUIRED: 'approval', UNTRUSTED_INSTRUCTION: 'trust', RAW_SECRET_DETECTED: 'credential',
+        PATH_OUTSIDE_WORKSPACE: 'filesystem', SSRF_ADDRESS_DENIED: 'egress', SANDBOX_REQUIRED: 'sandbox', MCP_CAPABILITY_ESCALATION: 'mcp',
+        TOOL_SCOPE_DENIED: 'identity', SECURITY_POLICY_UNAVAILABLE: 'registry',
+      };
+      const activeControl = controlByBlocker[scenario.blocker];
+      document.getElementById('securityControlPath').innerHTML = SECURITY_LAB.controls.map((control) => `
+        <div class="ops-signal-path-row${mastered && control.id === activeControl ? ' active' : ''}"><strong>${escapeHtml(control.name)}</strong><span>${mastered && control.id === activeControl ? escapeHtml(control.evidence) : '判定正确后展开主要控制证据'}</span></div>`).join('');
+
+      const expectedLabel = SECURITY_LAB.decisions.find((decision) => decision.id === scenario.expected)?.label || scenario.expected;
+      const evidence = { decision: scenario.expected, reason_code: scenario.blocker, side_effect_allowed: scenario.expected === 'allow', required_evidence: scenario.evidence, content_capture: 'metadata_only' };
+      const feedback = document.getElementById('securityDecisionFeedback');
+      if (securityFeedback?.scenarioId === scenario.id) {
+        feedback.innerHTML = securityFeedback.correct
+          ? `<div class="memory-feedback correct"><strong>安全决策正确：${escapeHtml(expectedLabel)}</strong><br>${escapeHtml(scenario.reason)}</div><pre class="memory-audit">${escapeHtml(JSON.stringify(evidence, null, 2))}</pre>`
+          : `<div class="memory-feedback wrong"><strong>这个选择可能放大权限或错误阻断正常工作。</strong><br>${escapeHtml(scenario.misconception)}<br>补充原理：${escapeHtml(scenario.reason)}</div>`;
+      } else if (mastered) {
+        feedback.innerHTML = `<div class="memory-feedback correct"><strong>该场景已掌握：${escapeHtml(expectedLabel)}</strong><br>${escapeHtml(scenario.reason)}</div><pre class="memory-audit">${escapeHtml(JSON.stringify(evidence, null, 2))}</pre>`;
+      } else {
+        feedback.innerHTML = '';
+      }
+    }
+
+    function checkSecurityDecision() {
+      const scenario = currentSecurityScenario();
+      const selected = state.securityLab.selectedDecision;
+      if (!selected) { showToast('先选择允许、等待审批、阻断或隔离'); return; }
+      const correct = selected === scenario.expected;
+      securityFeedback = { scenarioId: scenario.id, correct };
+      if (correct) state.securityLab.scenarios[scenario.id] = true;
+      saveState();
+      renderSecurityLab();
+      if (state.currentStage === 's8') renderStageView();
+      showToast(correct ? '安全终态正确，reason code 与证据要求已展开' : '判定未通过，请根据误区和确定性边界重试');
+    }
+
+    function renderSecurityProjects() {
+      if (!SECURITY_LAB.projects.some((project) => project.id === state.securityLab.activeProject)) state.securityLab.activeProject = SECURITY_LAB.projects[0].id;
+      const active = SECURITY_LAB.projects.find((project) => project.id === state.securityLab.activeProject) || SECURITY_LAB.projects[0];
+      document.getElementById('securityProjectList').innerHTML = SECURITY_LAB.projects.map((project) => `
+        <button type="button" class="memory-method-button${project.id === active.id ? ' active' : ''}" data-security-project="${escapeHtml(project.id)}"><strong>${escapeHtml(project.name)}</strong><span>${escapeHtml(project.status)}</span><small>${escapeHtml(project.role)}</small></button>`).join('');
+      document.getElementById('securityProjectDetail').innerHTML = `
+        <div class="memory-detail-heading"><div><span>${escapeHtml(active.role)}</span><h3>${escapeHtml(active.name)}</h3></div><a href="${escapeHtml(active.sourceUrl)}" target="_blank" rel="noopener noreferrer">固定源码</a></div>
+        <dl><div><dt>固定 commit</dt><dd><code>${escapeHtml(active.commit)}</code></dd></div><div><dt>审计路径</dt><dd>${active.sourcePaths.map((path) => `<code>${escapeHtml(path)}</code>`).join('<br>')}</dd></div><div><dt>已核验</dt><dd>${escapeHtml(active.verified)}</dd></div><div><dt>不能替代</dt><dd>${escapeHtml(active.limit)}</dd></div></dl>`;
+      document.querySelectorAll('[data-security-project]').forEach((button) => button.addEventListener('click', () => {
+        state.securityLab.activeProject = button.dataset.securityProject;
+        saveState();
+        renderSecurityProjects();
+      }));
+    }
+
+    function renderSecurityEvidence() {
+      document.getElementById('securitySources').innerHTML = SECURITY_LAB.sources.map((source) => `
+        <div class="eval-source-row"><strong>${escapeHtml(source.name)}</strong><span>${escapeHtml(source.focus)}</span><a href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer">一手来源</a></div>`).join('');
+      const evidence = SECURITY_LAB.future.filter((item) => item.kind === 'evidence');
+      const inference = SECURITY_LAB.future.filter((item) => item.kind === 'inference');
+      document.getElementById('securityFuture').innerHTML = `
+        <div class="memory-future-column"><h3>已有证据支持</h3>${evidence.map((item) => `<div class="memory-future-item"><strong>${escapeHtml(item.title)}</strong><span>${escapeHtml(item.detail)}</span></div>`).join('')}</div>
+        <div class="memory-future-column inference"><h3>工程推断，仍需验证</h3>${inference.map((item) => `<div class="memory-future-item"><strong>${escapeHtml(item.title)}</strong><span>${escapeHtml(item.detail)}</span></div>`).join('')}</div>`;
+    }
+
+    function renderSecurityLab() {
+      if (!SECURITY_LAB) {
+        document.getElementById('securityView').innerHTML = '<div class="page-heading"><h1>安全实验室暂不可用</h1><p>课程数据未加载，请检查 data/security_lab.js。</p></div>';
+        return;
+      }
+      renderSecurityProgress();
+      renderSecurityControls();
+      renderSecurityDecision();
+      renderSecurityProjects();
+      renderSecurityEvidence();
+      requestAnimationFrame(updateSecuritySectionNav);
+    }
+
     function updateEvalSectionNav() {
       if (activeView !== 'eval') return;
       const sections = [...document.querySelectorAll('[data-eval-target]')]
@@ -3342,6 +3567,25 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
       });
     }
 
+    function updateSecuritySectionNav() {
+      if (activeView !== 'security') return;
+      const sections = [...document.querySelectorAll('[data-security-target]')]
+        .map((button) => document.getElementById(button.dataset.securityTarget))
+        .filter(Boolean);
+      if (!sections.length) return;
+      const offset = window.innerWidth <= 720 ? 124 : 118;
+      let activeSection = sections[0].id;
+      for (const section of sections) {
+        if (section.getBoundingClientRect().top <= offset) activeSection = section.id;
+      }
+      document.querySelectorAll('[data-security-target]').forEach((button) => {
+        const active = button.dataset.securityTarget === activeSection;
+        button.classList.toggle('active', active);
+        if (active) button.setAttribute('aria-current', 'step');
+        else button.removeAttribute('aria-current');
+      });
+    }
+
     function scheduleSectionNavUpdate() {
       if (sectionNavFrame) return;
       sectionNavFrame = requestAnimationFrame(() => {
@@ -3350,6 +3594,7 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
         updateMemorySectionNav();
         updateEvalSectionNav();
         updateOpsSectionNav();
+        updateSecuritySectionNav();
       });
     }
 
@@ -3442,7 +3687,7 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
     }
 
     function showView(view) {
-      activeView = ['overview', 'stage', 'simulator', 'rag', 'memory', 'eval', 'ops', 'library'].includes(view) ? view : 'overview';
+      activeView = ['overview', 'stage', 'simulator', 'rag', 'memory', 'eval', 'ops', 'security', 'library'].includes(view) ? view : 'overview';
       document.querySelectorAll('[data-view-panel]').forEach((panel) => panel.classList.toggle('active', panel.dataset.viewPanel === activeView));
       updateViewButtons();
       closeDrawer();
@@ -3451,6 +3696,7 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
       requestAnimationFrame(updateMemorySectionNav);
       requestAnimationFrame(updateEvalSectionNav);
       requestAnimationFrame(updateOpsSectionNav);
+      requestAnimationFrame(updateSecuritySectionNav);
     }
 
     function navigate(hash) {
@@ -3576,6 +3822,9 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
       document.querySelectorAll('[data-ops-target]').forEach((button) => button.addEventListener('click', () => {
         document.getElementById(button.dataset.opsTarget)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }));
+      document.querySelectorAll('[data-security-target]').forEach((button) => button.addEventListener('click', () => {
+        document.getElementById(button.dataset.securityTarget)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }));
       document.getElementById('startStageButton').addEventListener('click', () => {
         const itemState = stageState(state.currentStage);
         if (itemState.status === 'not-started') itemState.status = 'learning';
@@ -3597,10 +3846,12 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
       document.getElementById('openMemoryLabButton').addEventListener('click', () => navigate('#memory'));
       document.getElementById('openEvalLabButton').addEventListener('click', () => navigate('#eval'));
       document.getElementById('openObservabilityLabButton').addEventListener('click', () => navigate('#ops'));
+      document.getElementById('openSecurityLabButton').addEventListener('click', () => navigate('#security'));
       document.getElementById('openRagAtlas').addEventListener('click', () => openChapter('rag-atlas'));
       document.getElementById('openMemoryAtlas').addEventListener('click', () => openChapter('memory-atlas'));
       document.getElementById('openEvalGuide').addEventListener('click', () => openChapter('s6-lab'));
       document.getElementById('openOpsGuide').addEventListener('click', () => openChapter('s7-lab'));
+      document.getElementById('openSecurityGuide').addEventListener('click', () => openChapter('s8'));
       document.getElementById('buildRagPlan').addEventListener('click', buildRagPlan);
       document.getElementById('checkRagAction').addEventListener('click', checkRagAction);
       document.getElementById('ragScenario').addEventListener('change', (event) => {
@@ -3639,6 +3890,14 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
         saveState();
         renderOpsDecision();
       });
+      document.getElementById('checkSecurityDecision').addEventListener('click', checkSecurityDecision);
+      document.getElementById('securityScenario').addEventListener('change', (event) => {
+        state.securityLab.activeScenario = event.target.value;
+        state.securityLab.selectedDecision = '';
+        securityFeedback = null;
+        saveState();
+        renderSecurityDecision();
+      });
       document.getElementById('quizDraft').addEventListener('input', (event) => {
         const itemState = stageState(state.currentStage);
         itemState.draft = event.target.value;
@@ -3674,6 +3933,7 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
       renderMemoryLab();
       renderEvalLab();
       renderObservabilityLab();
+      renderSecurityLab();
       renderLibrary(state.activeChapter || 'start');
     }
 

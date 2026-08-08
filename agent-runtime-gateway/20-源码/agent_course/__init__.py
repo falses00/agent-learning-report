@@ -26,6 +26,11 @@ from .memory import (
 from .rag import Citation, KnowledgeBase, KnowledgeDocument
 from .rag_diagnostics import RAGDiagnosisError, diagnose_rag, run_rag_diagnostic_eval
 from .runtime import AgentRuntime
+from .security import (
+    SecurityContractError,
+    evaluate_security_request,
+    run_security_eval,
+)
 
 __all__ = [
     "AgentRuntime",
@@ -51,10 +56,13 @@ __all__ = [
     "RAGDiagnosisError",
     "RunRequest",
     "RunStatus",
+    "SecurityContractError",
     "SimulatedCrash",
     "TicketRepository",
     "TicketService",
     "ToolCall",
     "diagnose_rag",
+    "evaluate_security_request",
     "run_rag_diagnostic_eval",
+    "run_security_eval",
 ]

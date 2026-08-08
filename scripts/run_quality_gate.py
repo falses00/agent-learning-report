@@ -213,6 +213,12 @@ def main() -> int:
             "observability-content.log",
         ),
         Check(
+            "security-content",
+            ("node", "data/check_security_content.mjs"),
+            ROOT,
+            "security-content.log",
+        ),
+        Check(
             "pytest",
             (
                 sys.executable,
@@ -333,6 +339,18 @@ def main() -> int:
             ),
             SOURCE_DIR,
             "s7-observability-adversarial.json",
+        ),
+        Check(
+            "s8-security-adversarial",
+            (
+                sys.executable,
+                "-m",
+                "agent_course.cli",
+                "security-eval",
+                "../22-评测集/s8-security-adversarial.json",
+            ),
+            SOURCE_DIR,
+            "s8-security-adversarial.json",
         ),
     )
 

@@ -1,6 +1,6 @@
 # 可运行基线
 
-这不是完整生产 Agent，而是课程 F0、S0-S7 的可运行起点。它用确定性组件稳定证明：HTTP/CLI/SQLite 基础、严格契约、租户隔离、ToolCall 只是申请、高风险工具审批、operation ledger 幂等、多租户 RAG、可信引用、拒答、崩溃恢复、provider reconciliation、受治理的长期 Memory、可阻塞发布的 eval gate，以及可追踪、可审计、可重放的事故证据链。
+这不是完整生产 Agent，而是课程 F0、S0-S8 的可运行起点。它用确定性组件稳定证明：HTTP/CLI/SQLite 基础、严格契约、租户隔离、ToolCall 只是申请、高风险工具审批、operation ledger 幂等、多租户 RAG、可信引用、拒答、崩溃恢复、provider reconciliation、受治理的长期 Memory、可阻塞发布的 eval gate、可追踪的事故证据链，以及 fail-closed 的安全控制平面。
 
 ## 运行
 
@@ -20,6 +20,7 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
 python -m agent_course.cli release-gate-eval ..\22-评测集\s6-release-gate-adversarial.json
 python -m agent_course.cli observability ..\22-评测集\s7-observability-manifest.json
 python -m agent_course.cli observability-eval ..\22-评测集\s7-observability-adversarial.json
+python -m agent_course.cli security-eval ..\22-评测集\s8-security-adversarial.json
 ```
 
 无需 API key。F0 HTTP 实验使用 FastAPI/Pydantic，测试使用 pytest/httpx；版本范围固定在 `pyproject.toml`。
@@ -46,6 +47,7 @@ python -m agent_course.cli observability-eval ..\22-评测集\s7-observability-a
 - 16 个 adversarial case 专门测试门禁本身，未知输入 fail closed；公开 holdout 会保留生产证据不足警告。
 - S7 从 6 个 Runtime run 派生合法 W3C trace context、Agent/Tool/Guardrail/Retrieval spans、metadata-only audit chain 和完整 replay 版本谱系。
 - S7 基线 36/36 条断言通过；14 个对抗 case 和 46 条攻击断言能阻止缺 span、audit 篡改、secret 泄漏、快速 burn、未锁版本和外部采样覆写。
+- S8 以 25 个 critical case 和 150 条运行断言验证 scope、source trust、secret、path、URL/DNS/redirect、approval、operation id、sandbox 与 MCP 准入；未知 schema 和控制面故障 fail closed。
 
 ## 代码边界
 
@@ -67,11 +69,12 @@ python -m agent_course.cli observability-eval ..\22-评测集\s7-observability-a
 | `release_gate_evals.py` | 对门禁规则执行 adversarial mutation，防止 false pass |
 | `observability.py` | S7 轨迹适配、脱敏 audit chain、replay、SLI/SLO、告警与事故回归 |
 | `observability_evals.py` | 对 trace、audit、敏感数据、成本、延迟、采样和证据谱系做反向攻击 |
-| `cli.py` | ticket、demo、eval、release gate 和 observability 入口 |
+| `security.py` | S8 scope、source trust、secret、filesystem、SSRF、approval、sandbox 与 MCP 控制平面 |
+| `cli.py` | ticket、demo、eval、release gate、observability 和 security 入口 |
 
 ## 为什么先不用真实模型
 
-真实模型会引入随机性、网络、限流、费用和 provider 差异。F0、S0-S7 先固定 planner、lexical retrieval、mock refund provider、deterministic Memory service、release gate 与 telemetry fixture，可以稳定复现权限、状态、副作用、引用、拒答、恢复、记忆治理、门禁绕过和证据篡改故障。后续添加 `ModelGateway`、embedding、reranker、temporal graph 或 workflow adapter 时，仍保留 deterministic baseline 作为回归 fixture。
+真实模型会引入随机性、网络、限流、费用和 provider 差异。F0、S0-S8 先固定 planner、lexical retrieval、mock provider、deterministic Memory、release/telemetry/security fixture，可以稳定复现权限、状态、副作用、引用、恢复、记忆治理、门禁绕过、证据篡改和安全边界故障。后续添加真实 model、retriever、sandbox、proxy 或 credential broker 时，仍保留 deterministic baseline 作为回归 fixture。
 
 ## 已知生产缺口
 
@@ -82,10 +85,11 @@ python -m agent_course.cli observability-eval ..\22-评测集\s7-observability-a
 - S5 已有受信成员/资源策略、write gate、tenant/user/resource 隔离、TTL、版本链硬删除、context budget 和 18-case eval；仍没有真实身份认证 adapter、embedding/graph、并发写控制、KMS/加密、备份擦除、法务留存、跨区域复制和生产 SLO。
 - S6 已有严格 manifest、五类 split、版本谱系、deterministic/model-judge 边界、holdout 污染检测、critical gate、预算 gate 和 gate adversarial；仍没有真实模型 trial、人工双标平台、私有 holdout 仓库、线上 telemetry、canary、签名制品和发布审批 adapter。
 - S7 已有严格 manifest、W3C trace context、版本锁定的 GenAI span 适配、脱敏 audit hash chain、replay lineage、SLO/burn-rate 分级与 adversarial gate；仍没有真实 OTel SDK/Collector/backend、真实采样容量、生产长短窗口、WORM/KMS、值班和 ticket adapter。
+- S8 已有严格 policy/request schema、scope、source trust、secret canary、路径规范化、URL/DNS/redirect、approval、operation id、sandbox availability 和 MCP capability diff；仍没有真实 IAM/KMS、网络 proxy、文件 mount、容器/gVisor/microVM backend、MCP runtime、SIEM 或逃逸认证。
 - audit 表不是 append-only/WORM 存储，未实现访问控制、签名、保留和导出策略。
 - 没有真实 model gateway、队列、OpenTelemetry、sandbox、secret broker 和应用部署；仓库已接入基础 CI 质量门禁与签名 manifest，但不等于生产发布系统。
 
-因此该代码只能作为 F0、S0-S7 教学证据，不能接入真实资金、客户数据或生产凭据。
+因此该代码只能作为 F0、S0-S8 教学证据，不能接入真实资金、客户数据或生产凭据。
 
 ## 下一步实验
 
