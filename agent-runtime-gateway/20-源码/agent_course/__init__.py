@@ -24,6 +24,7 @@ from .memory import (
     MemoryWriteResult,
 )
 from .rag import Citation, KnowledgeBase, KnowledgeDocument
+from .rag_diagnostics import RAGDiagnosisError, diagnose_rag, run_rag_diagnostic_eval
 from .runtime import AgentRuntime
 
 __all__ = [
@@ -47,10 +48,13 @@ __all__ = [
     "MemoryType",
     "MemoryWriteResult",
     "ProviderLookupStatus",
+    "RAGDiagnosisError",
     "RunRequest",
     "RunStatus",
     "SimulatedCrash",
     "TicketRepository",
     "TicketService",
     "ToolCall",
+    "diagnose_rag",
+    "run_rag_diagnostic_eval",
 ]

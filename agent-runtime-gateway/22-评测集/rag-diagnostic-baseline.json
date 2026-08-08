@@ -1,0 +1,182 @@
+{
+  "suite": "rag-diagnostic-baseline",
+  "version": "2026-08-08",
+  "cases": [
+    {
+      "id": "missing-authoritative-source",
+      "critical": false,
+      "signals": {"answer_in_corpus": false, "retrieval_recall": 0.0},
+      "assertions": [
+        {"type": "equals", "path": "action", "value": "repair_source_coverage"},
+        {"type": "equals", "path": "layer", "value": "data"},
+        {"type": "equals", "path": "release_decision", "value": "experiment"},
+        {"type": "equals", "path": "blockers", "value": []}
+      ]
+    },
+    {
+      "id": "table-layout-lost",
+      "critical": false,
+      "signals": {"parse_fidelity": 0.62, "retrieval_recall": 0.2},
+      "assertions": [
+        {"type": "equals", "path": "action", "value": "repair_layout_parsing"},
+        {"type": "equals", "path": "layer", "value": "ingestion"},
+        {"type": "equals", "path": "release_decision", "value": "experiment"},
+        {"type": "equals", "path": "blockers", "value": []}
+      ]
+    },
+    {
+      "id": "chunk-boundary-split",
+      "critical": false,
+      "signals": {"boundary_split": true, "retrieval_recall": 0.45},
+      "assertions": [
+        {"type": "equals", "path": "action", "value": "rechunk_with_parent_context"},
+        {"type": "equals", "path": "layer", "value": "chunking"},
+        {"type": "equals", "path": "release_decision", "value": "experiment"},
+        {"type": "equals", "path": "blockers", "value": []}
+      ]
+    },
+    {
+      "id": "exact-sku-missed-by-dense",
+      "critical": false,
+      "signals": {"exact_identifier_miss": true, "retrieval_recall": 0.4},
+      "assertions": [
+        {"type": "equals", "path": "action", "value": "add_hybrid_retrieval"},
+        {"type": "equals", "path": "layer", "value": "retrieval"},
+        {"type": "equals", "path": "release_decision", "value": "experiment"},
+        {"type": "equals", "path": "blockers", "value": []}
+      ]
+    },
+    {
+      "id": "domain-terminology-shift",
+      "critical": false,
+      "signals": {"domain_shift": true, "retrieval_recall": 0.35},
+      "assertions": [
+        {"type": "equals", "path": "action", "value": "shadow_domain_embedding"},
+        {"type": "equals", "path": "layer", "value": "index"},
+        {"type": "equals", "path": "release_decision", "value": "experiment"},
+        {"type": "equals", "path": "blockers", "value": []}
+      ]
+    },
+    {
+      "id": "elliptical-query",
+      "critical": false,
+      "signals": {"query_ambiguity": true, "retrieval_recall": 0.3},
+      "assertions": [
+        {"type": "equals", "path": "action", "value": "rewrite_or_clarify_query"},
+        {"type": "equals", "path": "layer", "value": "query"},
+        {"type": "equals", "path": "release_decision", "value": "experiment"},
+        {"type": "equals", "path": "blockers", "value": []}
+      ]
+    },
+    {
+      "id": "candidate-noise",
+      "critical": false,
+      "signals": {"retrieval_recall": 0.9, "retrieval_precision": 0.35},
+      "assertions": [
+        {"type": "equals", "path": "action", "value": "rerank_candidates"},
+        {"type": "equals", "path": "layer", "value": "ranking"},
+        {"type": "equals", "path": "release_decision", "value": "experiment"},
+        {"type": "equals", "path": "blockers", "value": []}
+      ]
+    },
+    {
+      "id": "multi-hop-missing-path",
+      "critical": false,
+      "signals": {"multi_hop": true, "path_coverage": 0.4, "retrieval_recall": 0.7},
+      "assertions": [
+        {"type": "equals", "path": "action", "value": "decompose_then_test_graph"},
+        {"type": "equals", "path": "layer", "value": "reasoning_retrieval"},
+        {"type": "equals", "path": "release_decision", "value": "experiment"},
+        {"type": "equals", "path": "blockers", "value": []}
+      ]
+    },
+    {
+      "id": "visual-page-evidence",
+      "critical": false,
+      "signals": {"visual_evidence": true, "visual_recall": 0.2, "retrieval_recall": 0.3},
+      "assertions": [
+        {"type": "equals", "path": "action", "value": "add_multimodal_retrieval"},
+        {"type": "equals", "path": "layer", "value": "retrieval"},
+        {"type": "equals", "path": "release_decision", "value": "experiment"},
+        {"type": "equals", "path": "blockers", "value": []}
+      ]
+    },
+    {
+      "id": "unsupported-citation",
+      "critical": true,
+      "signals": {"citation_support": 0.5},
+      "assertions": [
+        {"type": "equals", "path": "action", "value": "validate_claims_or_abstain"},
+        {"type": "equals", "path": "layer", "value": "generation"},
+        {"type": "equals", "path": "release_decision", "value": "block"},
+        {"type": "contains", "path": "blockers", "value": "RAG_UNSUPPORTED_CLAIM"}
+      ]
+    },
+    {
+      "id": "cross-tenant-candidate",
+      "critical": true,
+      "signals": {"cross_tenant_candidates": 1, "retrieval_recall": 1.0},
+      "assertions": [
+        {"type": "equals", "path": "action", "value": "enforce_acl_before_retrieval"},
+        {"type": "equals", "path": "layer", "value": "security"},
+        {"type": "equals", "path": "release_decision", "value": "block"},
+        {"type": "contains", "path": "blockers", "value": "RAG_ACL_VIOLATION"}
+      ]
+    },
+    {
+      "id": "indirect-prompt-injection",
+      "critical": true,
+      "signals": {"injection_hits": 1, "citation_support": 1.0},
+      "assertions": [
+        {"type": "equals", "path": "action", "value": "quarantine_untrusted_source"},
+        {"type": "equals", "path": "layer", "value": "security"},
+        {"type": "equals", "path": "release_decision", "value": "block"},
+        {"type": "contains", "path": "blockers", "value": "RAG_INJECTION_DETECTED"}
+      ]
+    },
+    {
+      "id": "stale-cache",
+      "critical": true,
+      "signals": {"cache_stale": true},
+      "assertions": [
+        {"type": "equals", "path": "action", "value": "invalidate_versioned_cache"},
+        {"type": "equals", "path": "layer", "value": "freshness"},
+        {"type": "equals", "path": "release_decision", "value": "block"},
+        {"type": "contains", "path": "blockers", "value": "RAG_STALE_EVIDENCE"}
+      ]
+    },
+    {
+      "id": "stale-cache-with-ranking-noise",
+      "critical": true,
+      "signals": {"cache_stale": true, "retrieval_recall": 0.9, "retrieval_precision": 0.3},
+      "assertions": [
+        {"type": "equals", "path": "action", "value": "invalidate_versioned_cache"},
+        {"type": "equals", "path": "layer", "value": "freshness"},
+        {"type": "equals", "path": "release_decision", "value": "block"},
+        {"type": "contains", "path": "blockers", "value": "RAG_STALE_EVIDENCE"}
+      ]
+    },
+    {
+      "id": "unsupported-claim-with-retrieval-miss",
+      "critical": true,
+      "signals": {"citation_support": 0.4, "exact_identifier_miss": true},
+      "assertions": [
+        {"type": "equals", "path": "action", "value": "validate_claims_or_abstain"},
+        {"type": "equals", "path": "layer", "value": "generation"},
+        {"type": "equals", "path": "release_decision", "value": "block"},
+        {"type": "contains", "path": "blockers", "value": "RAG_UNSUPPORTED_CLAIM"}
+      ]
+    },
+    {
+      "id": "latency-budget-exceeded",
+      "critical": false,
+      "signals": {"p95_latency_ms": 1800, "latency_budget_ms": 700},
+      "assertions": [
+        {"type": "equals", "path": "action", "value": "route_and_budget_expensive_steps"},
+        {"type": "equals", "path": "layer", "value": "operations"},
+        {"type": "equals", "path": "release_decision", "value": "experiment"},
+        {"type": "equals", "path": "blockers", "value": []}
+      ]
+    }
+  ]
+}

@@ -22,7 +22,9 @@ Agent Memory 是一套把历史消息、用户事实、业务事件、环境经�
 
 判断口诀：状态回答“现在做到哪”，上下文回答“本步看什么”，记忆回答“以后值得记什么”，RAG 回答“外部证据是什么”。
 
-## 3. 三个分类轴
+## 3. 六个分类轴
+
+不要只按“短期/长期”给记忆贴标签。工业选型至少同时回答六个问题：**记什么、保留多久、存在哪里、谁控制、如何取回、如何治理**。同一条记忆可以在六个轴上有不同取值，例如 CRM 合同到期日属于长期 semantic fact，存于 canonical store，由 rule-controlled write gate 写入，经 tenant/TTL 硬过滤后检索，并受版本、删除和审计约束。
 
 ### 3.1 按时间范围
 
@@ -46,6 +48,31 @@ Agent Memory 是一套把历史消息、用户事实、业务事件、环境经�
 - **Policy-learned**：通过训练或反馈学习何时写、读、压缩和遗忘，目前仍偏研究。
 
 工业系统通常是混合控制：规则守住权限和隐私，模型负责抽取与压缩，评测决定策略能否发布。
+
+### 3.4 按存储形态
+
+- **In-context**：消息、scratchpad、摘要或 Letta core block；读取快，但受 token 预算限制。
+- **External record**：SQL/KV/document/vector store 中可单独版本化和删除的记录；最适合受治理事实。
+- **Graph**：实体、关系、来源与有效时间；适合冲突、多跳和动态事实，但不是权限系统。
+- **File/Git**：Markdown、代码或技能文件加版本历史；可读、可审计，适合程序经验和团队协作。
+- **Activation/parameter**：把记忆放进模型状态或参数；仍偏研究，精确删除、归因和回滚最困难。
+
+### 3.5 按检索与使用方式
+
+- **Recency/window**：按最近消息或 checkpoint 恢复。
+- **Sparse/dense/hybrid**：按词项、向量或融合排名召回。
+- **Graph/temporal traversal**：按关系、有效区间和路径召回。
+- **Agent-directed**：模型主动调用 read/write/search tool。
+- **Trigger/prospective**：未来条件满足时恢复先前意图；需要授权、时机和幂等门禁。
+
+### 3.6 按治理属性
+
+- **Scope**：tenant、organization、user、agent、thread、run、resource。
+- **Provenance**：用户陈述、权威工具结果、模型推测或外部文档。
+- **Validity**：valid_from、valid_to、TTL、版本与冲突关系。
+- **Sensitivity**：public、internal、confidential、PII、secret。
+- **Mutability**：append、versioned update、retract、delete、legal hold。
+- **Evidence level**：原始事实、抽取、摘要、反思、策略或模型参数。
 
 ## 4. 统一生命周期
 
@@ -137,7 +164,7 @@ score = relevance
 | Voyager | 把成功轨迹固化为可检索、可组合代码技能 | 工具 Agent、具身 Agent | 技能复用和组合能力强 | 必须沙箱执行并验证技能安全 | 研究模式 |
 | MemoryBank | 会话记忆、画像、重要性和时间衰减 | 陪伴和个性化对话 | 引入强化与遗忘 | 事实冲突、租户和审计不是核心 | 研究原型 |
 | MemGPT / Letta | core、recall、archival 多层，Agent 通过工具管理虚拟上下文 | 长对话、stateful Agent | 内存层级可观察，主动管理灵活 | 工具开销、错误自写、注入持久化 | 工程框架 |
-| Mem0 | 选择性抽取、合并、用户/会话/组织作用域，可选图 | SaaS Agent、客服、个人助手 | API 化、作用域明确、接入快 | 托管与开源能力有差异，基准多为自报 | 工程产品 |
+| Mem0 | 当前 OSS 以 user/agent/run 作用域、一次 additive extraction、filtered vector search 和可选 rerank 为主 | SaaS Agent、客服、个人助手 | API 化、作用域明确、接入快 | 托管新算法不等于 OSS；scope 字段也不等于完整授权 | 工程产品/OSS |
 | Zep / Graphiti | episode/entity/community 子图，关系带有效时间，混合检索 | CRM、客服、动态企业事实 | 时间、来源、多跳和冲突表达强 | 实体消歧错误会扩散，图构建成本高 | 工程产品/开源引擎 |
 | A-MEM | Zettelkasten 风格 note，动态 tags、links 和 memory evolution | 研究 Agent、跨任务知识积累 | 结构会随新信息演化 | LLM 维护成本和错误链接累积 | 研究原型 |
 | HippoRAG / 2 | LLM 抽取图，Personalized PageRank 激活相关 passage | 多跳 QA、复杂文档关联 | 关联检索强，减少反复检索 | 离线抽图成本、增量和 ACL 需补齐 | 研究原型 |
@@ -146,6 +173,23 @@ score = relevance
 | SimpleMem | atomic memory + semantic compression + recursive consolidation + intent-aware retrieval | 长历史、多模态和轻量本地 Agent | 三段边界清楚，易比较压缩与召回 | 压缩不可逆，错误合并会丢来源和冲突 | 研究原型 |
 | ReMe | 从轨迹蒸馏、改写、合并和剪枝 procedural memory | 代码、Web、运维和重复工作流 | 经验可读、可搜索、可淘汰 | 错误经验晋升和环境版本漂移 | 研究工具包 |
 | Hindsight | retain / recall / reflect，区分 facts、experiences、entity summaries、beliefs | 长期对话与动态实体 | 时间、来源和 belief 演化边界明确 | 多阶段成本高，错误 belief 会持续影响召回 | 研究原型 |
+
+### 5.1 GitHub 源码审计：实现了什么，缺了什么
+
+下表固定到 2026-08-08 审计时的 commit，避免把 README 宣传、托管产品和当前开源实现混为一谈。`verified` 只表示这些机制能从列出的源码路径直接确认，不表示已满足生产 SLA。
+
+| 项目与 commit | 源码入口 | 已确认机制 | 不能直接推断的能力 |
+|---|---|---|---|
+| Letta `ff19ffe` | [`memory.py`](https://github.com/letta-ai/letta/blob/ff19ffeafeb54bd2a7dc5d4a552f10191732a235/letta/schemas/memory.py)、`passage_manager.py`、`memory_repo/git_operations.py` | in-context blocks、archival passages、organization/agent 边界与 git-backed block 变更 | 未确认通用自动遗忘；框架能力不等于业务 ACL |
+| Mem0 `4debc58` | [`mem0/memory/main.py`](https://github.com/mem0ai/mem0/blob/4debc58a83377b18be81ae1e5969a300736b2fac/mem0/memory/main.py)、`vector_stores/base.py`、`reranker/base.py` | 至少一个 user/agent/run scope、实体字段防篡改、expiration、filtered search、可选 rerank | 托管新算法不等于此 OSS commit；实体 scope 不是完整授权体系 |
+| Graphiti `425bf24` | [`search.py`](https://github.com/getzep/graphiti/blob/425bf2481b51437e43455e09d241c5f46e3d95f3/graphiti_core/search/search.py)、`graphiti.py`、`edges.py` | episode/entity/fact graph、`valid_at/invalid_at/expired_at`、full-text/vector/BFS、RRF/MMR/cross-encoder | `group_id` 不是认证；实体消歧与图增长仍需自有评测 |
+| LangGraph `fde3068` | [`store/base/__init__.py`](https://github.com/langchain-ai/langgraph/blob/fde3068970679184b68d3d068a92c83c966a4888/libs/checkpoint/langgraph/store/base/__init__.py)、checkpoint memory | thread checkpoint 与 namespace/key/value store 分离，支持 filter、semantic search 和 TTL | 它提供存储契约，不提供业务 write gate、冲突解决和授权策略 |
+| A-Mem `ceffb86` | [`memory_system.py`](https://github.com/agiresearch/A-mem/blob/ceffb860f0712bbae97b184d440df62bc910ca8d/agentic_memory/memory_system.py)、`retrievers.py` | Chroma 召回、note/tags/links/context 的 LLM 演化、update/delete | 多租户、安全、审计和生产可观测性不是仓库重点 |
+| SimpleMem/EvolveMem `db80b6a` | [`consolidator.py`](https://github.com/aiming-lab/SimpleMem/blob/db80b6a7c591e0ea730a058e9f5fc4eb06572299/EvolveMem/evolvemem/consolidator.py)、`memory_builder.py`、`hybrid_retriever.py` | 语义/BM25/结构化多路召回、压缩、重复合并、importance decay 和演化 | 论文/README 数字需在自有数据复现；自动演化需 private holdout |
+| ReMe `d5e0d28` | [`auto_memory.py`](https://github.com/agentscope-ai/ReMe/blob/d5e0d2837b772873153adabe334d3fd6718167ac/reme/steps/evolve/auto_memory.py)、`search.py`、local file graph | Markdown source、BM25/vector/file graph；自动写记忆时剔除已召回 tool result，防止把召回内容伪装成新用户事实 | 本地 workspace/path 边界不等于云端多租户授权 |
+| MIRIX `51f3342` | [`memory_tools.py`](https://github.com/Mirix-AI/MIRIX/blob/51f3342d5366b0e215439581f92e0323227146af/mirix/functions/function_sets/memory_tools.py)、typed agent/ORM | core、episodic、semantic、procedural、resource、vault 六类 manager，user/org 查询与 raw memory TTL cleanup | 持续屏幕采集使隐私、删除传播和运维成本明显上升 |
+
+源码审计的可迁移结论不是“选某个项目”，而是：**把工作状态与长期事实分开、把业务授权放在召回前、让每条派生记忆可回到原始来源、让更新/删除传播到所有索引、按 construction/retrieval/generation 分别计量成本**。
 
 ## 6. 方法原理与取舍
 
@@ -459,8 +503,10 @@ authorize request
 - [HippoRAG 2（2025）](https://arxiv.org/abs/2502.14802)
 - [Mem0（2025）](https://arxiv.org/abs/2504.19413)
 - [MemoryOS（2025）](https://arxiv.org/abs/2506.06326)
+- [MemOS: A Memory OS for AI System（2025）](https://arxiv.org/abs/2507.03724)
 - [MIRIX（2025）](https://arxiv.org/abs/2507.07957)
 - [SimpleMem（2026）](https://arxiv.org/abs/2601.02553)
+- [EvolveMem 固定版本源码](https://github.com/aiming-lab/SimpleMem/tree/db80b6a7c591e0ea730a058e9f5fc4eb06572299/EvolveMem)
 - [ReMe（ACL Findings 2026）](https://arxiv.org/abs/2512.10696)
 - [Hindsight（2026）](https://arxiv.org/abs/2512.12818)
 - [LangMem 官方概念指南](https://langchain-ai.github.io/langmem/concepts/conceptual_guide/)
@@ -474,6 +520,7 @@ authorize request
 - [Graph-based Agent Memory Survey（2026）](https://arxiv.org/abs/2602.05665)
 - [Memory for Autonomous LLM Agents Survey（2026）](https://arxiv.org/abs/2603.07670)
 - [Agent Memory Systems Characterization（2026）](https://arxiv.org/abs/2606.06448)
+- [From Storage to Experience: Agent Memory Survey（2026）](https://arxiv.org/abs/2605.06716)
 - [EvoMemBench（2026）](https://arxiv.org/abs/2605.18421)
 - [MemSyco-Bench（2026）](https://arxiv.org/abs/2607.01071)
 - [PM-Bench（2026）](https://arxiv.org/abs/2607.12385)

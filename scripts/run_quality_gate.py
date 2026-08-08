@@ -169,7 +169,10 @@ def main() -> int:
     output_dir.mkdir(parents=True, exist_ok=True)
 
     pytest_xml = output_dir / "pytest.xml"
-    pytest_xml_argument = os.path.relpath(pytest_xml, SOURCE_DIR)
+    try:
+        pytest_xml_argument = os.path.relpath(pytest_xml, SOURCE_DIR)
+    except ValueError:
+        pytest_xml_argument = str(pytest_xml)
     checks = (
         Check("chapters", ("node", "data/build_chapters.mjs", "--check"), ROOT, "chapters.log"),
         Check(
@@ -192,10 +195,22 @@ def main() -> int:
             "memory-content.log",
         ),
         Check(
+            "rag-content",
+            ("node", "data/check_rag_content.mjs"),
+            ROOT,
+            "rag-content.log",
+        ),
+        Check(
             "eval-content",
             ("node", "data/check_eval_content.mjs"),
             ROOT,
             "eval-content.log",
+        ),
+        Check(
+            "observability-content",
+            ("node", "data/check_observability_content.mjs"),
+            ROOT,
+            "observability-content.log",
         ),
         Check(
             "pytest",
@@ -234,6 +249,18 @@ def main() -> int:
             ),
             SOURCE_DIR,
             "s3-rag-eval.json",
+        ),
+        Check(
+            "s3-rag-diagnostic-eval",
+            (
+                sys.executable,
+                "-m",
+                "agent_course.cli",
+                "rag-diagnostic-eval",
+                "../22-评测集/rag-diagnostic-baseline.json",
+            ),
+            SOURCE_DIR,
+            "s3-rag-diagnostic-eval.json",
         ),
         Check(
             "s4-durable-eval",
@@ -282,6 +309,30 @@ def main() -> int:
             ),
             SOURCE_DIR,
             "s6-gate-adversarial.json",
+        ),
+        Check(
+            "s7-observability",
+            (
+                sys.executable,
+                "-m",
+                "agent_course.cli",
+                "observability",
+                "../22-评测集/s7-observability-manifest.json",
+            ),
+            SOURCE_DIR,
+            "s7-observability.json",
+        ),
+        Check(
+            "s7-observability-adversarial",
+            (
+                sys.executable,
+                "-m",
+                "agent_course.cli",
+                "observability-eval",
+                "../22-评测集/s7-observability-adversarial.json",
+            ),
+            SOURCE_DIR,
+            "s7-observability-adversarial.json",
         ),
     )
 

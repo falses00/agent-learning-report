@@ -12,9 +12,12 @@
 - `../../20-源码/agent_course/tools.py`
 - `../../20-源码/agent_course/runtime.py`
 - `../../20-源码/agent_course/evals.py`
+- `../../20-源码/agent_course/rag_diagnostics.py`
 - `../../21-测试/test_rag.py`
 - `../../21-测试/test_evals.py`
+- `../../21-测试/test_rag_diagnostics.py`
 - `../../22-评测集/s3-rag-baseline.json`
+- `../../22-评测集/rag-diagnostic-baseline.json`
 
 ## 2. 六个关键概念
 
@@ -27,7 +30,7 @@
 | Verifiable citation | 引用包含 doc/chunk/version/原文片段 | 引用存在但不支持答案 | 篡改 quote 后验证失败 |
 | Layered eval | retrieval、answer、citation、audit 分开测 | 平均分掩盖安全失败 | 组合断言逐条输出原因，critical case 阻塞 |
 
-责任边界：本实验实现确定性 lexical baseline、过滤、引用与拒答；不宣称已有 ingestion pipeline、embedding、hybrid retrieval、reranker、生成模型或生产级索引发布。
+责任边界：本实验实现确定性 lexical baseline、过滤、引用、拒答和故障分流；不宣称已有 ingestion pipeline、embedding、hybrid retrieval、reranker、生成模型或生产级索引发布。诊断器证明“第一动作与 blocker 是否正确”，不证明某个真实检索组件的质量。
 
 ## 3. 先复现失败
 
@@ -44,11 +47,14 @@
 
 ```powershell
 cd "agent-runtime-gateway\20-源码"
-python -m pytest ..\21-测试\test_rag.py ..\21-测试\test_evals.py -q
+python -m pytest ..\21-测试\test_rag.py ..\21-测试\test_evals.py ..\21-测试\test_rag_diagnostics.py -q
 python -m agent_course.cli eval ..\22-评测集\s3-rag-baseline.json
+python -m agent_course.cli rag-diagnostic-eval ..\22-评测集\rag-diagnostic-baseline.json
 ```
 
-预期：RAG 集 5/5 case、27/27 assertions 通过，`critical_failed=0`，`release_passed=true`。
+预期：基础 RAG 集 5/5 case、27/27 assertions 通过；诊断集 16/16 case、64/64 assertions 通过；两者均 `critical_failed=0`、`release_passed=true`。
+
+诊断集覆盖 source、parse、chunk、index、query、retrieval、ranking、multimodal、citation、ACL、injection、freshness 和 operations。输入 schema 未知字段、比例越界或未知 assertion 均 fail closed。
 
 ## 5. 五道自测
 
@@ -67,7 +73,10 @@ python -m agent_course.cli eval ..\22-评测集\s3-rag-baseline.json
 - 无答案、跨租户、过期文档和间接注入进入结构化拒答。
 - 篡改 quote 的 citation validation 失败。
 - eval runner 能检查 citation、audit、forbidden tool、result 和 trace。
+- 诊断 runner 能让越权、注入、无支持 claim 和陈旧关键证据优先阻塞，不能被相关性或成本分数抵消。
 - 按[证据清单](evidence/README.md)记录测试与剩余风险。
+
+完整方法、GitHub 源码审计和发布清单见[RAG 全链路提升与工业最佳实践](../../07-RAG问题诊断与优化/RAG全链路提升与工业最佳实践-2026.md)。
 
 岗位映射：Agentic RAG、检索评测、多租户 ACL、引用可信度、prompt injection 防护、回归门禁和可观测性。
 

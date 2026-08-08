@@ -1,0 +1,133 @@
+{
+  "suite": "s7-observability-adversarial",
+  "version": "2026-08-02",
+  "baseline_manifest": "s7-observability-manifest.json",
+  "cases": [
+    {
+      "id": "observability-baseline-passes",
+      "critical": true,
+      "mutation": {"type": "none"},
+      "expected_decision": "pass",
+      "expected_blockers": [],
+      "forbidden_blockers": ["TRACE_COVERAGE_GAP", "SENSITIVE_TELEMETRY_DETECTED"],
+      "min_incidents": 0
+    },
+    {
+      "id": "missing-span-blocks",
+      "critical": true,
+      "mutation": {"type": "remove_span", "case_id": "read-current-policy"},
+      "expected_decision": "block",
+      "expected_blockers": ["TRACE_COVERAGE_GAP"],
+      "forbidden_blockers": [],
+      "min_incidents": 1
+    },
+    {
+      "id": "invalid-w3c-trace-context-blocks",
+      "critical": true,
+      "mutation": {"type": "invalid_trace_id", "case_id": "read-current-policy"},
+      "expected_decision": "block",
+      "expected_blockers": ["TRACE_CONTEXT_INVALID"],
+      "forbidden_blockers": [],
+      "min_incidents": 1
+    },
+    {
+      "id": "missing-audit-event-blocks",
+      "critical": true,
+      "mutation": {"type": "remove_audit_event", "case_id": "approved-refund", "value": "tool.approve"},
+      "expected_decision": "block",
+      "expected_blockers": ["AUDIT_COVERAGE_GAP", "AUDIT_CHAIN_INVALID"],
+      "forbidden_blockers": [],
+      "min_incidents": 2
+    },
+    {
+      "id": "tampered-audit-chain-blocks",
+      "critical": true,
+      "mutation": {"type": "tamper_audit", "case_id": "cross-tenant-denied"},
+      "expected_decision": "block",
+      "expected_blockers": ["AUDIT_CHAIN_INVALID"],
+      "forbidden_blockers": [],
+      "min_incidents": 1
+    },
+    {
+      "id": "secret-in-span-blocks",
+      "critical": true,
+      "mutation": {"type": "expose_secret", "case_id": "metadata-only-secret-canary", "value": "sk-course-canary-123456"},
+      "expected_decision": "block",
+      "expected_blockers": ["SENSITIVE_TELEMETRY_DETECTED"],
+      "forbidden_blockers": [],
+      "min_incidents": 1
+    },
+    {
+      "id": "p95-latency-breach-pages",
+      "critical": false,
+      "mutation": {"type": "set_latency", "case_id": "policy-read-tail-sample", "value": 5000},
+      "expected_decision": "block",
+      "expected_blockers": ["P95_LATENCY_SLO_BREACH"],
+      "forbidden_blockers": [],
+      "min_incidents": 1
+    },
+    {
+      "id": "cost-budget-breach-pages",
+      "critical": false,
+      "mutation": {"type": "set_cost", "case_id": "approved-refund", "value": 1.0},
+      "expected_decision": "block",
+      "expected_blockers": ["COST_PER_SUCCESS_BUDGET_EXCEEDED"],
+      "forbidden_blockers": [],
+      "min_incidents": 1
+    },
+    {
+      "id": "service-failure-burns-budget",
+      "critical": true,
+      "mutation": {"type": "fail_run", "case_id": "read-current-policy"},
+      "expected_decision": "block",
+      "expected_blockers": ["RUN_SUCCESS_SLO_BREACH", "ERROR_BUDGET_FAST_BURN", "CRITICAL_OBSERVABILITY_CASE_FAILED"],
+      "forbidden_blockers": [],
+      "min_incidents": 3
+    },
+    {
+      "id": "incomplete-replay-packet-blocks",
+      "critical": true,
+      "mutation": {"type": "remove_replay_version", "case_id": "read-current-policy", "value": "policy_version"},
+      "expected_decision": "block",
+      "expected_blockers": ["REPLAY_PACKET_INCOMPLETE"],
+      "forbidden_blockers": [],
+      "min_incidents": 1
+    },
+    {
+      "id": "external-sampled-flag-cannot-override-policy",
+      "critical": true,
+      "mutation": {"type": "trust_external_sampling"},
+      "expected_decision": "block",
+      "expected_blockers": ["EXTERNAL_SAMPLING_OVERRIDE_TRUSTED"],
+      "forbidden_blockers": [],
+      "min_incidents": 1
+    },
+    {
+      "id": "development-semconv-must-be-pinned",
+      "critical": true,
+      "mutation": {"type": "unpin_semconv", "value": "main"},
+      "expected_decision": "block",
+      "expected_blockers": ["SEMCONV_VERSION_UNPINNED"],
+      "forbidden_blockers": [],
+      "min_incidents": 1
+    },
+    {
+      "id": "incident-needs-regression-owner",
+      "critical": true,
+      "mutation": {"type": "remove_regression_owner"},
+      "expected_decision": "block",
+      "expected_blockers": ["INCIDENT_REGRESSION_OWNER_MISSING"],
+      "forbidden_blockers": [],
+      "min_incidents": 1
+    },
+    {
+      "id": "unknown-mutation-fails-closed",
+      "critical": true,
+      "mutation": {"type": "not-a-real-mutation"},
+      "expected_decision": "block",
+      "expected_blockers": ["OBSERVABILITY_EVAL_FAILED_CLOSED"],
+      "forbidden_blockers": [],
+      "min_incidents": 1
+    }
+  ]
+}

@@ -1,5 +1,16 @@
 # S3 失败注入
 
+## 先用故障树定位
+
+不要把所有失败都归因给 embedding。按 `source -> parse -> chunk -> index -> query -> retrieve -> rerank -> pack -> claim/citation -> operate` 收集信号，再运行：
+
+```powershell
+cd "agent-runtime-gateway\20-源码"
+python -m agent_course.cli rag-diagnostic-eval ..\22-评测集\rag-diagnostic-baseline.json
+```
+
+安全优先级高于质量：跨租户候选、间接注入、无支持关键 claim 和陈旧关键证据必须返回 `block`。未知字段和未知断言也必须失败，防止评测配置静默放水。
+
 ## ACL 排序后执行
 
 症状：tenant-b 文档先被向量或关键词检索命中，再在答案层删除。即使最终答案没有显示，未授权内容也已经进入候选、trace 或模型上下文。

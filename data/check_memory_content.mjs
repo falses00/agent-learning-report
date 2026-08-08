@@ -31,6 +31,24 @@ if (!lab || typeof lab !== 'object') {
     });
   }
 
+  if (!Array.isArray(lab.axes) || lab.axes.length < 6) errors.push('axes must contain at least 6 entries');
+  else {
+    requireUniqueIds(lab.axes, 'axes');
+    lab.axes.forEach((item, index) => {
+      for (const field of ['id', 'label', 'values']) requireText(item[field], `axes[${index}].${field}`);
+    });
+  }
+  if (!Array.isArray(lab.projects) || lab.projects.length < 8) errors.push('projects must contain at least 8 source audits');
+  else {
+    requireUniqueIds(lab.projects, 'projects');
+    lab.projects.forEach((item, index) => {
+      for (const field of ['id', 'name', 'status', 'commit', 'mechanism', 'verified', 'missing']) requireText(item[field], `projects[${index}].${field}`);
+      if (!/^[a-f0-9]{40}$/.test(item.commit)) errors.push(`projects[${index}].commit must be a full SHA`);
+      if (!Array.isArray(item.sourcePaths) || item.sourcePaths.length < 2) errors.push(`projects[${index}].sourcePaths must contain at least 2 paths`);
+      if (typeof item.sourceUrl !== 'string' || !item.sourceUrl.includes(item.commit)) errors.push(`projects[${index}].sourceUrl must be commit-pinned`);
+    });
+  }
+
   if (!Array.isArray(lab.scenarios) || lab.scenarios.length < 7) errors.push('scenarios must contain at least 7 entries');
   else {
     requireUniqueIds(lab.scenarios, 'scenarios');
@@ -60,7 +78,7 @@ const guide = readFileSync(guidePath, 'utf8');
 for (const section of ['代表方法对比', '工业选型', '删除传播', '评测', '未来', '一页速记', '预习核对']) {
   if (!guide.includes(section)) errors.push(`memory guide is missing section: ${section}`);
 }
-for (const item of [...(lab?.methods || []), ...(lab?.benchmarks || [])]) {
+for (const item of [...(lab?.methods || []), ...(lab?.benchmarks || []), ...(lab?.projects || [])]) {
   if (item.sourceUrl && !guide.includes(item.sourceUrl)) errors.push(`memory guide is missing primary source: ${item.sourceUrl}`);
 }
 const evalLines = readFileSync(evalPath, 'utf8').split(/\r?\n/).filter(Boolean);
@@ -89,4 +107,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log(`OK: ${lab.methods.length} memory methods, ${lab.scenarios.length} lab scenarios, ${lab.workloads.length} workload profiles, ${evalCases.length} eval cases.`);
+console.log(`OK: ${lab.methods.length} memory methods, ${lab.projects.length} source-audited projects, ${lab.scenarios.length} lab scenarios, ${lab.workloads.length} workload profiles, ${evalCases.length} eval cases.`);

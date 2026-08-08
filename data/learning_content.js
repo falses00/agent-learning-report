@@ -112,10 +112,10 @@
     s3: {
       prerequisites: [
         "已经运行确定性 S3 fixture，能解释 ACL、freshness、source trust 和 relevance 四道前置门禁。",
-        "定义 retrieval、answer、citation 与 audit 四类独立评测标准。",
-        "准备跨租户、过期文档、间接注入和无答案问题。",
+        "能按 source、parse、chunk、index、query、retrieve、rerank、pack、claim/citation、operate 十层定位失败。",
+        "准备缺数据、表格错位、切块断裂、精确编号、多跳、跨租户、过期、注入和无答案问题。",
       ],
-      concepts: ["检索前 ACL", "有效期与来源门禁", "可验证 Citation", "拒答与分层 Eval"],
+      concepts: ["十层故障树", "检索前 ACL", "Claim-level Citation", "单变量消融与回滚"],
       caseStudy: {
         title: "召回了错误租户的退款政策",
         context: "向量相似度很高，但缓存键没有 tenant，tenant-a 命中了 tenant-b 的新政策。",
@@ -123,9 +123,9 @@
         lesson: "权限过滤必须发生在检索前；相关不等于可访问，也不等于支持结论。",
       },
       workshop: {
-        title: "构建可拒答的多租户 RAG",
-        steps: ["为文档和引用记录 tenant、版本、生效期与来源信任。", "在 lexical baseline 评分前执行 ACL、freshness 和 source trust。", "验证 citation quote，并用组合断言评测命中、拒答、audit 与 trace。"],
-        evidence: "保存 current citation、tenant mismatch、stale policy、indirect injection 和拒答 eval 报告。",
+        title: "构建可拒答、可诊断、可回滚的多租户 RAG",
+        steps: ["运行 lexical baseline，证明 tenant、版本、生效期、来源信任和 claim citation。", "运行 14 类诊断场景，根据可观测信号选择第一修复层，并让 critical case 优先阻塞。", "为一个真实失败设计 baseline、单变量消融、分片指标、成本预算和索引回滚别名。"],
+        evidence: "保存基础 RAG 5/5 与诊断 16/16 报告，并记录 current citation、tenant mismatch、table parse、chunk split、stale policy、indirect injection、组合 blocker、拒答和回滚条件。",
       },
       quiz: [
         q("retrieval recall 很高，答案为什么仍可能错误？", ["模型温度太低", "召回相关不等于上下文精确、引用支持或生成忠实", "top_k 太小必然错误", "向量库不能做问答"], 1, "评测", "用单一召回指标代替端到端事实支持。", "检索、重排、上下文、答案和引用需要分别评测。", "找到相关法规不代表引用条款真的支持结论。", "构造命中相关文档但引用不支持结论的 case。"),
@@ -219,7 +219,7 @@
         "为延迟、错误率、成本和 trace coverage 定义 SLO。",
         "准备 provider 慢、成本暴涨和 secret canary 场景。",
       ],
-      concepts: ["Correlation ID", "Trace/Metric/Log", "Audit", "Error Budget"],
+      concepts: ["Signal Contract", "W3C Trace Context", "Agent Span", "Tail Sampling", "Audit Hash Chain", "SLO / Error Budget", "Replay Lineage", "Incident Regression"],
       caseStudy: {
         title: "所有 Span 成功但用户等待 30 秒",
         context: "模型和工具 span 都返回成功，但队列等待和串行检索没有被记录。",
@@ -227,9 +227,9 @@
         lesson: "成功状态不等于性能健康；必须覆盖完整关键路径和等待时间。",
       },
       workshop: {
-        title: "定位一次 provider 延迟事故",
-        steps: ["统一 run_id 与 trace_id，补齐队列、模型、检索和工具 span。", "记录 token、延迟、重试和错误类型，不记录 secret。", "设置 SLO、告警和一页事故复盘。"],
-        evidence: "保存完整 trace、P95 指标、告警触发和脱敏检查结果。",
+        title: "从 Runtime 轨迹到事故回归",
+        steps: ["运行 6 个真实 Runtime 场景：检查 W3C trace context、父子 span 和终态，再对 audit 导出做 metadata-only 脱敏、actor/resource hash 与 SHA-256 链校验。", "聚合成功率、P95、cost/success、coverage 和 error-budget burn rate；运行 14 个对抗场景，确认 secret、缺 span、篡改 audit、未锁版本与外部采样覆写均 fail closed。", "对每个运行故障选择 page、ticket 或 observe，说明用户影响与误区，并绑定证据、owner、截止时间和 regression case。"],
+        evidence: "保存 6/6 run、36/36 基线断言、14/14 对抗 case、46/46 攻击断言、audit chain head、decision hash 与事故回归记录。",
       },
       quiz: [
         q("trace、metric、log 和 audit 的正确分工是什么？", ["都是同一种日志", "trace 看单次路径，metric 看趋势，log 看局部事件，audit 证明责任事实", "audit 只看性能", "metric 保存完整 prompt"], 1, "观测", "把所有信号都塞进日志，既难查询又难治理。", "四类信号回答不同问题，并有不同保留和访问要求。", "行车记录、仪表盘、维修记录和签收单用途不同。", "用同一 run_id 关联四类最小证据。"),

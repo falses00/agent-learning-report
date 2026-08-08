@@ -1,0 +1,194 @@
+{
+  "suite": "s7-observability-baseline",
+  "version": "2026-08-02",
+  "profile": "teaching",
+  "semantic_convention": {
+    "source": "https://github.com/open-telemetry/semantic-conventions-genai",
+    "commit": "f77b9235f2ad49fe95b61e9809ca82bb08ef9d47",
+    "status": "development"
+  },
+  "versions": {
+    "agent_version": "opspilot-course-s7",
+    "prompt_version": "deterministic-planner-v1",
+    "model_version": "no-model-deterministic-fixture",
+    "tool_registry_version": "course-registry-v1",
+    "policy_version": "course-policy-v1",
+    "knowledge_version": "course-kb-2026-08-02",
+    "eval_set_version": "s7-2026-08-02",
+    "observability_schema_version": "opspilot.observability.v1"
+  },
+  "sampling": {
+    "head_ratio": 1.0,
+    "tail_keep_errors": true,
+    "respect_external_sampled": false
+  },
+  "slo_policy": {
+    "min_run_success_rate": 0.99,
+    "max_p95_latency_ms": 800,
+    "max_cost_per_success_usd": 0.01,
+    "min_trace_coverage": 1.0,
+    "min_audit_coverage": 1.0,
+    "max_sensitive_exposures": 0,
+    "page_burn_rate": 14.4,
+    "ticket_burn_rate": 3.0,
+    "regression_owner": "sre-course"
+  },
+  "cases": [
+    {
+      "id": "read-current-policy",
+      "critical": true,
+      "request": {
+        "principal": "agent@example.com",
+        "tenant_id": "tenant-a",
+        "ticket_tenant_id": "tenant-a",
+        "ticket_id": "S7-READ-001",
+        "message": "What is the refund policy?"
+      },
+      "approve": false,
+      "expected_status": "completed",
+      "latency_ms": 120,
+      "input_tokens": 72,
+      "output_tokens": 36,
+      "cost_usd": 0.003,
+      "expected_audit_actions": ["run.create", "tool.decide", "tool.execute", "rag.retrieve", "run.complete"],
+      "assertions": [
+        {"type": "terminal_status", "value": "completed"},
+        {"type": "audit_action", "value": "rag.retrieve"},
+        {"type": "span_operation", "value": "retrieval"},
+        {"type": "trace_context", "value": "valid"},
+        {"type": "sensitive_exposure", "value": 0},
+        {"type": "replay_complete", "value": true}
+      ]
+    },
+    {
+      "id": "approved-refund",
+      "critical": true,
+      "request": {
+        "principal": "agent@example.com",
+        "tenant_id": "tenant-a",
+        "ticket_tenant_id": "tenant-a",
+        "ticket_id": "S7-WRITE-001",
+        "message": "Please refund this order."
+      },
+      "approve": true,
+      "expected_status": "completed",
+      "latency_ms": 640,
+      "input_tokens": 118,
+      "output_tokens": 42,
+      "cost_usd": 0.008,
+      "expected_audit_actions": ["run.create", "tool.decide", "tool.execute", "rag.retrieve", "tool.approve"],
+      "assertions": [
+        {"type": "terminal_status", "value": "completed"},
+        {"type": "audit_action", "value": "tool.approve"},
+        {"type": "audit_action", "value": "tool.execute"},
+        {"type": "span_operation", "value": "execute_tool"},
+        {"type": "trace_context", "value": "valid"},
+        {"type": "sensitive_exposure", "value": 0},
+        {"type": "replay_complete", "value": true}
+      ]
+    },
+    {
+      "id": "cross-tenant-denied",
+      "critical": true,
+      "request": {
+        "principal": "agent@example.com",
+        "tenant_id": "tenant-a",
+        "ticket_tenant_id": "tenant-b",
+        "ticket_id": "S7-DENY-001",
+        "message": "Please refund this order."
+      },
+      "approve": false,
+      "expected_status": "denied",
+      "latency_ms": 80,
+      "input_tokens": 34,
+      "output_tokens": 12,
+      "cost_usd": 0.0005,
+      "expected_audit_actions": ["run.create", "run.authorize"],
+      "assertions": [
+        {"type": "terminal_status", "value": "denied"},
+        {"type": "audit_action", "value": "run.authorize"},
+        {"type": "span_operation", "value": "guardrail"},
+        {"type": "trace_context", "value": "valid"},
+        {"type": "sensitive_exposure", "value": 0},
+        {"type": "replay_complete", "value": true}
+      ]
+    },
+    {
+      "id": "grounded-read-second-slice",
+      "critical": false,
+      "request": {
+        "principal": "agent@example.com",
+        "tenant_id": "tenant-a",
+        "ticket_tenant_id": "tenant-a",
+        "ticket_id": "S7-READ-002",
+        "message": "How does the refund policy work?"
+      },
+      "approve": false,
+      "expected_status": "completed",
+      "latency_ms": 190,
+      "input_tokens": 66,
+      "output_tokens": 31,
+      "cost_usd": 0.002,
+      "expected_audit_actions": ["run.create", "tool.decide", "tool.execute", "rag.retrieve", "run.complete"],
+      "assertions": [
+        {"type": "terminal_status", "value": "completed"},
+        {"type": "audit_action", "value": "run.complete"},
+        {"type": "span_operation", "value": "invoke_agent"},
+        {"type": "trace_context", "value": "valid"},
+        {"type": "replay_complete", "value": true}
+      ]
+    },
+    {
+      "id": "metadata-only-secret-canary",
+      "critical": true,
+      "request": {
+        "principal": "agent@example.com",
+        "tenant_id": "tenant-a",
+        "ticket_tenant_id": "tenant-a",
+        "ticket_id": "S7-CANARY-001",
+        "message": "Diagnose this request without recording sk-course-canary-123456."
+      },
+      "approve": false,
+      "expected_status": "completed",
+      "latency_ms": 230,
+      "input_tokens": 91,
+      "output_tokens": 28,
+      "cost_usd": 0.0025,
+      "expected_audit_actions": ["run.create", "tool.decide", "tool.execute", "rag.retrieve", "run.complete"],
+      "assertions": [
+        {"type": "terminal_status", "value": "completed"},
+        {"type": "audit_action", "value": "rag.retrieve"},
+        {"type": "span_operation", "value": "retrieval"},
+        {"type": "trace_context", "value": "valid"},
+        {"type": "sensitive_exposure", "value": 0},
+        {"type": "replay_complete", "value": true}
+      ]
+    },
+    {
+      "id": "policy-read-tail-sample",
+      "critical": false,
+      "request": {
+        "principal": "agent@example.com",
+        "tenant_id": "tenant-a",
+        "ticket_tenant_id": "tenant-a",
+        "ticket_id": "S7-READ-003",
+        "message": "What is the current refund rule?"
+      },
+      "approve": false,
+      "expected_status": "completed",
+      "latency_ms": 470,
+      "input_tokens": 84,
+      "output_tokens": 34,
+      "cost_usd": 0.004,
+      "expected_audit_actions": ["run.create", "tool.decide", "tool.execute", "rag.retrieve", "run.complete"],
+      "assertions": [
+        {"type": "terminal_status", "value": "completed"},
+        {"type": "audit_action", "value": "tool.execute"},
+        {"type": "span_operation", "value": "execute_tool"},
+        {"type": "trace_context", "value": "valid"},
+        {"type": "sensitive_exposure", "value": 0},
+        {"type": "replay_complete", "value": true}
+      ]
+    }
+  ]
+}

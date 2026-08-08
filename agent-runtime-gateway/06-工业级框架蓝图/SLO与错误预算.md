@@ -1,6 +1,7 @@
 # SLO 与错误预算
 
-生成日期：2026-06-30  
+生成日期：2026-06-30
+更新日期：2026-08-08
 目标：把“能长期运行”变成可度量、可告警、可冻结发布的指标。
 
 ## 1. SLO 分层
@@ -92,3 +93,41 @@
 是否加入 regression：
 是否修改门禁：
 ```
+
+## 8. S7 可执行基线
+
+课程 S7 使用 `s7-observability-manifest.json` 声明 SLI、阈值、采样和 regression owner，再由真实 Runtime case 生成观测报告。当前门禁至少计算：
+
+- `run_success_rate`：实际终态符合 case 预期的运行比例。
+- `p95_latency_ms`：端到端 latency 教学夹具的最近秩分位数。
+- `cost_per_success_usd`：总成本除以成功运行数，失败成本不能从分子删除。
+- `trace_coverage`：实际 span 数除以应有 root 与 audit-derived span 数。
+- `audit_coverage`：期望责任动作在 hash-chained export 中出现的比例。
+- `replay_packet_coverage`：版本谱系完整的 replay packet 比例。
+- `sensitive_exposures`：导出证据中的 secret/PII pattern 数量。
+- `error_budget_burn_rate`：当前错误率除以 `1 - SLO target`。
+
+教学 baseline 使用确定性 latency/token/cost，不是生产 SLO。生产接入必须记录数据源、查询表达式、长短窗口、缺数据行为和告警路由。
+
+## 9. Multi-window burn-rate 起点
+
+参考 Google SRE 的方法，用长窗口确认持续影响、短窗口确认当前仍在燃烧：
+
+| 类型 | 动作 | 课程起点 |
+|---|---|---:|
+| 快速燃烧 | page、冻结发布、保全 trace/audit | burn rate >= 14.4 |
+| 慢速燃烧 | ticket、owner、截止时间 | burn rate >= 3 |
+| 单次可恢复错误 | 保留 exemplar，观察窗口 SLI | 不单独 page |
+
+这些数值是教学起点，不是通用生产阈值。真实阈值必须由 SLO window、流量、用户影响和响应能力共同决定。
+
+## 10. 采样管道 SLO
+
+Tail sampling 可根据完整 trace 的错误、延迟和属性保留稀有证据，但是有状态组件。生产接入时至少监测：
+
+- 待决策 trace 数和内存占用。
+- 超时、容量溢出和被迫降级次数。
+- 错误、高延迟、高风险和新版本 trace 的实际保留率。
+- 采样决策延迟、导出失败和每成功任务观测成本。
+
+参考 [OpenTelemetry Sampling](https://opentelemetry.io/docs/concepts/sampling/)。外部 `sampled` flag 不能覆盖内部风险和数据分类策略。

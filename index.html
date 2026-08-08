@@ -278,7 +278,7 @@
       .markdown h2 { font-size: 20px; }
       .reader-nav { grid-template-columns: 1fr; }
       .reader-nav button:last-child { text-align: left; }
-      .mobile-nav { position: fixed; inset: auto 0 0; z-index: var(--z-topbar); height: calc(var(--bottom-nav) + env(safe-area-inset-bottom, 0px)); padding-bottom: env(safe-area-inset-bottom, 0px); display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); background: color-mix(in oklch, var(--surface) 94%, transparent); backdrop-filter: blur(12px); }
+      .mobile-nav { position: fixed; inset: auto 0 0; z-index: var(--z-topbar); height: calc(var(--bottom-nav) + env(safe-area-inset-bottom, 0px)); padding-bottom: env(safe-area-inset-bottom, 0px); display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); border-top: 1px solid var(--line); background: color-mix(in oklch, var(--surface) 94%, transparent); backdrop-filter: blur(12px); }
       .mobile-nav button { display: grid; place-items: center; color: var(--ink-muted); font-size: 11px; }
       .mobile-nav button.active { color: var(--accent-hover); font-weight: 700; }
       .toast { bottom: calc(var(--bottom-nav) + 14px); }
@@ -693,7 +693,7 @@
       .document-reader { padding: 20px 18px; }
       .library-header { padding: 18px; }
       .sim-controls { padding: 18px; }
-      .mobile-nav { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+      .mobile-nav { grid-template-columns: repeat(8, minmax(0, 1fr)); }
       .memory-progress { grid-template-columns: 1fr; }
       .memory-progress-item { min-height: 70px; border-right: 0; border-bottom: 1px solid var(--line); }
       .memory-progress-item:last-child { border-bottom: 0; }
@@ -942,11 +942,78 @@
     .eval-source-row span { color: var(--ink-muted); font-size: 10px; }
     .eval-source-row a { font-size: 10px; white-space: nowrap; }
 
+    .ops-section-nav { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    .ops-signal-list { border-top: 1px solid var(--line); }
+    .ops-signal-row { display: grid; grid-template-columns: 84px minmax(170px, .7fr) minmax(0, 1.3fr) minmax(180px, .8fr); gap: 18px; padding: 15px 4px; border-bottom: 1px solid var(--line); align-items: start; }
+    .ops-signal-row strong { color: #263248; font: 800 12px var(--mono); }
+    .ops-signal-row span { color: #354158; font-size: 12px; }
+    .ops-signal-row small { color: var(--ink-muted); font-size: 10px; line-height: 1.5; }
+    .ops-trace-layout { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(280px, .65fr); gap: 40px; align-items: start; }
+    .ops-trace-list { border-top: 1px solid var(--line); }
+    .ops-trace-step { display: grid; grid-template-columns: 42px minmax(135px, .42fr) minmax(0, 1fr) 62px; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--line); align-items: start; }
+    .ops-trace-step > span { color: var(--accent); font: 800 9px var(--mono); }
+    .ops-trace-step strong { color: #263248; font-size: 11px; }
+    .ops-trace-step p { margin: 2px 0 0; color: var(--ink-muted); font-size: 10px; }
+    .ops-trace-step time { color: var(--ink-muted); font: 700 10px var(--mono); text-align: right; }
+    .ops-trace-contract { padding-left: 24px; border-left: 1px solid var(--line); }
+    .ops-trace-contract h3 { margin: 0 0 10px; font-size: 16px; }
+    .ops-trace-contract dl { margin: 0; }
+    .ops-trace-contract dl div { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--line); }
+    .ops-trace-contract dt { color: var(--ink-muted); font-size: 10px; font-weight: 800; }
+    .ops-trace-contract dd { margin: 0; font: 10px/1.55 var(--mono); overflow-wrap: anywhere; }
+    .ops-lab-layout { display: grid; grid-template-columns: minmax(280px, .72fr) minmax(0, 1.28fr); gap: 40px; align-items: start; }
+    .ops-lab-layout > * { min-width: 0; }
+    #opsScenario { width: 100%; max-width: 100%; }
+    .ops-scenario-sheet { margin-top: 14px; padding: 18px 0; border-top: 2px solid var(--accent); border-bottom: 1px solid var(--line); }
+    .ops-scenario-sheet h3 { margin: 0 0 8px; color: #202b40; font: 800 19px var(--display); }
+    .ops-scenario-sheet > p { margin: 0 0 14px; color: #354158; font-size: 13px; }
+    .ops-decision-control { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 16px; border: 1px solid var(--line-strong); border-radius: var(--radius-sm); overflow: hidden; }
+    .ops-decision-control button { min-width: 0; min-height: 44px; padding: 6px 8px; border: 0; background: var(--surface); color: var(--ink-muted); cursor: pointer; font-size: 11px; font-weight: 800; }
+    .ops-decision-control button + button { border-left: 1px solid var(--line); }
+    .ops-decision-control button.active { background: var(--accent-soft); color: var(--accent-hover); }
+    .ops-signal-path { border-top: 1px solid var(--line); }
+    .ops-signal-path-row { display: grid; grid-template-columns: 74px minmax(0, 1fr); gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--line); opacity: .42; }
+    .ops-signal-path-row.active { opacity: 1; }
+    .ops-signal-path-row strong { font: 800 10px var(--mono); }
+    .ops-signal-path-row span { color: var(--ink-muted); font-size: 10px; }
+
+    .rag-section-nav { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    .rag-pipeline { border-top: 1px solid var(--line); }
+    .rag-pipeline-row { display: grid; grid-template-columns: 44px minmax(130px, .42fr) minmax(0, 1.1fr) minmax(0, .9fr); gap: 12px 18px; align-items: start; padding: 14px 0; border-bottom: 1px solid var(--line); }
+    .rag-pipeline-row > span { color: var(--accent-hover); font: 800 10px var(--mono); }
+    .rag-pipeline-row strong { color: #263248; font-size: 12px; }
+    .rag-pipeline-row p, .rag-pipeline-row small { margin: 0; color: var(--ink-muted); font-size: 11px; line-height: 1.55; }
+    .rag-pipeline-row.active { background: var(--success-soft); box-shadow: inset 3px 0 0 var(--success); }
+    .rag-axis-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0 0 18px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .rag-axis-item { padding: 12px 14px; border-right: 1px solid var(--line); }
+    .rag-axis-item:nth-child(3n) { border-right: 0; }
+    .rag-axis-item strong, .rag-axis-item span { display: block; }
+    .rag-axis-item strong { color: #263248; font-size: 11px; }
+    .rag-axis-item span { margin-top: 3px; color: var(--ink-muted); font-size: 10px; }
+    .rag-diagnostic-sheet { margin-top: 14px; padding: 18px 0; border-top: 2px solid var(--accent); border-bottom: 1px solid var(--line); }
+    .rag-diagnostic-sheet h3 { margin: 0 0 7px; color: #202b40; font: 800 19px var(--display); }
+    .rag-diagnostic-sheet p { margin: 0 0 12px; color: #354158; font-size: 13px; }
+    .rag-signal-list { display: flex; flex-wrap: wrap; gap: 6px; }
+    .rag-signal-list code { padding: 3px 6px; border-radius: 4px; background: var(--surface-muted); color: var(--ink-muted); font: 10px var(--mono); }
+    .rag-evidence-list { margin: 12px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+    .rag-evidence-list li { display: grid; grid-template-columns: 18px minmax(0, 1fr); gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--line); color: var(--ink-muted); font-size: 11px; }
+    .source-paths { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
+    .source-paths code { max-width: 100%; padding: 3px 6px; border-radius: 4px; background: var(--surface-muted); color: var(--ink-muted); font: 10px var(--mono); overflow-wrap: anywhere; }
+    .project-audit { margin-top: 30px; }
+    .project-audit > h3 { margin: 0 0 4px; color: #263248; font-size: 17px; }
+    .project-audit > p { margin: 0 0 14px; color: var(--ink-muted); font-size: 12px; }
+
     @media (max-width: 1040px) {
       .stage-layout { grid-template-columns: 1fr; }
+      .topbar-brand { display: none; }
+      .view-nav button { padding-inline: 6px; font-size: 12px; }
       .evidence-panel { padding: 28px 0 0; border-left: 0; border-top: 1px solid var(--line); }
       .sim-controls { padding: 0 0 24px; border-right: 0; border-bottom: 1px solid var(--line); }
       .eval-evidence-grid { grid-template-columns: 1fr; }
+      .ops-trace-layout, .ops-lab-layout { grid-template-columns: 1fr; }
+      .rag-pipeline-row { grid-template-columns: 38px minmax(120px, .45fr) minmax(0, 1fr); }
+      .rag-pipeline-row small { grid-column: 3; }
+      .ops-trace-contract { padding: 24px 0 0; border-top: 1px solid var(--line); border-left: 0; }
     }
 
     @media (max-width: 1199px) {
@@ -959,6 +1026,14 @@
       html, body { overflow-x: clip; }
       .view { width: min(100% - 32px, var(--content-width)); padding-top: 26px; }
       .page-heading h1, .overview-hero h1 { font-size: 27px; }
+      .mobile-nav { grid-template-columns: repeat(8, minmax(0, 1fr)); }
+      .mobile-nav button { min-width: 0; padding-inline: 1px; font-size: 10px; }
+      .rag-section-nav button { font-size: 9px; }
+      .rag-pipeline-row { grid-template-columns: 32px minmax(0, 1fr); gap: 5px 10px; }
+      .rag-pipeline-row p, .rag-pipeline-row small { grid-column: 2; }
+      .rag-axis-list { grid-template-columns: 1fr; }
+      .rag-axis-item, .rag-axis-item:nth-child(3n) { border-right: 0; border-bottom: 1px solid var(--line); }
+      .rag-axis-item:last-child { border-bottom: 0; }
       .continue-panel { padding: 24px 0; }
       .journey-overview { overflow: hidden; }
       .journey-strip { gap: 0; padding: 0 0 6px; }
@@ -991,6 +1066,11 @@
       .eval-table tr { padding: 10px 0; border-bottom: 1px solid var(--line); }
       .eval-table td { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 10px; padding: 5px 0; border-bottom: 0; }
       .eval-table td::before { content: attr(data-label); color: var(--ink-muted); font-size: 9px; font-weight: 800; }
+      .ops-signal-row { grid-template-columns: 72px minmax(0, 1fr); gap: 7px 12px; }
+      .ops-signal-row small { grid-column: 2; }
+      .ops-trace-step { grid-template-columns: 34px minmax(105px, .42fr) minmax(0, 1fr); gap: 8px; }
+      .ops-trace-step time { grid-column: 2; text-align: left; }
+      .ops-decision-control button { min-height: 48px; padding-inline: 4px; font-size: 10px; }
     }
   </style>
 </head>
@@ -1011,8 +1091,10 @@
       <button type="button" data-view="overview">总览</button>
       <button type="button" data-view="stage">阶段学习</button>
       <button type="button" data-view="simulator">故障演练</button>
+      <button type="button" data-view="rag">RAG 实验室</button>
       <button type="button" data-view="memory">记忆实验室</button>
       <button type="button" data-view="eval">评测实验室</button>
+      <button type="button" data-view="ops">运营实验</button>
       <button type="button" data-view="library">资料库</button>
     </nav>
   </header>
@@ -1150,8 +1232,10 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
               <button class="primary-button" id="startStageButton" type="button">开始本阶段</button>
               <button class="secondary-button" id="openStageChapter" type="button">打开阶段教材</button>
               <button class="secondary-button" id="openSelftest" type="button">查看题库文档</button>
+              <button class="secondary-button" id="openRagLabButton" type="button" hidden>进入 RAG 实验室</button>
               <button class="secondary-button" id="openMemoryLabButton" type="button" hidden>进入记忆实验室</button>
               <button class="secondary-button" id="openEvalLabButton" type="button" hidden>进入评测实验室</button>
+              <button class="secondary-button" id="openObservabilityLabButton" type="button" hidden>进入运营实验室</button>
             </div>
           </section>
 
@@ -1243,6 +1327,74 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
       </div>
     </section>
 
+    <section class="view" id="ragView" data-view-panel="rag">
+      <div class="page-heading">
+        <div class="section-label">S3 专项训练</div>
+        <h1>RAG 全链路诊断实验室</h1>
+        <p>沿十层证据链定位故障，比较二十五条提升路径，并用最小消融、关键阻塞规则和回滚条件决定是否升级。</p>
+      </div>
+      <div class="memory-boundary"><strong>教学诊断模拟</strong><span>不连接生产语料</span><span>不调用真实模型</span><span>项目结论固定到审计 commit</span></div>
+      <div class="memory-progress" id="ragProgress" aria-live="polite"></div>
+      <nav class="memory-section-nav rag-section-nav" aria-label="RAG 实验室步骤">
+        <button type="button" data-rag-target="ragPipeline">看懂链路</button>
+        <button type="button" data-rag-target="ragMethods">比较方法</button>
+        <button type="button" data-rag-target="ragPlanner">生成架构</button>
+        <button type="button" data-rag-target="ragDiagnosis">诊断故障</button>
+        <button type="button" data-rag-target="ragEvidence">源码验收</button>
+      </nav>
+
+      <section class="memory-section" id="ragPipeline" aria-labelledby="ragPipelineTitle">
+        <div class="memory-section-heading">
+          <div><div class="section-label">01 · 建立地图</div><h2 id="ragPipelineTitle">从来源到发布的十层证据链</h2><p>先找到证据第一次变坏的位置。越权和注入优先于质量，数据与解析优先于检索调参。</p></div>
+          <button class="secondary-button" id="openRagAtlas" type="button">打开完整教材</button>
+        </div>
+        <div class="rag-pipeline" id="ragPipelineList"></div>
+      </section>
+
+      <section class="memory-section" id="ragMethods" aria-labelledby="ragMethodsTitle">
+        <div class="memory-section-heading"><div><div class="section-label">02 · 比较而非堆叠</div><h2 id="ragMethodsTitle">二十五条提升路径</h2><p>每个方法都绑定触发症状、最小实验、指标、成本和回滚；没有失败证据就保留简单基线。</p></div></div>
+        <div class="memory-family-filter" id="ragFamilyFilter" role="group" aria-label="按 RAG 层筛选"></div>
+        <div class="memory-method-layout">
+          <div class="memory-method-list" id="ragMethodList" aria-label="RAG 方法列表"></div>
+          <article class="memory-detail" id="ragMethodDetail" aria-live="polite"></article>
+        </div>
+      </section>
+
+      <section class="memory-section" id="ragPlanner" aria-labelledby="ragPlannerTitle">
+        <div class="memory-section-heading"><div><div class="section-label">03 · 选择最小架构</div><h2 id="ragPlannerTitle">工作负载架构规划器</h2><p>先选强基线，再写明何种失败才允许升级，以及必须共同通过的质量、安全、时效和成本门禁。</p></div></div>
+        <div class="memory-form-grid">
+          <div class="field"><label for="ragProfile">工作负载</label><select id="ragProfile"></select></div>
+        </div>
+        <div class="memory-action-row"><button class="primary-button" id="buildRagPlan" type="button">生成可消融架构</button><span class="section-help">规划结果只保存在当前浏览器。</span></div>
+        <output class="memory-result" id="ragPlanResult" aria-live="polite" hidden></output>
+      </section>
+
+      <section class="memory-section" id="ragDiagnosis" aria-labelledby="ragDiagnosisTitle">
+        <div class="memory-section-heading"><div><div class="section-label">04 · 按信号诊断</div><h2 id="ragDiagnosisTitle">十四类故障第一动作</h2><p>至少正确完成 4 个场景。答错先讲误区与原理；答对后才展开指标、blocker 和最小实验方向。</p></div></div>
+        <div class="memory-lab-layout">
+          <div>
+            <div class="field"><label for="ragScenario">故障场景</label><select id="ragScenario"></select></div>
+            <article class="rag-diagnostic-sheet" id="ragScenarioSheet"></article>
+            <div class="memory-decision"><label for="ragAction">你的第一动作</label><select id="ragAction"></select></div>
+            <div class="memory-action-row"><button class="primary-button" id="checkRagAction" type="button">校验诊断</button></div>
+          </div>
+          <div>
+            <div class="rag-pipeline" id="ragDiagnosticPath" aria-label="故障证据路径"></div>
+            <div id="ragDiagnosticFeedback" aria-live="polite"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="memory-section" id="ragEvidence" aria-labelledby="ragEvidenceTitle">
+        <div class="memory-section-heading"><div><div class="section-label">05 · 从源码到发布</div><h2 id="ragEvidenceTitle">项目源码、指标与未来走向</h2><p>固定 commit 只证明已实现机制；生产适用性必须由自有数据、威胁模型、成本预算和回滚演练证明。</p></div></div>
+        <div class="memory-method-layout">
+          <div class="memory-method-list" id="ragProjectList" aria-label="RAG 源码项目列表"></div>
+          <article class="memory-detail" id="ragProjectDetail" aria-live="polite"></article>
+        </div>
+        <div class="memory-future" id="ragFuture"></div>
+      </section>
+    </section>
+
     <section class="view" id="memoryView" data-view-panel="memory">
       <div class="page-heading">
         <div class="section-label">S5 专项训练</div>
@@ -1260,9 +1412,10 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
 
       <section class="memory-section" id="memoryMethods" aria-labelledby="memoryMethodsTitle">
         <div class="memory-section-heading">
-          <div><div class="section-label">01 · 先比较</div><h2 id="memoryMethodsTitle">17 类方法谱系</h2><p>看清原理、适用场景、收益、代价和最常见的失败方式，再做产品或框架选择。</p></div>
+          <div><div class="section-label">01 · 先比较</div><h2 id="memoryMethodsTitle">21 类方法与六轴谱系</h2><p>同时回答记什么、保留多久、存在哪里、谁控制、如何取回、如何治理，再做产品或框架选择。</p></div>
           <button class="secondary-button" id="openMemoryAtlas" type="button">打开完整原理教材</button>
         </div>
+        <div class="rag-axis-list" id="memoryAxes"></div>
         <div class="memory-family-filter" id="memoryFamilyFilter" role="group" aria-label="按方法族筛选"></div>
         <div class="memory-method-layout">
           <div class="memory-method-list" id="memoryMethodList" aria-label="记忆方法列表"></div>
@@ -1305,6 +1458,14 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
           <div><h3>发布指标</h3><div class="memory-metric-list" id="memoryMetrics"></div></div>
         </div>
         <div class="memory-future" id="memoryFuture"></div>
+        <div class="project-audit">
+          <h3>八个 GitHub 项目源码审计</h3>
+          <p>查看固定 commit、源码入口、已确认机制和不能由仓库直接推断的生产能力。</p>
+          <div class="memory-method-layout">
+            <div class="memory-method-list" id="memoryProjectList" aria-label="记忆项目列表"></div>
+            <article class="memory-detail" id="memoryProjectDetail" aria-live="polite"></article>
+          </div>
+        </div>
       </section>
     </section>
 
@@ -1361,6 +1522,68 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
       </section>
     </section>
 
+    <section class="view" id="opsView" data-view-panel="ops">
+      <div class="page-heading">
+        <div class="section-label">S7 专项训练</div>
+        <h1>Agent Observability 与事故响应实验室</h1>
+        <p>从一次真实 Runtime 运行的轨迹出发，建立信号合同、SLO 和分级响应，再把事故转成有 owner 的回归用例。</p>
+      </div>
+      <div class="memory-boundary"><strong>可运行教学基线</strong><span>Runtime 轨迹派生 span</span><span>延迟与成本为固定 fixture</span><span>不代替生产 OTel 后端</span></div>
+      <div class="memory-progress" id="opsProgress" aria-live="polite"></div>
+      <nav class="memory-section-nav ops-section-nav" aria-label="运营实验室步骤">
+        <button type="button" data-ops-target="opsSignals">信号契约</button>
+        <button type="button" data-ops-target="opsTrace">Trace 检查</button>
+        <button type="button" data-ops-target="opsRules">SLO 规则</button>
+        <button type="button" data-ops-target="opsIncidents">事故演练</button>
+        <button type="button" data-ops-target="opsEvidence">证据与趋势</button>
+      </nav>
+
+      <section class="memory-section" id="opsSignals" aria-labelledby="opsSignalsTitle">
+        <div class="memory-section-heading"><div><div class="section-label">01 · 先定义信号边界</div><h2 id="opsSignalsTitle">Trace、Metric、Log、Audit 和 Replay 各司其职</h2><p>不以“记得越多越好”为目标，而是明确每类信号回答的问题、最小证据和保留期。</p></div></div>
+        <div class="ops-signal-list" id="opsSignalList"></div>
+      </section>
+
+      <section class="memory-section" id="opsTrace" aria-labelledby="opsTraceTitle">
+        <div class="memory-section-heading">
+          <div><div class="section-label">02 · 沿一次 run 定位</div><h2 id="opsTraceTitle">检查父子 Span 与证据链</h2><p>只有能从入口追到终态、政策和副作用的轨迹，才能支撑根因定位和事故重放。</p></div>
+          <button class="secondary-button" id="openOpsGuide" type="button">打开完整实验教材</button>
+        </div>
+        <div class="ops-trace-layout">
+          <div class="ops-trace-list" id="opsTraceList"></div>
+          <aside class="ops-trace-contract" aria-label="轨迹验收合同"><h3>轨迹验收合同</h3><dl id="opsTraceContract"></dl></aside>
+        </div>
+      </section>
+
+      <section class="memory-section" id="opsRules" aria-labelledby="opsRulesTitle">
+        <div class="memory-section-heading"><div><div class="section-label">03 · 用用户影响定义 SLO</div><h2 id="opsRulesTitle">分页、工单与观察不是同一件事</h2><p>快速预算燃烧要立即止损，慢性退化要绑定 owner，可恢复的单次错误则保留证据并观察趋势。</p></div></div>
+        <div class="eval-table-wrap"><table class="eval-table"><thead><tr><th>触发信号</th><th>级别</th><th>响应</th><th>工程理由</th><th>必须留下</th></tr></thead><tbody id="opsRuleRows"></tbody></table></div>
+      </section>
+
+      <section class="memory-section" id="opsIncidents" aria-labelledby="opsIncidentsTitle">
+        <div class="memory-section-heading"><div><div class="section-label">04 · 亲自值班</div><h2 id="opsIncidentsTitle">事故响应决策演练</h2><p>至少正确完成 4 个场景。答错时会展开误区和原理；答对后才显示证据、blocker 和该事故的信号路径。</p></div></div>
+        <div class="ops-lab-layout">
+          <div>
+            <div class="field"><label for="opsScenario">当前运行场景</label><select id="opsScenario"></select></div>
+            <article class="ops-scenario-sheet" id="opsScenarioSheet"></article>
+            <div class="ops-decision-control" id="opsDecisionControl" role="group" aria-label="你的事故响应"></div>
+            <div class="memory-action-row"><button class="primary-button" id="checkOpsDecision" type="button">校验响应决策</button></div>
+          </div>
+          <div>
+            <div class="ops-signal-path" id="opsSignalPath" aria-label="该场景的证据信号路径"></div>
+            <div id="opsDecisionFeedback" aria-live="polite"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="memory-section" id="opsEvidence" aria-labelledby="opsEvidenceTitle">
+        <div class="memory-section-heading"><div><div class="section-label">05 · 把观测变成持续改进</div><h2 id="opsEvidenceTitle">一手规范、安全边界与未来走向</h2><p>语义规范仍在变化，所以要锁定版本、保留内部证据合同，并将现有证据与工程推断分开。</p></div></div>
+        <div class="eval-evidence-grid">
+          <div><h3>一手资料</h3><div class="eval-source-list" id="opsSources"></div></div>
+          <div><h3>当前与未来</h3><div class="memory-future" id="opsFuture"></div></div>
+        </div>
+      </section>
+    </section>
+
     <section class="view" id="libraryView" data-view-panel="library">
       <header class="library-header">
         <div>
@@ -1380,13 +1603,15 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
     </section>
   </main>
 
-  <nav class="mobile-nav" aria-label="移动端主要视图">
-    <button type="button" data-view="overview">总览</button>
-    <button type="button" data-view="stage">阶段</button>
-    <button type="button" data-view="simulator">演练</button>
-    <button type="button" data-view="memory">记忆</button>
-    <button type="button" data-view="eval">评测</button>
-    <button type="button" data-view="library">资料</button>
+  <nav class="mobile-nav" id="mobileBottomNav" aria-label="移动端主要视图">
+    <button class="mobile-nav-button" type="button" data-view="overview">总览</button>
+    <button class="mobile-nav-button" type="button" data-view="stage">阶段</button>
+    <button class="mobile-nav-button" type="button" data-view="simulator">演练</button>
+    <button class="mobile-nav-button" type="button" data-view="rag">检索</button>
+    <button class="mobile-nav-button" type="button" data-view="memory">记忆</button>
+    <button class="mobile-nav-button" type="button" data-view="eval">评测</button>
+    <button class="mobile-nav-button" type="button" data-view="ops">运营</button>
+    <button class="mobile-nav-button" type="button" data-view="library">资料</button>
   </nav>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -1395,8 +1620,10 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
   <script src="data/course_gate.js"></script>
   <script src="data/baseline_metrics.js"></script>
   <script src="data/learning_content.js"></script>
+  <script src="data/rag_lab.js"></script>
   <script src="data/memory_lab.js"></script>
   <script src="data/eval_lab.js"></script>
+  <script src="data/observability_lab.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked@15.0.12/marked.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js"></script>
   <script>
@@ -1409,8 +1636,10 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
       ? window.BASELINE_METRICS
       : { tests: 31, evalCases: 10, assertions: 54, runnableStages: ['f0', 's0', 's1', 's2', 's3'], totalStages: 12, targets: { tests: 60, evalCases: 100 } };
     const LEARNING_CONTENT = window.LEARNING_CONTENT && typeof window.LEARNING_CONTENT === 'object' ? window.LEARNING_CONTENT : {};
+    const RAG_LAB = window.RAG_LAB && typeof window.RAG_LAB === 'object' ? window.RAG_LAB : null;
     const MEMORY_LAB = window.MEMORY_LAB && typeof window.MEMORY_LAB === 'object' ? window.MEMORY_LAB : null;
     const EVAL_LAB = window.EVAL_LAB && typeof window.EVAL_LAB === 'object' ? window.EVAL_LAB : null;
+    const OBSERVABILITY_LAB = window.OBSERVABILITY_LAB && typeof window.OBSERVABILITY_LAB === 'object' ? window.OBSERVABILITY_LAB : null;
     const STORAGE_KEY = 'ARG_ENGINEERING_COURSE_V2';
     const GITHUB_SOURCE = 'https://github.com/falses00/agent-learning-report/blob/main/';
     const evidenceFields = [
@@ -1477,7 +1706,7 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
         failure: '找不到政策、找错租户、引用过期，或检索命中却不支持答案。',
         fix: '分开评测 retrieval、answer 和 citation，ACL 在检索前强制执行。',
         evidence: 'hard retrieval、跨租户、过期文档、unsupported claim eval。',
-        command: 'cd "agent-runtime-gateway\\20-源码"\npython -m pytest ..\\21-测试\\test_rag.py ..\\21-测试\\test_evals.py -q\npython -m agent_course.cli eval ..\\22-评测集\\s3-rag-baseline.json', implemented: true,
+        command: 'cd "agent-runtime-gateway\\20-源码"\npython -m pytest ..\\21-测试\\test_rag.py ..\\21-测试\\test_evals.py ..\\21-测试\\test_rag_diagnostics.py -q\npython -m agent_course.cli eval ..\\22-评测集\\s3-rag-baseline.json\npython -m agent_course.cli rag-diagnostic-eval ..\\22-评测集\\rag-diagnostic-baseline.json', implemented: true,
         chapter: 's3-lab',
         question: 'Retrieval recall 很高，为什么答案仍可能错误？',
         answer: '召回到相关文档不等于上下文精确、引用支持结论或生成没有歪曲。检索、重排、上下文组装、答案和引用需要分别评测。',
@@ -1524,9 +1753,9 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
         deliverable: 'OpenTelemetry spans、成本/延迟指标、结构化 audit、SLO 和 runbook。',
         failure: '日志很多却无法串联一次 run，或 trace 意外记录 secret 与客户数据。',
         fix: '统一 correlation ids，分清 trace、metric、log、audit，字段脱敏。',
-        evidence: '慢请求定位、成本暴涨告警、trace coverage 和 secret canary。',
-        command: '# 完成 S7 实验后运行\npython -m pytest tests -q -k observability', implemented: false,
-        chapter: 's7',
+        evidence: '6 个 Runtime run、36 条基线断言、14 个对抗场景、46 条攻击断言、audit hash chain 与 replay 谱系。',
+        command: 'cd "agent-runtime-gateway\\20-源码"\npython -m pytest ..\\21-测试\\test_observability.py -q\npython -m agent_course.cli observability ..\\22-评测集\\s7-observability-manifest.json\npython -m agent_course.cli observability-eval ..\\22-评测集\\s7-observability-adversarial.json', implemented: true,
+        chapter: 's7-lab',
         question: 'Trace、metric、log 和 audit 分别回答什么问题？',
         answer: 'Trace 解释一次请求怎么走，metric 描述整体趋势，log 记录局部事件，audit 证明谁在何时对什么资源做了什么决定。',
       },
@@ -1637,6 +1866,17 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
       activeFamily: 'all',
       activeMethod: 'context',
       activeScenario: 'explicit_preference',
+      activeProject: 'letta',
+    };
+
+    const defaultRagLabState = {
+      scenarios: {},
+      planner: null,
+      activeFamily: 'all',
+      activeMethod: 'source-contract',
+      activeScenario: 'missing-source',
+      activeProject: 'docling',
+      selectedAction: '',
     };
 
     const defaultEvalLabState = {
@@ -1645,22 +1885,32 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
       selectedDecision: '',
     };
 
+    const defaultObservabilityLabState = {
+      scenarios: {},
+      activeScenario: 'secret-export',
+      selectedResponse: '',
+    };
+
     const defaultState = {
-      courseVersion: 7,
+      courseVersion: 9,
       path: 'engineering',
       currentStage: 's0',
       stages: {},
       today: {},
       activeChapter: 'start',
+      ragLab: defaultRagLabState,
       memoryLab: defaultMemoryLabState,
       evalLab: defaultEvalLabState,
+      observabilityLab: defaultObservabilityLabState,
     };
 
     let state = loadState();
     let activeView = 'overview';
     let simulatorRunning = false;
+    let ragFeedback = null;
     let memoryFeedback = null;
     let evalFeedback = null;
+    let opsFeedback = null;
     let toastTimer;
     const openNavGroups = new Set(['start']);
     const openRoadmapGroups = new Set();
@@ -1670,14 +1920,23 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
       try {
         const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
         if (saved && typeof saved === 'object') {
+          const savedRagLab = saved.ragLab && typeof saved.ragLab === 'object' ? saved.ragLab : {};
           const savedMemoryLab = saved.memoryLab && typeof saved.memoryLab === 'object' ? saved.memoryLab : {};
           const savedEvalLab = saved.evalLab && typeof saved.evalLab === 'object' ? saved.evalLab : {};
+          const savedObservabilityLab = saved.observabilityLab && typeof saved.observabilityLab === 'object' ? saved.observabilityLab : {};
           return {
             ...defaultState,
             ...saved,
             courseVersion: defaultState.courseVersion,
             stages: saved.stages && typeof saved.stages === 'object' ? saved.stages : {},
             today: saved.today && typeof saved.today === 'object' ? saved.today : {},
+            ragLab: {
+              ...defaultRagLabState,
+              ...savedRagLab,
+              scenarios: savedRagLab.scenarios && typeof savedRagLab.scenarios === 'object' ? savedRagLab.scenarios : {},
+              planner: savedRagLab.planner && typeof savedRagLab.planner === 'object' ? savedRagLab.planner : null,
+              selectedAction: RAG_LAB?.actions?.some((action) => action.id === savedRagLab.selectedAction) ? savedRagLab.selectedAction : '',
+            },
             memoryLab: {
               ...defaultMemoryLabState,
               ...savedMemoryLab,
@@ -1689,6 +1948,12 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
               ...savedEvalLab,
               scenarios: savedEvalLab.scenarios && typeof savedEvalLab.scenarios === 'object' ? savedEvalLab.scenarios : {},
               selectedDecision: ['pass', 'block'].includes(savedEvalLab.selectedDecision) ? savedEvalLab.selectedDecision : '',
+            },
+            observabilityLab: {
+              ...defaultObservabilityLabState,
+              ...savedObservabilityLab,
+              scenarios: savedObservabilityLab.scenarios && typeof savedObservabilityLab.scenarios === 'object' ? savedObservabilityLab.scenarios : {},
+              selectedResponse: ['page', 'ticket', 'observe'].includes(savedObservabilityLab.selectedResponse) ? savedObservabilityLab.selectedResponse : '',
             },
           };
         }
@@ -1716,7 +1981,9 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
     }
 
     function requiredGateVersion(stageId) {
-      if (stageId === 'f0' || stageId === 's3' || stageId === 's6') return 7;
+      if (stageId === 's3') return 9;
+      if (stageId === 's7') return 8;
+      if (stageId === 'f0' || stageId === 's6') return 7;
       return stageId === 's5' ? 6 : 5;
     }
 
@@ -1790,6 +2057,26 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
       );
     }
 
+    function ragPlannerIsValid(plan) {
+      return Boolean(
+        plan
+        && plan.version === 1
+        && RAG_LAB?.plannerProfiles?.some((profile) => profile.id === plan.profile)
+        && Array.isArray(plan.base) && plan.base.length >= 4
+        && Array.isArray(plan.gates) && plan.gates.length >= 3
+        && typeof plan.upgrade === 'string' && plan.upgrade.length > 10
+        && Number.isFinite(Date.parse(plan.selectedAt))
+      );
+    }
+
+    function ragLabStatus() {
+      const scenarios = state.ragLab?.scenarios && typeof state.ragLab.scenarios === 'object' ? state.ragLab.scenarios : {};
+      const validScenarioIds = RAG_LAB?.scenarios?.map((scenario) => scenario.id) || [];
+      const mastered = validScenarioIds.filter((id) => scenarios[id] === true).length;
+      const plannerReady = ragPlannerIsValid(state.ragLab?.planner);
+      return { mastered, plannerReady, ready: mastered >= 4 && plannerReady };
+    }
+
     function memoryLabStatus() {
       const scenarios = state.memoryLab?.scenarios && typeof state.memoryLab.scenarios === 'object' ? state.memoryLab.scenarios : {};
       const validScenarioIds = MEMORY_LAB?.scenarios?.map((scenario) => scenario.id) || [];
@@ -1805,17 +2092,26 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
       return { mastered, ready: mastered >= 4 };
     }
 
+    function observabilityLabStatus() {
+      const scenarios = state.observabilityLab?.scenarios && typeof state.observabilityLab.scenarios === 'object' ? state.observabilityLab.scenarios : {};
+      const validScenarioIds = OBSERVABILITY_LAB?.scenarios?.map((scenario) => scenario.id) || [];
+      const mastered = validScenarioIds.filter((id) => scenarios[id] === true).length;
+      return { mastered, ready: mastered >= 4 };
+    }
+
     function passEligibility(stageId, itemState) {
       const lesson = LEARNING_CONTENT[stageId];
       const stage = STAGES.find((candidate) => candidate.id === stageId);
-      if (!lesson || !stage) return { ready: false, implementationReady: false, preflightReady: false, evidenceReady: false, quizReady: false, memoryLabReady: false, evalLabReady: false };
+      if (!lesson || !stage) return { ready: false, implementationReady: false, preflightReady: false, evidenceReady: false, quizReady: false, ragLabReady: false, memoryLabReady: false, evalLabReady: false, observabilityLabReady: false };
       const implementationReady = stage.implemented === true;
       const preflightReady = itemState.prerequisites.every(Boolean);
       const evidenceReady = evidenceStatus(itemState).ready;
       const quizReady = quizMetrics(itemState, lesson).passed;
+      const ragLabReady = stageId !== 's3' || ragLabStatus().ready;
       const memoryLabReady = stageId !== 's5' || memoryLabStatus().ready;
       const evalLabReady = stageId !== 's6' || evalLabStatus().ready;
-      return { ready: COURSE_GATE.canPassStage({ implementationReady, preflightReady, evidenceReady, quizReady, memoryLabReady, evalLabReady }), implementationReady, preflightReady, evidenceReady, quizReady, memoryLabReady, evalLabReady };
+      const observabilityLabReady = stageId !== 's7' || observabilityLabStatus().ready;
+      return { ready: COURSE_GATE.canPassStage({ implementationReady, preflightReady, evidenceReady, quizReady, ragLabReady, memoryLabReady, evalLabReady, observabilityLabReady }), implementationReady, preflightReady, evidenceReady, quizReady, ragLabReady, memoryLabReady, evalLabReady, observabilityLabReady };
     }
 
     function gateStatus(stageId) {
@@ -1855,6 +2151,11 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
       if (!gate.quizReady) return metrics.complete
         ? '重做未达标或关键题，达到 8/10 且关键题首轮正确。'
         : `继续完成自测，还有 ${lesson.quiz.length - metrics.mastered} 题未掌握。`;
+      if (!gate.ragLabReady) {
+        const lab = ragLabStatus();
+        if (!lab.plannerReady) return '进入 RAG 实验室，先为一个工作负载生成可消融架构。';
+        return `继续 RAG 故障诊断，还需掌握 ${Math.max(0, 4 - lab.mastered)} 个场景。`;
+      }
       if (!gate.memoryLabReady) {
         const lab = memoryLabStatus();
         if (!lab.chooserReady) return '进入记忆实验室，先完成一次最小架构选型。';
@@ -1863,6 +2164,10 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
       if (!gate.evalLabReady) {
         const lab = evalLabStatus();
         return `进入评测实验室继续发布判定，还需掌握 ${Math.max(0, 4 - lab.mastered)} 个场景。`;
+      }
+      if (!gate.observabilityLabReady) {
+        const lab = observabilityLabStatus();
+        return `进入运营实验室继续事故响应判定，还需掌握 ${Math.max(0, 4 - lab.mastered)} 个场景。`;
       }
       if (!gate.evidenceReady) return `补齐 ${evidenceFields.length - evidence.complete} 项结构化工程证据并完成验收。`;
       if (itemState.status !== 'passed') return '本地自评条件已经满足；记录后仍需用仓库测试、CI 或评审复验。';
@@ -2038,8 +2343,10 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
       document.getElementById('stageCommand').textContent = stage.command;
       document.getElementById('stageCommandLabel').textContent = stage.implemented ? '当前可运行' : '规划中的验收命令（当前不可运行）';
       document.getElementById('startStageButton').textContent = itemState.status === 'not-started' ? '开始本阶段' : '继续本阶段';
+      document.getElementById('openRagLabButton').hidden = stage.id !== 's3';
       document.getElementById('openMemoryLabButton').hidden = stage.id !== 's5';
       document.getElementById('openEvalLabButton').hidden = stage.id !== 's6';
+      document.getElementById('openObservabilityLabButton').hidden = stage.id !== 's7';
 
       document.getElementById('prerequisiteChecklist').innerHTML = lesson.prerequisites.map((text, index) => `
         <label class="check-row">
@@ -2098,6 +2405,10 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
         ['阶段自测', stageGate.quizReady, `${metrics.score}/10`],
         ['结构化工程证据', stageGate.evidenceReady, `${evidence.complete}/${evidenceFields.length}`],
       ];
+      if (stage.id === 's3') {
+        const lab = ragLabStatus();
+        requirements.push(['RAG 诊断实验室', stageGate.ragLabReady, `${lab.mastered}/4 + ${lab.plannerReady ? '已规划' : '未规划'}`]);
+      }
       if (stage.id === 's5') {
         const lab = memoryLabStatus();
         requirements.push(['记忆实验室', stageGate.memoryLabReady, `${lab.mastered}/4 + ${lab.chooserReady ? '已选型' : '未选型'}`]);
@@ -2105,6 +2416,10 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
       if (stage.id === 's6') {
         const lab = evalLabStatus();
         requirements.push(['评测实验室', stageGate.evalLabReady, `${lab.mastered}/4 个发布判定`]);
+      }
+      if (stage.id === 's7') {
+        const lab = observabilityLabStatus();
+        requirements.push(['运营实验室', stageGate.observabilityLabReady, `${lab.mastered}/4 个事故响应判定`]);
       }
       document.getElementById('gateRequirements').innerHTML = requirements.map(([label, done, value]) => `<div class="gate-requirement${done ? ' done' : ''}"><span>${done ? '已完成' : '未完成'} · ${label}</span><strong>${value}</strong></div>`).join('');
 
@@ -2115,6 +2430,11 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
       if (!stageGate.preflightReady) missing.push(`${itemState.prerequisites.filter((value) => !value).length} 项课前准备`);
       if (!stageGate.quizReady) missing.push(metrics.complete ? '重做自测并达到 8/10，关键题首轮正确' : `${lesson.quiz.length - metrics.mastered} 道未掌握题`);
       if (!stageGate.evidenceReady) missing.push(`${evidenceFields.length - evidence.complete} 项结构化工程证据`);
+      if (!stageGate.ragLabReady) {
+        const lab = ragLabStatus();
+        if (!lab.plannerReady) missing.push('1 次 RAG 可消融架构规划');
+        if (lab.mastered < 4) missing.push(`${4 - lab.mastered} 个 RAG 故障诊断场景`);
+      }
       if (!stageGate.memoryLabReady) {
         const lab = memoryLabStatus();
         if (!lab.chooserReady) missing.push('1 次记忆架构选型');
@@ -2123,6 +2443,10 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
       if (!stageGate.evalLabReady) {
         const lab = evalLabStatus();
         missing.push(`${Math.max(0, 4 - lab.mastered)} 个发布门禁判定场景`);
+      }
+      if (!stageGate.observabilityLabReady) {
+        const lab = observabilityLabStatus();
+        missing.push(`${Math.max(0, 4 - lab.mastered)} 个事故响应判定场景`);
       }
       gate.textContent = stageGate.ready ? '本地自评条件已满足；这不是工程认证，仍需仓库测试、CI 或评审者复验。' : `还需要：${missing.join('；')}。`;
       const passButton = document.getElementById('passStageButton');
@@ -2362,6 +2686,201 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
       log.textContent += '> 审批绑定当前 ToolCall。Tool Gateway 模拟执行一次。\n> 结果：写操作完成，operation id 与 Audit 已记录。';
     }
 
+    function currentRagScenario() {
+      if (!RAG_LAB) return null;
+      const selected = RAG_LAB.scenarios.find((scenario) => scenario.id === state.ragLab.activeScenario);
+      return selected || RAG_LAB.scenarios[0];
+    }
+
+    function renderRagProgress() {
+      const progress = ragLabStatus();
+      document.getElementById('ragProgress').innerHTML = `
+        <div class="memory-progress-item"><span>提升路径</span><strong>${RAG_LAB.methods.length} 条</strong><small>由失败信号触发，不按热门程度堆叠</small></div>
+        <div class="memory-progress-item"><span>诊断演练</span><strong>${progress.mastered} / 4</strong><small>共 ${RAG_LAB.scenarios.length} 个故障切片</small></div>
+        <div class="memory-progress-item"><span>S3 专项门禁</span><strong>${progress.ready ? '已满足' : '待完成'}</strong><small>${progress.plannerReady ? '已生成可消融架构' : '还需完成一次架构规划'}</small></div>`;
+    }
+
+    function renderRagPipeline() {
+      document.getElementById('ragPipelineList').innerHTML = RAG_LAB.pipeline.map((step, index) => `
+        <div class="rag-pipeline-row"><span>${String(index + 1).padStart(2, '0')}</span><strong>${escapeHtml(step.label)}</strong><p>${escapeHtml(step.question)}</p><small>${escapeHtml(step.failure)} · 证据：${escapeHtml(step.evidence)}</small></div>`).join('');
+    }
+
+    function renderRagMethods() {
+      const familyIds = new Set(RAG_LAB.families.map((family) => family.id));
+      if (!familyIds.has(state.ragLab.activeFamily)) state.ragLab.activeFamily = 'all';
+      const filtered = state.ragLab.activeFamily === 'all'
+        ? RAG_LAB.methods
+        : RAG_LAB.methods.filter((item) => item.family === state.ragLab.activeFamily);
+      if (!filtered.some((item) => item.id === state.ragLab.activeMethod)) state.ragLab.activeMethod = filtered[0]?.id || RAG_LAB.methods[0].id;
+      const active = RAG_LAB.methods.find((item) => item.id === state.ragLab.activeMethod) || RAG_LAB.methods[0];
+      const familyLabel = RAG_LAB.families.find((family) => family.id === active.family)?.label || active.family;
+      document.getElementById('ragFamilyFilter').innerHTML = RAG_LAB.families.map((family) => `
+        <button type="button" class="${family.id === state.ragLab.activeFamily ? 'active' : ''}" data-rag-family="${escapeHtml(family.id)}">${escapeHtml(family.label)}</button>`).join('');
+      document.getElementById('ragMethodList').innerHTML = filtered.map((item) => `
+        <button type="button" class="memory-method-button${item.id === active.id ? ' active' : ''}" data-rag-method="${escapeHtml(item.id)}">
+          <strong>${escapeHtml(item.name)}</strong><span>${escapeHtml(RAG_LAB.families.find((family) => family.id === item.family)?.label || item.family)}</span><small>${escapeHtml(item.symptom)}</small>
+        </button>`).join('');
+      document.getElementById('ragMethodDetail').innerHTML = `
+        <div class="memory-detail-title"><h3>${escapeHtml(active.name)}</h3><span class="memory-tag">${escapeHtml(familyLabel)}</span></div>
+        <p class="memory-detail-principle">${escapeHtml(active.principle)}</p>
+        <dl class="memory-detail-grid">
+          <div><dt>触发症状</dt><dd>${escapeHtml(active.symptom)}</dd></div>
+          <div><dt>最小消融</dt><dd>${escapeHtml(active.experiment)}</dd></div>
+          <div><dt>核心指标</dt><dd>${escapeHtml(active.metrics.join(' · '))}</dd></div>
+          <div><dt>预期收益</dt><dd>${escapeHtml(active.benefit)}</dd></div>
+          <div><dt>新增成本/风险</dt><dd>${escapeHtml(active.cost)}</dd></div>
+          <div><dt>回滚条件</dt><dd>${escapeHtml(active.rollback)}</dd></div>
+        </dl>
+        <a class="memory-source" href="${escapeHtml(active.sourceUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(active.sourceLabel)} · 一手来源</a>`;
+      document.querySelectorAll('[data-rag-family]').forEach((button) => button.addEventListener('click', () => {
+        state.ragLab.activeFamily = button.dataset.ragFamily;
+        saveState();
+        renderRagMethods();
+      }));
+      document.querySelectorAll('[data-rag-method]').forEach((button) => button.addEventListener('click', () => {
+        state.ragLab.activeMethod = button.dataset.ragMethod;
+        saveState();
+        renderRagMethods();
+      }));
+    }
+
+    function renderRagPlanner() {
+      const select = document.getElementById('ragProfile');
+      select.innerHTML = RAG_LAB.plannerProfiles.map((profile) => `<option value="${escapeHtml(profile.id)}">${escapeHtml(profile.label)}</option>`).join('');
+      const plan = state.ragLab.planner;
+      if (RAG_LAB.plannerProfiles.some((profile) => profile.id === plan?.profile)) select.value = plan.profile;
+      const output = document.getElementById('ragPlanResult');
+      if (!ragPlannerIsValid(plan)) { output.hidden = true; output.innerHTML = ''; return; }
+      output.hidden = false;
+      output.innerHTML = `<h3>${escapeHtml(plan.label)} · 最小可发布候选</h3><div class="memory-result-grid">
+        <div><strong>BASELINE</strong><span>${escapeHtml(plan.base.join(' -> '))}</span></div>
+        <div><strong>升级条件</strong><span>${escapeHtml(plan.upgrade)}</span></div>
+        <div><strong>单变量消融</strong><span>${escapeHtml(plan.variable)}</span></div>
+        <div><strong>发布门禁</strong><span>${escapeHtml(plan.gates.join(' · '))}</span></div>
+        <div><strong>回滚</strong><span>${escapeHtml(plan.rollback)}</span></div>
+        <div><strong>证据版本</strong><span>dataset + source + parser/chunk/index/model/prompt/policy</span></div>
+      </div>`;
+    }
+
+    function buildRagPlan() {
+      const profile = RAG_LAB.plannerProfiles.find((item) => item.id === document.getElementById('ragProfile').value) || RAG_LAB.plannerProfiles[0];
+      state.ragLab.planner = {
+        version: 1,
+        profile: profile.id,
+        label: profile.label,
+        base: profile.base,
+        upgrade: profile.upgrade,
+        gates: profile.gates,
+        variable: '保持语料、问题、gold evidence 与其他组件固定，每次只替换一个 parser、chunker、retriever、reranker 或 controller。',
+        rollback: '保留 baseline 索引与版本化 read alias；质量无切片增益、安全失败或延迟/成本超预算时切回。',
+        selectedAt: new Date().toISOString(),
+      };
+      saveState();
+      renderRagLab();
+      if (state.currentStage === 's3') renderStageView();
+      showToast('RAG 可消融架构已生成并记入 S3 进度');
+    }
+
+    const ragLayerByAction = {
+      repair_source_coverage: 'source', repair_layout_parsing: 'parse', rechunk_with_parent_context: 'chunk',
+      add_hybrid_retrieval: 'retrieve', shadow_domain_embedding: 'index', rewrite_or_clarify_query: 'query',
+      rerank_candidates: 'rerank', decompose_then_test_graph: 'retrieve', add_multimodal_retrieval: 'retrieve',
+      validate_claims_or_abstain: 'answer', enforce_acl_before_retrieval: 'retrieve', quarantine_untrusted_source: 'operate',
+      invalidate_versioned_cache: 'operate', route_and_budget_expensive_steps: 'operate',
+    };
+    const ragCriticalActions = new Set(['validate_claims_or_abstain', 'enforce_acl_before_retrieval', 'quarantine_untrusted_source', 'invalidate_versioned_cache']);
+
+    function renderRagDiagnosis() {
+      const validIds = new Set(RAG_LAB.scenarios.map((scenario) => scenario.id));
+      if (!validIds.has(state.ragLab.activeScenario)) state.ragLab.activeScenario = RAG_LAB.scenarios[0].id;
+      const scenario = currentRagScenario();
+      const mastered = state.ragLab.scenarios[scenario.id] === true;
+      const select = document.getElementById('ragScenario');
+      select.innerHTML = RAG_LAB.scenarios.map((item) => `<option value="${escapeHtml(item.id)}">${state.ragLab.scenarios[item.id] === true ? '已掌握 · ' : ''}${escapeHtml(item.title)}</option>`).join('');
+      select.value = scenario.id;
+      document.getElementById('ragAction').innerHTML = `<option value="">请选择第一动作</option>${RAG_LAB.actions.map((action) => `<option value="${escapeHtml(action.id)}">${escapeHtml(action.label)}</option>`).join('')}`;
+      document.getElementById('ragAction').value = state.ragLab.selectedAction;
+      document.getElementById('ragScenarioSheet').innerHTML = `<h3>${escapeHtml(scenario.title)}</h3><p>${escapeHtml(scenario.symptom)}</p><div class="rag-signal-list">${scenario.signals.map((signal) => `<code>${escapeHtml(signal)}</code>`).join('')}</div>`;
+      const activeLayer = ragLayerByAction[scenario.expected];
+      document.getElementById('ragDiagnosticPath').innerHTML = RAG_LAB.pipeline.map((step, index) => `
+        <div class="rag-pipeline-row${mastered && step.id === activeLayer ? ' active' : ''}"><span>${String(index + 1).padStart(2, '0')}</span><strong>${escapeHtml(step.label)}</strong><p>${mastered && step.id === activeLayer ? escapeHtml(scenario.principle) : '根据当前信号判断是否在这一层首次失真。'}</p><small>${mastered && step.id === activeLayer ? `检查：${escapeHtml(scenario.evidence.join(' · '))}` : escapeHtml(step.failure)}</small></div>`).join('');
+      const expected = RAG_LAB.actions.find((action) => action.id === scenario.expected)?.label || scenario.expected;
+      const feedback = document.getElementById('ragDiagnosticFeedback');
+      const critical = ragCriticalActions.has(scenario.expected);
+      if (ragFeedback?.scenarioId === scenario.id) {
+        feedback.innerHTML = ragFeedback.correct
+          ? `<div class="memory-feedback correct"><strong>诊断正确：${escapeHtml(expected)}</strong><br>${escapeHtml(scenario.principle)}</div><pre class="memory-audit">${escapeHtml(JSON.stringify({ action: scenario.expected, layer: activeLayer, decision: critical ? 'block' : 'experiment', evidence: scenario.evidence, rollback_required: true }, null, 2))}</pre>`
+          : `<div class="memory-feedback wrong"><strong>这不是当前信号下的第一动作。</strong><br>误区：${escapeHtml(scenario.misconception)}<br>补充原理：${escapeHtml(scenario.principle)}</div>`;
+      } else if (mastered) {
+        feedback.innerHTML = `<div class="memory-feedback correct"><strong>该场景已掌握：${escapeHtml(expected)}</strong><br>${escapeHtml(scenario.principle)}</div>`;
+      } else feedback.innerHTML = '';
+    }
+
+    function checkRagAction() {
+      const scenario = currentRagScenario();
+      const selected = state.ragLab.selectedAction;
+      if (!selected) { showToast('先选择一个第一动作'); return; }
+      const correct = selected === scenario.expected;
+      ragFeedback = { scenarioId: scenario.id, correct };
+      if (correct) state.ragLab.scenarios[scenario.id] = true;
+      saveState();
+      renderRagLab();
+      if (state.currentStage === 's3') renderStageView();
+      showToast(correct ? '诊断正确，证据层与发布决策已展开' : '诊断未通过，请先看误区与第一原则');
+    }
+
+    function renderRagEvidence() {
+      if (!RAG_LAB.projects.some((project) => project.id === state.ragLab.activeProject)) state.ragLab.activeProject = RAG_LAB.projects[0].id;
+      const active = RAG_LAB.projects.find((project) => project.id === state.ragLab.activeProject) || RAG_LAB.projects[0];
+      document.getElementById('ragProjectList').innerHTML = RAG_LAB.projects.map((project) => `
+        <button type="button" class="memory-method-button${project.id === active.id ? ' active' : ''}" data-rag-project="${escapeHtml(project.id)}"><strong>${escapeHtml(project.name)}</strong><span>${escapeHtml(project.status)}</span><small>${escapeHtml(project.role)}</small></button>`).join('');
+      document.getElementById('ragProjectDetail').innerHTML = `
+        <div class="memory-detail-title"><h3>${escapeHtml(active.name)}</h3><span class="memory-tag">${escapeHtml(active.commit.slice(0, 8))}</span></div>
+        <p class="memory-detail-principle">${escapeHtml(active.role)}</p>
+        <dl class="memory-detail-grid"><div><dt>源码已确认</dt><dd>${escapeHtml(active.verified)}</dd></div><div><dt>不能直接推断</dt><dd>${escapeHtml(active.limit)}</dd></div></dl>
+        <div class="source-paths">${active.sourcePaths.map((path) => `<code>${escapeHtml(path)}</code>`).join('')}</div>
+        <a class="memory-source" href="${escapeHtml(active.sourceUrl)}" target="_blank" rel="noopener noreferrer">查看固定 commit 源码</a>`;
+      document.querySelectorAll('[data-rag-project]').forEach((button) => button.addEventListener('click', () => {
+        state.ragLab.activeProject = button.dataset.ragProject;
+        saveState();
+        renderRagEvidence();
+      }));
+      const evidence = RAG_LAB.future.filter((item) => item.kind === 'evidence');
+      const inference = RAG_LAB.future.filter((item) => item.kind === 'inference');
+      document.getElementById('ragFuture').innerHTML = `
+        <div class="memory-future-column"><h3>已有证据支持</h3>${evidence.map((item) => `<div class="memory-future-item"><strong>${escapeHtml(item.title)}</strong><span>${escapeHtml(item.detail)}</span></div>`).join('')}</div>
+        <div class="memory-future-column inference"><h3>工程推断，仍需验证</h3>${inference.map((item) => `<div class="memory-future-item"><strong>${escapeHtml(item.title)}</strong><span>${escapeHtml(item.detail)}</span></div>`).join('')}</div>`;
+    }
+
+    function renderRagLab() {
+      if (!RAG_LAB) {
+        document.getElementById('ragView').innerHTML = '<div class="page-heading"><h1>RAG 实验室暂不可用</h1><p>课程数据未加载，请检查 data/rag_lab.js。</p></div>';
+        return;
+      }
+      renderRagProgress();
+      renderRagPipeline();
+      renderRagMethods();
+      renderRagPlanner();
+      renderRagDiagnosis();
+      renderRagEvidence();
+      requestAnimationFrame(updateRagSectionNav);
+    }
+
+    function updateRagSectionNav() {
+      if (activeView !== 'rag') return;
+      const sections = [...document.querySelectorAll('[data-rag-target]')].map((button) => document.getElementById(button.dataset.ragTarget)).filter(Boolean);
+      if (!sections.length) return;
+      const offset = window.innerWidth <= 720 ? 124 : 118;
+      let activeSection = sections[0].id;
+      for (const section of sections) if (section.getBoundingClientRect().top <= offset) activeSection = section.id;
+      document.querySelectorAll('[data-rag-target]').forEach((button) => {
+        const active = button.dataset.ragTarget === activeSection;
+        button.classList.toggle('active', active);
+        if (active) button.setAttribute('aria-current', 'step');
+        else button.removeAttribute('aria-current');
+      });
+    }
+
     function currentMemoryScenario() {
       if (!MEMORY_LAB) return null;
       const selected = MEMORY_LAB.scenarios.find((scenario) => scenario.id === state.memoryLab.activeScenario);
@@ -2377,6 +2896,8 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
     }
 
     function renderMemoryMethods() {
+      document.getElementById('memoryAxes').innerHTML = MEMORY_LAB.axes.map((axis) => `
+        <div class="rag-axis-item"><strong>${escapeHtml(axis.label)}</strong><span>${escapeHtml(axis.values)}</span></div>`).join('');
       const familyIds = new Set(MEMORY_LAB.families.map((family) => family.id));
       if (!familyIds.has(state.memoryLab.activeFamily)) state.memoryLab.activeFamily = 'all';
       const filtered = state.memoryLab.activeFamily === 'all'
@@ -2526,6 +3047,21 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
       document.getElementById('memoryFuture').innerHTML = `
         <div class="memory-future-column"><h3>已有证据支持</h3>${evidence.map((item) => `<div class="memory-future-item"><strong>${escapeHtml(item.title)}</strong><span>${escapeHtml(item.detail)}</span></div>`).join('')}</div>
         <div class="memory-future-column inference"><h3>工程推断，仍需验证</h3>${inference.map((item) => `<div class="memory-future-item"><strong>${escapeHtml(item.title)}</strong><span>${escapeHtml(item.detail)}</span></div>`).join('')}</div>`;
+      if (!MEMORY_LAB.projects.some((project) => project.id === state.memoryLab.activeProject)) state.memoryLab.activeProject = MEMORY_LAB.projects[0].id;
+      const active = MEMORY_LAB.projects.find((project) => project.id === state.memoryLab.activeProject) || MEMORY_LAB.projects[0];
+      document.getElementById('memoryProjectList').innerHTML = MEMORY_LAB.projects.map((project) => `
+        <button type="button" class="memory-method-button${project.id === active.id ? ' active' : ''}" data-memory-project="${escapeHtml(project.id)}"><strong>${escapeHtml(project.name)}</strong><span>${escapeHtml(project.status)}</span><small>${escapeHtml(project.mechanism)}</small></button>`).join('');
+      document.getElementById('memoryProjectDetail').innerHTML = `
+        <div class="memory-detail-title"><h3>${escapeHtml(active.name)}</h3><span class="memory-tag">${escapeHtml(active.commit.slice(0, 8))}</span></div>
+        <p class="memory-detail-principle">${escapeHtml(active.mechanism)}</p>
+        <dl class="memory-detail-grid"><div><dt>源码已确认</dt><dd>${escapeHtml(active.verified)}</dd></div><div><dt>不能直接推断</dt><dd>${escapeHtml(active.missing)}</dd></div></dl>
+        <div class="source-paths">${active.sourcePaths.map((path) => `<code>${escapeHtml(path)}</code>`).join('')}</div>
+        <a class="memory-source" href="${escapeHtml(active.sourceUrl)}" target="_blank" rel="noopener noreferrer">查看固定 commit 源码</a>`;
+      document.querySelectorAll('[data-memory-project]').forEach((button) => button.addEventListener('click', () => {
+        state.memoryLab.activeProject = button.dataset.memoryProject;
+        saveState();
+        renderMemoryEvidence();
+      }));
     }
 
     function renderMemoryLab() {
@@ -2655,6 +3191,119 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
       requestAnimationFrame(updateEvalSectionNav);
     }
 
+    function currentObservabilityScenario() {
+      const scenarios = OBSERVABILITY_LAB?.scenarios || [];
+      const selected = scenarios.find((scenario) => scenario.id === state.observabilityLab.activeScenario);
+      if (selected) return selected;
+      const fallback = scenarios[0];
+      if (fallback) state.observabilityLab.activeScenario = fallback.id;
+      return fallback;
+    }
+
+    function renderOpsProgress() {
+      const lab = observabilityLabStatus();
+      const baseline = OBSERVABILITY_LAB.baseline;
+      document.getElementById('opsProgress').innerHTML = `
+        <div class="memory-progress-item"><span>可运行基线</span><strong>${baseline.runs} runs · ${baseline.assertions} assertions</strong><small>${escapeHtml(baseline.traceCoverage)} trace / ${escapeHtml(baseline.auditCoverage)} audit coverage</small></div>
+        <div class="memory-progress-item"><span>对抗基线</span><strong>${baseline.attacks} attacks · ${baseline.attackAssertions} assertions</strong><small>P95 ${escapeHtml(baseline.p95)} · cost/success ${escapeHtml(baseline.costPerSuccess)}</small></div>
+        <div class="memory-progress-item"><span>事故判断</span><strong>${lab.mastered} / 4</strong><small>${lab.ready ? '已满足 S7 专项门禁' : '至少掌握 4 个不同级别场景'}</small></div>`;
+    }
+
+    function renderOpsSignals() {
+      document.getElementById('opsSignalList').innerHTML = OBSERVABILITY_LAB.signals.map((signal) => `
+        <div class="ops-signal-row"><strong>${escapeHtml(signal.name)}</strong><span>${escapeHtml(signal.question)}</span><small>${escapeHtml(signal.evidence)}</small><small>${escapeHtml(signal.retention)}</small></div>`).join('');
+    }
+
+    function renderOpsTrace() {
+      document.getElementById('opsTraceList').innerHTML = OBSERVABILITY_LAB.trace.map((step, index) => `
+        <div class="ops-trace-step"><span>${String(index + 1).padStart(2, '0')}</span><div><strong>${escapeHtml(step.label)}</strong><p>${escapeHtml(step.operation)}</p></div><p>${escapeHtml(step.detail)}</p><time>${escapeHtml(step.duration)}</time></div>`).join('');
+      const contracts = [
+        ['Trace context', 'W3C traceparent · 16-byte trace-id · 8-byte span-id'],
+        ['Content policy', 'metadata-only · prompt/output/identity raw values forbidden'],
+        ['Audit integrity', 'ordered event hash · previous hash · chain head'],
+        ['Replay lineage', 'agent/prompt/model/tool/policy/knowledge/eval/schema versions'],
+        ['Semantic version', 'OTel GenAI Development · pinned commit f77b9235'],
+      ];
+      document.getElementById('opsTraceContract').innerHTML = contracts.map(([term, value]) => `<div><dt>${escapeHtml(term)}</dt><dd>${escapeHtml(value)}</dd></div>`).join('');
+    }
+
+    function renderOpsRules() {
+      document.getElementById('opsRuleRows').innerHTML = OBSERVABILITY_LAB.rules.map((rule) => `
+        <tr><td data-label="触发信号">${escapeHtml(rule.signal)}</td><td data-label="级别"><span class="eval-decision-code${rule.severity === 'P0' || rule.severity === 'P1' ? '' : ' warn'}">${escapeHtml(rule.severity)}</span></td><td data-label="响应">${escapeHtml(rule.response)}</td><td data-label="工程理由">${escapeHtml(rule.reason)}</td><td data-label="必须留下">${escapeHtml(rule.evidence)}</td></tr>`).join('');
+    }
+
+    function renderOpsDecision() {
+      const scenario = currentObservabilityScenario();
+      if (!scenario) return;
+      const mastered = state.observabilityLab.scenarios[scenario.id] === true;
+      const select = document.getElementById('opsScenario');
+      select.innerHTML = OBSERVABILITY_LAB.scenarios.map((item) => `<option value="${escapeHtml(item.id)}">${state.observabilityLab.scenarios[item.id] === true ? '已掌握 · ' : ''}${escapeHtml(item.title)}</option>`).join('');
+      select.value = scenario.id;
+      document.getElementById('opsScenarioSheet').innerHTML = `
+        <h3>${escapeHtml(scenario.title)}</h3><p>${escapeHtml(scenario.observation)}</p>
+        <dl class="eval-scenario-meta"><div><dt>事故级别</dt><dd>${escapeHtml(scenario.severity)}</dd></div><div><dt>初步信号</dt><dd>${escapeHtml(scenario.signalIds.join(' + '))}</dd></div><div><dt>证据边界</dt><dd>只保留最小元数据、hash 与版本引用</dd></div></dl>`;
+      document.getElementById('opsDecisionControl').innerHTML = OBSERVABILITY_LAB.responses.map((response) => `
+        <button type="button" class="${state.observabilityLab.selectedResponse === response.id ? 'active' : ''}" data-ops-response="${escapeHtml(response.id)}" aria-pressed="${state.observabilityLab.selectedResponse === response.id}" title="${escapeHtml(response.detail)}">${escapeHtml(response.label)}</button>`).join('');
+      document.querySelectorAll('[data-ops-response]').forEach((button) => button.addEventListener('click', () => {
+        state.observabilityLab.selectedResponse = button.dataset.opsResponse;
+        opsFeedback = null;
+        saveState();
+        renderOpsDecision();
+      }));
+      document.getElementById('opsSignalPath').innerHTML = OBSERVABILITY_LAB.signals.map((signal) => `
+        <div class="ops-signal-path-row${mastered && scenario.signalIds.includes(signal.id) ? ' active' : ''}"><strong>${escapeHtml(signal.name)}</strong><span>${mastered && scenario.signalIds.includes(signal.id) ? escapeHtml(signal.evidence) : '判定正确后展开该信号证据'}</span></div>`).join('');
+
+      const responseLabel = OBSERVABILITY_LAB.responses.find((response) => response.id === scenario.expected)?.label || scenario.expected;
+      const feedback = document.getElementById('opsDecisionFeedback');
+      const evidence = { response: scenario.expected, severity: scenario.severity, reason_code: scenario.blocker, required_evidence: scenario.evidence, regression_owner_required: true };
+      if (opsFeedback?.scenarioId === scenario.id) {
+        feedback.innerHTML = opsFeedback.correct
+          ? `<div class="memory-feedback correct"><strong>响应正确：${escapeHtml(responseLabel)}</strong><br>${escapeHtml(scenario.reason)}</div><pre class="memory-audit">${escapeHtml(JSON.stringify(evidence, null, 2))}</pre>`
+          : `<div class="memory-feedback wrong"><strong>这个响应级别会扩大风险或制造告警疲劳。</strong><br>${escapeHtml(scenario.misconception)}<br>补充原理：${escapeHtml(scenario.reason)}</div>`;
+      } else if (mastered) {
+        feedback.innerHTML = `<div class="memory-feedback correct"><strong>该场景已掌握：${escapeHtml(responseLabel)}</strong><br>${escapeHtml(scenario.reason)}</div><pre class="memory-audit">${escapeHtml(JSON.stringify(evidence, null, 2))}</pre>`;
+      } else {
+        feedback.innerHTML = '';
+      }
+    }
+
+    function checkOpsDecision() {
+      const scenario = currentObservabilityScenario();
+      const selected = state.observabilityLab.selectedResponse;
+      if (!selected) { showToast('先选择立即分页、建立工单或继续观察'); return; }
+      const correct = selected === scenario.expected;
+      opsFeedback = { scenarioId: scenario.id, correct };
+      if (correct) state.observabilityLab.scenarios[scenario.id] = true;
+      saveState();
+      renderObservabilityLab();
+      if (state.currentStage === 's7') renderStageView();
+      showToast(correct ? '响应级别正确，证据路径与回归要求已展开' : '判定未通过，请结合误区、用户影响与错误预算重试');
+    }
+
+    function renderOpsEvidence() {
+      document.getElementById('opsSources').innerHTML = OBSERVABILITY_LAB.sources.map((source) => `
+        <div class="eval-source-row"><strong>${escapeHtml(source.name)}</strong><span>${escapeHtml(source.focus)}</span><a href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer">一手来源</a></div>`).join('');
+      const evidence = OBSERVABILITY_LAB.future.filter((item) => item.kind === 'evidence');
+      const inference = OBSERVABILITY_LAB.future.filter((item) => item.kind === 'inference');
+      document.getElementById('opsFuture').innerHTML = `
+        <div class="memory-future-column"><h3>已有证据支持</h3>${evidence.map((item) => `<div class="memory-future-item"><strong>${escapeHtml(item.title)}</strong><span>${escapeHtml(item.detail)}</span></div>`).join('')}</div>
+        <div class="memory-future-column inference"><h3>工程推断，仍需验证</h3>${inference.map((item) => `<div class="memory-future-item"><strong>${escapeHtml(item.title)}</strong><span>${escapeHtml(item.detail)}</span></div>`).join('')}</div>`;
+    }
+
+    function renderObservabilityLab() {
+      if (!OBSERVABILITY_LAB) {
+        document.getElementById('opsView').innerHTML = '<div class="page-heading"><h1>运营实验室暂不可用</h1><p>课程数据未加载，请检查 data/observability_lab.js。</p></div>';
+        return;
+      }
+      renderOpsProgress();
+      renderOpsSignals();
+      renderOpsTrace();
+      renderOpsRules();
+      renderOpsDecision();
+      renderOpsEvidence();
+      requestAnimationFrame(updateOpsSectionNav);
+    }
+
     function updateEvalSectionNav() {
       if (activeView !== 'eval') return;
       const sections = [...document.querySelectorAll('[data-eval-target]')]
@@ -2674,12 +3323,33 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
       });
     }
 
+    function updateOpsSectionNav() {
+      if (activeView !== 'ops') return;
+      const sections = [...document.querySelectorAll('[data-ops-target]')]
+        .map((button) => document.getElementById(button.dataset.opsTarget))
+        .filter(Boolean);
+      if (!sections.length) return;
+      const offset = window.innerWidth <= 720 ? 124 : 118;
+      let activeSection = sections[0].id;
+      for (const section of sections) {
+        if (section.getBoundingClientRect().top <= offset) activeSection = section.id;
+      }
+      document.querySelectorAll('[data-ops-target]').forEach((button) => {
+        const active = button.dataset.opsTarget === activeSection;
+        button.classList.toggle('active', active);
+        if (active) button.setAttribute('aria-current', 'step');
+        else button.removeAttribute('aria-current');
+      });
+    }
+
     function scheduleSectionNavUpdate() {
       if (sectionNavFrame) return;
       sectionNavFrame = requestAnimationFrame(() => {
         sectionNavFrame = 0;
+        updateRagSectionNav();
         updateMemorySectionNav();
         updateEvalSectionNav();
+        updateOpsSectionNav();
       });
     }
 
@@ -2772,13 +3442,15 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
     }
 
     function showView(view) {
-      activeView = ['overview', 'stage', 'simulator', 'memory', 'eval', 'library'].includes(view) ? view : 'overview';
+      activeView = ['overview', 'stage', 'simulator', 'rag', 'memory', 'eval', 'ops', 'library'].includes(view) ? view : 'overview';
       document.querySelectorAll('[data-view-panel]').forEach((panel) => panel.classList.toggle('active', panel.dataset.viewPanel === activeView));
       updateViewButtons();
       closeDrawer();
       window.scrollTo({ top: 0, behavior: 'auto' });
+      requestAnimationFrame(updateRagSectionNav);
       requestAnimationFrame(updateMemorySectionNav);
       requestAnimationFrame(updateEvalSectionNav);
+      requestAnimationFrame(updateOpsSectionNav);
     }
 
     function navigate(hash) {
@@ -2892,11 +3564,17 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
       document.querySelectorAll('[data-stage-target]').forEach((button) => button.addEventListener('click', () => {
         document.getElementById(button.dataset.stageTarget)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }));
+      document.querySelectorAll('[data-rag-target]').forEach((button) => button.addEventListener('click', () => {
+        document.getElementById(button.dataset.ragTarget)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }));
       document.querySelectorAll('[data-memory-target]').forEach((button) => button.addEventListener('click', () => {
         document.getElementById(button.dataset.memoryTarget)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }));
       document.querySelectorAll('[data-eval-target]').forEach((button) => button.addEventListener('click', () => {
         document.getElementById(button.dataset.evalTarget)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }));
+      document.querySelectorAll('[data-ops-target]').forEach((button) => button.addEventListener('click', () => {
+        document.getElementById(button.dataset.opsTarget)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }));
       document.getElementById('startStageButton').addEventListener('click', () => {
         const itemState = stageState(state.currentStage);
@@ -2915,10 +3593,28 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
       });
       document.getElementById('openStageChapter').addEventListener('click', () => openChapter(currentStage().chapter));
       document.getElementById('openSelftest').addEventListener('click', () => openChapter('selftest'));
+      document.getElementById('openRagLabButton').addEventListener('click', () => navigate('#rag'));
       document.getElementById('openMemoryLabButton').addEventListener('click', () => navigate('#memory'));
       document.getElementById('openEvalLabButton').addEventListener('click', () => navigate('#eval'));
+      document.getElementById('openObservabilityLabButton').addEventListener('click', () => navigate('#ops'));
+      document.getElementById('openRagAtlas').addEventListener('click', () => openChapter('rag-atlas'));
       document.getElementById('openMemoryAtlas').addEventListener('click', () => openChapter('memory-atlas'));
       document.getElementById('openEvalGuide').addEventListener('click', () => openChapter('s6-lab'));
+      document.getElementById('openOpsGuide').addEventListener('click', () => openChapter('s7-lab'));
+      document.getElementById('buildRagPlan').addEventListener('click', buildRagPlan);
+      document.getElementById('checkRagAction').addEventListener('click', checkRagAction);
+      document.getElementById('ragScenario').addEventListener('change', (event) => {
+        state.ragLab.activeScenario = event.target.value;
+        state.ragLab.selectedAction = '';
+        ragFeedback = null;
+        saveState();
+        renderRagDiagnosis();
+      });
+      document.getElementById('ragAction').addEventListener('change', (event) => {
+        state.ragLab.selectedAction = event.target.value;
+        ragFeedback = null;
+        saveState();
+      });
       document.getElementById('buildMemoryArchitecture').addEventListener('click', buildMemoryArchitecture);
       document.getElementById('checkMemoryDecision').addEventListener('click', checkMemoryDecision);
       document.getElementById('memoryScenario').addEventListener('change', (event) => {
@@ -2934,6 +3630,14 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
         evalFeedback = null;
         saveState();
         renderEvalDecision();
+      });
+      document.getElementById('checkOpsDecision').addEventListener('click', checkOpsDecision);
+      document.getElementById('opsScenario').addEventListener('change', (event) => {
+        state.observabilityLab.activeScenario = event.target.value;
+        state.observabilityLab.selectedResponse = '';
+        opsFeedback = null;
+        saveState();
+        renderOpsDecision();
       });
       document.getElementById('quizDraft').addEventListener('input', (event) => {
         const itemState = stageState(state.currentStage);
@@ -2966,8 +3670,10 @@ python -m agent_course.cli release-gate ..\22-评测集\s6-release-manifest.json
       renderOverview();
       renderStageView();
       renderSimulator();
+      renderRagLab();
       renderMemoryLab();
       renderEvalLab();
+      renderObservabilityLab();
       renderLibrary(state.activeChapter || 'start');
     }
 

@@ -20,8 +20,11 @@ from .memory import (
     MemoryType,
 )
 from .memory_evals import run_memory_eval
+from .observability import run_observability
+from .observability_evals import run_observability_eval
 from .release_gate import run_release_gate
 from .release_gate_evals import run_release_gate_eval
+from .rag_diagnostics import run_rag_diagnostic_eval
 from .runtime import AgentRuntime
 from .store import SQLiteStore
 from .tools import ToolRegistry
@@ -65,6 +68,21 @@ def main() -> int:
         help="red-team the S6 release gate with adversarial mutations",
     )
     release_gate_eval_parser.add_argument("path")
+    observability_parser = subparsers.add_parser(
+        "observability",
+        help="run the executable S7 trace, SLO, and incident evidence pipeline",
+    )
+    observability_parser.add_argument("path")
+    observability_eval_parser = subparsers.add_parser(
+        "observability-eval",
+        help="red-team the S7 observability and incident gate",
+    )
+    observability_eval_parser.add_argument("path")
+    rag_diagnostic_parser = subparsers.add_parser(
+        "rag-diagnostic-eval",
+        help="run the executable RAG failure diagnosis suite",
+    )
+    rag_diagnostic_parser.add_argument("path")
     memory_parser = subparsers.add_parser(
         "memory-demo",
         help="run the S5 write, isolation, expiry, and delete demo",
@@ -346,6 +364,21 @@ def main() -> int:
 
     if args.command == "release-gate-eval":
         result = run_release_gate_eval(args.path)
+        print(json.dumps(result, indent=2, ensure_ascii=False))
+        return 0 if result["failed"] == 0 else 1
+
+    if args.command == "observability":
+        result = run_observability(args.path)
+        print(json.dumps(result, indent=2, ensure_ascii=False))
+        return 0 if result["release_passed"] else 1
+
+    if args.command == "observability-eval":
+        result = run_observability_eval(args.path)
+        print(json.dumps(result, indent=2, ensure_ascii=False))
+        return 0 if result["failed"] == 0 else 1
+
+    if args.command == "rag-diagnostic-eval":
+        result = run_rag_diagnostic_eval(args.path)
         print(json.dumps(result, indent=2, ensure_ascii=False))
         return 0 if result["failed"] == 0 else 1
 
