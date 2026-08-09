@@ -219,6 +219,12 @@ def main() -> int:
             "security-content.log",
         ),
         Check(
+            "vibe-coding-content",
+            ("node", "data/check_vibe_coding_content.mjs"),
+            ROOT,
+            "vibe-coding-content.log",
+        ),
+        Check(
             "pytest",
             (
                 sys.executable,

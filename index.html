@@ -797,6 +797,29 @@
     .section-block:last-child { padding-left: 40px; border-left: 1px solid var(--line); }
     .segment-control button.active { box-shadow: none; }
 
+    .vibe-practice { padding: 40px 0 44px; border-bottom: 1px solid var(--line); }
+    .vibe-practice-header { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 22px; }
+    .vibe-practice-header h2 { margin: 3px 0 7px; font-size: 24px; }
+    .vibe-practice-header p { max-width: 78ch; margin: 0; color: var(--ink-muted); }
+    .vibe-mode-strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-block: 1px solid var(--line); }
+    .vibe-mode { min-width: 0; padding: 16px 20px 17px 0; }
+    .vibe-mode + .vibe-mode { padding-left: 20px; border-left: 1px solid var(--line); }
+    .vibe-mode strong, .vibe-loop-row strong { display: block; color: #253149; font-size: 13px; }
+    .vibe-mode span, .vibe-mode small { display: block; margin-top: 5px; color: var(--ink-muted); font-size: 11px; line-height: 1.55; }
+    .vibe-mode small { color: var(--danger); }
+    .vibe-loop { margin: 22px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+    .vibe-loop-row { display: grid; grid-template-columns: 42px 120px minmax(0, 1fr) minmax(140px, .34fr); gap: 16px; align-items: start; padding: 13px 4px; border-bottom: 1px solid var(--line); }
+    .vibe-loop-row > span { color: var(--accent); font: 800 11px var(--mono); }
+    .vibe-loop-row p, .vibe-loop-row small { margin: 0; color: var(--ink-muted); font-size: 11px; line-height: 1.55; }
+    .vibe-loop-row small { color: #8f3c32; }
+    .vibe-practice-footer { display: grid; grid-template-columns: minmax(260px, .55fr) minmax(0, 1.45fr); gap: 36px; margin-top: 24px; align-items: start; }
+    .vibe-boundary { padding-top: 12px; border-top: 2px solid var(--danger); }
+    .vibe-boundary strong { display: block; margin-bottom: 7px; }
+    .vibe-boundary p { margin: 0; color: var(--ink-muted); font-size: 12px; line-height: 1.65; }
+    .vibe-contract { min-width: 0; }
+    .vibe-contract summary { cursor: pointer; color: #253149; font-size: 13px; font-weight: 800; }
+    .vibe-contract .command-block { margin-top: 10px; }
+
     .route-list { margin-top: 48px; border-top: 0; }
     .route-header { padding: 0 0 18px; }
     .roadmap-group > summary {
@@ -1037,6 +1060,14 @@
       .rag-axis-item, .rag-axis-item:nth-child(3n) { border-right: 0; border-bottom: 1px solid var(--line); }
       .rag-axis-item:last-child { border-bottom: 0; }
       .continue-panel { padding: 24px 0; }
+      .vibe-practice { padding: 32px 0 36px; }
+      .vibe-practice-header { align-items: start; flex-direction: column; }
+      .vibe-mode-strip { grid-template-columns: 1fr; }
+      .vibe-mode, .vibe-mode + .vibe-mode { padding: 14px 0; border-left: 0; border-bottom: 1px solid var(--line); }
+      .vibe-mode:last-child { border-bottom: 0; }
+      .vibe-loop-row { grid-template-columns: 30px 86px minmax(0, 1fr); gap: 9px; padding-inline: 0; }
+      .vibe-loop-row small { grid-column: 3; }
+      .vibe-practice-footer { grid-template-columns: 1fr; gap: 22px; }
       .journey-overview { overflow: hidden; }
       .journey-strip { gap: 0; padding: 0 0 6px; }
       .journey-step { flex: 0 0 190px; padding: 7px 16px; }
@@ -1190,6 +1221,19 @@ python -m agent_course.cli security-eval ..\22-评测集\s8-security-adversarial
           <div class="today-list" id="todayChecklist"></div>
         </section>
       </div>
+
+      <section class="vibe-practice" id="vibePractice" aria-labelledby="vibePracticeTitle">
+        <div class="vibe-practice-header">
+          <div><div class="section-label">贯穿 F0-S10 的工作方式</div><h2 id="vibePracticeTitle">工程化 Vibe Coding</h2><p id="vibeDefinition"></p></div>
+          <button class="secondary-button" id="openVibeGuide" type="button">打开完整最佳实践</button>
+        </div>
+        <div class="vibe-mode-strip" id="vibeModes" aria-label="Vibe Coding 工作模式"></div>
+        <ol class="vibe-loop" id="vibeLoop" aria-label="Vibe Coding 七步闭环"></ol>
+        <div class="vibe-practice-footer">
+          <div class="vibe-boundary"><strong>何时退出 Vibe Coding</strong><p>认证、支付、权限、生产迁移和不可逆操作必须切换到高风险受限模式：独立审批、最小权限、dry run、canary 与真实回滚演练。</p></div>
+          <details class="vibe-contract"><summary>展开可复制的任务契约</summary><div class="command-block"><div class="command-label"><span>任务开始前一次性说清</span><button class="copy-button" type="button" data-copy-target="vibeTaskContract">复制模板</button></div><pre id="vibeTaskContract"></pre></div></details>
+        </div>
+      </section>
 
       <section class="route-list" aria-labelledby="routeTitle">
         <div class="route-header"><div><div class="section-label">完整主线</div><h2 id="routeTitle">四段式工程学习路线</h2></div><span>按证据练习，工程认证需机器或评审复验</span></div>
@@ -1692,6 +1736,7 @@ python -m agent_course.cli security-eval ..\22-评测集\s8-security-adversarial
   <script src="data/eval_lab.js"></script>
   <script src="data/observability_lab.js"></script>
   <script src="data/security_lab.js"></script>
+  <script src="data/vibe_coding.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked@15.0.12/marked.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js"></script>
   <script>
@@ -1709,6 +1754,7 @@ python -m agent_course.cli security-eval ..\22-评测集\s8-security-adversarial
     const EVAL_LAB = window.EVAL_LAB && typeof window.EVAL_LAB === 'object' ? window.EVAL_LAB : null;
     const OBSERVABILITY_LAB = window.OBSERVABILITY_LAB && typeof window.OBSERVABILITY_LAB === 'object' ? window.OBSERVABILITY_LAB : null;
     const SECURITY_LAB = window.SECURITY_LAB && typeof window.SECURITY_LAB === 'object' ? window.SECURITY_LAB : null;
+    const VIBE_CODING = window.VIBE_CODING && typeof window.VIBE_CODING === 'object' ? window.VIBE_CODING : null;
     const STORAGE_KEY = 'ARG_ENGINEERING_COURSE_V2';
     const GITHUB_SOURCE = 'https://github.com/falses00/agent-learning-report/blob/main/';
     const evidenceFields = [
@@ -2283,6 +2329,21 @@ python -m agent_course.cli security-eval ..\22-评测集\s8-security-adversarial
 
     function escapeHtml(value) {
       return String(value).replace(/[&<>'"]/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' })[character]);
+    }
+
+    function renderVibePractice() {
+      const section = document.getElementById('vibePractice');
+      if (!VIBE_CODING) {
+        section.hidden = true;
+        return;
+      }
+      section.hidden = false;
+      document.getElementById('vibeDefinition').textContent = VIBE_CODING.definition;
+      document.getElementById('vibeModes').innerHTML = VIBE_CODING.modes.map((mode) => `
+        <div class="vibe-mode"><strong>${escapeHtml(mode.name)}</strong><span>${escapeHtml(mode.fit)}</span><small>${escapeHtml(mode.exit)}</small></div>`).join('');
+      document.getElementById('vibeLoop').innerHTML = VIBE_CODING.loop.map((step, index) => `
+        <li class="vibe-loop-row"><span>${String(index + 1).padStart(2, '0')}</span><strong>${escapeHtml(step.name)}</strong><p>${escapeHtml(step.action)}<br>产物：${escapeHtml(step.artifact)}</p><small>失控：${escapeHtml(step.failure)}</small></li>`).join('');
+      document.getElementById('vibeTaskContract').textContent = VIBE_CODING.taskContract;
     }
 
     function renderProgress() {
@@ -3799,6 +3860,7 @@ python -m agent_course.cli security-eval ..\22-评测集\s8-security-adversarial
       document.getElementById('resetProgress').addEventListener('click', resetProgress);
       document.getElementById('continueButton').addEventListener('click', (event) => openStage(event.currentTarget.dataset.stage || state.currentStage));
       document.getElementById('openBaselineButton').addEventListener('click', () => openChapter('baseline'));
+      document.getElementById('openVibeGuide').addEventListener('click', () => openChapter('vibe-coding'));
       document.querySelectorAll('[data-path]').forEach((button) => button.addEventListener('click', () => {
         state.path = button.dataset.path;
         state.currentStage = state.path === 'foundation' ? 'f0' : 's0';
@@ -3926,6 +3988,7 @@ python -m agent_course.cli security-eval ..\22-评测集\s8-security-adversarial
 
     function renderAll() {
       renderCourseNav();
+      renderVibePractice();
       renderOverview();
       renderStageView();
       renderSimulator();

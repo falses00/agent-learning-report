@@ -11,7 +11,8 @@ const chapters = [
   { id: 'route', num: '路线', title: '工程实战主线 v2', meta: 'F0 · S0-S10 · 阶段门禁', src: 'agent-runtime-gateway/00-课程总览/工程实战主线-v2.md', group: 'start' },
   { id: 'project', num: '项目', title: 'OpsPilot 贯穿项目', meta: '真实场景 · 三条演示路径', src: 'agent-runtime-gateway/11-工程实战主线/README.md', group: 'start' },
   { id: 'standards', num: '毕业', title: '岗位能力与毕业标准', meta: '作品集 · 答辩 · 评分', src: 'agent-runtime-gateway/00-课程总览/岗位能力与毕业标准.md', group: 'start' },
-  { id: 'protocol', num: '协议', title: '统一教学提示词 v3', meta: '资料审计 · 源码证据 · 实验 · 自测 · 岗位映射', src: 'agent-runtime-gateway/00-课程总览/每节课互动模板.md', group: 'start' },
+  { id: 'protocol', num: '协议', title: '统一教学提示词 v4', meta: '资料审计 · Vibe Coding · 实验 · 自测 · 岗位映射', src: 'agent-runtime-gateway/00-课程总览/每节课互动模板.md', group: 'start' },
+  { id: 'vibe-coding', num: '方法', title: 'Vibe Coding 最佳实践', meta: '任务契约 · 小批量 · 验证 · 审查 · 安全边界', src: 'agent-runtime-gateway/00-课程总览/Vibe-Coding最佳实践-2026.md', group: 'start' },
   { id: 'baseline', num: '基线', title: '可运行教学基线', meta: 'CLI · pytest · eval', src: 'agent-runtime-gateway/20-源码/README.md', group: 'start' },
 
   { id: 'f0-lab', num: 'F0', title: '工程基础可运行实验', meta: 'FastAPI · SQLite · Idempotency · pytest', src: 'agent-runtime-gateway/labs/F0-foundation/README.md', group: 'main', stageId: 'f0' },
