@@ -2,7 +2,7 @@
   'use strict';
 
   root.VIBE_CODING = Object.freeze({
-    version: '2026-08-09',
+    version: '2026-08-12',
     definition: 'Vibe Coding 是用自然语言与 Coding Agent 快速迭代软件的协作方式；工程化版本要求人负责目标、边界与验收，Agent 负责受限探索和实现，机器证据负责判断能否交付。',
     principle: '意图由人确认，事实从仓库读取，变更保持小批量，正确性由可重跑证据证明。',
     modes: [
@@ -39,10 +39,34 @@
       { id: 'unsafe-autonomy', name: '生产环境放权', symptom: 'Agent 持长期凭据、开放网络并可直接部署。', repair: '隔离工作区、短期凭据、egress allowlist、审批和 canary。' },
       { id: 'no-learning-loop', name: '失败不沉淀', symptom: '每次重复解释同一环境问题。', repair: '把稳定教训写入测试、AGENTS、runbook 或可版本化 skill。' },
     ],
+    decisionTree: [
+      { id: 'discardable', question: '失败结果能否直接丢弃，且只使用假数据？', yes: '探索模式', no: '继续检查风险责任面。' },
+      { id: 'high-risk', question: '是否涉及认证、授权、支付、隐私、迁移、生产或不可逆副作用？', yes: '高风险受限模式', no: '继续检查交付条件。' },
+      { id: 'contract-ready', question: '是否已有仓库规则、明确验收、可运行测试和 reviewer？', yes: '交付模式', no: '先补任务契约与验证环境。' },
+      { id: 'new-access', question: 'Agent 是否需要新生产权限、真实客户数据或不可逆命令？', yes: '立即升级风险模式并等待审批', no: '保持当前最小权限。' },
+    ],
+    evidence: [
+      { id: 'metr-2025', type: '随机对照实验', claim: '16 位开发者在 246 个熟悉仓库任务中，早期 2025 AI 条件用时增加 19%。', boundary: '不代表所有开发者、仓库或 2026 工具。' },
+      { id: 'metr-2026', type: '研究方法更新', claim: '后续实验因拒绝无 AI 任务、选择效应和多 Agent 计时而无法给出可靠当前提速值。', boundary: '原始均值只能视为很弱的证据。' },
+      { id: 'meta-2026', type: '预印本元分析', claim: '23 项研究呈中等正向生产率效应，但真实环境收益较小且学习效果不显著。', boundary: '尚未同行评议，研究间异质性高。' },
+      { id: 'dora-2025', type: '跨组织观察研究', claim: 'AI 更像组织能力放大器，会同时放大强项和流程弱点。', boundary: '关联不等于因果，不能直接换算团队 ROI。' },
+      { id: 'anthropic-2026', type: '厂商遥测研究', claim: '约 40 万次 Claude Code 会话中，人多做规划决策，Agent 多做执行决策。', boundary: '厂商样本和模型分类不能代表全部 Coding Agent。' },
+      { id: 'nist-2026', type: '官方规范性指导', claim: 'AI 生成内容应由人监控和验证，并通过可验证过程检查准确性与可信度。', boundary: '规范性建议不提供生产率效果量。' },
+    ],
+    metrics: [
+      { id: 'cycle-time', name: 'Cycle time', measure: '任务进入开发到可发布的总历时。' },
+      { id: 'acceptance-lead-time', name: 'Acceptance lead time', measure: '首次实现到全部验收通过的历时。' },
+      { id: 'first-pass', name: 'First-pass gate rate', measure: '第一次提交即通过全部门禁的比例。' },
+      { id: 'rework', name: 'Rework ratio', measure: '为修正生成改动而新增或重写的工作量。' },
+      { id: 'escaped-defect', name: 'Escaped defects', measure: '合并或发布后发现的缺陷，按严重度分层。' },
+      { id: 'review-load', name: 'Review load', measure: '人类审查时长、轮次与认知负担。' },
+      { id: 'security', name: 'Security findings', measure: 'secret、依赖、权限、注入和供应链发现。' },
+    ],
     taskContract: `目标：为【用户/场景】实现【可观察结果】。\n非目标：本轮不处理【明确排除项】。\n现状：先读取【规则、相关代码、相似实现、测试】并总结事实。\n约束：保持【架构/依赖/兼容/安全/性能】边界，不改无关文件。\n验收：\n1. 正常路径：【输入 -> 预期】\n2. 失败路径：【错误 -> 明确响应】\n3. 边界/对抗：【极端或攻击输入 -> 阻断】\n4. 质量门禁：【test/lint/type/build/browser/security】\n工作方式：先调查和计划；按最小批次实现；每批运行检查并审查 diff。\n停止条件：遇到【不可逆操作、需求冲突、缺少权威事实】时暂停并说明。\n交付：列出改动、实际命令、结果、残余风险和回滚方式。`,
     sources: [
+      { id: 'karpathy-origin', name: 'Original Vibe Coding Post 2025', focus: '原始术语强调宽松探索，不等同于生产工程', url: 'https://x.com/karpathy/status/1886192184808149383' },
       { id: 'openai-codex', name: 'OpenAI Codex Use Cases', focus: '理解代码库、构建、测试、审查和迭代工作流', url: 'https://developers.openai.com/codex/use-cases' },
-      { id: 'openai-model', name: 'OpenAI Model Guidance', focus: '精简指令、相关工具和代表性 eval', url: 'https://developers.openai.com/api/docs/guides/latest-model' },
+      { id: 'openai-uses-codex', name: 'How OpenAI Uses Codex 2026', focus: '先调查、按 issue 组织任务、持久仓库指令和迭代验证', url: 'https://openai.com/business/guides-and-resources/how-openai-uses-codex/' },
       { id: 'anthropic-practice', name: 'Claude Code Best Practices', focus: '仓库指令、TDD、小步提交和可验证循环', url: 'https://www.anthropic.com/engineering/claude-code-best-practices' },
       { id: 'anthropic-expertise', name: 'Agentic Coding and Expertise 2026', focus: '人负责规划决策、领域知识仍影响成功率', url: 'https://www.anthropic.com/research/claude-code-expertise' },
       { id: 'anthropic-containment', name: 'How We Contain Claude 2026', focus: '权限疲劳、沙箱、文件与网络边界', url: 'https://www.anthropic.com/engineering/how-we-contain-claude' },
@@ -50,7 +74,10 @@
       { id: 'github-practice', name: 'GitHub Copilot Best Practices', focus: '明确上下文、测试和自动化检查', url: 'https://docs.github.com/en/copilot/get-started/best-practices' },
       { id: 'github-responsible', name: 'Responsible Use of Coding Agents', focus: '幻觉、不安全建议、命令和人工审查风险', url: 'https://docs.github.com/en/copilot/responsible-use/agents' },
       { id: 'dora-2025', name: 'DORA AI-assisted Development 2025', focus: 'AI 放大既有组织能力，流程与平台决定收益', url: 'https://dora.dev/research/2025/dora-report/' },
-      { id: 'nist-devsecops', name: 'NIST DevSecOps and AI', focus: 'AI 产物需要人类监督和可验证流程', url: 'https://pages.nist.gov/nccoe-devsecops/introduction.html' },
+      { id: 'metr-2025', name: 'METR Early-2025 OSS Developer RCT', focus: '16 人 246 任务中测得 19% 变慢，并明确外推边界', url: 'https://arxiv.org/abs/2507.09089' },
+      { id: 'metr-2026', name: 'METR 2026 Experiment Design Update', focus: '选择偏差与多 Agent 计时使最新提速估计不可靠', url: 'https://metr.org/blog/2026-02-24-uplift-update/' },
+      { id: 'meta-2026', name: 'Programming Productivity Meta-analysis 2026', focus: '平均生产率效应偏正但高度依赖场景，学习收益不显著', url: 'https://arxiv.org/abs/2605.04779' },
+      { id: 'nist-devsecops', name: 'NIST DevSecOps and AI 2026', focus: 'AI 产物需要人类监督、验证、追踪和可验证流程', url: 'https://pages.nist.gov/nccoe-devsecops/introduction.html' },
     ],
   });
 })(globalThis);

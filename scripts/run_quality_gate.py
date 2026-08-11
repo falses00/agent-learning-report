@@ -225,6 +225,12 @@ def main() -> int:
             "vibe-coding-content.log",
         ),
         Check(
+            "reader-content",
+            ("node", "data/check_reader_content.mjs"),
+            ROOT,
+            "reader-content.log",
+        ),
+        Check(
             "pytest",
             (
                 sys.executable,

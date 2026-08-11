@@ -19,7 +19,8 @@
 - S6 Eval 与发布门禁实验室：35 个前序 Agent case、183 条断言、16 个门禁攻击、grader/holdout/critical gate 和证据 hash。
 - S7 Observability 与事故响应实验室：信号契约、W3C trace、SLO/burn-rate 分级、8 个事故判定、6 个 Runtime run 与 14 个门禁攻击。
 - S8 Security 与 Sandbox 实验室：9 层控制链、4 类安全终态、10 个交互事故、6 个固定 commit 源码项目与 25 个 critical 攻击 case。
-- 工程化 Vibe Coding 工作方式：探索/交付/高风险受限三种模式，七步闭环、任务契约、8 类反模式和 10 个一手来源。
+- 工程化 Vibe Coding 工作方式：探索/交付/高风险受限三种模式，七步闭环、任务契约、8 类反模式、6 条证据主张与 14 个一手来源；明确区分随机实验、观察研究、厂商遥测和课程推论。
+- 长教材阅读器：稳定正文宽度、粘性阅读进度、当前位置、桌面章内目录与移动端折叠目录。
 - 可运行基线命令、故障演练、课程资料阅读和搜索。
 - 本地进度导出与重置，不上传学习数据；导出包明确标记为 `self-reported`，不能替代 CI 或独立工程复验。
 
@@ -46,6 +47,7 @@ node data/check_eval_content.mjs
 node data/check_observability_content.mjs
 node data/check_security_content.mjs
 node data/check_vibe_coding_content.mjs
+node data/check_reader_content.mjs
 ```
 
 运行 Agent 教学基线：
@@ -77,7 +79,7 @@ python -m agent_course.cli security-eval ..\22-评测集\s8-security-adversarial
 python scripts/run_quality_gate.py
 ```
 
-命令当前执行 21 项检查，生成 `quality-reports/manifest.json`、pytest JUnit、内容检查（含 Vibe Coding）、S3 基础与诊断 eval、S4/S5 eval、S6 release gate、S7 observability，以及 S8 security adversarial JSON。每次向 `main` 推送后，Actions 会保留整包证据，并使用 GitHub Artifact Attestations 为 manifest 生成可验证的构建来源。下载 CI 产物后可核对：
+命令当前执行 22 项检查，生成 `quality-reports/manifest.json`、pytest JUnit、内容检查（含 Vibe Coding 与长文阅读器）、S3 基础与诊断 eval、S4/S5 eval、S6 release gate、S7 observability，以及 S8 security adversarial JSON。每次向 `main` 推送后，Actions 会保留整包证据，并使用 GitHub Artifact Attestations 为 manifest 生成可验证的构建来源。下载 CI 产物后可核对：
 
 ```powershell
 gh attestation verify quality-reports/manifest.json --repo falses00/agent-learning-report

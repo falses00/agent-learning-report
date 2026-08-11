@@ -1,14 +1,35 @@
 # Vibe Coding 最佳实践（2026）
 
-核验日期：2026-08-09
+核验日期：2026-08-12
 
 定位：F0-S10 共用的 AI 辅助工程工作方式，不是独立技术阶段，也不是“生成后直接上线”的免责标签。
+
+## 0. 阅读导航
+
+| 目标 | 推荐读法 | 完成证据 |
+|---|---|---|
+| 10 分钟建立判断框架 | 读 1、2、3、10、11 节 | 能解释三种模式和退出条件 |
+| 45 分钟掌握交付闭环 | 再读 4、5、7、8 节 | 能写出可执行任务契约和审查清单 |
+| 90 分钟进入真实练习 | 完成 6、9 节案例与五道自测 | 保存一次真实 diff、失败测试和复验命令 |
+
+阅读时先看结论，再检查它属于“标准/官方指导、随机实验、观察性研究、厂商遥测还是课程推论”。不要只记数字；先记数字成立的样本、时间、工具与任务边界。
 
 ## 1. 一句话定义
 
 **Vibe Coding 是用自然语言与 Coding Agent 快速迭代软件的协作方式；工程化版本要求人负责目标、边界与验收，Agent 负责受限探索和实现，机器证据负责判断能否交付。**
 
 它的价值是缩短“想法 -> 可运行反馈”的周期。它不负责替代产品判断、领域知识、架构责任、安全审批和发布责任。
+
+### 1.1 术语边界
+
+| 术语 | 本课程采用的含义 | 不能混同 |
+|---|---|---|
+| 原始 Vibe Coding | 2025 年由 Andrej Karpathy 描述的宽松探索方式：主要通过自然语言驱动生成、运行和修补，甚至暂时不关注代码细节 | 不能自动等同于生产级软件工程 |
+| AI-assisted coding | 补全、解释、生成测试、审查或局部改码等广义 AI 辅助开发 | 不一定拥有自主工具循环 |
+| Agentic coding | Agent 能读取仓库、调用工具、编辑文件、运行命令并多步迭代 | 自主程度高不代表有发布权限 |
+| 工程化 Vibe Coding | **本课程定义**：保留自然语言快速反馈，同时增加任务契约、最小权限、可重跑门禁、独立审查与回滚 | 不是行业正式标准，也不是对原始术语的重新定义 |
+
+因此，探索模式可以接近原始 Vibe Coding；一旦进入共享仓库或生产责任面，正确名称更接近“受控的 agentic software engineering”。
 
 ## 2. 先纠正两个极端
 
@@ -29,6 +50,16 @@
 + 独立审查
 + 最小权限与回滚
 ```
+
+### 2.1 先看完整证据，不先站队
+
+- **受控实验的负结果**：METR 在 2025 年对 16 位熟悉自己开源仓库的开发者做随机对照实验，共 246 个任务；主要使用 Cursor Pro 与 Claude 3.5/3.7 Sonnet。允许 AI 的任务实际用时增加 19%（95% 置信区间约为增加 2%-39%），但参与者事前预测会快 24%，事后仍认为快 20%。这说明主观流畅感不能替代计时与质量证据。
+- **负结果的边界**：该实验只代表 2025 年初工具、成熟大型仓库、熟悉代码库的资深开源贡献者及其任务，不能推出“AI 让所有开发者变慢”。
+- **2026 年更新仍不确定**：METR 后续实验出现明显选择偏差，部分开发者不愿接受禁用 AI 的任务，多 Agent 并行也使工时难以计算。原团队认为最新工具可能更快，但明确把新估计称为很弱的证据，不能拿原始结果或后续原始均值宣称普遍因果效果。
+- **综合研究的正面但异质结果**：2026 年一项纳入 23 项研究、27 个效应量的预印本元分析得到中等正向生产率效应（Hedges' g=0.33，95% CI 0.09-0.58），同时发现真实开源和企业环境的收益小于受控实验，学习效果没有统计显著改善。预印本与纳入研究的异质性意味着结论仍需后续复核。
+- **组织层面不是线性提速**：DORA 2025 把 AI 描述为“放大器”；它会同时放大强流程和坏流程。代码生成更快，不等于交付稳定性、用户价值或学习能力同步提高。
+
+课程结论不是“AI 一定提速”或“一定降速”，而是：**把收益当成需要在本团队工作负载上测量的假设。**
 
 ## 3. 三种工作模式
 
@@ -58,6 +89,20 @@
 - 关键假设必须由权威系统、代码所有者或安全负责人确认。
 - 使用短期凭据、隔离工作区、网络出口限制和独立审批。
 - 需要备份、dry run、canary、回滚演练和人工签字。
+
+### 3.4 工作模式决策树
+
+```text
+结果失败后可以直接丢弃，且只用假数据？
+├─ 是 -> 探索模式
+└─ 否 -> 是否涉及认证、授权、支付、隐私、迁移、生产或不可逆副作用？
+         ├─ 是 -> 高风险受限模式
+         └─ 否 -> 是否存在明确仓库规则、验收、测试和 reviewer？
+                  ├─ 是 -> 交付模式
+                  └─ 否 -> 先补任务契约和验证环境，不开始生成代码
+```
+
+升级信号：Agent 需要新生产权限、真实客户数据、不可逆命令或自行改变业务规则时，立即从探索/交付升级为高风险受限。降级信号：风险责任面已移除、数据已匿名化且变更可完全丢弃时，才可回到探索。
 
 ## 4. 七步闭环
 
@@ -204,6 +249,23 @@ AI review 可以提供第二视角，但不能成为自己的唯一批准人。�
 
 此时应退出自由探索模式，进入正式变更管理：数据画像、兼容读写、备份、dry run、容量测试、canary、回滚、值班和审批。Agent 可以帮助生成脚本和检查，但不能单独决定迁移窗口或执行生产切换。
 
+### 示例 D：坏契约与可交付契约
+
+坏提示：`帮我把退款 Agent 做得更智能，顺便优化架构并上线。`
+
+问题：用户结果、非目标、可信数据源、金额边界、权限、失败响应和验收全部缺失，“更智能”无法被证伪。
+
+可交付版本：
+
+```text
+目标：让客服查看退款建议；只有后端 policy 返回 allow 且人工审批完成后才能调用退款工具。
+非目标：不改变退款阈值，不新增支付渠道，不执行生产部署。
+可信事实：tenant_id、role、order_amount 只来自服务端会话与订单服务。
+失败行为：policy 超时、跨租户、重复 request_id、金额不一致一律拒绝并写 audit。
+验收：正常/越权/重放/超时测试；trace 中可关联 run_id；dry run 不产生真实退款；独立 reviewer 复核 policy diff。
+停止：需要修改金额阈值、生产凭据或不可逆迁移时暂停。
+```
+
 ## 7. 常见问题与解决
 
 | 问题 | 直接原因 | 解决方法 | 必加证据 |
@@ -229,6 +291,22 @@ AI review 可以提供第二视角，但不能成为自己的唯一批准人。�
 | 正确性 | 认可验收标准 | 生成并运行检查 | 给出可重跑结果 |
 | 安全与发布 | 审批高风险操作 | 发现风险、生成候选修复 | policy、CI、scanner、deployment gate |
 | 事故责任 | 团队承担 | 不具备责任主体资格 | 保存证据 |
+
+### 8.1 如何测量是否真的更好
+
+不要用代码行数、prompt 数或 Agent 调用次数当生产率。至少连续记录一个基线周期和一个试点周期，并同时观察速度、质量、负担与体验：
+
+| 指标 | 定义 | 常见误读 |
+|---|---|---|
+| Cycle time | 任务进入开发到可发布的历时 | 只算生成代码时间，漏掉等待与返工 |
+| Acceptance lead time | 首次实现到验收通过的历时 | 把首次“看起来能跑”当完成 |
+| First-pass gate rate | 第一次提交即通过全部门禁的比例 | Agent 重试很多次后绿色仍算首次成功 |
+| Rework ratio | 验收前后为修正生成改动而新增/重写的工作量 | 用 churn 当个人绩效指标会诱导隐藏返工 |
+| Escaped defects | 合并或发布后发现的缺陷，按严重度分层 | 只看数量，不看流量、变更规模和严重度 |
+| Review load | 人类审查时长、轮次和认知负担 | PR 数增加不等于 reviewer 更轻松 |
+| Security findings | secret、依赖、权限、注入和供应链发现 | 扫描器变多导致发现增加不等于安全变差 |
+
+比较时固定或记录任务类型、仓库熟悉度、模型/工具版本、并行 Agent 数、人员经验和质量门槛。观察性前后对比只能说明相关性；要讨论因果，需随机化或至少使用匹配任务，并报告置信区间和缺失数据。
 
 ## 9. 五道自测
 
@@ -270,8 +348,9 @@ Agent 可以执行，机器可以验证，人必须承担决定与发布责任�
 
 ## 12. 一手资料
 
+- [Andrej Karpathy 原始 Vibe Coding 帖子（2025-02-02）](https://x.com/karpathy/status/1886192184808149383)
 - [OpenAI Codex Use Cases](https://developers.openai.com/codex/use-cases)
-- [OpenAI Model Guidance](https://developers.openai.com/api/docs/guides/latest-model)
+- [How OpenAI Uses Codex（2026）](https://openai.com/business/guides-and-resources/how-openai-uses-codex/)
 - [Claude Code Best Practices](https://www.anthropic.com/engineering/claude-code-best-practices)
 - [Agentic Coding and Persistent Returns to Expertise（2026）](https://www.anthropic.com/research/claude-code-expertise)
 - [How We Contain Claude Across Products（2026）](https://www.anthropic.com/engineering/how-we-contain-claude)
@@ -279,12 +358,27 @@ Agent 可以执行，机器可以验证，人必须承担决定与发布责任�
 - [GitHub Copilot Best Practices](https://docs.github.com/en/copilot/get-started/best-practices)
 - [GitHub Responsible Use of Coding Agents](https://docs.github.com/en/copilot/responsible-use/agents)
 - [DORA State of AI-assisted Software Development 2025](https://dora.dev/research/2025/dora-report/)
-- [NIST DevSecOps: The Role of AI in Software Development](https://pages.nist.gov/nccoe-devsecops/introduction.html)
+- [METR：Early-2025 AI and Experienced OSS Developer Productivity](https://arxiv.org/abs/2507.09089)
+- [METR：2026 Productivity Experiment Design Update](https://metr.org/blog/2026-02-24-uplift-update/)
+- [2026 编程生产率与学习效果元分析（预印本）](https://arxiv.org/abs/2605.04779)
+- [NIST DevSecOps: The Role of AI in Software Development（2026）](https://pages.nist.gov/nccoe-devsecops/introduction.html)
+
+### 12.1 来源到主张审计
+
+| 来源类型 | 可支持的主张 | 不能证明什么 |
+|---|---|---|
+| NIST / GitHub 官方指导 | 生产代码需要人工监督、测试、依赖与安全审查、可验证门禁 | 不能量化某工具带来的生产率 |
+| METR 2025 随机对照实验 | 在其 16 人、246 任务、早期 2025 工具场景下因果测得 19% 变慢 | 不能外推到所有人、所有仓库或 2026 工具 |
+| METR 2026 方法更新 | 后续研究存在拒绝无 AI 任务、样本选择与并行计时偏差 | 不能给出最新工具的可靠普遍提速值 |
+| 2026 元分析预印本 | 跨既有研究的平均效应偏正，但异质性大，学习收益不显著 | 未经同行评议，不能抹平不同任务与研究偏差 |
+| Anthropic 约 40 万会话遥测 | 在 Claude Code 样本中，人多做规划、Agent 多做执行；领域经验与成功相关 | 厂商样本和模型分类不能证明因果，也不能代表所有 Agent |
+| OpenAI / 厂商内部案例 | 可形成可复用工作流假设和工程模式 | 内部案例缺少随机对照，不能直接当作你的 ROI |
+| 本课程综合规则 | 可作为 OpsPilot 的保守默认值和训练门禁 | 不是行业标准，必须用项目实验继续校准 |
 
 ## 13. 证据边界与未来走向
 
-已验证事实：官方实践共同强调仓库上下文、测试、人工审查、安全边界和可验证流程；DORA 2025 将 AI 描述为放大既有能力和弱点的工具；2026 交互研究仍显示领域知识与规划决策重要。
+已验证事实：官方实践共同强调仓库上下文、测试、人工审查、安全边界和可验证流程；NIST 2026 要求 AI 生成内容由人监控、验证并保留可验证过程；DORA 2025 将 AI 描述为放大既有能力和弱点的工具。Anthropic 对 2025-10 至 2026-04 约 40 万次 Claude Code 会话的厂商观察研究中，分类器估计人平均承担约 70% 规划决策、Agent 承担约 80% 执行决策；这是使用模式证据，不是生产率因果证据。
 
-合理推断：未来 Coding Agent 会承担更长的执行链，人会更多负责目标、架构、风险和多 Agent 编排；仓库指令、skills、eval、sandbox 和 policy 会成为与代码同等重要的工程资产。
+合理推断：未来 Coding Agent 会承担更长的执行链，人会更多负责目标、架构、风险和多 Agent 编排；仓库指令、skills、eval、sandbox、policy、provenance 和 Agent 工时观测会成为与代码同等重要的工程资产。随着并行 Agent 普及，“等待时间、机器时间、人类注意力、返工时间”需要分开计量。
 
-仍未知：公开资料不能证明某一模型或工作流在所有团队、语言和代码库中都是最优；生产收益必须按本团队的 cycle time、escaped defect、rework、review load、security finding 和 developer experience 持续评测。
+仍未知：公开资料不能证明某一模型或工作流在所有团队、语言和代码库中都是最优，也不能证明 Vibe Coding 本身会改善编程学习。生产收益必须按本团队的 cycle time、first-pass gate、escaped defect、rework、review load、security finding 和 developer experience 持续评测，并在工具或模型升级后重跑基线。
