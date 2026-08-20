@@ -1106,10 +1106,10 @@
     .interview-market-summary strong, .interview-market-summary span { display: block; }
     .interview-market-summary strong { color: #263248; font-size: 13px; }
     .interview-market-summary span { max-width: 76ch; margin-top: 5px; color: var(--ink-muted); font-size: 11px; line-height: 1.6; }
-    .interview-section-nav { position: sticky; top: calc(var(--topbar) + 8px); z-index: 18; display: flex; overflow-x: auto; margin-bottom: 24px; border-bottom: 1px solid var(--line); background: rgba(255, 255, 255, .97); scrollbar-width: thin; }
-    .interview-section-nav button { flex: 1 0 94px; min-height: 44px; padding: 6px 10px; border: 0; border-bottom: 2px solid transparent; background: transparent; color: var(--ink-muted); cursor: pointer; font-size: 11px; font-weight: 800; white-space: nowrap; }
+    .interview-section-nav { position: sticky; top: calc(var(--topbar) + 8px); z-index: 18; display: flex; overflow-x: auto; margin-bottom: 24px; border-bottom: 1px solid var(--line); background: rgba(255, 255, 255, .97); scrollbar-width: thin; scroll-padding-inline: 24px; scroll-snap-type: x proximity; }
+    .interview-section-nav button { flex: 1 0 70px; min-height: 44px; padding: 6px 8px; border: 0; border-bottom: 2px solid transparent; background: transparent; color: var(--ink-muted); cursor: pointer; font-size: 11px; font-weight: 800; white-space: nowrap; scroll-snap-align: center; }
     .interview-section-nav button:hover, .interview-section-nav button:focus-visible { background: var(--surface-muted); color: var(--ink); }
-    .interview-section-nav button:active { border-bottom-color: var(--accent); color: var(--accent-hover); }
+    .interview-section-nav button.active { border-bottom-color: var(--accent); background: var(--accent-soft); color: var(--accent-hover); }
     .interview-section { padding: 32px 0 40px; border-top: 1px solid rgba(0, 82, 217, .14); scroll-margin-top: calc(var(--topbar) + 64px); }
     .interview-section:first-of-type { border-top: 0; }
     .interview-section-heading { display: flex; align-items: end; justify-content: space-between; gap: 22px; margin-bottom: 20px; }
@@ -1219,31 +1219,31 @@
     .interview-project-detail header p { margin: 6px 0 0; color: var(--ink-muted); font-size: 11px; line-height: 1.55; }
     .interview-project-detail dl { display: grid; grid-template-columns: 112px minmax(0, 1fr); margin: 0; }
     .interview-project-detail dt, .interview-project-detail dd { margin: 0; padding: 13px 0; border-bottom: 1px solid var(--line); }
-    .interview-project-detail dt { color: var(--ink-muted); font-size: 10px; font-weight: 800; }
+    .interview-project-detail dt { color: var(--ink-muted); font-size: 11px; font-weight: 800; }
     .interview-project-detail dd { color: #3d485e; font-size: 11px; line-height: 1.65; }
     .interview-module-list { display: flex; flex-wrap: wrap; gap: 6px; }
-    .interview-module-list code { padding: 3px 6px; border-radius: 4px; background: var(--surface-muted); color: var(--ink-muted); font: 9px var(--mono); overflow-wrap: anywhere; }
+    .interview-module-list code { padding: 3px 6px; border-radius: 4px; background: var(--surface-muted); color: var(--ink-muted); font: 10px var(--mono); overflow-wrap: anywhere; }
     .interview-community-list { margin-top: 14px; border-top: 1px solid var(--line); }
     .interview-community-row { display: grid; grid-template-columns: 92px minmax(180px, .75fr) minmax(0, 1fr) minmax(0, .9fr) auto; gap: 14px; align-items: start; padding: 14px 0; border-bottom: 1px solid var(--line); }
-    .interview-community-row > span { color: var(--ink-muted); font: 800 9px var(--mono); }
+    .interview-community-row > span { color: var(--ink-muted); font: 800 10px var(--mono); }
     .interview-community-row strong { color: #263248; font-size: 11px; line-height: 1.5; }
-    .interview-community-row p { margin: 0; color: var(--ink-muted); font-size: 10px; line-height: 1.55; }
-    .interview-community-row a { white-space: nowrap; font-size: 10px; font-weight: 800; }
+    .interview-community-row p { margin: 0; color: var(--ink-muted); font-size: 11px; line-height: 1.55; }
+    .interview-community-row a { white-space: nowrap; font-size: 11px; font-weight: 800; }
     .interview-tier-legend { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-bottom: 18px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
     .interview-tier-item { min-height: 90px; padding: 14px; border-right: 1px solid var(--line); }
     .interview-tier-item:last-child { border-right: 0; }
     .interview-tier-item strong, .interview-tier-item span { display: block; }
     .interview-tier-item strong { color: #263248; font-size: 11px; }
-    .interview-tier-item span { margin-top: 6px; color: var(--ink-muted); font-size: 10px; line-height: 1.55; }
+    .interview-tier-item span { margin-top: 6px; color: var(--ink-muted); font-size: 11px; line-height: 1.55; }
     .interview-evidence-tabs { margin-bottom: 4px; }
     .interview-source-list { border-top: 1px solid var(--line); }
     .interview-source-row { display: grid; grid-template-columns: 72px 112px minmax(190px, .8fr) minmax(0, 1.25fr) 92px auto; gap: 14px; align-items: start; padding: 13px 0; border-bottom: 1px solid var(--line); }
     .interview-tier-badge { width: fit-content; padding: 3px 6px; border-radius: 4px; background: var(--accent-soft); color: var(--accent-hover) !important; font: 850 9px var(--mono) !important; }
-    .interview-source-row > span { color: var(--ink-muted); font-size: 10px; }
+    .interview-source-row > span { color: var(--ink-muted); font-size: 11px; }
     .interview-source-row strong { color: #263248; font-size: 11px; }
-    .interview-source-row p { margin: 0; color: var(--ink-muted); font-size: 10px; line-height: 1.55; }
-    .interview-source-row time { color: var(--ink-muted); font: 700 9px var(--mono); }
-    .interview-source-row a { white-space: nowrap; font-size: 10px; font-weight: 800; }
+    .interview-source-row p { margin: 0; color: var(--ink-muted); font-size: 11px; line-height: 1.55; }
+    .interview-source-row time { color: var(--ink-muted); font: 700 10px var(--mono); }
+    .interview-source-row a { white-space: nowrap; font-size: 11px; font-weight: 800; }
     .interview-community-row strong, .interview-community-row p, .interview-source-row strong, .interview-source-row p { min-width: 0; overflow-wrap: anywhere; }
 
     @media (max-width: 1040px) {
@@ -1278,14 +1278,21 @@
       .topbar { gap: 10px; padding-inline: 16px; }
       .topbar-boundary { display: none; }
       .view-nav button { padding-inline: 9px; white-space: nowrap; }
+      .overview-hero { grid-template-columns: 1fr; gap: 18px; }
+      .overview-progress { min-height: auto; padding: 16px 0 0; border-top: 1px solid rgba(0, 82, 217, .14); border-left: 0; }
     }
 
     @media (max-width: 720px) {
       html, body { overflow-x: clip; }
       .view { width: min(100% - 32px, var(--content-width)); padding-top: 26px; }
       .page-heading h1, .overview-hero h1 { font-size: 27px; }
-      .mobile-nav { grid-template-columns: repeat(9, minmax(0, 1fr)); }
-      .mobile-nav button { min-width: 0; padding-inline: 1px; font-size: 10px; }
+      .mobile-nav { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+      .mobile-nav > button { min-width: 44px; min-height: 44px; padding-inline: 2px; font-size: 11px; }
+      .mobile-more-menu { position: absolute; right: 8px; bottom: calc(100% + 8px); width: min(280px, calc(100vw - 16px)); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 8px; border: 1px solid var(--line); border-radius: var(--radius); background: rgba(255, 255, 255, .98); box-shadow: 0 8px 24px rgba(31, 41, 55, .14); }
+      .mobile-more-menu[hidden] { display: none; }
+      .mobile-more-menu .mobile-nav-button { min-height: 48px; padding: 0 10px; border-radius: var(--radius-sm); font-size: 12px; }
+      .mobile-more-menu .mobile-nav-button.active { background: var(--accent-soft); }
+      .mobile-more-button.active { color: var(--accent-hover); font-weight: 700; }
       .rag-section-nav button { font-size: 9px; }
       .rag-path-layout { grid-template-columns: 1fr; gap: 18px; }
       .rag-path-list { display: flex; overflow-x: auto; border-top: 1px solid var(--line); scroll-snap-type: x proximity; }
@@ -1308,7 +1315,7 @@
       .rag-axis-item:last-child { border-bottom: 0; }
       .interview-market-bar { grid-template-columns: 1fr; gap: 14px; }
       .interview-market-tabs button { flex-basis: 140px; }
-      .interview-section-nav button { flex-basis: 84px; padding-inline: 5px; font-size: 9px; }
+      .interview-section-nav button { flex-basis: 48px; padding-inline: 3px; font-size: 11px; }
       .interview-section-heading { align-items: start; flex-direction: column; }
       .interview-role-tabs { flex-wrap: nowrap; overflow-x: auto; }
       .interview-role-tabs button { flex: 0 0 138px; padding-inline: 9px; }
@@ -2019,13 +2026,13 @@ python -m agent_course.cli security-eval ..\22-评测集\s8-security-adversarial
         <div class="interview-market-summary" id="interviewMarketSummary" role="tabpanel" aria-live="polite"></div>
       </div>
       <nav class="interview-section-nav" aria-label="面试验收步骤">
-        <button type="button" data-interview-target="interviewRoles">岗位画像</button>
-        <button type="button" data-interview-target="interviewMarketRadar">国内雷达</button>
-        <button type="button" data-interview-target="interviewKnowledge">知识地图</button>
-        <button type="button" data-interview-target="interviewChallenge">难题实战</button>
-        <button type="button" data-interview-target="interviewQuiz">五题自测</button>
-        <button type="button" data-interview-target="interviewProjects">项目深挖</button>
-        <button type="button" data-interview-target="interviewEvidence">证据审计</button>
+        <button type="button" data-interview-target="interviewRoles" aria-label="岗位画像">岗位</button>
+        <button type="button" data-interview-target="interviewMarketRadar" aria-label="国内招聘雷达">雷达</button>
+        <button type="button" data-interview-target="interviewKnowledge" aria-label="知识地图">知识</button>
+        <button type="button" data-interview-target="interviewChallenge" aria-label="难题实战">难题</button>
+        <button type="button" data-interview-target="interviewQuiz" aria-label="五题自测">自测</button>
+        <button type="button" data-interview-target="interviewProjects" aria-label="项目深挖">项目</button>
+        <button type="button" data-interview-target="interviewEvidence" aria-label="证据审计">证据</button>
       </nav>
 
       <section class="interview-section" id="interviewRoles" aria-labelledby="interviewRolesTitle">
@@ -2134,13 +2141,16 @@ python -m agent_course.cli security-eval ..\22-评测集\s8-security-adversarial
   <nav class="mobile-nav" id="mobileBottomNav" aria-label="移动端主要视图">
     <button class="mobile-nav-button" type="button" data-view="overview">总览</button>
     <button class="mobile-nav-button" type="button" data-view="stage">阶段</button>
-    <button class="mobile-nav-button" type="button" data-view="security">安全</button>
     <button class="mobile-nav-button" type="button" data-view="rag">检索</button>
-    <button class="mobile-nav-button" type="button" data-view="memory">记忆</button>
-    <button class="mobile-nav-button" type="button" data-view="eval">评测</button>
-    <button class="mobile-nav-button" type="button" data-view="ops">运营</button>
     <button class="mobile-nav-button" type="button" data-view="interview">面试</button>
     <button class="mobile-nav-button" type="button" data-view="library">资料</button>
+    <button class="mobile-more-button" id="mobileMoreButton" type="button" aria-expanded="false" aria-controls="mobileMoreMenu">专项</button>
+    <div class="mobile-more-menu" id="mobileMoreMenu" aria-label="专项实验室" hidden>
+      <button class="mobile-nav-button" type="button" data-view="security">安全</button>
+      <button class="mobile-nav-button" type="button" data-view="memory">记忆</button>
+      <button class="mobile-nav-button" type="button" data-view="eval">评测</button>
+      <button class="mobile-nav-button" type="button" data-view="ops">运营</button>
+    </div>
   </nav>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -4459,15 +4469,22 @@ python -m agent_course.cli security-eval ..\22-评测集\s8-security-adversarial
         .map((button) => document.getElementById(button.dataset.interviewTarget))
         .filter(Boolean);
       if (!sections.length) return;
-      const offset = window.innerWidth <= 720 ? 124 : 118;
+      const offset = window.innerWidth <= 720 ? 132 : 122;
       let activeSection = sections[0].id;
       for (const section of sections) {
         if (section.getBoundingClientRect().top <= offset) activeSection = section.id;
       }
       document.querySelectorAll('[data-interview-target]').forEach((button) => {
         const active = button.dataset.interviewTarget === activeSection;
+        const becameActive = active && !button.classList.contains('active');
         button.classList.toggle('active', active);
-        if (active) button.setAttribute('aria-current', 'step');
+        if (active) {
+          button.setAttribute('aria-current', 'step');
+          if (becameActive) {
+            const nav = button.parentElement;
+            nav?.scrollTo({ left: button.offsetLeft - ((nav.clientWidth - button.clientWidth) / 2), behavior: 'smooth' });
+          }
+        }
         else button.removeAttribute('aria-current');
       });
     }
@@ -4706,6 +4723,25 @@ python -m agent_course.cli security-eval ..\22-评测集\s8-security-adversarial
 
     function updateViewButtons() {
       document.querySelectorAll('[data-view]').forEach((button) => button.classList.toggle('active', button.dataset.view === activeView));
+      document.getElementById('mobileMoreButton')?.classList.toggle('active', ['security', 'memory', 'eval', 'ops'].includes(activeView));
+    }
+
+    function closeMobileMore() {
+      const menu = document.getElementById('mobileMoreMenu');
+      const button = document.getElementById('mobileMoreButton');
+      if (!menu || !button) return;
+      menu.hidden = true;
+      button.setAttribute('aria-expanded', 'false');
+    }
+
+    function toggleMobileMore() {
+      const menu = document.getElementById('mobileMoreMenu');
+      const button = document.getElementById('mobileMoreButton');
+      if (!menu || !button) return;
+      const willOpen = menu.hidden;
+      menu.hidden = !willOpen;
+      button.setAttribute('aria-expanded', String(willOpen));
+      if (willOpen) menu.querySelector('.mobile-nav-button')?.focus();
     }
 
     function showView(view) {
@@ -4713,6 +4749,7 @@ python -m agent_course.cli security-eval ..\22-评测集\s8-security-adversarial
       document.querySelectorAll('[data-view-panel]').forEach((panel) => panel.classList.toggle('active', panel.dataset.viewPanel === activeView));
       updateViewButtons();
       closeDrawer();
+      closeMobileMore();
       window.scrollTo({ top: 0, behavior: 'auto' });
       requestAnimationFrame(updateRagSectionNav);
       requestAnimationFrame(updateMemorySectionNav);
@@ -4815,9 +4852,18 @@ python -m agent_course.cli security-eval ..\22-评测集\s8-security-adversarial
     }
 
     function bindEvents() {
-      document.querySelectorAll('[data-view]').forEach((button) => button.addEventListener('click', () => navigate(`#${button.dataset.view}`)));
+      document.querySelectorAll('[data-view]').forEach((button) => button.addEventListener('click', () => {
+        closeMobileMore();
+        navigate(`#${button.dataset.view}`);
+      }));
+      document.getElementById('mobileMoreButton').addEventListener('click', toggleMobileMore);
       document.getElementById('menuButton').addEventListener('click', () => document.getElementById('sidebar').classList.contains('open') ? closeDrawer() : openDrawer());
       document.getElementById('drawerOverlay').addEventListener('click', closeDrawer);
+      document.addEventListener('keydown', (event) => {
+        if (event.key !== 'Escape') return;
+        closeDrawer();
+        closeMobileMore();
+      });
       document.getElementById('courseSearch').addEventListener('input', (event) => renderCourseNav(event.target.value));
       document.getElementById('exportProgress').addEventListener('click', exportProgress);
       document.getElementById('resetProgress').addEventListener('click', resetProgress);
