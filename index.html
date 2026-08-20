@@ -1020,6 +1020,27 @@
     .ops-signal-path-row span { color: var(--ink-muted); font-size: 10px; }
 
     .rag-section-nav { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    .rag-path-layout { display: grid; grid-template-columns: minmax(230px, .5fr) minmax(0, 1.5fr); gap: 30px; align-items: start; border-top: 1px solid var(--line); }
+    .rag-path-list { border-bottom: 1px solid var(--line); }
+    .rag-path-button { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 10px; width: 100%; min-height: 58px; padding: 10px 8px 10px 0; border: 0; border-bottom: 1px solid var(--line); background: transparent; color: var(--ink-muted); cursor: pointer; text-align: left; }
+    .rag-path-button:last-child { border-bottom: 0; }
+    .rag-path-button > span { color: var(--warning); font: 800 10px/1.5 var(--mono); }
+    .rag-path-button strong, .rag-path-button small { display: block; }
+    .rag-path-button strong { color: #263248; font-size: 12px; }
+    .rag-path-button small { margin-top: 3px; color: var(--ink-muted); font-size: 10px; }
+    .rag-path-button:hover { background: var(--surface-muted); }
+    .rag-path-button.active { padding-left: 10px; background: var(--accent-soft); box-shadow: inset 3px 0 0 var(--accent); }
+    .rag-path-detail { min-height: 390px; padding: 22px 0; border-top: 2px solid var(--accent); border-bottom: 1px solid var(--line); }
+    .rag-path-detail header { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+    .rag-path-detail h3 { margin: 0; color: #18233a; font: 800 22px var(--display); }
+    .rag-path-detail > p { margin: 14px 0 20px; color: #354158; font-size: 15px; font-weight: 650; }
+    .rag-path-detail dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 24px; margin: 0; }
+    .rag-path-detail dl div { padding: 13px 0; border-top: 1px solid var(--line); }
+    .rag-path-detail dt { color: var(--ink-muted); font-size: 10px; font-weight: 800; }
+    .rag-path-detail dd { margin: 5px 0 0; font-size: 12px; line-height: 1.6; }
+    .rag-pipeline-intro { display: flex; align-items: end; justify-content: space-between; gap: 18px; margin: 34px 0 12px; }
+    .rag-pipeline-intro h3 { margin: 0; color: #263248; font-size: 17px; }
+    .rag-pipeline-intro p { max-width: 66ch; margin: 4px 0 0; color: var(--ink-muted); font-size: 12px; }
     .rag-pipeline { border-top: 1px solid var(--line); }
     .rag-pipeline-row { display: grid; grid-template-columns: 44px minmax(130px, .42fr) minmax(0, 1.1fr) minmax(0, .9fr); gap: 12px 18px; align-items: start; padding: 14px 0; border-bottom: 1px solid var(--line); }
     .rag-pipeline-row > span { color: var(--accent-hover); font: 800 10px var(--mono); }
@@ -1039,6 +1060,36 @@
     .rag-signal-list code { padding: 3px 6px; border-radius: 4px; background: var(--surface-muted); color: var(--ink-muted); font: 10px var(--mono); }
     .rag-evidence-list { margin: 12px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
     .rag-evidence-list li { display: grid; grid-template-columns: 18px minmax(0, 1fr); gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--line); color: var(--ink-muted); font-size: 11px; }
+    .rag-method-toolbar { display: grid; grid-template-columns: minmax(220px, .7fr) minmax(0, 1.3fr); gap: 18px; align-items: end; margin-bottom: 16px; }
+    .rag-search-field label { display: block; margin-bottom: 5px; color: var(--ink-muted); font-size: 10px; font-weight: 800; }
+    .rag-search-field input { width: 100%; min-height: 38px; padding: 8px 10px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--surface); color: var(--ink); }
+    .rag-adoption-filter { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-bottom: 1px solid var(--line); }
+    .rag-adoption-filter button { min-height: 38px; padding: 5px 8px; border: 0; border-bottom: 2px solid transparent; background: transparent; color: var(--ink-muted); cursor: pointer; font-size: 10px; font-weight: 800; }
+    .rag-adoption-filter button:hover { background: var(--surface-muted); color: var(--ink); }
+    .rag-adoption-filter button.active { border-bottom-color: var(--accent); color: var(--accent-hover); }
+    .rag-method-empty { padding: 24px 0; color: var(--ink-muted); font-size: 12px; }
+    .rag-source-audit { margin-top: 34px; }
+    .rag-source-audit-heading { display: flex; align-items: end; justify-content: space-between; gap: 18px; margin-bottom: 14px; }
+    .rag-source-audit-heading h3 { margin: 0; color: #263248; font-size: 17px; }
+    .rag-source-audit-heading p { max-width: 68ch; margin: 4px 0 0; color: var(--ink-muted); font-size: 12px; }
+    .rag-source-summary { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .rag-source-summary button { min-height: 64px; padding: 10px 12px; border: 0; border-right: 1px solid var(--line); background: transparent; color: var(--ink-muted); cursor: pointer; text-align: left; }
+    .rag-source-summary button:last-child { border-right: 0; }
+    .rag-source-summary button:hover { background: var(--surface-muted); }
+    .rag-source-summary button.active { background: var(--accent-soft); box-shadow: inset 0 -2px 0 var(--accent); }
+    .rag-source-summary strong, .rag-source-summary span { display: block; }
+    .rag-source-summary strong { color: #263248; font-size: 12px; }
+    .rag-source-summary span { margin-top: 3px; font: 700 10px var(--mono); }
+    .rag-source-list { margin-top: 4px; }
+    .rag-source-row { display: grid; grid-template-columns: minmax(220px, 1.2fr) 92px minmax(180px, .8fr) 72px; gap: 14px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 11px; }
+    .rag-source-row > strong { color: #263248; }
+    .rag-source-row > span { color: var(--ink-muted); }
+    .rag-source-row a { font-weight: 750; text-align: right; }
+    .rag-lifecycle { width: fit-content; padding: 3px 6px; border-radius: 4px; font: 800 9px var(--mono); }
+    .rag-lifecycle.current { background: var(--success-soft); color: var(--success); }
+    .rag-lifecycle.monitor { background: var(--warning-soft); color: var(--warning); }
+    .rag-lifecycle.historical { background: var(--surface-muted); color: var(--ink-muted); }
+    .rag-lifecycle.retired { background: var(--danger-soft); color: var(--danger); }
     .source-paths { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
     .source-paths code { max-width: 100%; padding: 3px 6px; border-radius: 4px; background: var(--surface-muted); color: var(--ink-muted); font: 10px var(--mono); overflow-wrap: anywhere; }
     .project-audit { margin-top: 30px; }
@@ -1055,6 +1106,10 @@
       .ops-trace-layout, .ops-lab-layout { grid-template-columns: 1fr; }
       .rag-pipeline-row { grid-template-columns: 38px minmax(120px, .45fr) minmax(0, 1fr); }
       .rag-pipeline-row small { grid-column: 3; }
+      .rag-path-layout { grid-template-columns: minmax(210px, .56fr) minmax(0, 1.44fr); }
+      .rag-method-toolbar { grid-template-columns: 1fr; }
+      .rag-source-row { grid-template-columns: minmax(180px, 1fr) 86px 64px; }
+      .rag-source-row > span:nth-of-type(2) { display: none; }
       .ops-trace-contract { padding: 24px 0 0; border-top: 1px solid var(--line); border-left: 0; }
     }
 
@@ -1071,6 +1126,19 @@
       .mobile-nav { grid-template-columns: repeat(8, minmax(0, 1fr)); }
       .mobile-nav button { min-width: 0; padding-inline: 1px; font-size: 10px; }
       .rag-section-nav button { font-size: 9px; }
+      .rag-path-layout { grid-template-columns: 1fr; gap: 18px; }
+      .rag-path-list { display: flex; overflow-x: auto; border-top: 1px solid var(--line); scroll-snap-type: x proximity; }
+      .rag-path-button { flex: 0 0 154px; grid-template-columns: 28px minmax(0, 1fr); scroll-snap-align: start; border-right: 1px solid var(--line); }
+      .rag-path-button.active { padding-left: 8px; box-shadow: inset 0 -3px 0 var(--accent); }
+      .rag-path-detail { min-height: 0; }
+      .rag-path-detail dl { grid-template-columns: 1fr; }
+      .rag-pipeline-intro, .rag-source-audit-heading { align-items: start; flex-direction: column; }
+      .rag-adoption-filter, .rag-source-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .rag-source-summary button:nth-child(2) { border-right: 0; }
+      .rag-source-summary button:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+      .rag-source-row { grid-template-columns: minmax(0, 1fr) auto; gap: 6px 10px; }
+      .rag-source-row > span:nth-of-type(2) { display: block; grid-column: 1; }
+      .rag-source-row a { grid-column: 2; grid-row: 1 / span 2; }
       .security-section-nav button { padding-inline: 2px; font-size: 9px; line-height: 1.25; }
       .rag-pipeline-row { grid-template-columns: 32px minmax(0, 1fr); gap: 5px 10px; }
       .rag-pipeline-row p, .rag-pipeline-row small { grid-column: 2; }
@@ -1404,23 +1472,35 @@ python -m agent_course.cli security-eval ..\22-评测集\s8-security-adversarial
       <div class="memory-boundary"><strong>教学诊断模拟</strong><span>不连接生产语料</span><span>不调用真实模型</span><span>项目结论固定到审计 commit</span></div>
       <div class="memory-progress" id="ragProgress" aria-live="polite"></div>
       <nav class="memory-section-nav rag-section-nav" aria-label="RAG 实验室步骤">
-        <button type="button" data-rag-target="ragPipeline">看懂链路</button>
+        <button type="button" data-rag-target="ragPath">学习主线</button>
         <button type="button" data-rag-target="ragMethods">比较方法</button>
         <button type="button" data-rag-target="ragPlanner">生成架构</button>
         <button type="button" data-rag-target="ragDiagnosis">诊断故障</button>
         <button type="button" data-rag-target="ragEvidence">源码验收</button>
       </nav>
 
-      <section class="memory-section" id="ragPipeline" aria-labelledby="ragPipelineTitle">
+      <section class="memory-section" id="ragPath" aria-labelledby="ragPathTitle">
         <div class="memory-section-heading">
-          <div><div class="section-label">01 · 建立地图</div><h2 id="ragPipelineTitle">从来源到发布的十层证据链</h2><p>先找到证据第一次变坏的位置。越权和注入优先于质量，数据与解析优先于检索调参。</p></div>
-          <button class="secondary-button" id="openRagAtlas" type="button">打开完整教材</button>
+          <div><div class="section-label">01 · 从学习到交付</div><h2 id="ragPathTitle">RAG × Vibe Coding 七阶段主线</h2><p>每一步都给出目标、产物、常见问题和通过门禁。先把反馈闭环跑通，再选择高级方法。</p></div>
+          <button class="secondary-button" id="openRagVibeGuide" type="button">打开工程手册</button>
+        </div>
+        <div class="rag-path-layout">
+          <div class="rag-path-list" id="ragPathList" role="tablist" aria-label="RAG 工程学习阶段"></div>
+          <article class="rag-path-detail" id="ragPathDetail" role="tabpanel" aria-live="polite"></article>
+        </div>
+        <div class="rag-pipeline-intro">
+          <div><h3>从来源到发布的十层证据链</h3><p>遇到失败时先找证据第一次变坏的位置。越权和注入优先于质量，数据与解析优先于检索调参。</p></div>
+          <button class="secondary-button" id="openRagAtlas" type="button">查看方法图谱</button>
         </div>
         <div class="rag-pipeline" id="ragPipelineList"></div>
       </section>
 
       <section class="memory-section" id="ragMethods" aria-labelledby="ragMethodsTitle">
         <div class="memory-section-heading"><div><div class="section-label">02 · 比较而非堆叠</div><h2 id="ragMethodsTitle">二十五条提升路径</h2><p>每个方法都绑定触发症状、最小实验、指标、成本和回滚；没有失败证据就保留简单基线。</p></div></div>
+        <div class="rag-method-toolbar">
+          <div class="rag-search-field"><label for="ragMethodSearch">搜索症状或方法</label><input id="ragMethodSearch" type="search" autocomplete="off" placeholder="例如：表格、越权、GraphRAG"></div>
+          <div class="rag-adoption-filter" id="ragAdoptionFilter" role="group" aria-label="按采用成熟度筛选"></div>
+        </div>
         <div class="memory-family-filter" id="ragFamilyFilter" role="group" aria-label="按 RAG 层筛选"></div>
         <div class="memory-method-layout">
           <div class="memory-method-list" id="ragMethodList" aria-label="RAG 方法列表"></div>
@@ -1454,12 +1534,20 @@ python -m agent_course.cli security-eval ..\22-评测集\s8-security-adversarial
       </section>
 
       <section class="memory-section" id="ragEvidence" aria-labelledby="ragEvidenceTitle">
-        <div class="memory-section-heading"><div><div class="section-label">05 · 从源码到发布</div><h2 id="ragEvidenceTitle">项目源码、指标与未来走向</h2><p>固定 commit 只证明已实现机制；生产适用性必须由自有数据、威胁模型、成本预算和回滚演练证明。</p></div></div>
+        <div class="memory-section-heading"><div><div class="section-label">05 · 从源码到维护</div><h2 id="ragEvidenceTitle">项目源码、资料时效与未来走向</h2><p>固定 commit 只证明已实现机制；生产适用性必须由自有数据、威胁模型、成本预算和回滚演练证明。</p></div></div>
         <div class="memory-method-layout">
           <div class="memory-method-list" id="ragProjectList" aria-label="RAG 源码项目列表"></div>
           <article class="memory-detail" id="ragProjectDetail" aria-live="polite"></article>
         </div>
         <div class="memory-future" id="ragFuture"></div>
+        <div class="rag-source-audit">
+          <div class="rag-source-audit-heading">
+            <div><h3>资料维护状态</h3><p>按“当前采用、持续观察、历史基础、已退出主线”分层。历史论文保留原理价值，旧 API 和误导性路线不再作为默认入口。</p></div>
+            <button class="secondary-button" id="openMaintenanceGuide" type="button">查看维护规范</button>
+          </div>
+          <div class="rag-source-summary" id="ragSourceSummary" role="group" aria-label="按资料状态筛选"></div>
+          <div class="rag-source-list" id="ragSourceList" aria-live="polite"></div>
+        </div>
       </section>
     </section>
 
@@ -2019,10 +2107,14 @@ python -m agent_course.cli security-eval ..\22-评测集\s8-security-adversarial
     const defaultRagLabState = {
       scenarios: {},
       planner: null,
+      activePathStep: 'frame',
       activeFamily: 'all',
+      activeAdoption: 'all',
+      methodQuery: '',
       activeMethod: 'source-contract',
       activeScenario: 'missing-source',
       activeProject: 'docling',
+      activeSourceLifecycle: 'current',
       selectedAction: '',
     };
 
@@ -2046,7 +2138,7 @@ python -m agent_course.cli security-eval ..\22-评测集\s8-security-adversarial
     };
 
     const defaultState = {
-      courseVersion: 10,
+      courseVersion: 11,
       path: 'engineering',
       currentStage: 's0',
       stages: {},
@@ -2896,9 +2988,33 @@ python -m agent_course.cli security-eval ..\22-评测集\s8-security-adversarial
     function renderRagProgress() {
       const progress = ragLabStatus();
       document.getElementById('ragProgress').innerHTML = `
-        <div class="memory-progress-item"><span>提升路径</span><strong>${RAG_LAB.methods.length} 条</strong><small>由失败信号触发，不按热门程度堆叠</small></div>
+        <div class="memory-progress-item"><span>工程主线</span><strong>${RAG_LAB.learningPath.length} 阶段</strong><small>Frame 到发布维护的 Vibe Coding 闭环</small></div>
         <div class="memory-progress-item"><span>诊断演练</span><strong>${progress.mastered} / 4</strong><small>共 ${RAG_LAB.scenarios.length} 个故障切片</small></div>
         <div class="memory-progress-item"><span>S3 专项门禁</span><strong>${progress.ready ? '已满足' : '待完成'}</strong><small>${progress.plannerReady ? '已生成可消融架构' : '还需完成一次架构规划'}</small></div>`;
+    }
+
+    function renderRagPath() {
+      const validIds = new Set(RAG_LAB.learningPath.map((step) => step.id));
+      if (!validIds.has(state.ragLab.activePathStep)) state.ragLab.activePathStep = RAG_LAB.learningPath[0].id;
+      const active = RAG_LAB.learningPath.find((step) => step.id === state.ragLab.activePathStep) || RAG_LAB.learningPath[0];
+      document.getElementById('ragPathList').innerHTML = RAG_LAB.learningPath.map((step, index) => `
+        <button type="button" role="tab" aria-selected="${step.id === active.id}" class="rag-path-button${step.id === active.id ? ' active' : ''}" data-rag-path-step="${escapeHtml(step.id)}">
+          <span>${String(index + 1).padStart(2, '0')}</span><span><strong>${escapeHtml(step.label)}</strong><small>${escapeHtml(step.vibe)}</small></span>
+        </button>`).join('');
+      document.getElementById('ragPathDetail').innerHTML = `
+        <header><h3>${escapeHtml(active.label)}</h3><span class="memory-tag">${escapeHtml(active.vibe)}</span></header>
+        <p>${escapeHtml(active.goal)}</p>
+        <dl>
+          <div><dt>本阶段产物</dt><dd>${escapeHtml(active.artifact)}</dd></div>
+          <div><dt>最常见问题</dt><dd>${escapeHtml(active.failure)}</dd></div>
+          <div><dt>通过门禁</dt><dd>${escapeHtml(active.gate)}</dd></div>
+          <div><dt>工作原则</dt><dd>先用真实现场和可执行证据缩小问题，再让 Agent 生成下一批最小变更。</dd></div>
+        </dl>`;
+      document.querySelectorAll('[data-rag-path-step]').forEach((button) => button.addEventListener('click', () => {
+        state.ragLab.activePathStep = button.dataset.ragPathStep;
+        saveState();
+        renderRagPath();
+      }));
     }
 
     function renderRagPipeline() {
@@ -2908,23 +3024,34 @@ python -m agent_course.cli security-eval ..\22-评测集\s8-security-adversarial
 
     function renderRagMethods() {
       const familyIds = new Set(RAG_LAB.families.map((family) => family.id));
+      const adoptionIds = new Set(RAG_LAB.adoptionModes.map((mode) => mode.id));
       if (!familyIds.has(state.ragLab.activeFamily)) state.ragLab.activeFamily = 'all';
-      const filtered = state.ragLab.activeFamily === 'all'
-        ? RAG_LAB.methods
-        : RAG_LAB.methods.filter((item) => item.family === state.ragLab.activeFamily);
-      if (!filtered.some((item) => item.id === state.ragLab.activeMethod)) state.ragLab.activeMethod = filtered[0]?.id || RAG_LAB.methods[0].id;
-      const active = RAG_LAB.methods.find((item) => item.id === state.ragLab.activeMethod) || RAG_LAB.methods[0];
+      if (!adoptionIds.has(state.ragLab.activeAdoption)) state.ragLab.activeAdoption = 'all';
+      const query = typeof state.ragLab.methodQuery === 'string' ? state.ragLab.methodQuery.trim().toLocaleLowerCase('zh-CN') : '';
+      const filtered = RAG_LAB.methods.filter((item) => {
+        const familyMatch = state.ragLab.activeFamily === 'all' || item.family === state.ragLab.activeFamily;
+        const adoptionMatch = state.ragLab.activeAdoption === 'all' || item.adoption === state.ragLab.activeAdoption;
+        const searchText = `${item.name} ${item.symptom} ${item.principle} ${item.benefit}`.toLocaleLowerCase('zh-CN');
+        return familyMatch && adoptionMatch && (!query || searchText.includes(query));
+      });
+      if (filtered.length && !filtered.some((item) => item.id === state.ragLab.activeMethod)) state.ragLab.activeMethod = filtered[0].id;
+      const active = filtered.find((item) => item.id === state.ragLab.activeMethod) || filtered[0] || RAG_LAB.methods[0];
       const familyLabel = RAG_LAB.families.find((family) => family.id === active.family)?.label || active.family;
+      const adoption = RAG_LAB.adoptionModes.find((mode) => mode.id === active.adoption) || RAG_LAB.adoptionModes[0];
+      document.getElementById('ragMethodSearch').value = state.ragLab.methodQuery || '';
+      document.getElementById('ragAdoptionFilter').innerHTML = RAG_LAB.adoptionModes.map((mode) => `
+        <button type="button" class="${mode.id === state.ragLab.activeAdoption ? 'active' : ''}" data-rag-adoption="${escapeHtml(mode.id)}" title="${escapeHtml(mode.detail)}">${escapeHtml(mode.label)}</button>`).join('');
       document.getElementById('ragFamilyFilter').innerHTML = RAG_LAB.families.map((family) => `
         <button type="button" class="${family.id === state.ragLab.activeFamily ? 'active' : ''}" data-rag-family="${escapeHtml(family.id)}">${escapeHtml(family.label)}</button>`).join('');
-      document.getElementById('ragMethodList').innerHTML = filtered.map((item) => `
+      document.getElementById('ragMethodList').innerHTML = filtered.length ? filtered.map((item) => `
         <button type="button" class="memory-method-button${item.id === active.id ? ' active' : ''}" data-rag-method="${escapeHtml(item.id)}">
-          <strong>${escapeHtml(item.name)}</strong><span>${escapeHtml(RAG_LAB.families.find((family) => family.id === item.family)?.label || item.family)}</span><small>${escapeHtml(item.symptom)}</small>
-        </button>`).join('');
+          <strong>${escapeHtml(item.name)}</strong><span>${escapeHtml(RAG_LAB.adoptionModes.find((mode) => mode.id === item.adoption)?.label || item.adoption)} · ${escapeHtml(RAG_LAB.families.find((family) => family.id === item.family)?.label || item.family)}</span><small>${escapeHtml(item.symptom)}</small>
+        </button>`).join('') : '<div class="rag-method-empty">没有匹配的方法。清空搜索或切回“全部方法”。</div>';
       document.getElementById('ragMethodDetail').innerHTML = `
-        <div class="memory-detail-title"><h3>${escapeHtml(active.name)}</h3><span class="memory-tag">${escapeHtml(familyLabel)}</span></div>
+        <div class="memory-detail-title"><h3>${escapeHtml(active.name)}</h3><span class="memory-tag">${escapeHtml(adoption.label)}</span><span class="memory-tag">${escapeHtml(familyLabel)}</span></div>
         <p class="memory-detail-principle">${escapeHtml(active.principle)}</p>
         <dl class="memory-detail-grid">
+          <div><dt>采用定位</dt><dd>${escapeHtml(adoption.detail)}</dd></div>
           <div><dt>触发症状</dt><dd>${escapeHtml(active.symptom)}</dd></div>
           <div><dt>最小消融</dt><dd>${escapeHtml(active.experiment)}</dd></div>
           <div><dt>核心指标</dt><dd>${escapeHtml(active.metrics.join(' · '))}</dd></div>
@@ -2935,6 +3062,11 @@ python -m agent_course.cli security-eval ..\22-评测集\s8-security-adversarial
         <a class="memory-source" href="${escapeHtml(active.sourceUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(active.sourceLabel)} · 一手来源</a>`;
       document.querySelectorAll('[data-rag-family]').forEach((button) => button.addEventListener('click', () => {
         state.ragLab.activeFamily = button.dataset.ragFamily;
+        saveState();
+        renderRagMethods();
+      }));
+      document.querySelectorAll('[data-rag-adoption]').forEach((button) => button.addEventListener('click', () => {
+        state.ragLab.activeAdoption = button.dataset.ragAdoption;
         saveState();
         renderRagMethods();
       }));
@@ -3033,12 +3165,13 @@ python -m agent_course.cli security-eval ..\22-评测集\s8-security-adversarial
     function renderRagEvidence() {
       if (!RAG_LAB.projects.some((project) => project.id === state.ragLab.activeProject)) state.ragLab.activeProject = RAG_LAB.projects[0].id;
       const active = RAG_LAB.projects.find((project) => project.id === state.ragLab.activeProject) || RAG_LAB.projects[0];
+      const lifecycle = RAG_LAB.sourcePolicy.statuses.find((item) => item.id === active.lifecycle) || RAG_LAB.sourcePolicy.statuses[1];
       document.getElementById('ragProjectList').innerHTML = RAG_LAB.projects.map((project) => `
-        <button type="button" class="memory-method-button${project.id === active.id ? ' active' : ''}" data-rag-project="${escapeHtml(project.id)}"><strong>${escapeHtml(project.name)}</strong><span>${escapeHtml(project.status)}</span><small>${escapeHtml(project.role)}</small></button>`).join('');
+        <button type="button" class="memory-method-button${project.id === active.id ? ' active' : ''}" data-rag-project="${escapeHtml(project.id)}"><strong>${escapeHtml(project.name)}</strong><span>${escapeHtml(RAG_LAB.sourcePolicy.statuses.find((item) => item.id === project.lifecycle)?.label || project.status)} · ${escapeHtml(project.activityAt)}</span><small>${escapeHtml(project.role)}</small></button>`).join('');
       document.getElementById('ragProjectDetail').innerHTML = `
-        <div class="memory-detail-title"><h3>${escapeHtml(active.name)}</h3><span class="memory-tag">${escapeHtml(active.commit.slice(0, 8))}</span></div>
+        <div class="memory-detail-title"><h3>${escapeHtml(active.name)}</h3><span class="rag-lifecycle ${escapeHtml(active.lifecycle)}">${escapeHtml(lifecycle.label)}</span><span class="memory-tag">${escapeHtml(active.commit.slice(0, 8))}</span></div>
         <p class="memory-detail-principle">${escapeHtml(active.role)}</p>
-        <dl class="memory-detail-grid"><div><dt>源码已确认</dt><dd>${escapeHtml(active.verified)}</dd></div><div><dt>不能直接推断</dt><dd>${escapeHtml(active.limit)}</dd></div></dl>
+        <dl class="memory-detail-grid"><div><dt>源码已确认</dt><dd>${escapeHtml(active.verified)}</dd></div><div><dt>不能直接推断</dt><dd>${escapeHtml(active.limit)}</dd></div><div><dt>上游活跃度</dt><dd>${escapeHtml(active.activityAt)} · ${escapeHtml(active.activity)}</dd></div><div><dt>课程采用</dt><dd>${escapeHtml(lifecycle.detail)}</dd></div></dl>
         <div class="source-paths">${active.sourcePaths.map((path) => `<code>${escapeHtml(path)}</code>`).join('')}</div>
         <a class="memory-source" href="${escapeHtml(active.sourceUrl)}" target="_blank" rel="noopener noreferrer">查看固定 commit 源码</a>`;
       document.querySelectorAll('[data-rag-project]').forEach((button) => button.addEventListener('click', () => {
@@ -3051,6 +3184,26 @@ python -m agent_course.cli security-eval ..\22-评测集\s8-security-adversarial
       document.getElementById('ragFuture').innerHTML = `
         <div class="memory-future-column"><h3>已有证据支持</h3>${evidence.map((item) => `<div class="memory-future-item"><strong>${escapeHtml(item.title)}</strong><span>${escapeHtml(item.detail)}</span></div>`).join('')}</div>
         <div class="memory-future-column inference"><h3>工程推断，仍需验证</h3>${inference.map((item) => `<div class="memory-future-item"><strong>${escapeHtml(item.title)}</strong><span>${escapeHtml(item.detail)}</span></div>`).join('')}</div>`;
+
+      const statusIds = new Set(RAG_LAB.sourcePolicy.statuses.map((item) => item.id));
+      if (!statusIds.has(state.ragLab.activeSourceLifecycle)) state.ragLab.activeSourceLifecycle = 'current';
+      const retired = RAG_LAB.sourcePolicy.retired.map((item) => ({ ...item, kind: 'legacy', lifecycle: 'retired', reviewedAt: RAG_LAB.sourcePolicy.reviewedAt }));
+      const sources = [...RAG_LAB.sources, ...retired];
+      document.getElementById('ragSourceSummary').innerHTML = RAG_LAB.sourcePolicy.statuses.map((status) => {
+        const count = sources.filter((source) => source.lifecycle === status.id).length;
+        return `<button type="button" class="${status.id === state.ragLab.activeSourceLifecycle ? 'active' : ''}" data-rag-source-status="${escapeHtml(status.id)}" title="${escapeHtml(status.detail)}"><strong>${escapeHtml(status.label)}</strong><span>${count} 项</span></button>`;
+      }).join('');
+      const filteredSources = sources.filter((source) => source.lifecycle === state.ragLab.activeSourceLifecycle);
+      document.getElementById('ragSourceList').innerHTML = filteredSources.map((source) => {
+        const status = RAG_LAB.sourcePolicy.statuses.find((item) => item.id === source.lifecycle);
+        const detail = source.lifecycle === 'retired' ? `${source.reason} 替代：${source.replacement}` : `${source.kind} · 核验 ${source.reviewedAt}`;
+        return `<div class="rag-source-row"><strong>${escapeHtml(source.label)}</strong><span class="rag-lifecycle ${escapeHtml(source.lifecycle)}">${escapeHtml(status?.label || source.lifecycle)}</span><span>${escapeHtml(detail)}</span><a href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer">查看来源</a></div>`;
+      }).join('');
+      document.querySelectorAll('[data-rag-source-status]').forEach((button) => button.addEventListener('click', () => {
+        state.ragLab.activeSourceLifecycle = button.dataset.ragSourceStatus;
+        saveState();
+        renderRagEvidence();
+      }));
     }
 
     function renderRagLab() {
@@ -3059,6 +3212,7 @@ python -m agent_course.cli security-eval ..\22-评测集\s8-security-adversarial
         return;
       }
       renderRagProgress();
+      renderRagPath();
       renderRagPipeline();
       renderRagMethods();
       renderRagPlanner();
@@ -3822,6 +3976,13 @@ python -m agent_course.cli security-eval ..\22-评测集\s8-security-adversarial
       buildDocumentOutline();
     }
 
+    function estimateReadingTime(content) {
+      const plain = content.replace(/```[\s\S]*?```/g, ' ').replace(/[`#>*_|\[\]()!-]/g, ' ');
+      const cjkCount = (plain.match(/[\u3400-\u9fff]/g) || []).length;
+      const wordCount = (plain.match(/[A-Za-z0-9][A-Za-z0-9'./+-]*/g) || []).length;
+      return Math.max(1, Math.ceil(cjkCount / 350 + wordCount / 220));
+    }
+
     function renderLibrary(chapterId) {
       const chapter = CHAPTERS.find((item) => item.id === chapterId) || CHAPTERS[0];
       if (!chapter) return;
@@ -3829,7 +3990,7 @@ python -m agent_course.cli security-eval ..\22-评测集\s8-security-adversarial
       saveState();
       document.getElementById('libraryNumber').textContent = chapter.num;
       document.getElementById('libraryTitle').textContent = chapter.title;
-      document.getElementById('libraryMeta').textContent = `${chapter.meta} · 来源：${chapter.source}`;
+      document.getElementById('libraryMeta').textContent = `${chapter.meta} · 约 ${estimateReadingTime(chapter.content)} 分钟 · 来源：${chapter.source}`;
       document.getElementById('githubSource').href = GITHUB_SOURCE + encodeURI(chapter.source);
       renderMarkdown(chapter);
       renderCourseNav(document.getElementById('courseSearch').value);
@@ -4014,12 +4175,22 @@ python -m agent_course.cli security-eval ..\22-评测集\s8-security-adversarial
       document.getElementById('openObservabilityLabButton').addEventListener('click', () => navigate('#ops'));
       document.getElementById('openSecurityLabButton').addEventListener('click', () => navigate('#security'));
       document.getElementById('openRagAtlas').addEventListener('click', () => openChapter('rag-atlas'));
+      document.getElementById('openRagVibeGuide').addEventListener('click', () => openChapter('rag-vibe'));
+      document.getElementById('openMaintenanceGuide').addEventListener('click', () => openChapter('maintenance'));
       document.getElementById('openMemoryAtlas').addEventListener('click', () => openChapter('memory-atlas'));
       document.getElementById('openEvalGuide').addEventListener('click', () => openChapter('s6-lab'));
       document.getElementById('openOpsGuide').addEventListener('click', () => openChapter('s7-lab'));
       document.getElementById('openSecurityGuide').addEventListener('click', () => openChapter('s8'));
       document.getElementById('buildRagPlan').addEventListener('click', buildRagPlan);
       document.getElementById('checkRagAction').addEventListener('click', checkRagAction);
+      document.getElementById('ragMethodSearch').addEventListener('input', (event) => {
+        state.ragLab.methodQuery = event.target.value;
+        saveState();
+        renderRagMethods();
+        const input = document.getElementById('ragMethodSearch');
+        input.focus();
+        input.setSelectionRange(input.value.length, input.value.length);
+      });
       document.getElementById('ragScenario').addEventListener('change', (event) => {
         state.ragLab.activeScenario = event.target.value;
         state.ragLab.selectedAction = '';

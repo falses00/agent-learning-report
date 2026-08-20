@@ -5,9 +5,49 @@
     id, name, family, symptom, principle, experiment, metrics, benefit, cost, rollback, sourceLabel, sourceUrl,
   });
 
+  const methodAdoption = {
+    baseline: new Set(['source-contract', 'layout-parse', 'dedup-metadata', 'fixed-structural', 'dense', 'hybrid', 'acl-prefilter', 'rerank', 'context-pack', 'claim-citation', 'fresh-cache', 'injection-poison', 'eval-observe']),
+    conditional: new Set(['parent-child', 'domain-embedding', 'decompose-route', 'mmr-diversity', 'rewrite', 'multimodal']),
+    research: new Set(['semantic-chunk', 'contextual-late', 'raptor', 'colbert', 'graph-rag', 'self-correct']),
+  };
+
+  const sourceLifecycle = {
+    current: new Set(['docling', 'llama-ingest', 'parent', 'bge', 'colbert', 'cohere', 'azure-hybrid', 'qdrant-tenant', 'graphrag', 'lightrag', 'ragas', 'owasp', 'nemo', 'strong-baseline-2025', 'mirage-2025', 'grouse-2025', 'garage-2025', 'rageval-2025', 'mt-rag-2025', 'openai-file-search']),
+    monitor: new Set(['contextual', 'late', 'chunk-2026', 'decompose', 'ragchecker-paper', 'ragchecker-source', 'ragrouter-2026', 'agentic-rag-sok-2026', 'ragcap-2025', 'pre-route-2026', 'lara-2025', 'secure-rag-2026']),
+    historical: new Set(['rag-paper', 'hyde', 'raptor', 'selfrag', 'crag', 'adaptive', 'colpali', 'lost-middle']),
+  };
+
+  const projectActivity = {
+    docling: { lifecycle: 'current', activityAt: '2026-08-19', activity: '上游近 30 天活跃' },
+    colbert: { lifecycle: 'monitor', activityAt: '2025-10-14', activity: '研究工程实现，生产采用前复核索引与发布节奏' },
+    graphrag: { lifecycle: 'current', activityAt: '2026-08-19', activity: 'v3.1.0 发布于 2026-05-28，上游持续活跃' },
+    lightrag: { lifecycle: 'current', activityAt: '2026-08-20', activity: '上游高频变化，必须固定 commit 与配置' },
+    raptor: { lifecycle: 'historical', activityAt: '2024-09-03', activity: '保留为论文机制参考，不作为默认生产依赖' },
+    selfrag: { lifecycle: 'historical', activityAt: '2024-05-25', activity: '保留为研究基线，不冒充现代应用框架' },
+    crag: { lifecycle: 'historical', activityAt: '2024-10-08', activity: '保留 evaluator 思路，第三方重现需单独审计' },
+    ragchecker: { lifecycle: 'monitor', activityAt: '2024-12-13', activity: '保留细粒度评测思想，judge 必须人标校准' },
+    ragas: { lifecycle: 'monitor', activityAt: '2026-02-24', activity: '可用于评测工作流，不能替代确定性安全断言' },
+    'nemo-retriever': { lifecycle: 'current', activityAt: '2026-08-20', activity: '上游近 30 天活跃，部署成本需按硬件实测' },
+  };
+
   window.RAG_LAB = {
-    updatedAt: '2026-08-08',
+    updatedAt: '2026-08-20',
     evidenceNotice: '复杂 RAG 不会自动胜过简单基线。每个方法必须由失败切片触发，经过单变量消融、安全与成本门禁，并保留回滚路径。',
+    adoptionModes: [
+      { id: 'all', label: '全部方法', detail: '用于建立完整方法地图。' },
+      { id: 'baseline', label: '生产默认', detail: '先建立可解释、可回滚、可分层评测的强基线。' },
+      { id: 'conditional', label: '条件升级', detail: '只有对应失败切片稳定复现后才启用。' },
+      { id: 'research', label: '研究候选', detail: '先做离线复现、成本与失败路径验证，不直接进入主架构。' },
+    ],
+    learningPath: [
+      { id: 'frame', label: '定义结果', vibe: 'Frame', goal: '把“做一个 RAG”改写成用户可观察结果、非目标、风险和停止条件。', artifact: '任务契约 + 3 个正常问题 + 3 个失败问题', failure: '一开始就指定向量库或 GraphRAG，无法判断是否解决了真实问题。', gate: '每个结果都能由测试、指标或人工验收观察。' },
+      { id: 'survey', label: '读取现场', vibe: 'Survey', goal: '盘点语料所有者、版本、ACL、格式、当前代码、测试和可运行命令。', artifact: 'source inventory + trust/ACL/version matrix + git 状态', failure: '把模型记忆、营销文档或旧框架 API 当作当前项目事实。', gate: '未知项显式标记；易变资料已核对官方文档或固定 commit。' },
+      { id: 'contract', label: '锁定基线', vibe: 'Plan + Contract', goal: '先定义 dataset、gold evidence、关键 blocker、延迟和成本预算，再选择最小链路。', artifact: '版本化 eval set + lexical/dense/structure baseline + release thresholds', failure: '先调 chunk、embedding 和 prompt，最后才寻找能证明收益的数据。', gate: '正常、失败、边界、安全、时效五类断言可重复运行。' },
+      { id: 'implement', label: '最小实现', vibe: 'Implement', goal: '按 source -> parse -> chunk -> retrieve -> cite 的责任面逐层实现，每批只改变一个行为。', artifact: '可运行 baseline + trace + claim-span citation + abstention', failure: '一次加入 hybrid、rerank、GraphRAG、agent loop，无法归因也无法回滚。', gate: '未授权内容从未进入候选；无证据时结构化拒答。' },
+      { id: 'diagnose', label: '按层诊断', vibe: 'Verify', goal: '找到证据第一次失真的层，再做单变量消融；复杂方法必须打败同预算强基线。', artifact: '失败切片报告 + A/B 消融 + cost/latency delta', failure: '只看最终答案平均分，或用更大 top_k 掩盖数据、解析和权限问题。', gate: '增益落在目标切片，且 critical failure、p95 与成本共同过门。' },
+      { id: 'review', label: '对抗审查', vibe: 'Review', goal: '独立检查越权、投毒、伪引用、陈旧缓存、judge 偏差、依赖与迁移风险。', artifact: 'adversarial probes + diff review + rollback rehearsal', failure: '让生成代码的同一 Agent 成为唯一 reviewer，或用 LLM judge 覆盖安全硬断言。', gate: '至少一个失败/对抗探针通过，回滚已真实演练。' },
+      { id: 'operate', label: '发布维护', vibe: 'Release + Learn', goal: '影子索引、canary query、版本化 read alias 发布；事故与低分样例回流评测集。', artifact: 'release evidence + source review + runbook + maintenance log', failure: '上线后只看回答满意度，不追踪 source/index/model/policy 版本与漂移。', gate: '变更可审计、可回放、可回滚；资料和依赖进入复核周期。' },
+    ],
     families: [
       { id: 'all', label: '全部路径' },
       { id: 'ingestion', label: '数据与解析' },
@@ -36,7 +76,7 @@
       method('layout-parse', '版式感知解析', 'ingestion', 'PDF 表格、阅读顺序、页码或公式丢失。', '解析是证据保真层，不是简单转纯文本。', '抽 50 页 golden set，对比 text-only、OCR、layout/table pipeline。', ['parse fidelity', 'table cell F1', 'page anchors'], '保留文档结构和可引用坐标。', '解析延迟、GPU/OCR 成本与格式差异。', '不支持页转专用解析器或人工复核。', 'Docling source', 'https://github.com/docling-project/docling/tree/8050c42be2b179504445cb8f3c75655e27cbb662/docling/pipeline'),
       method('dedup-metadata', '去重、来源与有效时间', 'ingestion', '重复引用、冲突文档与缓存误命中。', '主记录、派生 chunk 和 index 必须共享稳定 ID 与版本。', 'content hash、canonical URL、doc version 的定向变更实验。', ['duplicate rate', 'staleness', 'metadata recall'], '降低冲突和旧答案风险。', '数据契约与重建索引成本。', '缺 source/version/tenant/time 任一关键字段就隔离。', 'W3C PROV overview', 'https://www.w3.org/TR/prov-overview/'),
       method('fixed-structural', 'Fixed / recursive / structural baseline', 'chunking', '句子被切断或章节层级丢失。', '先有简单、可解释、可回滚的切块基线。', 'chunk size/overlap 网格，其他组件固定。', ['hit@k', 'context recall', 'tokens/query'], '成本低、易调试，常是强基线。', '不理解语义与跨节关系。', '复杂 chunk 无明确增益时回滚到该基线。', '2026 chunking comparison', 'https://arxiv.org/abs/2607.01852'),
-      method('parent-child', 'Parent-child / sentence window', 'chunking', '小块命中但缺完整条件或上下文。', '用小 child 精准命中，返回较大 parent 作证据。', 'child 256/512 与 parent 2k/4k 组合消融。', ['child hit@k', 'parent precision', 'middle needle'], '平衡召回精度和证据完整性。', 'parent 过大又会导致中间遗忘。', '回退到结构块，或降低 parent 尺寸。', 'ParentDocumentRetriever', 'https://reference.langchain.com/python/langchain-classic/retrievers/parent_document_retriever/ParentDocumentRetriever'),
+      method('parent-child', 'Parent-child / sentence window', 'chunking', '小块命中但缺完整条件或上下文。', '用小 child 精准命中，返回较大 parent 作证据。', 'child 256/512 与 parent 2k/4k 组合消融。', ['child hit@k', 'parent precision', 'middle needle'], '平衡召回精度和证据完整性。', 'parent 过大又会导致中间遗忘。', '回退到结构块，或降低 parent 尺寸。', 'LlamaIndex RecursiveRetriever source', 'https://github.com/run-llama/llama_index/blob/main/llama-index-core/llama_index/core/retrievers/recursive_retriever.py'),
       method('semantic-chunk', 'Semantic chunking', 'chunking', '结构不稳定，语义转折与标题不对齐。', '根据 embedding 语义断点分块，但它只是待验证假设。', '与 fixed/structural 同索引同评测对照。', ['retrieval recall', 'boundary error', 'build cost'], '可减少部分语义跨块。', '颈值敏感、embedding 成本高，并非稳定胜出。', '未超过简单 baseline 即关闭。', 'LightRAG semantic chunker', 'https://github.com/HKUDS/LightRAG/blob/ee9abf27b2c5e3f94ec8399a6d046f5b96ed9f1a/lightrag/chunker/paragraph_semantic.py'),
       method('contextual-late', 'Contextual retrieval / late chunking', 'chunking', 'chunk 脱离文档后主体、时间和章节不明。', '为 chunk 添加可追溯上下文，或先长文编码再切分表征。', '原 chunk、contextual、late chunking 三路 A/B。', ['MRR', 'retrieval failure', 'context cost'], '对依赖篇章语境的短块有用。', '上下文生成可漂移，late encoding 有窗口与索引成本。', '保留原文 chunk，上下文不可替代引用。', 'Contextual Retrieval', 'https://www.anthropic.com/engineering/contextual-retrieval'),
       method('raptor', 'RAPTOR hierarchical summaries', 'chunking', '长文全局主题和层级问题失败。', '递归聚类、摘要建树，在不同粒度检索。', 'flat chunks 对比 tree retrieval，并核查摘要指针。', ['summary faithfulness', 'level hit ratio', 'complex QA'], '帮助长文高层问题。', '建树贵、摘要可失真、增量更新复杂。', '摘要无原文指针时不得用于最终引用。', 'RAPTOR source', 'https://github.com/parthsarthi03/raptor/tree/7da1d48a7e1d7dec61a63c9d9aae84e2dfaa5767/raptor'),
@@ -119,7 +159,9 @@
       { id: 'operations', label: '运营', values: 'p50/p95 / $ per query / index build / flake' },
     ],
     future: [
-      { kind: 'evidence', title: '复杂方法不稳定胜出', detail: '2026 chunking 对照在其设定下没有发现 cluster-based semantic chunking 超过简单策略，且指出 RAGAs faithfulness 的可靠性局限。' },
+      { kind: 'evidence', title: '强简单基线必须进入同预算对照', detail: 'EMNLP 2025 的长上下文 RAG 对照中，保持原始文档顺序的 DOS RAG 在多个基准上匹配或超过更复杂的多阶段方法。' },
+      { kind: 'evidence', title: 'RAG、长上下文与复杂路径没有通用赢家', detail: 'LaRA 与 2026 RAGRouter-Bench 都显示最佳路径取决于问题、语料、模型、预算和成本，复杂机制不必然带来更好性价比。' },
+      { kind: 'evidence', title: '自动评测器会漏掉真实失败', detail: 'GroUSE、MIRAGE 与 GaRAGe 把噪声脆弱性、上下文误用和细粒度 grounding 纳入评测，提醒团队用人标校准和确定性 blocker 补足 judge。' },
       { kind: 'evidence', title: '安全边界覆盖整条知识访问链', detail: '2026 secure RAG 分类把攻击面划分为检索前污染、检索时访问操纵、下游上下文利用与知识外泄。' },
       { kind: 'evidence', title: '检索工程越来越模块化', detail: 'GraphRAG、LightRAG、Docling 和 NeMo Retriever 的当前源码都把 parse/chunk/index/query/eval/cache 拆成可替换责任面。' },
       { kind: 'evidence', title: '多模态开始直接检索页面', detail: 'ColPali 类方法不只依赖 OCR，而是对页面视觉内容建多向量表征。' },
@@ -127,11 +169,25 @@
       { kind: 'inference', title: '可回滚索引会成为发布标配', detail: '随着 embedding、chunk、graph 和 cache 频繁变更，影子索引、读别名、版本化证据与 canary 查询会成为必需。' },
       { kind: 'inference', title: '引用会从文档级缩小到 claim-span 级', detail: '简单 source URL 将不足以支撑合规和自动审查，需保留版本、页面、chunk、quote 和 ACL decision。' },
     ],
+    sourcePolicy: {
+      reviewedAt: '2026-08-20',
+      nextReviewAt: '2026-09-20',
+      statuses: [
+        { id: 'current', label: '当前采用', detail: '当前官方文档、活跃上游或 2025–2026 同行评审证据，可进入主线但仍需项目复现。' },
+        { id: 'monitor', label: '持续观察', detail: '新论文、快速变化项目或自动评测工具，只作为候选和对照。' },
+        { id: 'historical', label: '历史基础', detail: '用于理解原理与演进，不代表当前生产默认。' },
+        { id: 'retired', label: '已退出主线', detail: '链接、API 或项目定位已过时，只保留淘汰原因与替代来源。' },
+      ],
+      retired: [
+        { id: 'langchain-classic-parent', label: 'langchain-classic ParentDocumentRetriever', reason: '当前入口明确落在 langchain-classic，不再作为现代主线 API 示例。', replacement: 'LlamaIndex RecursiveRetriever 源码 + 框架无关 parent-child 契约', url: 'https://reference.langchain.com/python/langchain-classic/retrievers/parent_document_retriever/ParentDocumentRetriever' },
+        { id: 'method-first-route', label: '按方法名递进的旧 RAG-02 至 RAG-06 路线', reason: '容易让学习者误以为 semantic chunking、GraphRAG、Self-RAG 是必经升级。', replacement: '失败切片 -> 强基线 -> 单变量消融 -> 发布门禁', url: 'https://falses00.github.io/agent-learning-report/#rag' },
+      ],
+    },
     sources: [
       { id: 'rag-paper', label: 'Retrieval-Augmented Generation (2020)', kind: 'paper', url: 'https://arxiv.org/abs/2005.11401' },
       { id: 'docling', label: 'Docling source', kind: 'source', url: 'https://github.com/docling-project/docling/tree/8050c42be2b179504445cb8f3c75655e27cbb662' },
       { id: 'llama-ingest', label: 'LlamaIndex ingestion pipeline', kind: 'official', url: 'https://developers.llamaindex.ai/python/framework/module_guides/loading/ingestion_pipeline/' },
-      { id: 'parent', label: 'ParentDocumentRetriever', kind: 'official', url: 'https://reference.langchain.com/python/langchain-classic/retrievers/parent_document_retriever/ParentDocumentRetriever' },
+      { id: 'parent', label: 'LlamaIndex RecursiveRetriever source', kind: 'source', url: 'https://github.com/run-llama/llama_index/blob/main/llama-index-core/llama_index/core/retrievers/recursive_retriever.py' },
       { id: 'contextual', label: 'Anthropic Contextual Retrieval', kind: 'official', url: 'https://www.anthropic.com/engineering/contextual-retrieval' },
       { id: 'late', label: 'Reconstructing Context', kind: 'paper', url: 'https://arxiv.org/html/2504.19754v1' },
       { id: 'chunk-2026', label: '2026 chunking comparison', kind: 'paper', url: 'https://arxiv.org/abs/2607.01852' },
@@ -156,6 +212,27 @@
       { id: 'owasp', label: 'OWASP LLM Top 10', kind: 'official', url: 'https://owasp.org/www-project-top-10-for-large-language-model-applications/' },
       { id: 'secure-rag-2026', label: 'Securing RAG taxonomy (2026)', kind: 'paper', url: 'https://arxiv.org/abs/2604.08304' },
       { id: 'nemo', label: 'NeMo Retriever source', kind: 'source', url: 'https://github.com/NVIDIA/NeMo-Retriever/tree/637cfa33a4d81641bfdb8ef88d8ab8b620f386ba' },
+      { id: 'strong-baseline-2025', label: 'Stronger Baselines for RAG with Long-Context LMs (EMNLP 2025)', kind: 'paper', url: 'https://aclanthology.org/2025.emnlp-main.1656/' },
+      { id: 'lara-2025', label: 'LaRA: RAG vs Long Context routing benchmark (2025)', kind: 'paper', url: 'https://arxiv.org/abs/2502.09977' },
+      { id: 'ragrouter-2026', label: 'RAGRouter-Bench (2026)', kind: 'paper', url: 'https://arxiv.org/abs/2602.00296' },
+      { id: 'pre-route-2026', label: 'Route Before Retrieve (2026)', kind: 'paper', url: 'https://arxiv.org/abs/2605.10235' },
+      { id: 'mirage-2025', label: 'MIRAGE RAG evaluation benchmark (NAACL 2025)', kind: 'paper', url: 'https://aclanthology.org/2025.findings-naacl.157/' },
+      { id: 'grouse-2025', label: 'GroUSE evaluator benchmark (COLING 2025)', kind: 'paper', url: 'https://aclanthology.org/2025.coling-main.304/' },
+      { id: 'garage-2025', label: 'GaRAGe grounding benchmark (ACL 2025)', kind: 'paper', url: 'https://aclanthology.org/2025.findings-acl.875/' },
+      { id: 'rageval-2025', label: 'RAGEval scenario-specific dataset (ACL 2025)', kind: 'paper', url: 'https://aclanthology.org/2025.acl-long.418/' },
+      { id: 'mt-rag-2025', label: 'mt RAG multi-turn benchmark (TACL 2025)', kind: 'paper', url: 'https://aclanthology.org/2025.tacl-1.36/' },
+      { id: 'agentic-rag-sok-2026', label: 'SoK: Agentic RAG (2026)', kind: 'paper', url: 'https://arxiv.org/abs/2603.07379' },
+      { id: 'ragcap-2025', label: 'RAGCap-Bench agentic RAG capabilities (2025)', kind: 'paper', url: 'https://arxiv.org/abs/2510.13910' },
+      { id: 'openai-file-search', label: 'OpenAI vector store files API', kind: 'official', url: 'https://platform.openai.com/docs/api-reference/vector-stores-files' },
     ],
   };
+
+  for (const item of window.RAG_LAB.methods) {
+    item.adoption = Object.entries(methodAdoption).find(([, ids]) => ids.has(item.id))?.[0] || 'conditional';
+  }
+  for (const source of window.RAG_LAB.sources) {
+    source.lifecycle = Object.entries(sourceLifecycle).find(([, ids]) => ids.has(source.id))?.[0] || 'monitor';
+    source.reviewedAt = window.RAG_LAB.sourcePolicy.reviewedAt;
+  }
+  for (const project of window.RAG_LAB.projects) Object.assign(project, projectActivity[project.id] || { lifecycle: 'monitor', activityAt: 'unknown', activity: '进入生产前重新核验上游状态。' });
 })();

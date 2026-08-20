@@ -22,7 +22,7 @@ if (!lab || typeof lab !== 'object') errors.push('window.RAG_LAB is missing');
 else {
   const requirements = [
     ['pipeline', 10], ['methods', 24], ['scenarios', 14], ['plannerProfiles', 5],
-    ['projects', 10], ['metrics', 7], ['sources', 24],
+    ['projects', 10], ['metrics', 7], ['sources', 36], ['learningPath', 7],
   ];
   for (const [field, minimum] of requirements) {
     if (!Array.isArray(lab[field]) || lab[field].length < minimum) errors.push(`${field} must contain at least ${minimum} entries`);
@@ -34,6 +34,7 @@ else {
     if (!familyIds.has(item.family)) errors.push(`methods[${index}].family is unknown`);
     if (!Array.isArray(item.metrics) || item.metrics.length < 2) errors.push(`methods[${index}].metrics must contain at least 2 entries`);
     if (!item.sourceUrl.startsWith('https://')) errors.push(`methods[${index}].sourceUrl must be https`);
+    if (!['baseline', 'conditional', 'research'].includes(item.adoption)) errors.push(`methods[${index}].adoption is invalid`);
   });
   const actionIds = new Set((lab.actions || []).map((item) => item.id));
   (lab.scenarios || []).forEach((item, index) => {
@@ -47,7 +48,15 @@ else {
     if (!/^[a-f0-9]{40}$/.test(item.commit)) errors.push(`projects[${index}].commit must be a full SHA`);
     if (!item.sourceUrl.includes(item.commit)) errors.push(`projects[${index}].sourceUrl must be commit-pinned`);
     if (!Array.isArray(item.sourcePaths) || item.sourcePaths.length < 2) errors.push(`projects[${index}].sourcePaths must contain at least 2 paths`);
+    if (!['current', 'monitor', 'historical'].includes(item.lifecycle)) errors.push(`projects[${index}].lifecycle is invalid`);
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(item.activityAt)) errors.push(`projects[${index}].activityAt must be YYYY-MM-DD`);
   });
+  (lab.sources || []).forEach((item, index) => {
+    for (const field of ['id', 'label', 'kind', 'url', 'lifecycle', 'reviewedAt']) requireText(item[field], `sources[${index}].${field}`);
+    if (!['current', 'monitor', 'historical'].includes(item.lifecycle)) errors.push(`sources[${index}].lifecycle is invalid`);
+  });
+  if (!Array.isArray(lab.sourcePolicy?.retired) || lab.sourcePolicy.retired.length < 2) errors.push('sourcePolicy.retired must record at least 2 retired items');
+  if (lab.sources.some((item) => item.url.includes('langchain-classic/retrievers/parent_document_retriever'))) errors.push('legacy ParentDocumentRetriever must not remain in active sources');
   if (!Array.isArray(lab.future) || !lab.future.some((item) => item.kind === 'evidence') || !lab.future.some((item) => item.kind === 'inference')) errors.push('future must separate evidence and inference');
 }
 
@@ -66,8 +75,21 @@ for (const requiredSection of ['一句话定义', '十层主线', '二十五条�
   if (!guide.includes(requiredSection)) errors.push(`RAG guide is missing section: ${requiredSection}`);
 }
 
+const learningPath = readFileSync(resolve(repoRoot, 'agent-runtime-gateway/07-RAG问题诊断与优化/RAG与Vibe-Coding工程学习路径-2026.md'), 'utf8');
+for (const requiredSection of ['一句话定义与关键概念', '七阶段学习路径', 'RAG 专用完整提示词', '工业最佳实践', '五道自测', '一页速记与预习核对']) {
+  if (!learningPath.includes(requiredSection)) errors.push(`RAG vibe learning path is missing section: ${requiredSection}`);
+}
+const route = readFileSync(resolve(repoRoot, 'agent-runtime-gateway/07-RAG问题诊断与优化/RAG教学路线总览.md'), 'utf8');
+if (route.includes('| RAG-05 |') || route.includes('RAG逐课教学手册')) errors.push('current RAG route must not restore the retired method-first sequence');
+const ragIndex = readFileSync(resolve(repoRoot, 'agent-runtime-gateway/07-RAG问题诊断与优化/00-RAG索引.md'), 'utf8');
+if (!ragIndex.includes('已退出主线的参考档案') || !ragIndex.includes('RAG与Vibe-Coding工程学习路径-2026.md')) errors.push('RAG index must separate current path from retired reference archives');
+const maintenance = readFileSync(resolve(repoRoot, 'MAINTENANCE.md'), 'utf8');
+for (const requiredSection of ['来源分级', '资料准入与淘汰', '标准更新流程', '发布阻塞规则']) {
+  if (!maintenance.includes(requiredSection)) errors.push(`maintenance guide is missing section: ${requiredSection}`);
+}
+
 const frontend = readFileSync(resolve(repoRoot, 'index.html'), 'utf8');
-for (const marker of ['data/rag_lab.js', 'data-view-panel="rag"', 'renderRagLab()', 'ragLabReady']) {
+for (const marker of ['data/rag_lab.js', 'data-view-panel="rag"', 'renderRagLab()', 'ragLabReady', 'id="ragPathList"', 'id="ragMethodSearch"', 'id="ragSourceSummary"', 'openRagVibeGuide', 'openMaintenanceGuide']) {
   if (!frontend.includes(marker)) errors.push(`frontend is missing RAG integration marker: ${marker}`);
 }
 if ((frontend.match(/data-rag-target=/g) || []).length < 5) errors.push('frontend must expose the five-step RAG section navigation');

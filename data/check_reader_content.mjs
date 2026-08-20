@@ -16,6 +16,8 @@ for (const marker of [
   'class="reader-layout"',
   'function buildDocumentOutline()',
   'function updateReaderNavigation()',
+  'function estimateReadingTime(content)',
+  '约 ${estimateReadingTime(chapter.content)} 分钟',
   "prefers-reduced-motion: reduce",
   'updateReaderNavigation();',
 ]) {

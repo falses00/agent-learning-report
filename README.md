@@ -14,7 +14,7 @@
 - F0、S0-S10 学习路线、本地进度，以及 10/12 工程实验覆盖率；当前可运行基线为 F0、S0-S8。
 - 每阶段 3 项课前检查、明确标注来源的事故或合成工程故障场景、动手步骤和关键概念速记。
 - 每阶段 5 题自测、逐题误区反馈、首轮评分和结构化本地自评门禁。
-- S3 RAG 全链路实验室：10 层证据链、25 条提升路径、14 类故障诊断、10 个固定 commit 源码项目与可消融架构规划。
+- S3 RAG 全链路实验室：RAG × Vibe Coding 七阶段主线、10 层证据链、25 条提升路径、14 类故障诊断、10 个固定 commit 源码项目、资料生命周期与可消融架构规划。
 - S5 Agent Memory 实验室：21 类方法、六轴分类、8 个固定 commit 源码项目、工作负载选型、写入生命周期决策、SQLite 治理实验与 18 条专项评测。
 - S6 Eval 与发布门禁实验室：35 个前序 Agent case、183 条断言、16 个门禁攻击、grader/holdout/critical gate 和证据 hash。
 - S7 Observability 与事故响应实验室：信号契约、W3C trace、SLO/burn-rate 分级、8 个事故判定、6 个 Runtime run 与 14 个门禁攻击。
@@ -97,7 +97,9 @@ manifest 中保存各报告的 SHA-256，因此签名来源、提交版本与报
 - [岗位能力与毕业标准](agent-runtime-gateway/00-课程总览/岗位能力与毕业标准.md)
 - [Agent Memory 方法谱系与工业选型](agent-runtime-gateway/06-工业级框架蓝图/Agent-Memory方法谱系与工业选型-2026.md)
 - [RAG 全链路提升与工业最佳实践](agent-runtime-gateway/07-RAG问题诊断与优化/RAG全链路提升与工业最佳实践-2026.md)
+- [RAG × Vibe Coding 工程学习路径](agent-runtime-gateway/07-RAG问题诊断与优化/RAG与Vibe-Coding工程学习路径-2026.md)
 - [S3 多租户 RAG 与故障诊断实验](agent-runtime-gateway/labs/S03-rag-citations/README.md)
+- [教学平台维护规范](MAINTENANCE.md)
 - [S4 崩溃恢复与副作用对账实验](agent-runtime-gateway/labs/S04-durable-execution/README.md)
 - [S5 受治理 Agent Memory 实验](agent-runtime-gateway/labs/S05-memory-context/README.md)
 - [S6 可阻塞发布的 Eval 与红队门禁实验](agent-runtime-gateway/labs/S06-eval-red-team/README.md)

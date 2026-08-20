@@ -36,11 +36,13 @@ const chapters = [
   { id: 'failures', num: '手册', title: '全链路故障与修复', meta: '症状 · 根因 · 修复 · 回归', src: 'agent-runtime-gateway/11-工程实战主线/全链路故障与修复手册.md', group: 'reference' },
   { id: 'selftest', num: '题库', title: '阶段自测与预习', meta: '每阶段 5 题 · 预习门禁', src: 'agent-runtime-gateway/11-工程实战主线/阶段自测与预习清单.md', group: 'reference' },
   { id: 'rag-atlas', num: 'S3+', title: 'RAG 全链路最佳实践', meta: '10 层 · 25 条路径 · 源码审计 · 故障树', src: 'agent-runtime-gateway/07-RAG问题诊断与优化/RAG全链路提升与工业最佳实践-2026.md', group: 'reference' },
+  { id: 'rag-vibe', num: 'S3 方法', title: 'RAG × Vibe Coding 学习路径', meta: '任务契约 · 强基线 · 消融 · 对抗验证 · 发布维护', src: 'agent-runtime-gateway/07-RAG问题诊断与优化/RAG与Vibe-Coding工程学习路径-2026.md', group: 'reference' },
   { id: 'memory-atlas', num: 'S5+', title: 'Agent Memory 方法谱系', meta: '21 类方法 · 8 个源码项目 · 工业选型 · 趋势', src: 'agent-runtime-gateway/06-工业级框架蓝图/Agent-Memory方法谱系与工业选型-2026.md', group: 'reference' },
   { id: 'sources', num: '资料', title: '权威资料索引', meta: '官方文档 · 标准 · 原始论文', src: 'agent-runtime-gateway/00-课程总览/权威资料索引.md', group: 'reference' },
   { id: 'mcp', num: '专题', title: 'MCP 与工具生态', meta: '协议 · 准入 · 凭据边界', src: 'agent-runtime-gateway/02-阶段教学手册/Phase-05-MCP与工具生态教学手册.md', group: 'reference' },
   { id: 'acceptance', num: '门禁', title: '阶段验收清单', meta: '设计理解 · 工程证据', src: 'agent-runtime-gateway/02-阶段教学手册/阶段验收清单.md', group: 'reference' },
   { id: 'audit', num: '审计', title: '真实缺口与演进台账', meta: 'P0-P2 · 证据 · 实施顺序', src: 'agent-runtime-gateway/00-课程总览/教学平台真实缺口与演进台账-2026-07-13.md', group: 'reference' },
+  { id: 'maintenance', num: '维护', title: '教学平台维护规范', meta: '资料准入 · 生命周期 · 淘汰 · 验证 · 发布', src: 'MAINTENANCE.md', group: 'reference' },
 ];
 
 const missing = chapters.filter((chapter) => !existsSync(resolve(repoRoot, chapter.src)));
