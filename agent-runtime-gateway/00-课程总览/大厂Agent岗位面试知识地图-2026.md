@@ -1,13 +1,16 @@
 # 大厂 Agent 岗位面试知识地图（2026）
 
 - 核验日期：2026-08-20
-- 下次复核：2026-09-20
+- 国内岗位下次复核：2026-09-03
+- 国际岗位、GitHub 与社区样本下次复核：2026-09-20
 
 ## 1. 一句话定义与真实性边界
 
 **大厂 Agent 面试验收，是用可运行项目证据回答编码、系统设计、AI 深挖和行为追问，而不是背框架名词。**
 
 本章的岗位能力来自核验日仍能访问的公司官方招聘页；面试方式来自公司官方招聘说明。后面的 OpsPilot 难题是根据公开要求构造的综合训练题，不是 OpenAI、Google、Amazon、TikTok、Microsoft 或 Anthropic 的泄露原题，也不能保证某场面试按同样顺序进行。
+
+来源分三层：A 类企业官方岗位只能证明核验日的职责要求；B 类 GitHub 上游仓库只能证明工程实现与活跃状态；C 类 Linux DO、牛客等带日期社区样本只能提出训练假设。三类证据不能互相冒充。
 
 公开职位会关闭。职位关闭后只能进入历史证据区，不继续作为“当前岗位”宣传。课程不承诺 offer、职级、薪资或特定公司的录用结果。
 
@@ -32,6 +35,28 @@
 4. 同时优化质量、P95 延迟、成本、容量、可靠性和用户结果。
 5. 能把独立项目、开源贡献、事故复盘和量化指标变成可追问证据。
 
+## 2A. 中国国内官方岗位基线
+
+国内岗位不是国际岗位的翻译版。核验日可访问的官方招聘入口显示，应用落地、智能体算法、RAG/Search、Harness/Infra 与模型训练已经明显分层，但它们共同要求编码、工程交付、评测、成本与业务结果。
+
+| 国内官方岗位 | 当前信号 | 训练落点 |
+|---|---|---|
+| [字节跳动 Agent 算法工程师 · AI Platform](https://jobs.bytedance.com/experienced/m/position/detail/7599598898747656453) | Agent 架构、工具、上下文、编排、Agentic RL/Post-Training | S0-S2、S5-S6：实现 loop/context/eval，并做算法消融 |
+| [字节跳动大语言模型 AI 搜索 Agent 算法工程师](https://jobs.bytedance.com/experienced/m/position/detail/7473064938787244306) | LLM 训练、检索排序、搜索 Agent、线上效果 | S3、S6：拆 retrieval/rank/answer 指标与线上实验 |
+| [腾讯 HR 领域大模型及 AI Agent 应用落地](https://careers.tencent.com/jobdesc.html?postId=2082043721595138048) | RAG、微调、Agent 编排、业务抽象、组件复用和交付 | S3、S9-S10：从单业务实现抽象出平台契约 |
+| [腾讯混元强化训练框架研发工程师](https://careers.tencent.com/jobdesc.html?postId=2061810859658887168) | Python、Asyncio、并发、强化训练框架、LLM/Agent 工程化 | F0、S4、S6：补并发、可靠训练与性能证据 |
+| [百度 2027 AIDU 智能体算法工程师](https://talent.baidu.com/jobs/detail/GRADUATE/4f1cbc80-8332-4a92-b8fa-c0132b17d47e) | planning、tool、reflection、memory、多 Agent、RAG、评测、延迟与成本 | S1-S7：机制、baseline、失败切片和上线指标都要能答 |
+| [百度 2027 AIDU Agent 应用全栈工程师](https://talent.baidu.com/jobs/detail/GRADUATE/6f9c3a86-6557-409d-8fa7-e6f4c68d6765) | Planning-Acting-Reflection、Tool/API、Memory、状态、多 Agent、RAG、Eval | F0、S1-S7：前后端可运行主链与评测闭环 |
+| [阿里巴巴企业级 AI Agent 平台研发](https://campus-talent.alibaba.com/campus/position/199907780033) | Agent、RAG 与企业平台模块 | S9-S10：多租户、policy、tool、release 的复用边界 |
+| [华为 AI 大模型训练 / 推理系统优化](https://career.huawei.com/reccampportal/portal5/social-recruitment-detail.html?dataSource=1&jobId=28183) | Python/C++、训练可靠性、推理、量化、KV 压缩、投机推理、国产算力 | F0、S7：profile、容量、模型服务和硬件约束 |
+| [华为供应链生成式 AI / Agent 应用](https://career.huawei.com/reccampportal/portal5/social-recruitment-detail.html?dataSource=1&jobId=22643) | Transformer、SFT、RAG、Agent、集群、行业需求与系统设计 | S0、S3、S10：模型、知识与行业流程共同验收 |
+| [美团 LongCat 招聘](https://zhaopin.meituan.com/longcatprogram) | Agentic RL、RAG、多模态、Memory/Cognition、AI Infra 和评测 | S3、S5-S7：算法与系统必须用同一业务集评估 |
+| [京东 AI 架构师](https://zhaopin.jd.com/web/job-info-detail?requementId=221903) | Agent、多 Agent、RAG+TDD AI Coding、流处理、微服务、云原生与大促 SLO | F0、S3-S4、S7、S10：高并发交付与发布门禁 |
+| [DeepSeek 招聘](https://talent.deepseek.com/) | Agent Harness、Agent Infra、AI 搜索与 Agent 后端并列 | S1-S7：context、tool、memory、subagent 与性能不可只停留在 SDK |
+| [MiniMax Careers](https://www.minimaxi.com/careers) | 模型算法、机器学习系统与 AI 应用并列 | 按目标岗位选择算法深挖或工程交付证据 |
+
+国内重复信号可压成七条：Harness/Context、搜索化 RAG、质量-延迟-成本联合评测、后端与分布式、模型适配与后训练、业务平台化、上游开源证据。单个 JD 不能把某个框架升级为课程必修；只有跨公司重复信号和项目验证才能改变主线。
+
 ## 3. 官方说明中的面试方式
 
 - [Amazon Software Development Interview Topics](https://amazon.jobs/content/en/how-we-hire/interview-prep/software-development-topics) 明确列出 coding、system design、数据结构、算法、数据库、分布式计算、操作系统、网络和 ML/AI；官方说明也强调评估应用能力，不是死记细节。
@@ -49,7 +74,7 @@ Coding / Debugging
 
 具体公司、团队和职级会调整轮次。拿到面试邀请后仍要向 recruiter 确认范围。
 
-## 4. 三类岗位画像
+## 4. 四类岗位画像
 
 ### Agent 应用工程师
 
@@ -74,6 +99,14 @@ Coding / Debugging
 主修：IR、数据管道、hybrid/rerank、引用、ACL、freshness、评测和低延迟。
 
 合格证据：分别报告 retrieval、answer、citation、ACL、freshness、P95 和成本。
+
+### 智能体算法工程师
+
+目标：研究并优化 planning、reasoning、tool learning、memory、retrieval 与后训练，使真实任务产生可测增益。
+
+主修：Transformer/LLM、SFT/DPO/RL、Agentic RL、数据构造、baseline、消融和失败切片，同时保持可运行实现。
+
+合格证据：同任务、同预算比较 prompt/RAG/harness/训练方案；说明 reward hacking、泛化失败和如何接入线上门禁。
 
 ## 5. 必须记住的八域知识
 
@@ -139,6 +172,21 @@ Coding / Debugging
 
 回答追问仍用“定义、机制、取舍、失败、指标、证据”六句结构。
 
+## 6A. 国内企业 Agent 面试难题
+
+设计一个支持公有 API 与私有模型切换、可私有化部署的集团办事 Agent：300 家子公司、20 万员工、500 万份制度/FAQ/表格/扫描件、峰值 800 QPS。身份、数据域和审批链不能由模型推断；知识更新 10 分钟内可检索；工单与写操作要授权、审批、幂等、可取消、可对账；GPU 和外部 API 都有硬预算。
+
+60 分钟按七段完成：场景与边界、模型与部署、企业 RAG、Harness 与工具、评测与迁移、安全治理、容量与发布。重点追问：
+
+1. OpenAI-compatible 接口为什么不等于行为兼容？怎样做模型切换回归与回滚？
+2. 扫描件解析、ACL、十分钟 freshness、claim citation 如何分别评测？
+3. context compaction、工具结果卸载、长期记忆和 checkpoint 怎样避免互相覆盖？
+4. 外部写操作结果未知时，operation id、ledger 与 reconcile 怎样配合？
+5. GPU 紧张时怎样按任务价值做 admission control，而不是所有请求一起降级？
+6. MCP/skill、恶意文档、敏感字段和 trace 分别由哪一层控制？
+
+该题仍是 A 类国内岗位重复信号的课程合成题，不是任何公司的原题。评分同样要求 80/100，并把跨组织泄漏、迁移无 blocker、未知结果直接重试、敏感信息出域列为硬失败。
+
 ## 7. 100 分评分尺
 
 | 维度 | 分值 | 满分锚点 |
@@ -169,6 +217,32 @@ Coding / Debugging
 | 只报整体正确率 | 无法发现 ACL、引用、工具等关键失败 | 按 failure slice 分层，critical case 独立阻塞 |
 | 背框架 API | 上游版本变化后知识迅速失效 | 用契约、状态、权限、证据解释不可替代原理 |
 | 项目讲成技术清单 | 面试官无法判断你真的解决过问题 | 用事故、取舍、量化结果、约束和可打开证据组织 |
+
+## 8A. GitHub 上游项目深挖
+
+项目学习不是读 README 后复述功能。每个仓库都要回答四件事：责任边界在哪里、最危险失败是什么、现有测试没证明什么、你能提交的最小改进是什么。
+
+| B 类上游项目 | 先读什么 | 可用于哪类追问 |
+|---|---|---|
+| [AgentScope](https://github.com/agentscope-ai/agentscope) | `src/agentscope`、memory、agent service、tests | context compaction、tool/MCP/skill、permission/HITL、workspace/sandbox 与 agent team |
+| [RAGFlow](https://github.com/infiniflow/ragflow) | `deepdoc`、`rag`、`agent`、`memory`、`mcp` | 解析、chunk、retrieval、rerank、citation 和索引迁移怎样分层验收 |
+| [DB-GPT](https://github.com/eosphoros-ai/DB-GPT) | core、RAG、AWEL、serve、tests | AI+Data、SQL/代码工具、workflow 与私有化部署的权限和执行边界 |
+| [agentUniverse](https://github.com/agentuniverse-ai/agentUniverse) | agent、memory、RAG、planner、observability | PEER/DOE、多 Agent 决策、memory 与 trace 责任分工 |
+| [Qwen-Agent](https://github.com/QwenLM/Qwen-Agent) | agent、tools、memory、examples、tests | tool calling、MCP、RAG、code interpreter；基础 Docker 隔离为什么仍需威胁模型 |
+| [MaxKB](https://github.com/1Panel-dev/MaxKB) | apps、workflow、knowledge、model_provider、tests | 企业 RAG、workflow、MCP、私有模型和产品化运维如何形成可复验项目 |
+
+仓库活跃或 release 新，只说明值得继续审计，不说明默认安全、适合你的语料或生产最优。最终采用必须回到固定版本、自己的 eval、trace、成本和对抗结果。
+
+## 8B. Linux DO 与中文社区证据
+
+C 类样本的用途是生成训练活动，不是宣布“高频真题”。本轮保留以下可读原帖：
+
+- [Linux DO：面试了十几家 Agent 岗位，整理了面试题](https://linux.do/t/topic/2365650)，2026-06-10。用于练容量、token 成本、多 Agent 取舍、Docker/K8s 和业务收益；作者匿名且录音经 AI 整理。
+- [Linux DO：4-5 月 Agent 社招面经手记](https://linux.do/t/topic/2416951)，2026-06-16。用于练记忆冲突、shared state、context 压缩、eval、sandbox 与成本；不能外推公司题库。
+- [Linux DO：大模型应用开发面试中的 RAG 场景题](https://linux.do/t/topic/648771)，2025-05-14。用于做指代消解、元数据过滤、query rewrite 延迟与检索策略的 failure drill；社区答案互有冲突。
+- [牛客：百度 AI 应用工程师社招一面复盘](https://www.nowcoder.com/feed/main/detail/26578b46ce064ac6a5f67d41adb07eb7)，2026-07-17。用于准备权限、上下文压缩、动态 Tool 注册和完整 RAG 链路的项目追问；单人失败面经不代表百度统一标准。
+
+使用规则：把每条线索改写成“可运行实验 + 评分标准 + 失败边界”；不要把公司名、题目频率、轮次或标准答案从匿名帖子推断出来。
 
 ## 9. 五道自测
 
@@ -226,8 +300,8 @@ Coding / Debugging
 
 ## 13. 资料维护门禁
 
-1. 每月抽样核验当前岗位；记录公司、岗位、地区、访问日期、能力信号和可访问状态。
+1. 国内当前岗位每 14 天抽样核验，国际岗位最长 30 天；记录公司、岗位、地区、访问日期、能力信号和可访问状态。
 2. 职位关闭后标记 historical，不删除曾影响课程的决策记录。
 3. 单个 JD 不能改变主线；至少两个独立公司的重复信号才能升级为核心能力。
-4. 面经、论坛和题库不能标成官方原题；只有官方说明能描述公司流程。
+4. A / B / C 分层展示：官方岗位说明职责，GitHub 说明实现，社区经验只生成训练假设；面经、论坛和题库不能标成官方原题。
 5. 任何新增知识点必须映射到课程阶段、可运行证据和一道故障追问。

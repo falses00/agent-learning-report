@@ -1098,8 +1098,16 @@
 
     .interview-boundary { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 0 0 24px; padding: 12px 0; border-top: 1px solid rgba(201, 100, 66, .28); border-bottom: 1px solid rgba(201, 100, 66, .28); color: #71412f; font-size: 12px; }
     .interview-boundary strong { color: #5d3426; }
-    .interview-section-nav { position: sticky; top: calc(var(--topbar) + 8px); z-index: 18; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); margin-bottom: 24px; border-bottom: 1px solid var(--line); background: rgba(255, 255, 255, .97); }
-    .interview-section-nav button { min-height: 44px; padding: 6px 10px; border: 0; border-bottom: 2px solid transparent; background: transparent; color: var(--ink-muted); cursor: pointer; font-size: 11px; font-weight: 800; }
+    .interview-market-bar { display: grid; grid-template-columns: minmax(230px, .55fr) minmax(0, 1.45fr); gap: 26px; align-items: center; margin: 0 0 24px; padding: 18px 0; border-top: 2px solid var(--accent); border-bottom: 1px solid var(--line); }
+    .interview-market-tabs, .interview-evidence-tabs, .interview-challenge-tabs { display: flex; min-width: 0; overflow-x: auto; border-bottom: 1px solid var(--line); }
+    .interview-market-tabs button, .interview-evidence-tabs button, .interview-challenge-tabs button { flex: 1 0 auto; min-height: 42px; padding: 7px 14px; border: 0; border-bottom: 2px solid transparent; background: transparent; color: var(--ink-muted); cursor: pointer; font-size: 11px; font-weight: 800; white-space: nowrap; }
+    .interview-market-tabs button:hover, .interview-evidence-tabs button:hover, .interview-challenge-tabs button:hover { background: var(--surface-muted); color: var(--ink); }
+    .interview-market-tabs button.active, .interview-evidence-tabs button.active, .interview-challenge-tabs button.active { border-bottom-color: var(--accent); color: var(--accent-hover); }
+    .interview-market-summary strong, .interview-market-summary span { display: block; }
+    .interview-market-summary strong { color: #263248; font-size: 13px; }
+    .interview-market-summary span { max-width: 76ch; margin-top: 5px; color: var(--ink-muted); font-size: 11px; line-height: 1.6; }
+    .interview-section-nav { position: sticky; top: calc(var(--topbar) + 8px); z-index: 18; display: flex; overflow-x: auto; margin-bottom: 24px; border-bottom: 1px solid var(--line); background: rgba(255, 255, 255, .97); scrollbar-width: thin; }
+    .interview-section-nav button { flex: 1 0 94px; min-height: 44px; padding: 6px 10px; border: 0; border-bottom: 2px solid transparent; background: transparent; color: var(--ink-muted); cursor: pointer; font-size: 11px; font-weight: 800; white-space: nowrap; }
     .interview-section-nav button:hover, .interview-section-nav button:focus-visible { background: var(--surface-muted); color: var(--ink); }
     .interview-section-nav button:active { border-bottom-color: var(--accent); color: var(--accent-hover); }
     .interview-section { padding: 32px 0 40px; border-top: 1px solid rgba(0, 82, 217, .14); scroll-margin-top: calc(var(--topbar) + 64px); }
@@ -1116,6 +1124,13 @@
     .interview-role-summary span, .interview-role-summary strong { display: block; }
     .interview-role-summary span { color: var(--ink-muted); font-size: 10px; font-weight: 800; }
     .interview-role-summary strong { margin-top: 6px; color: #2d3850; font-size: 13px; line-height: 1.6; }
+    .interview-signal-list { border-top: 1px solid var(--line); }
+    .interview-signal-row { display: grid; grid-template-columns: minmax(160px, .72fr) minmax(0, 1.2fr) minmax(0, 1.08fr) auto; gap: 18px; align-items: start; padding: 16px 0; border-bottom: 1px solid var(--line); }
+    .interview-signal-row strong { color: #263248; font-size: 12px; line-height: 1.5; }
+    .interview-signal-row strong small { display: block; margin-top: 4px; color: var(--accent-hover); font-size: 9px; }
+    .interview-signal-row p { margin: 0; color: #465168; font-size: 11px; line-height: 1.6; }
+    .interview-signal-row p small { display: block; margin-top: 5px; color: var(--ink-muted); font-size: 10px; }
+    .interview-signal-row button { min-height: 34px; white-space: nowrap; }
     .interview-answer-frame { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); margin-top: 24px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
     .interview-frame-item { min-height: 98px; padding: 14px 12px; border-right: 1px solid var(--line); }
     .interview-frame-item:last-child { border-right: 0; }
@@ -1135,6 +1150,8 @@
     .interview-prep-row strong { font-size: 12px; }
     .interview-prep-row time { color: var(--ink-muted); font-size: 10px; }
     .interview-prep-row p, .interview-prep-row small { margin: 0; color: var(--ink-muted); font-size: 11px; line-height: 1.55; }
+    .interview-challenge-tabs { margin-bottom: 22px; }
+    .interview-challenge-tabs button { flex-basis: 210px; text-align: left; }
     .interview-challenge-head { padding: 0 0 22px; border-bottom: 2px solid var(--accent); }
     .interview-challenge-head h3 { margin: 0; color: #18233a; font: 850 24px var(--display); text-wrap: balance; }
     .interview-challenge-head p { max-width: 74ch; margin: 12px 0 0; color: #354158; font-size: 14px; line-height: 1.75; }
@@ -1190,13 +1207,44 @@
     .interview-quiz-feedback { margin-top: 14px; padding: 12px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); color: #4d596f; font-size: 11px; line-height: 1.65; }
     .interview-quiz-feedback.correct { color: var(--success); }
     .interview-quiz-feedback.wrong { color: var(--warning); }
+    .interview-project-workspace { display: grid; grid-template-columns: 220px minmax(0, 1fr); min-height: 390px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .interview-project-tabs { border-right: 1px solid var(--line); }
+    .interview-project-tabs button { display: block; width: 100%; min-height: 54px; padding: 9px 14px; border: 0; border-bottom: 1px solid var(--line); background: transparent; color: var(--ink-muted); cursor: pointer; text-align: left; font-size: 11px; font-weight: 800; }
+    .interview-project-tabs button small { display: block; margin-top: 3px; color: var(--ink-faint); font: 9px var(--mono); }
+    .interview-project-tabs button:hover { background: var(--surface-muted); color: var(--ink); }
+    .interview-project-tabs button.active { background: var(--accent-soft); color: var(--accent-hover); box-shadow: inset 0 -2px 0 var(--accent); }
+    .interview-project-detail { min-width: 0; padding: 24px 28px; }
+    .interview-project-detail header { display: flex; align-items: start; justify-content: space-between; gap: 24px; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+    .interview-project-detail h3 { margin: 0; color: #263248; font-size: 20px; }
+    .interview-project-detail header p { margin: 6px 0 0; color: var(--ink-muted); font-size: 11px; line-height: 1.55; }
+    .interview-project-detail dl { display: grid; grid-template-columns: 112px minmax(0, 1fr); margin: 0; }
+    .interview-project-detail dt, .interview-project-detail dd { margin: 0; padding: 13px 0; border-bottom: 1px solid var(--line); }
+    .interview-project-detail dt { color: var(--ink-muted); font-size: 10px; font-weight: 800; }
+    .interview-project-detail dd { color: #3d485e; font-size: 11px; line-height: 1.65; }
+    .interview-module-list { display: flex; flex-wrap: wrap; gap: 6px; }
+    .interview-module-list code { padding: 3px 6px; border-radius: 4px; background: var(--surface-muted); color: var(--ink-muted); font: 9px var(--mono); overflow-wrap: anywhere; }
+    .interview-community-list { margin-top: 14px; border-top: 1px solid var(--line); }
+    .interview-community-row { display: grid; grid-template-columns: 92px minmax(180px, .75fr) minmax(0, 1fr) minmax(0, .9fr) auto; gap: 14px; align-items: start; padding: 14px 0; border-bottom: 1px solid var(--line); }
+    .interview-community-row > span { color: var(--ink-muted); font: 800 9px var(--mono); }
+    .interview-community-row strong { color: #263248; font-size: 11px; line-height: 1.5; }
+    .interview-community-row p { margin: 0; color: var(--ink-muted); font-size: 10px; line-height: 1.55; }
+    .interview-community-row a { white-space: nowrap; font-size: 10px; font-weight: 800; }
+    .interview-tier-legend { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-bottom: 18px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .interview-tier-item { min-height: 90px; padding: 14px; border-right: 1px solid var(--line); }
+    .interview-tier-item:last-child { border-right: 0; }
+    .interview-tier-item strong, .interview-tier-item span { display: block; }
+    .interview-tier-item strong { color: #263248; font-size: 11px; }
+    .interview-tier-item span { margin-top: 6px; color: var(--ink-muted); font-size: 10px; line-height: 1.55; }
+    .interview-evidence-tabs { margin-bottom: 4px; }
     .interview-source-list { border-top: 1px solid var(--line); }
-    .interview-source-row { display: grid; grid-template-columns: 120px minmax(190px, .8fr) minmax(0, 1.25fr) 92px auto; gap: 14px; align-items: start; padding: 13px 0; border-bottom: 1px solid var(--line); }
+    .interview-source-row { display: grid; grid-template-columns: 72px 112px minmax(190px, .8fr) minmax(0, 1.25fr) 92px auto; gap: 14px; align-items: start; padding: 13px 0; border-bottom: 1px solid var(--line); }
+    .interview-tier-badge { width: fit-content; padding: 3px 6px; border-radius: 4px; background: var(--accent-soft); color: var(--accent-hover) !important; font: 850 9px var(--mono) !important; }
     .interview-source-row > span { color: var(--ink-muted); font-size: 10px; }
     .interview-source-row strong { color: #263248; font-size: 11px; }
     .interview-source-row p { margin: 0; color: var(--ink-muted); font-size: 10px; line-height: 1.55; }
     .interview-source-row time { color: var(--ink-muted); font: 700 9px var(--mono); }
     .interview-source-row a { white-space: nowrap; font-size: 10px; font-weight: 800; }
+    .interview-community-row strong, .interview-community-row p, .interview-source-row strong, .interview-source-row p { min-width: 0; overflow-wrap: anywhere; }
 
     @media (max-width: 1040px) {
       .stage-layout { grid-template-columns: 1fr; }
@@ -1218,7 +1266,11 @@
       .interview-frame-item:nth-child(-n+3) { border-bottom: 1px solid var(--line); }
       .interview-capability-row { grid-template-columns: 132px 60px minmax(0, 1fr) auto; }
       .interview-capability-row p:nth-of-type(2) { grid-column: 3; }
-      .interview-source-row { grid-template-columns: 100px minmax(180px, .8fr) minmax(0, 1fr) auto; }
+      .interview-signal-row { grid-template-columns: minmax(150px, .65fr) minmax(0, 1fr) minmax(0, 1fr); }
+      .interview-signal-row button { grid-column: 2; }
+      .interview-community-row { grid-template-columns: 82px minmax(170px, .8fr) minmax(0, 1.2fr) auto; }
+      .interview-community-row p:nth-of-type(2) { grid-column: 3; }
+      .interview-source-row { grid-template-columns: 58px 90px minmax(180px, .8fr) minmax(0, 1fr) auto; }
       .interview-source-row time { display: none; }
     }
 
@@ -1254,12 +1306,16 @@
       .rag-axis-list { grid-template-columns: 1fr; }
       .rag-axis-item, .rag-axis-item:nth-child(3n) { border-right: 0; border-bottom: 1px solid var(--line); }
       .rag-axis-item:last-child { border-bottom: 0; }
-      .interview-section-nav button { min-width: 0; padding-inline: 3px; font-size: 9px; }
+      .interview-market-bar { grid-template-columns: 1fr; gap: 14px; }
+      .interview-market-tabs button { flex-basis: 140px; }
+      .interview-section-nav button { flex-basis: 84px; padding-inline: 5px; font-size: 9px; }
       .interview-section-heading { align-items: start; flex-direction: column; }
       .interview-role-tabs { flex-wrap: nowrap; overflow-x: auto; }
       .interview-role-tabs button { flex: 0 0 138px; padding-inline: 9px; }
       .interview-role-summary { grid-template-columns: 1fr; gap: 0; }
       .interview-role-summary div { padding: 12px 0; border-bottom: 1px solid var(--line); }
+      .interview-signal-row { grid-template-columns: 1fr; gap: 8px; }
+      .interview-signal-row button { grid-column: auto; width: fit-content; }
       .interview-answer-frame { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .interview-frame-item, .interview-frame-item:nth-child(3) { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
       .interview-frame-item:nth-child(2n) { border-right: 0; }
@@ -1274,8 +1330,24 @@
       .interview-rubric-row { grid-template-columns: 22px minmax(0, 1fr) 46px; }
       .interview-rubric-row span { grid-column: 2 / -1; }
       .interview-score-line { align-items: start; flex-direction: column; gap: 6px; }
-      .interview-source-row { grid-template-columns: 88px minmax(0, 1fr) auto; gap: 6px 10px; }
-      .interview-source-row p { grid-column: 2 / -1; }
+      .interview-project-workspace { grid-template-columns: 1fr; }
+      .interview-project-tabs { display: flex; overflow-x: auto; border-right: 0; border-bottom: 1px solid var(--line); }
+      .interview-project-tabs button { flex: 0 0 142px; }
+      .interview-project-tabs button.active { box-shadow: inset 0 -3px 0 var(--accent); }
+      .interview-project-detail { padding: 20px 0; }
+      .interview-project-detail header { flex-direction: column; gap: 10px; }
+      .interview-project-detail dl { grid-template-columns: 1fr; }
+      .interview-project-detail dt { padding-bottom: 2px; border-bottom: 0; }
+      .interview-project-detail dd { padding-top: 4px; }
+      .interview-community-row { grid-template-columns: 74px minmax(0, 1fr); gap: 6px 10px; }
+      .interview-community-row p, .interview-community-row p:nth-of-type(2) { grid-column: 2; }
+      .interview-community-row a { grid-column: 2; width: fit-content; }
+      .interview-tier-legend { grid-template-columns: 1fr; }
+      .interview-tier-item { min-height: 0; border-right: 0; border-bottom: 1px solid var(--line); }
+      .interview-tier-item:last-child { border-bottom: 0; }
+      .interview-source-row { grid-template-columns: 46px 74px minmax(0, 1fr); gap: 6px 10px; }
+      .interview-source-row p { grid-column: 3 / -1; }
+      .interview-source-row a { grid-column: 3; width: fit-content; white-space: normal; }
       .interview-source-row time { display: none; }
       .continue-panel { padding: 24px 0; }
       .vibe-practice { padding: 32px 0 36px; }
@@ -1939,25 +2011,39 @@ python -m agent_course.cli security-eval ..\22-评测集\s8-security-adversarial
       <div class="page-heading">
         <div class="section-label">I1 · S10 后综合验收</div>
         <h1>大厂 Agent 面试训练场</h1>
-        <p>从当前官方岗位要求反查知识缺口，用同一道 OpsPilot 高难题完成系统设计、连续追问、证据评分和定向补课。</p>
+        <p>从当前官方岗位要求反查知识缺口，用国内企业部署题与全球高并发题完成系统设计、连续追问、证据评分和定向补课。</p>
       </div>
       <div class="interview-boundary"><strong>真实性边界</strong><span id="interviewTruthBoundary">岗位要求来自官方页面；题目是课程合成题，不是公司泄露原题。</span><span id="interviewReviewDate"></span></div>
+      <div class="interview-market-bar">
+        <div class="interview-market-tabs" id="interviewMarketTabs" role="tablist" aria-label="招聘市场"></div>
+        <div class="interview-market-summary" id="interviewMarketSummary" role="tabpanel" aria-live="polite"></div>
+      </div>
       <nav class="interview-section-nav" aria-label="面试验收步骤">
         <button type="button" data-interview-target="interviewRoles">岗位画像</button>
+        <button type="button" data-interview-target="interviewMarketRadar">国内雷达</button>
         <button type="button" data-interview-target="interviewKnowledge">知识地图</button>
         <button type="button" data-interview-target="interviewChallenge">难题实战</button>
         <button type="button" data-interview-target="interviewQuiz">五题自测</button>
-        <button type="button" data-interview-target="interviewEvidence">官方来源</button>
+        <button type="button" data-interview-target="interviewProjects">项目深挖</button>
+        <button type="button" data-interview-target="interviewEvidence">证据审计</button>
       </nav>
 
       <section class="interview-section" id="interviewRoles" aria-labelledby="interviewRolesTitle">
         <div class="interview-section-heading">
-          <div><h2 id="interviewRolesTitle">先选岗位，再决定学习深度</h2><p>三类岗位共用八个能力域，但主修深度不同。选择只改变重点和推荐证据，不隐藏任何知识。</p></div>
+          <div><h2 id="interviewRolesTitle">先选岗位，再决定学习深度</h2><p>四类岗位共用八个能力域，但主修深度不同。选择只改变重点和推荐证据，不隐藏任何知识。</p></div>
           <button class="secondary-button" id="openInterviewGuide" type="button">打开完整教材</button>
         </div>
         <div class="interview-role-tabs" id="interviewRoleTabs" role="tablist" aria-label="目标岗位"></div>
         <div class="interview-role-summary" id="interviewRoleSummary" role="tabpanel" aria-live="polite"></div>
         <div class="interview-answer-frame" id="interviewAnswerFrame" aria-label="六句证据回答法"></div>
+      </section>
+
+      <section class="interview-section" id="interviewMarketRadar" aria-labelledby="interviewMarketRadarTitle">
+        <div class="interview-section-heading">
+          <div><h2 id="interviewMarketRadarTitle">国内招聘雷达</h2><p>从多个当前企业官方岗位中提取重复能力信号。每一条都对应一道追问和课程入口，不把搜索摘要或匿名经验当招聘事实。</p></div>
+          <span id="interviewDomesticSummary"></span>
+        </div>
+        <div class="interview-signal-list" id="interviewDomesticSignals"></div>
       </section>
 
       <section class="interview-section" id="interviewKnowledge" aria-labelledby="interviewKnowledgeTitle">
@@ -1968,6 +2054,7 @@ python -m agent_course.cli security-eval ..\22-评测集\s8-security-adversarial
       </section>
 
       <section class="interview-section" id="interviewChallenge" aria-labelledby="interviewChallengeTitle">
+        <div class="interview-challenge-tabs" id="interviewChallengeTabs" role="tablist" aria-label="系统设计难题"></div>
         <div class="interview-challenge-head">
           <div class="interview-challenge-meta" id="interviewChallengeMeta"></div>
           <h3 id="interviewChallengeTitle"></h3>
@@ -1994,8 +2081,20 @@ python -m agent_course.cli security-eval ..\22-评测集\s8-security-adversarial
         <div class="interview-quiz-workspace" id="interviewQuizWorkspace"></div>
       </section>
 
+      <section class="interview-section" id="interviewProjects" aria-labelledby="interviewProjectsTitle">
+        <div class="interview-section-heading"><div><h2 id="interviewProjectsTitle">GitHub 上游项目深挖</h2><p>不背项目功能表。沿真实源码目录回答责任边界、失败模式、验证缺口和最小改进，再把结论接回自己的项目证据。</p></div><span>6 个活跃上游仓库</span></div>
+        <div class="interview-project-workspace">
+          <div class="interview-project-tabs" id="interviewProjectTabs" role="tablist" aria-label="GitHub 项目"></div>
+          <article class="interview-project-detail" id="interviewProjectDetail" role="tabpanel" aria-live="polite"></article>
+        </div>
+        <div class="interview-section-heading" style="margin-top:34px"><div><h2>中文社区经验样本</h2><p>Linux DO 与牛客只用来发现可能的追问方向；每条都保留日期、偏差和可安全转化的训练动作。</p></div></div>
+        <div class="interview-community-list" id="interviewCommunitySignals"></div>
+      </section>
+
       <section class="interview-section" id="interviewEvidence" aria-labelledby="interviewEvidenceTitle">
-        <div class="interview-section-heading"><div><h2 id="interviewEvidenceTitle">当前官方岗位与面试说明</h2><p>只保留核验日可访问的官方页面。职位到期后退出当前证据集；能力结论至少需要两个独立公司的重复信号。</p></div><span id="interviewSourceSummary"></span></div>
+        <div class="interview-section-heading"><div><h2 id="interviewEvidenceTitle">证据分级与来源审计</h2><p>先看来源能证明什么，再看它说了什么。国内官方岗位 14 天复核一次；GitHub 证明实现，社区只生成训练假设。</p></div><span id="interviewSourceSummary"></span></div>
+        <div class="interview-tier-legend" id="interviewTierLegend"></div>
+        <div class="interview-evidence-tabs" id="interviewEvidenceTabs" role="tablist" aria-label="证据来源筛选"></div>
         <div class="interview-source-list" id="interviewSources"></div>
       </section>
     </section>
@@ -2339,13 +2438,12 @@ python -m agent_course.cli security-eval ..\22-评测集\s8-security-adversarial
     };
 
     const defaultInterviewLabState = {
+      activeMarket: 'china',
       activeRole: 'agent-application',
-      activePhase: 'scope',
-      practicedPhases: {},
-      draft: '',
-      rubricVisible: false,
-      rubric: {},
-      hardBoundaries: {},
+      activeChallenge: 'china-enterprise',
+      attempts: {},
+      activeProject: 'agentscope',
+      activeEvidence: 'china',
       quiz: {},
       activeQuiz: 0,
     };
@@ -2431,13 +2529,12 @@ python -m agent_course.cli security-eval ..\22-评测集\s8-security-adversarial
             interviewLab: {
               ...defaultInterviewLabState,
               ...savedInterviewLab,
+              activeMarket: INTERVIEW_LAB?.markets?.some((item) => item.id === savedInterviewLab.activeMarket) ? savedInterviewLab.activeMarket : defaultInterviewLabState.activeMarket,
               activeRole: INTERVIEW_LAB?.roles?.some((item) => item.id === savedInterviewLab.activeRole) ? savedInterviewLab.activeRole : defaultInterviewLabState.activeRole,
-              activePhase: INTERVIEW_LAB?.challenge?.phases?.some((item) => item.id === savedInterviewLab.activePhase) ? savedInterviewLab.activePhase : defaultInterviewLabState.activePhase,
-              practicedPhases: savedInterviewLab.practicedPhases && typeof savedInterviewLab.practicedPhases === 'object' ? savedInterviewLab.practicedPhases : {},
-              draft: typeof savedInterviewLab.draft === 'string' ? savedInterviewLab.draft.slice(0, 20000) : '',
-              rubricVisible: Boolean(savedInterviewLab.rubricVisible),
-              rubric: savedInterviewLab.rubric && typeof savedInterviewLab.rubric === 'object' ? savedInterviewLab.rubric : {},
-              hardBoundaries: savedInterviewLab.hardBoundaries && typeof savedInterviewLab.hardBoundaries === 'object' ? savedInterviewLab.hardBoundaries : {},
+              activeChallenge: [INTERVIEW_LAB?.domesticChallenge, INTERVIEW_LAB?.challenge].some((item) => item?.id === savedInterviewLab.activeChallenge) ? savedInterviewLab.activeChallenge : defaultInterviewLabState.activeChallenge,
+              attempts: savedInterviewLab.attempts && typeof savedInterviewLab.attempts === 'object' ? savedInterviewLab.attempts : {},
+              activeProject: INTERVIEW_LAB?.githubProjects?.some((item) => item.id === savedInterviewLab.activeProject) ? savedInterviewLab.activeProject : defaultInterviewLabState.activeProject,
+              activeEvidence: ['china', 'global', 'github', 'community'].includes(savedInterviewLab.activeEvidence) ? savedInterviewLab.activeEvidence : defaultInterviewLabState.activeEvidence,
               quiz: savedInterviewLab.quiz && typeof savedInterviewLab.quiz === 'object' ? savedInterviewLab.quiz : {},
               activeQuiz: Math.max(0, Math.min((INTERVIEW_LAB?.selfTests?.length || 1) - 1, Number(savedInterviewLab.activeQuiz) || 0)),
             },
@@ -4010,8 +4107,46 @@ python -m agent_course.cli security-eval ..\22-评测集\s8-security-adversarial
       return INTERVIEW_LAB?.roles?.find((role) => role.id === state.interviewLab.activeRole) || INTERVIEW_LAB?.roles?.[0];
     }
 
+    function interviewChallenges() {
+      return [INTERVIEW_LAB?.domesticChallenge, INTERVIEW_LAB?.challenge].filter(Boolean);
+    }
+
+    function currentInterviewMarket() {
+      return INTERVIEW_LAB?.markets?.find((market) => market.id === state.interviewLab.activeMarket) || INTERVIEW_LAB?.markets?.[0];
+    }
+
+    function currentInterviewChallenge() {
+      return interviewChallenges().find((challenge) => challenge.id === state.interviewLab.activeChallenge) || interviewChallenges()[0];
+    }
+
+    function interviewAttempt(challenge = currentInterviewChallenge()) {
+      if (!state.interviewLab.attempts || typeof state.interviewLab.attempts !== 'object') state.interviewLab.attempts = {};
+      let attempt = state.interviewLab.attempts[challenge.id];
+      if (!attempt || typeof attempt !== 'object') {
+        const useLegacy = challenge.id === INTERVIEW_LAB.challenge.id && typeof state.interviewLab.draft === 'string';
+        attempt = {
+          activePhase: useLegacy && challenge.phases.some((item) => item.id === state.interviewLab.activePhase) ? state.interviewLab.activePhase : challenge.phases[0]?.id,
+          practicedPhases: useLegacy && state.interviewLab.practicedPhases && typeof state.interviewLab.practicedPhases === 'object' ? state.interviewLab.practicedPhases : {},
+          draft: useLegacy ? state.interviewLab.draft.slice(0, 20000) : '',
+          rubricVisible: useLegacy ? Boolean(state.interviewLab.rubricVisible) : false,
+          rubric: useLegacy && state.interviewLab.rubric && typeof state.interviewLab.rubric === 'object' ? state.interviewLab.rubric : {},
+          hardBoundaries: useLegacy && state.interviewLab.hardBoundaries && typeof state.interviewLab.hardBoundaries === 'object' ? state.interviewLab.hardBoundaries : {},
+        };
+        state.interviewLab.attempts[challenge.id] = attempt;
+      }
+      attempt.activePhase = challenge.phases.some((item) => item.id === attempt.activePhase) ? attempt.activePhase : challenge.phases[0]?.id;
+      attempt.practicedPhases = attempt.practicedPhases && typeof attempt.practicedPhases === 'object' ? attempt.practicedPhases : {};
+      attempt.draft = typeof attempt.draft === 'string' ? attempt.draft.slice(0, 20000) : '';
+      attempt.rubricVisible = Boolean(attempt.rubricVisible);
+      attempt.rubric = attempt.rubric && typeof attempt.rubric === 'object' ? attempt.rubric : {};
+      attempt.hardBoundaries = attempt.hardBoundaries && typeof attempt.hardBoundaries === 'object' ? attempt.hardBoundaries : {};
+      return attempt;
+    }
+
     function currentInterviewPhase() {
-      return INTERVIEW_LAB?.challenge?.phases?.find((phase) => phase.id === state.interviewLab.activePhase) || INTERVIEW_LAB?.challenge?.phases?.[0];
+      const challenge = currentInterviewChallenge();
+      const attempt = interviewAttempt(challenge);
+      return challenge.phases.find((phase) => phase.id === attempt.activePhase) || challenge.phases[0];
     }
 
     function interviewQuizResult(question) {
@@ -4025,6 +4160,24 @@ python -m agent_course.cli security-eval ..\22-评测集\s8-security-adversarial
       result.mastered = Boolean(result.mastered);
       result.lastCorrect = typeof result.lastCorrect === 'boolean' ? result.lastCorrect : null;
       return result;
+    }
+
+    function renderInterviewMarket() {
+      const market = currentInterviewMarket();
+      document.getElementById('interviewMarketTabs').innerHTML = INTERVIEW_LAB.markets.map((item) => `
+        <button type="button" role="tab" aria-selected="${item.id === market.id}" class="${item.id === market.id ? 'active' : ''}" data-interview-market="${escapeHtml(item.id)}">${escapeHtml(item.label)}</button>`).join('');
+      document.getElementById('interviewMarketSummary').innerHTML = `<strong>${escapeHtml(market.title)}</strong><span>${escapeHtml(market.summary)}</span>`;
+      document.querySelectorAll('[data-interview-market]').forEach((button) => button.addEventListener('click', () => {
+        const nextMarket = INTERVIEW_LAB.markets.find((item) => item.id === button.dataset.interviewMarket);
+        if (!nextMarket) return;
+        state.interviewLab.activeMarket = nextMarket.id;
+        state.interviewLab.activeChallenge = nextMarket.challengeId;
+        state.interviewLab.activeEvidence = nextMarket.sourceScope;
+        saveState();
+        renderInterviewMarket();
+        renderInterviewChallenge();
+        renderInterviewSources();
+      }));
     }
 
     function renderInterviewRoles() {
@@ -4042,7 +4195,21 @@ python -m agent_course.cli security-eval ..\22-评测集\s8-security-adversarial
         saveState();
         renderInterviewRoles();
         renderInterviewKnowledge();
+        renderInterviewSources();
       }));
+    }
+
+    function renderInterviewDomesticSignals() {
+      const officialChinaSources = INTERVIEW_LAB.sources.filter((source) => source.scope === 'china');
+      document.getElementById('interviewDomesticSummary').textContent = `${officialChinaSources.length} 个国内官方岗位 · ${INTERVIEW_LAB.domesticSignals.length} 条重复信号`;
+      document.getElementById('interviewDomesticSignals').innerHTML = INTERVIEW_LAB.domesticSignals.map((item) => `
+        <article class="interview-signal-row">
+          <strong>${escapeHtml(item.label)}<small>${escapeHtml(item.strength)}</small></strong>
+          <p>${escapeHtml(item.demand)}<small>对应课程：${escapeHtml(item.course)}</small></p>
+          <p><strong>现场追问</strong><br>${escapeHtml(item.prompt)}</p>
+          <button type="button" class="secondary-button" data-interview-chapter="${escapeHtml(item.chapter)}">回到课程</button>
+        </article>`).join('');
+      document.querySelectorAll('#interviewDomesticSignals [data-interview-chapter]').forEach((button) => button.addEventListener('click', () => openChapter(button.dataset.interviewChapter)));
     }
 
     function renderInterviewKnowledge() {
@@ -4061,70 +4228,93 @@ python -m agent_course.cli security-eval ..\22-评测集\s8-security-adversarial
     }
 
     function renderInterviewPhase() {
+      const challenge = currentInterviewChallenge();
+      const attempt = interviewAttempt(challenge);
       const phase = currentInterviewPhase();
-      document.getElementById('interviewPhaseTabs').innerHTML = INTERVIEW_LAB.challenge.phases.map((item) => `
-        <button type="button" role="tab" aria-selected="${item.id === phase.id}" class="${item.id === phase.id ? 'active' : ''}${state.interviewLab.practicedPhases[item.id] ? ' done' : ''}" data-interview-phase="${escapeHtml(item.id)}">${escapeHtml(item.label)} · ${item.minutes}m</button>`).join('');
+      document.getElementById('interviewPhaseTabs').innerHTML = challenge.phases.map((item) => `
+        <button type="button" role="tab" aria-selected="${item.id === phase.id}" class="${item.id === phase.id ? 'active' : ''}${attempt.practicedPhases[item.id] ? ' done' : ''}" data-interview-phase="${escapeHtml(item.id)}">${escapeHtml(item.label)} · ${item.minutes}m</button>`).join('');
       document.getElementById('interviewPhaseDetail').innerHTML = `
         <div><h3>${escapeHtml(phase.label)}</h3><p class="interview-phase-question">${escapeHtml(phase.question)}</p><ul class="interview-cover-list">${phase.mustCover.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul></div>
-        <aside class="interview-phase-aside"><div><strong>常见失分</strong><span>${escapeHtml(phase.trap)}</span></div><div><strong>回看阶段</strong><span>${escapeHtml(phase.review)}</span></div><button class="${state.interviewLab.practicedPhases[phase.id] ? 'secondary-button' : 'primary-button'}" id="toggleInterviewPhase" type="button">${state.interviewLab.practicedPhases[phase.id] ? '取消已练标记' : '标记本段已练'}</button></aside>`;
+        <aside class="interview-phase-aside"><div><strong>常见失分</strong><span>${escapeHtml(phase.trap)}</span></div><div><strong>回看阶段</strong><span>${escapeHtml(phase.review)}</span></div><button class="${attempt.practicedPhases[phase.id] ? 'secondary-button' : 'primary-button'}" id="toggleInterviewPhase" type="button">${attempt.practicedPhases[phase.id] ? '取消已练标记' : '标记本段已练'}</button></aside>`;
       document.querySelectorAll('[data-interview-phase]').forEach((button) => button.addEventListener('click', () => {
-        state.interviewLab.activePhase = button.dataset.interviewPhase;
+        attempt.activePhase = button.dataset.interviewPhase;
         saveState();
         renderInterviewPhase();
       }));
       document.getElementById('toggleInterviewPhase')?.addEventListener('click', () => {
-        state.interviewLab.practicedPhases[phase.id] = !state.interviewLab.practicedPhases[phase.id];
+        attempt.practicedPhases[phase.id] = !attempt.practicedPhases[phase.id];
         saveState();
         renderInterviewPhase();
       });
     }
 
     function interviewScoreStatus() {
-      const score = INTERVIEW_LAB.challenge.rubric.reduce((total, item) => total + (state.interviewLab.rubric[item.id] ? item.points : 0), 0);
-      const hardReady = INTERVIEW_LAB.challenge.autoFail.every((_, index) => state.interviewLab.hardBoundaries[index] === true);
-      const phaseCount = INTERVIEW_LAB.challenge.phases.filter((item) => state.interviewLab.practicedPhases[item.id]).length;
+      const challenge = currentInterviewChallenge();
+      const attempt = interviewAttempt(challenge);
+      const score = challenge.rubric.reduce((total, item) => total + (attempt.rubric[item.id] ? item.points : 0), 0);
+      const hardReady = challenge.autoFail.every((_, index) => attempt.hardBoundaries[index] === true);
+      const phaseCount = challenge.phases.filter((item) => attempt.practicedPhases[item.id]).length;
       return { score, hardReady, phaseCount, ready: score >= 80 && hardReady };
     }
 
     function renderInterviewRubric() {
+      const challenge = currentInterviewChallenge();
+      const attempt = interviewAttempt(challenge);
       const shell = document.getElementById('interviewRubricShell');
-      shell.hidden = !state.interviewLab.rubricVisible;
-      if (!state.interviewLab.rubricVisible) return;
-      document.getElementById('interviewRubric').innerHTML = INTERVIEW_LAB.challenge.rubric.map((item) => `
-        <label class="interview-rubric-row"><input type="checkbox" data-interview-rubric="${escapeHtml(item.id)}" ${state.interviewLab.rubric[item.id] ? 'checked' : ''}><strong>${escapeHtml(item.label)}</strong><em>${item.points} 分</em><span>${escapeHtml(item.anchor)}</span></label>`).join('');
-      document.getElementById('interviewHardBoundaries').innerHTML = INTERVIEW_LAB.challenge.autoFail.map((item, index) => `
-        <label class="interview-boundary-check"><input type="checkbox" data-interview-boundary="${index}" ${state.interviewLab.hardBoundaries[index] ? 'checked' : ''}><span>我的方案明确避免：${escapeHtml(item)}</span></label>`).join('');
+      shell.hidden = !attempt.rubricVisible;
+      if (!attempt.rubricVisible) return;
+      document.getElementById('interviewRubric').innerHTML = challenge.rubric.map((item) => `
+        <label class="interview-rubric-row"><input type="checkbox" data-interview-rubric="${escapeHtml(item.id)}" ${attempt.rubric[item.id] ? 'checked' : ''}><strong>${escapeHtml(item.label)}</strong><em>${item.points} 分</em><span>${escapeHtml(item.anchor)}</span></label>`).join('');
+      document.getElementById('interviewHardBoundaries').innerHTML = challenge.autoFail.map((item, index) => `
+        <label class="interview-boundary-check"><input type="checkbox" data-interview-boundary="${index}" ${attempt.hardBoundaries[index] ? 'checked' : ''}><span>我的方案明确避免：${escapeHtml(item)}</span></label>`).join('');
       const status = interviewScoreStatus();
       const scoreOutput = document.getElementById('interviewScore');
       scoreOutput.textContent = `${status.score} / 100`;
       scoreOutput.classList.toggle('ready', status.ready);
       document.getElementById('interviewScoreStatus').textContent = status.ready
-        ? `本地自评通过，已练 ${status.phaseCount} / ${INTERVIEW_LAB.challenge.phases.length} 段`
-        : `${status.score < 80 ? `还差 ${80 - status.score} 分` : '四个硬边界尚未全部确认'}，已练 ${status.phaseCount} / ${INTERVIEW_LAB.challenge.phases.length} 段`;
+        ? `本地自评通过，已练 ${status.phaseCount} / ${challenge.phases.length} 段`
+        : `${status.score < 80 ? `还差 ${80 - status.score} 分` : `${challenge.autoFail.length} 个硬边界尚未全部确认`}，已练 ${status.phaseCount} / ${challenge.phases.length} 段`;
       document.querySelectorAll('[data-interview-rubric]').forEach((input) => input.addEventListener('change', () => {
-        state.interviewLab.rubric[input.dataset.interviewRubric] = input.checked;
+        attempt.rubric[input.dataset.interviewRubric] = input.checked;
         saveState();
         renderInterviewRubric();
       }));
       document.querySelectorAll('[data-interview-boundary]').forEach((input) => input.addEventListener('change', () => {
-        state.interviewLab.hardBoundaries[input.dataset.interviewBoundary] = input.checked;
+        attempt.hardBoundaries[input.dataset.interviewBoundary] = input.checked;
         saveState();
         renderInterviewRubric();
       }));
     }
 
     function renderInterviewChallenge() {
-      const challenge = INTERVIEW_LAB.challenge;
-      document.getElementById('interviewChallengeMeta').innerHTML = `<span>${escapeHtml(challenge.level)}</span><span>${escapeHtml(challenge.duration)}</span><span>根据公开岗位能力合成</span>`;
+      const challenge = currentInterviewChallenge();
+      const attempt = interviewAttempt(challenge);
+      document.getElementById('interviewChallengeTabs').innerHTML = interviewChallenges().map((item) => `
+        <button type="button" role="tab" aria-selected="${item.id === challenge.id}" class="${item.id === challenge.id ? 'active' : ''}" data-interview-challenge="${escapeHtml(item.id)}">${item.id === INTERVIEW_LAB.domesticChallenge.id ? '国内企业部署题' : '全球高并发题'}</button>`).join('');
+      document.querySelectorAll('[data-interview-challenge]').forEach((button) => button.addEventListener('click', () => {
+        const nextChallenge = interviewChallenges().find((item) => item.id === button.dataset.interviewChallenge);
+        if (!nextChallenge) return;
+        state.interviewLab.activeChallenge = nextChallenge.id;
+        const matchingMarket = INTERVIEW_LAB.markets.find((item) => item.challengeId === nextChallenge.id);
+        if (matchingMarket) {
+          state.interviewLab.activeMarket = matchingMarket.id;
+          state.interviewLab.activeEvidence = matchingMarket.sourceScope;
+        }
+        saveState();
+        renderInterviewMarket();
+        renderInterviewChallenge();
+        renderInterviewSources();
+      }));
+      document.getElementById('interviewChallengeMeta').innerHTML = `<span>${escapeHtml(challenge.level)}</span><span>${escapeHtml(challenge.duration)}</span><span>A 类岗位信号合成 · 非公司原题</span>`;
       document.getElementById('interviewChallengeTitle').textContent = challenge.title;
       document.getElementById('interviewChallengePrompt').textContent = challenge.prompt;
       document.getElementById('interviewConstraints').innerHTML = challenge.constraints.map((item) => `<div class="interview-constraint"><strong>${escapeHtml(item.label)}</strong><span>${escapeHtml(item.value)}</span></div>`).join('');
       renderInterviewPhase();
       const draft = document.getElementById('interviewChallengeDraft');
-      if (draft.value !== state.interviewLab.draft) draft.value = state.interviewLab.draft;
-      document.getElementById('interviewDraftLength').textContent = `${state.interviewLab.draft.trim().length} 字`;
-      document.getElementById('revealInterviewRubric').textContent = state.interviewLab.rubricVisible ? '评分尺已展开' : '完成草稿并展开评分尺';
-      document.getElementById('revealInterviewRubric').disabled = state.interviewLab.rubricVisible;
+      if (draft.value !== attempt.draft) draft.value = attempt.draft;
+      document.getElementById('interviewDraftLength').textContent = `${attempt.draft.trim().length} 字`;
+      document.getElementById('revealInterviewRubric').textContent = attempt.rubricVisible ? '评分尺已展开' : '完成草稿并展开评分尺';
+      document.getElementById('revealInterviewRubric').disabled = attempt.rubricVisible;
       renderInterviewRubric();
     }
 
@@ -4178,11 +4368,71 @@ python -m agent_course.cli security-eval ..\22-评测集\s8-security-adversarial
       });
     }
 
+    function renderInterviewProjects() {
+      const project = INTERVIEW_LAB.githubProjects.find((item) => item.id === state.interviewLab.activeProject) || INTERVIEW_LAB.githubProjects[0];
+      state.interviewLab.activeProject = project.id;
+      document.getElementById('interviewProjectTabs').innerHTML = INTERVIEW_LAB.githubProjects.map((item) => `
+        <button type="button" role="tab" aria-selected="${item.id === project.id}" class="${item.id === project.id ? 'active' : ''}" data-interview-project="${escapeHtml(item.id)}">${escapeHtml(item.name)}<small>${escapeHtml(item.org)}</small></button>`).join('');
+      document.getElementById('interviewProjectDetail').innerHTML = `
+        <header><div><h3>${escapeHtml(project.name)}</h3><p>${escapeHtml(project.activity)}</p></div><a class="secondary-button" href="${escapeHtml(project.url)}" target="_blank" rel="noopener noreferrer">打开 GitHub</a></header>
+        <dl>
+          <dt>工程焦点</dt><dd>${escapeHtml(project.focus)}</dd>
+          <dt>先读目录</dt><dd><div class="interview-module-list">${project.modules.map((item) => `<code>${escapeHtml(item)}</code>`).join('')}</div></dd>
+          <dt>深挖问题</dt><dd><strong>${escapeHtml(project.question)}</strong></dd>
+          <dt>证据边界</dt><dd>${escapeHtml(project.limitation)}</dd>
+        </dl>`;
+      document.querySelectorAll('[data-interview-project]').forEach((button) => button.addEventListener('click', () => {
+        state.interviewLab.activeProject = button.dataset.interviewProject;
+        saveState();
+        renderInterviewProjects();
+      }));
+      document.getElementById('interviewCommunitySignals').innerHTML = INTERVIEW_LAB.communitySignals.map((item) => `
+        <article class="interview-community-row">
+          <span>${escapeHtml(item.tier)} · ${escapeHtml(item.platform)}<br>${escapeHtml(item.date)}</span>
+          <strong>${escapeHtml(item.title)}</strong>
+          <p>${escapeHtml(item.signal)}<br><strong>训练：</strong>${escapeHtml(item.training)}</p>
+          <p><strong>偏差：</strong>${escapeHtml(item.bias)}</p>
+          <a href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer">查看原帖</a>
+        </article>`).join('');
+    }
+
     function renderInterviewSources() {
       const role = currentInterviewRole();
-      document.getElementById('interviewSourceSummary').textContent = `${INTERVIEW_LAB.sources.length} 个当前官方来源 · 核验 ${INTERVIEW_LAB.reviewedAt}`;
-      document.getElementById('interviewSources').innerHTML = INTERVIEW_LAB.sources.map((source) => `
-        <div class="interview-source-row"><span>${escapeHtml(source.kind)}</span><strong>${escapeHtml(source.company)} · ${escapeHtml(source.title)}${role.sourceIds.includes(source.id) ? ' · 当前岗位重点' : ''}</strong><p>${escapeHtml(source.signal)}</p><time>${escapeHtml(source.checkedAt)}</time><a href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer">打开官方页</a></div>`).join('');
+      const filters = [
+        { id: 'china', label: '国内官方', count: INTERVIEW_LAB.sources.filter((item) => item.scope === 'china').length },
+        { id: 'global', label: '国际官方', count: INTERVIEW_LAB.sources.filter((item) => item.scope === 'global').length },
+        { id: 'github', label: 'GitHub 上游', count: INTERVIEW_LAB.githubProjects.length },
+        { id: 'community', label: '中文社区', count: INTERVIEW_LAB.communitySignals.length },
+      ];
+      const activeFilter = filters.some((item) => item.id === state.interviewLab.activeEvidence) ? state.interviewLab.activeEvidence : 'china';
+      state.interviewLab.activeEvidence = activeFilter;
+      document.getElementById('interviewTierLegend').innerHTML = INTERVIEW_LAB.sourceTiers.map((item) => `<div class="interview-tier-item"><strong>${escapeHtml(item.label)}</strong><span>${escapeHtml(item.rule)}</span></div>`).join('');
+      document.getElementById('interviewEvidenceTabs').innerHTML = filters.map((item) => `<button type="button" role="tab" aria-selected="${item.id === activeFilter}" class="${item.id === activeFilter ? 'active' : ''}" data-interview-evidence="${escapeHtml(item.id)}">${escapeHtml(item.label)} · ${item.count}</button>`).join('');
+      let rows = [];
+      if (activeFilter === 'china' || activeFilter === 'global') {
+        rows = INTERVIEW_LAB.sources.filter((source) => source.scope === activeFilter).map((source) => ({
+          tier: source.tier, kind: source.kind, title: `${source.company} · ${source.title}${role.sourceIds.includes(source.id) ? ' · 当前岗位重点' : ''}`,
+          signal: source.signal, checkedAt: source.checkedAt, url: source.url, link: '打开官方页',
+        }));
+      } else if (activeFilter === 'github') {
+        rows = INTERVIEW_LAB.githubProjects.map((project) => ({
+          tier: project.tier, kind: '上游仓库', title: `${project.org}/${project.name}`, signal: `${project.focus} 证据边界：${project.limitation}`,
+          checkedAt: project.checkedAt, url: project.url, link: '打开仓库',
+        }));
+      } else {
+        rows = INTERVIEW_LAB.communitySignals.map((item) => ({
+          tier: item.tier, kind: `${item.platform} · ${item.date}`, title: item.title, signal: `${item.signal} 偏差：${item.bias}`,
+          checkedAt: item.checkedAt, url: item.url, link: '查看原帖',
+        }));
+      }
+      document.getElementById('interviewSourceSummary').textContent = `${rows.length} 条当前筛选 · 核验 ${INTERVIEW_LAB.reviewedAt}`;
+      document.getElementById('interviewSources').innerHTML = rows.map((source) => `
+        <div class="interview-source-row"><span class="interview-tier-badge">${escapeHtml(source.tier)}</span><span>${escapeHtml(source.kind)}</span><strong>${escapeHtml(source.title)}</strong><p>${escapeHtml(source.signal)}</p><time>${escapeHtml(source.checkedAt)}</time><a href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(source.link)}</a></div>`).join('');
+      document.querySelectorAll('[data-interview-evidence]').forEach((button) => button.addEventListener('click', () => {
+        state.interviewLab.activeEvidence = button.dataset.interviewEvidence;
+        saveState();
+        renderInterviewSources();
+      }));
     }
 
     function renderInterviewLab() {
@@ -4192,10 +4442,13 @@ python -m agent_course.cli security-eval ..\22-评测集\s8-security-adversarial
       }
       document.getElementById('interviewTruthBoundary').textContent = INTERVIEW_LAB.truthBoundary;
       document.getElementById('interviewReviewDate').textContent = `核验 ${INTERVIEW_LAB.reviewedAt} · 下次复核 ${INTERVIEW_LAB.reviewDueAt}`;
+      renderInterviewMarket();
       renderInterviewRoles();
+      renderInterviewDomesticSignals();
       renderInterviewKnowledge();
       renderInterviewChallenge();
       renderInterviewQuiz();
+      renderInterviewProjects();
       renderInterviewSources();
       requestAnimationFrame(updateInterviewSectionNav);
     }
@@ -4631,17 +4884,19 @@ python -m agent_course.cli security-eval ..\22-评测集\s8-security-adversarial
       document.getElementById('openSecurityGuide').addEventListener('click', () => openChapter('s8'));
       document.getElementById('openInterviewGuide').addEventListener('click', () => openChapter('interview-map'));
       document.getElementById('interviewChallengeDraft').addEventListener('input', (event) => {
-        state.interviewLab.draft = event.target.value.slice(0, 20000);
-        document.getElementById('interviewDraftLength').textContent = `${state.interviewLab.draft.trim().length} 字`;
+        const attempt = interviewAttempt();
+        attempt.draft = event.target.value.slice(0, 20000);
+        document.getElementById('interviewDraftLength').textContent = `${attempt.draft.trim().length} 字`;
         saveState();
       });
       document.getElementById('revealInterviewRubric').addEventListener('click', () => {
-        if (state.interviewLab.draft.trim().length < 120) {
+        const attempt = interviewAttempt();
+        if (attempt.draft.trim().length < 120) {
           showToast('先写至少 120 字的架构草稿，再对照评分尺');
           document.getElementById('interviewChallengeDraft').focus();
           return;
         }
-        state.interviewLab.rubricVisible = true;
+        attempt.rubricVisible = true;
         saveState();
         renderInterviewChallenge();
         document.getElementById('interviewRubricShell').scrollIntoView({ behavior: 'smooth', block: 'start' });
