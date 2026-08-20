@@ -21,6 +21,7 @@
 | RAG 主线 | `agent-runtime-gateway/07-RAG问题诊断与优化/RAG教学路线总览.md` | 来源、失败切片、强基线、复杂方法边界 |
 | RAG 方法与资料状态 | `data/rag_lab.js` | 方法成熟度、source lifecycle、项目活跃度 |
 | Vibe Coding | `agent-runtime-gateway/00-课程总览/Vibe-Coding最佳实践-2026.md` | 当前工具实践、证据边界、安全责任 |
+| 面试岗位证据 | `data/interview_lab.js`、`agent-runtime-gateway/00-课程总览/大厂Agent岗位面试知识地图-2026.md` | 官方岗位状态、能力交集、题目边界、复核日期 |
 | 可执行实验 | `agent-runtime-gateway/labs/**`、`20-源码`、`21-测试` | 命令可运行、预期与实际一致、失败路径可复现 |
 | 评测集 | `agent-runtime-gateway/22-评测集` | schema、版本、critical blocker、覆盖与泄漏审计 |
 | 阅读器内容 | `data/build_chapters.mjs` -> `data/chapters.js` | 源文件存在、生成物同步、链接可解析 |
@@ -82,6 +83,8 @@
 
 招聘页面只用于校准能力方向，最长 30 天复核一次；不能把单个职位描述写成永久课程事实。
 
+面试岗位证据只接受公司官方招聘页与官方面试说明。题库、论坛和候选人回忆可用于发现检索词，但不能标成官方原题或公司固定流程。官方岗位关闭后应在 30 天复核时退出当前数据集，保留历史决策记录；至少两个独立公司的重复信号才能升级为主线能力。
+
 ## 6. 标准更新流程
 
 1. **Survey**：读本规范、相关主线、数据源、测试、`git status`；列出用户修改，禁止覆盖。
@@ -102,6 +105,7 @@
 ```powershell
 node data/build_chapters.mjs
 node data/check_rag_content.mjs
+node data/check_interview_content.mjs
 node data/check_reader_content.mjs
 python scripts/run_quality_gate.py
 git diff --check

@@ -225,6 +225,12 @@ def main() -> int:
             "vibe-coding-content.log",
         ),
         Check(
+            "interview-content",
+            ("node", "data/check_interview_content.mjs"),
+            ROOT,
+            "interview-content.log",
+        ),
+        Check(
             "reader-content",
             ("node", "data/check_reader_content.mjs"),
             ROOT,

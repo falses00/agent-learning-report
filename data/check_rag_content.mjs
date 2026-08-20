@@ -93,8 +93,8 @@ for (const marker of ['data/rag_lab.js', 'data-view-panel="rag"', 'renderRagLab(
   if (!frontend.includes(marker)) errors.push(`frontend is missing RAG integration marker: ${marker}`);
 }
 if ((frontend.match(/data-rag-target=/g) || []).length < 5) errors.push('frontend must expose the five-step RAG section navigation');
-if (!frontend.includes('id="mobileBottomNav"') || (frontend.match(/class="mobile-nav-button"/g) || []).length !== 8) errors.push('frontend must expose eight stable mobile navigation buttons');
-if (frontend.includes('repeat(7, minmax(0, 1fr))')) errors.push('frontend contains a stale seven-column mobile navigation rule');
+if (!frontend.includes('id="mobileBottomNav"') || (frontend.match(/class="mobile-nav-button"/g) || []).length !== 9) errors.push('frontend must expose nine stable mobile navigation buttons');
+if (frontend.includes('repeat(7, minmax(0, 1fr))') || frontend.includes('repeat(8, minmax(0, 1fr))')) errors.push('frontend contains a stale mobile navigation column rule');
 
 const courseGate = readFileSync(resolve(dataDir, 'course_gate.js'), 'utf8');
 if (!courseGate.includes('input.ragLabReady')) errors.push('course gate must require ragLabReady');

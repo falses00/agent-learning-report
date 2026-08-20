@@ -14,7 +14,7 @@ product
 
 本产品把分散的 Agent 知识组织成一条可执行的工程学习路线。每个阶段都要求学习者理解责任边界，复现真实故障，实现最小修复，完成正常、失败和对抗验证，并保存可复现证据。
 
-成功不是“读完资料”，而是学习者能够独立解释取舍、运行实验、定位失败、提交证据，并把 OpsPilot 从严格契约逐步演进到具备 Runtime、Tool/Policy、RAG、Durable Execution、Memory、Eval、Observability、Security、Multi-agent 和 Release 治理的系统。
+成功不是“读完资料”，而是学习者能够独立解释取舍、运行实验、定位失败、提交证据，并把 OpsPilot 从严格契约逐步演进到具备 Runtime、Tool/Policy、RAG、Durable Execution、Memory、Eval、Observability、Security、Multi-agent 和 Release 治理的系统。完成主线后，学习者还要通过 I1 面试实战，把工程证据组织成可追问、可评分、可复盘的系统设计回答；I1 是就业校准，不替代 S0-S10 工程门禁。
 
 ## Brand Personality
 

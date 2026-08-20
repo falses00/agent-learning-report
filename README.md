@@ -19,6 +19,7 @@
 - S6 Eval 与发布门禁实验室：35 个前序 Agent case、183 条断言、16 个门禁攻击、grader/holdout/critical gate 和证据 hash。
 - S7 Observability 与事故响应实验室：信号契约、W3C trace、SLO/burn-rate 分级、8 个事故判定、6 个 Runtime run 与 14 个门禁攻击。
 - S8 Security 与 Sandbox 实验室：9 层控制链、4 类安全终态、10 个交互事故、6 个固定 commit 源码项目与 25 个 critical 攻击 case。
+- I1 大厂 Agent 面试验收：3 类岗位画像、8 域必记知识、1 道 60 分钟综合系统设计难题、7 段连续追问、100 分评分尺、5 道自测和官方岗位来源生命周期。
 - 工程化 Vibe Coding 工作方式：探索/交付/高风险受限三种模式，七步闭环、任务契约、8 类反模式、6 条证据主张与 14 个一手来源；明确区分随机实验、观察研究、厂商遥测和课程推论。
 - 长教材阅读器：稳定正文宽度、粘性阅读进度、当前位置、桌面章内目录与移动端折叠目录。
 - 可运行基线命令、故障演练、课程资料阅读和搜索。
@@ -47,6 +48,7 @@ node data/check_eval_content.mjs
 node data/check_observability_content.mjs
 node data/check_security_content.mjs
 node data/check_vibe_coding_content.mjs
+node data/check_interview_content.mjs
 node data/check_reader_content.mjs
 ```
 
@@ -79,7 +81,7 @@ python -m agent_course.cli security-eval ..\22-评测集\s8-security-adversarial
 python scripts/run_quality_gate.py
 ```
 
-命令当前执行 22 项检查，生成 `quality-reports/manifest.json`、pytest JUnit、内容检查（含 Vibe Coding 与长文阅读器）、S3 基础与诊断 eval、S4/S5 eval、S6 release gate、S7 observability，以及 S8 security adversarial JSON。每次向 `main` 推送后，Actions 会保留整包证据，并使用 GitHub Artifact Attestations 为 manifest 生成可验证的构建来源。下载 CI 产物后可核对：
+命令当前执行 23 项检查，生成 `quality-reports/manifest.json`、pytest JUnit、内容检查（含 Vibe Coding、I1 面试验收与长文阅读器）、S3 基础与诊断 eval、S4/S5 eval、S6 release gate、S7 observability，以及 S8 security adversarial JSON。每次向 `main` 推送后，Actions 会保留整包证据，并使用 GitHub Artifact Attestations 为 manifest 生成可验证的构建来源。下载 CI 产物后可核对：
 
 ```powershell
 gh attestation verify quality-reports/manifest.json --repo falses00/agent-learning-report
@@ -95,6 +97,7 @@ manifest 中保存各报告的 SHA-256，因此签名来源、提交版本与报
 - [Vibe Coding 最佳实践](agent-runtime-gateway/00-课程总览/Vibe-Coding最佳实践-2026.md)
 - [真实缺口与演进台账](agent-runtime-gateway/00-课程总览/教学平台真实缺口与演进台账-2026-07-13.md)
 - [岗位能力与毕业标准](agent-runtime-gateway/00-课程总览/岗位能力与毕业标准.md)
+- [大厂 Agent 岗位面试知识地图](agent-runtime-gateway/00-课程总览/大厂Agent岗位面试知识地图-2026.md)
 - [Agent Memory 方法谱系与工业选型](agent-runtime-gateway/06-工业级框架蓝图/Agent-Memory方法谱系与工业选型-2026.md)
 - [RAG 全链路提升与工业最佳实践](agent-runtime-gateway/07-RAG问题诊断与优化/RAG全链路提升与工业最佳实践-2026.md)
 - [RAG × Vibe Coding 工程学习路径](agent-runtime-gateway/07-RAG问题诊断与优化/RAG与Vibe-Coding工程学习路径-2026.md)
